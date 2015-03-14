@@ -106,8 +106,8 @@ assignment}{parallel assignment}: `a, b := 20, 16`.
 This makes `a` and `b` both integer variables and assigns
 20 to `a` and 16 to `b`.
 
-A special name for a variable is `\textbf{\_`} (((variables!\_)))
-(underscore)(((variables!underscore))). Any value
+A special name for a variable is `\textbf{\_`} (((variables,_)))
+(underscore)(((variables,underscore))). Any value
 assigned to it is discarded (it's similar to \file{/dev/null} on Unix). In this example we only assign the integer
 value of 35 to `b` and discard the value 34: `_, b := 34, 35`.
 Declared but otherwise *unused* variables are a compiler error in Go.
@@ -214,13 +214,13 @@ fmt.Printf("%s\n", s2) |\longremark{Finally, we print the string with `fmt.Print
 %%     "Ending part"
 %%\end{lstlisting}
 %%Then Go will not insert the semicolons in the wrong places. Another way
-%%would be to use *raw* string literals(((string literal!raw))) by using backquotes (\key{`}):
+%%would be to use *raw* string literals(((string literal,raw))) by using backquotes (\key{`}):
 %%\begin{lstlisting}[numbers=none]
 %%s := `Starting part
 %%     Ending part`
 %%\end{lstlisting}
 %%Be aware that in this last example `s` now also contains the newline.
-%%Unlike *interpreted* string literals (((string literal!interpreted))) the value of a raw string literal
+%%Unlike *interpreted* string literals (((string literal,interpreted))) the value of a raw string literal
 %%is composed of the *uninterpreted* characters between the quotes.
 
 \subsection{Runes}
@@ -313,9 +313,9 @@ if x > 0 {
 }
 \end{lstlisting}
 
-(((keyword!return)))
+(((keyword,return)))
 
-(((keyword!if))) (((keyword!else)))
+(((keyword,if))) (((keyword,else)))
 Since \key{if} and \key{switch} accept an initialization statement, it's common to
 see one used to set up a (local) variable.
 \begin{lstlisting}[numbers=none]
@@ -408,7 +408,7 @@ loops over. Depending on what that is, \key{range} returns different things.
 
 When looping over a slice or array, \key{range} returns the index in the
 slice as the key and value belonging to that index.
-Consider this code: (((keyword!range!on slices)))
+Consider this code: (((keyword,range)))
 \begin{lstlisting}[numbers=none]
 list := []string{"a", "b", "c", "d", "e", "f"}
 for k, v := range list {
@@ -424,7 +424,7 @@ will break out the individual Unicode characters
 Mostly, when people talk about
 characters, they mean 8 bit characters. As UTF-8 characters may be up to 32 bits the word
 rune is used. In this case the type of `char` is \type{rune}.} and their start position, by parsing the UTF-8.
-The loop: (((keyword!range!on maps)))
+The loop: (((keyword,range)))
 \begin{lstlisting}[numbers=none]
 for pos, char := range "a|$\Phi{}$|x" {
     fmt.Printf("character '%c' starts at byte position %d\n", char, pos)
@@ -498,51 +498,51 @@ command `godoc builtin` to read the online documentation about the built-in type
 \end{center}
 \end{table}
 
-These built-in functions are documented in the \package{builtin} (((package!builtin)))
+These built-in functions are documented in the \package{builtin} (((package,builtin)))
 pseudo package that is included in recent Go releases. Let's go over these functions briefly.
 
 \begin{description}
 \item[`close`] is used in
 channel communication. It closes a channel. We'll learn more about this in Chapter \ref{chap:channels}.
-(((built-in!close)))
+(((built-in,close)))
 
 \item[`delete`] is used for deleting entries in maps.
-(((built-in!delete)))
+(((built-in,delete)))
 
 \item[`len` and `cap`] are used on a number of different
 types, `len` is
 used to return the lengths of strings, slices, and
 arrays. In the next section \nref{sec:arrays} we'll look at slices,
 arrays and the function
-`cap`.(((built-in!len)))(((built-in!cap)))
+`cap`.(((built-in,len)))(((built-in,cap)))
 
 \item[`new`] is used for allocating memory for user defined
 data types. See \nref{sec:allocation with new} on page
 \pageref{sec:allocation with new}.
-(((built-in!new)))
+(((built-in,new)))
 
 \item[`make`] is used for allocating memory for built-in
 types (maps, slices, and channels). See \nref{sec:allocation with make} on page
 \pageref{sec:allocation with make}.
-(((built-in!make)))
+(((built-in,make)))
 
 \item[`copy`] is for copying slices. See \nref{sec:slices} section in this chapter.
-(((built-in!copy)))
+(((built-in,copy)))
 
 \item[`append`] is for concatenating slices.
 See \nref{sec:slices} in this chapter.
-(((built-in!append)))
+(((built-in,append)))
 
 \item[`panic`, `recover`] are used for an
 *exception* mechanism. See \nref{sec:panic} on page \pageref{sec:panic} for more.
-(((built-in!panic)))
-(((built-in!recover)))
+(((built-in,panic)))
+(((built-in,recover)))
 
 \item[`print`, `println`] are low level printing
 functions that can be used without reverting to the
-\package{fmt}(((package!fmt)))
+\package{fmt}(((package,fmt)))
 package. These are mainly used for debugging.
-(((built-in!print)))(((built-in!println)))
+(((built-in,print)))(((built-in,println)))
 
 \item[`complex`, `real`, `imag`] all deal with
 \first{complex numbers}{complex numbers}. We will not use complex numbers in this book.
@@ -574,7 +574,7 @@ are values: Assigning one array to another *copies* all the elements.
 In particular, if you pass an array to a function it will receive a
 copy of the array, not a pointer to it.
 
-(((array!multidimensional)))
+(((array,multidimensional)))
 To declare an array you can use the following: `var a [3]int`.
 To initialize it to something other than zero, use a
 \first{composite literal}{literal!composite}: \lstinline|a := [3]int{1, 2, 3}|.
@@ -675,7 +675,7 @@ Note the three dots used after `s0...`! This is needed make it clear explicit th
 
 The copy function copies slice elements from a source to a destination, and returns the number of elements it copied. This number is the minimum of the length of the source and the length of the destination.
 For example:
-(((built-in!copy)))
+(((built-in,copy)))
 \begin{lstlisting}[numbers=none]
 var a = [...]int{0, 1, 2, 3, 4, 5, 6, 7}
 var s = make([]int, 6)
@@ -716,7 +716,7 @@ number of days in December:\newline %% the code will overflow otherwise
 If you are looping over an array, slice, string, or map a,
 \first{\key{range}}{keyword!range}
 clause will help you again, it returns the key and corresponding value
-with each invocation.(((keyword!range!on maps)))
+with each invocation.(((keyword,range)))
 \begin{lstlisting}
 year := 0
 for _, days := range monthdays |\longremark{At \citem{} we use the underscore to ignore (assign to nothing) the key returned by \key{range}. %
@@ -727,15 +727,15 @@ fmt.Printf("Numbers of days in a year: %d\n", year)
 \end{lstlisting}
 \showremarks
 
-(((keyword!map!add elements)))
+(((keyword,map adding elements)))
 To add elements to the map, you would add new month with: \lstinline|monthdays["Undecim"] = 30|. If you use a key that
 already exists, the value will be silently overwritten: \lstinline|monthdays["Feb"] = 29|.
-To test for existence (((keyword!map!existence))), you would use the
+To test for existence (((keyword,map existence))), you would use the
 following: `value, present := monthdays["Jan"]`. If the key "Jan" exists, `present`
 will be true. It's more Go like to name `present` "ok", and use:
 `v, ok := monthdays["Jan"]`. In Go we call this the "comma ok" form.
 
-You can remove elements (((keyword!map!remove elements))) from the \type{map}:
+You can remove elements (((keyword,map remove elements))) from the \type{map}:
 `delete(monthdays, "Mar")`\footnote{Always rainy in March anyway.}.
 In general the syntax `delete(m, x)` will delete the map entry
 retrieved by the expression `m[x]`.
