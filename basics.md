@@ -592,6 +592,7 @@ When using multidimensional arrays, you can use the following syntax:
 \lstinline|a := [2][2]int{ {1,2}, {3,4} }|. Now that you know about arrays you will
 be delighted to learn that you will almost never use them in Go, because there is something
 much more flexible: slices.
+-->
 
 \subsection{Slices}
 \label{sec:slices}
@@ -681,6 +682,7 @@ n2 := copy(s, s[2:])|\longremark{After \citem{}, \texttt{n2} is 4, and \texttt{s
 \end{lstlisting}
 \showremarks
 
+<!--
 \subsection{Maps}
 \label{sec:maps}
 Many other languages have a type similar to maps built-in. For instance, Perl has hashes,
