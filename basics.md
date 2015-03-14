@@ -636,15 +636,16 @@ before index `m`. It has length `n - m`.
     s4 := a[:4]  <5>
     s6 := a[2:4:5] <6>
 
+<!-- Double check this -->
 First we define <1> an array with five elements, from index 0 to 4.
 From this we create <2> a slice with the elements from index 2 to 3, this slices contains: `3, 4`.
-Then we we create another slice <3>} from `a`: with the elements from index 1 to 4,
-this contains: `2, 3, 4, 5`.}|
-With `a:[:]` \citem{} we create a slice with of all the elements in the array. This is a shorthand for: `a[0:len(a)]`.}|
-And with `a[:4]` \citem{} we create a slice with the elements from index %
-0 to 3, this is short for: `a[0:4]`, and gives us a slices that contains: `1, 2, 3, 4`.}|
-With `s2[:]` we create a slice from the slice `s2` \citem, note that `s5` still refers to the array `a`.}|
-Finally, we create a slice with the elements from index 3 to 3 *and* also set the cap to 4 \citem.}|
+Then we we create another slice <3> from `a`: with the elements from index 1 to 4,
+this contains: `2, 3, 4, 5`.
+With `a:[:]` <4> we create a slice with of all the elements in the array. This is a shorthand for: `a[0:len(a)]`.
+And with `a[:4]` <5> we create a slice with the elements from index 
+0 to 3, this is short for: `a[0:4]`, and gives us a slices that contains: `1, 2, 3, 4`.
+With `s2[:]` we create a slice from the slice `s2` <6>, note that `s5` still refers to the array `a`.
+Finally, we create a slice with the elements from index 3 to 3 *and* also set the cap to 4 <6>.
 
 When working with slices you can overrun the bounds, consider this code.
 
@@ -652,7 +653,7 @@ When working with slices you can overrun the bounds, consider this code.
 <{{src/basics/array-and-slices.go}}
 At <1> we create an array with a 100 elements, indexed from 0 to 99.
 Then at <2> we create a slice that has index 0 to 98.
-We assign $1$ to the 99th element <3> of the slice. This works as expected.
+We assign 1 to the 99th element <3> of the slice. This works as expected.
 But at <4>} we dare to do the impossible, and and try to allocate something
 beyond the length of the slice and we are greeted with a *runtime* error: `Error: "throw: index out of range".`
 
@@ -662,26 +663,30 @@ that make life easier:
 The append function appends zero or more values to a slice and returns the result: a slice with the same type as the original. If the original slice isn't big enough to fit the added values, append will allocate a new slice that is big enough. So the slice returned by append may refer to a different underlying array than the original slice does.
 Here's an example: (((built-in,append)))
 
-\begin{lstlisting}[numbers=none]
-s0 := []int{0, 0}
-s1 := append(s0, 2)|\longremark{At \citem{} we append a single element, making `s1` equal to `[]int\{0, 0, 2\`}.}|
-s2 := append(s1, 3, 5, 7)|\longremark{At \citem{} we append multiple elements, %%
-making `s2` equal to `[]int\{0, 0, 2, 3, 5, 7\`}.}|
-s3 := append(s2, s0...)|\longremark{And at \citem{} we append a slice, giving us `s3` equal to `[]int\{0, 0, 2, 3, 5, 7, 0, 0\`}. %%
-Note the three dots used after `s0...`! This is needed make it clear explicit that you're appending another slice, instead of a single value.}|
-\end{lstlisting}
-\showremarks
+{callout="//"}
+    s0 := []int{0, 0}
+    s1 := append(s0, 2) //<1>
+    s2 := append(s1, 3, 5, 7) //<2>
+    s3 := append(s2, s0...) //<3>
+
+At <1> we append a single element, making `s1` equal to `[]int{0, 0, 2}`.
+At <2> we append multiple elements, making `s2` equal to `[]int{0, 0, 2, 3, 5, 7}`.
+And at <3> we append a slice, giving us `s3` equal to `[]int{0, 0, 2, 3, 5, 7, 0, 0}`.
+Note the three dots used after `s0...`! This is needed make it clear explicit that you're 
+appending another slice, instead of a single value.
 
 The copy function copies slice elements from a source to a destination, and returns the number of elements it copied. This number is the minimum of the length of the source and the length of the destination.
 For example:
 (((built-in,copy)))
-\begin{lstlisting}[numbers=none]
-var a = [...]int{0, 1, 2, 3, 4, 5, 6, 7}
-var s = make([]int, 6)
-n1 := copy(s, a[0:])|\longremark{After \citem{}, now `n1` is 6, and `s` is `[]int\{0, 1, 2, 3, 4, 5\`}.}|
-n2 := copy(s, s[2:])|\longremark{After \citem{}, `n2` is 4, and `s` is `[]int\{2, 3, 4, 5, 4, 5\`}.}|
-\end{lstlisting}
-\showremarks
+
+{callout="//"}
+    var a = [...]int{0, 1, 2, 3, 4, 5, 6, 7}
+    var s = make([]int, 6)
+    n1 := copy(s, a[0:]) // <1>
+    n2 := copy(s, s[2:]) // <2>
+
+After <1>, `n1` is 6, and `s` is `[]int{0, 1, 2, 3, 4, 5}`.
+And after <2>, `n2` is 4, and `s` is `[]int{2, 3, 4, 5, 4, 5}`.
 
 <!--
 \subsection{Maps}

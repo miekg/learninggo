@@ -5,3 +5,8 @@ body {
 pre,code {
     font-family: 'Source Code Pro', monospace;
 }
+
+footer span.quote-who {
+    text-transform: uppercase;
+    padding-left: 1em;
+}
