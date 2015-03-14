@@ -27,7 +27,7 @@
 2. Rewriting the loop results in code that should look something
 like this (only showing the `main`-function):
 
-    {callout="yes"}
+{callout="yes"}
         func main() {
                 i := 0	<1>
         Loop:		    <2>
