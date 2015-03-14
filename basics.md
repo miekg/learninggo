@@ -7,30 +7,46 @@ In this chapter we will look at the basic building blocks of the Go programming
 language.
 
 ## Hello World
-In the Go tutorial, you get started with Go in the typical
-manner: printing ``Hello World'' (Ken Thompson and
-Dennis Ritchie started this when they presented the C language in
-the 1970s). That's a great way to start, so here it is, ``Hello World'' in Go.
+In the Go tutorial, you get started with Go in the typical manner: printing
+"Hello World" (Ken Thompson and Dennis Ritchie started this when they presented
+the C language in the 1970s). That's a great way to start, so here it is, "Hello
+World" in Go.
 
-\lstinputlisting[label=src:hello,numbers=none]{src/basics/helloworld.go}
+{callout="//"}
+<{{src/basics/helloworld.go}}
+
 Lets look at the program line by line.
-\showremarks
+This first line is just required <1>. All Go files start with
+`package <something>`, and `package main` is required for a standalone executable.
+
+`import "fmt"` says we need `fmt` in
+addition to `main` <2>. A package other than `main` is commonly called a
+library, a familiar concept in many programming languages (see chapter (#chap:packages).
+The line ends with a comment that begins with `//`.
+
+Next we another comment, but this one is enclosed in `/*` `*/` <3>.
+When your Go program is executed, the first function called will be
+`main.main()`, which mimics the behavior from C. Here we declare that function <4>.
+
+Finally we call a function from the package `fmt` to print a
+string to the screen. The string is enclosed with `"` and may
+contain non-ASCII characters <5>.
 
 ## Compiling and Running Code
-To build a Go program, use the \prog{go} tool.\index{tooling!go}
-To build \prog{helloworld} we just enter:
-\begin{alltt}
-\pr \user{go build helloworld.go}
-\end{alltt}
-\index{tooling!go!build}
-This results in an executable called \prog{helloworld}.
-\index{tooling!go!run}
-\begin{alltt}
-\pr \user{./helloworld}
-Hello, world.
-\end{alltt}
-You can combine the above and just call \prog{go run helloworld.go}.
+To build a Go program, use the `go` tool.(((tooling,go)))
+To build `helloworld` we just enter:
 
+    % go build helloworld.go
+
+(((tooling,go build)))
+This results in an executable called `helloworld`. (((tooling,go run)))
+
+    % ./helloworld
+    Hello, world.
+
+You can combine the above and just call `go run helloworld.go`.
+
+<!--
 \section{Variables, Types and Keywords}
 \label{sec:vars}
 In the next few sections we will look at the variables, basic types,
@@ -530,9 +546,9 @@ package. These are mainly used for debugging.
 
 \item[\func{complex}, \func{real}, \func{imag}] all deal with
 \first{complex numbers}{complex numbers}. We will not use complex numbers in this book.
-\index{built-in!complex}
-\index{built-in!real}
-\index{built-in!imag}
+(((built-in,complex)))
+(((built-in,real)))
+(((built-in,imag)))
 \end{description}
 
 \section{Arrays, Slices, and Maps}
@@ -726,3 +742,4 @@ retrieved by the expression \lstinline{m[x]}.
 \cleardoublepage
 \section{Answers}
 \shipoutAnswer
+-->
