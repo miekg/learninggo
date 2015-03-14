@@ -6,7 +6,7 @@ Quote: On adding complex numbers to Go -- Ken Thompson
 In this chapter we will look at the basic building blocks of the Go programming
 language.
 
-# Hello World
+## Hello World
 In the Go tutorial, you get started with Go in the typical
 manner: printing ``Hello World'' (Ken Thompson and
 Dennis Ritchie started this when they presented the C language in
@@ -16,8 +16,7 @@ the 1970s). That's a great way to start, so here it is, ``Hello World'' in Go.
 Lets look at the program line by line.
 \showremarks
 
-\section{Compiling and Running Code}
-\label{sec:building a program}
+## Compiling and Running Code
 To build a Go program, use the \prog{go} tool.\index{tooling!go}
 To build \prog{helloworld} we just enter:
 \begin{alltt}
@@ -47,8 +46,8 @@ which is \lstinline{""}.
 Declaring and assigning in Go is a two step process, but they may
 be combined. Compare the following pieces of code which have
 the same effect.
-\index{variables!declaring}
-\index{variables!assigning}
+(((variables,declaring)))
+(((variables,assigning)))
 
 \begin{minipage}{.5\textwidth}
 \begin{lstlisting}[linewidth=.5\textwidth,numbers=none]
