@@ -1,0 +1,26 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+      nChaps();
+      xRefs();
+    });
+
+    function nChaps(){
+      $("h1").each(
+        function(index){
+          $(this).prepend((index + 1) + ". ")
+        }
+      );
+    }
+
+    function xRefs() {
+      $("a:empty, [href^='#']").each(
+        function(){
+          var xid = $(this).attr("href");
+          var val = $(xid).text();
+          $(this).append(val)
+        }
+      );
+    }
+</script>

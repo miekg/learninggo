@@ -1,4 +1,4 @@
-{class="exersice" difficulty="0"}
+{.exersice difficulty="0"}
 ## For-loop
 
 1. Create a loop with the `for` construct. Make it loop
@@ -8,7 +8,7 @@
 
 3.  Rewrite the loop again so that it fills an array and then prints that array to the screen.
 
-{class="answer"}
+{.answer}
 ### Answer
 
 1. There are many possibilities. One solutions could be:
