@@ -8,9 +8,22 @@ pre,code {
     font-family: 'Source Code Pro', monospace;
 }
 
-footer span.quote-who {
-    text-transform: uppercase;
-    padding-left: 1em;
+.epigraph {
+    text-align: right;
+}
+
+.epigraph footer {
+    font-style: italic;
+}
+
+.epigraph footer span.quote-who {
+    font-style: normal;
+    font-variant: small-caps;
+}
+
+.epigraph footer span.quote-who::before {
+    content: "\a";
+    white-space: pre;
 }
 
 span.index-ref-secondary::before {
