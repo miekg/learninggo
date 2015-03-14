@@ -1,4 +1,6 @@
 body {
+    width: 80%;
+    margin: 0 auto;
     font-family: 'Droid Serif', serif;
 }
 
@@ -9,4 +11,9 @@ pre,code {
 footer span.quote-who {
     text-transform: uppercase;
     padding-left: 1em;
+}
+
+span.index-ref-secondary::before {
+    content: "\a    ";
+    white-space: pre;
 }
