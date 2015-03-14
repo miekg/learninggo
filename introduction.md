@@ -51,7 +51,7 @@ Postfix types
 
 UTF-8
 :   UTF-8 is everywhere, in strings
-    *and* in the program code. Finally you can use $$\Phi$ = $\Phi$ + 1$$ in your source code;
+    *and* in the program code. Finally you can use $$\Phi = \Phi + 1$$ in your source code;
 
 Open Source
 :   The Go license is completely open source.

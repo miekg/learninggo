@@ -1,2 +1,3 @@
 * Fix callouts so the only comments removed are those with a callout connected
     to it: remove: //<4>, leave: // <4> or // this is a comment <4>
+* Search and replace in vim non greedy: ":%s/\\texttt{\(.\{-}\)}/`\1`/g"
