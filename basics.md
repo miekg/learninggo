@@ -654,7 +654,7 @@ When working with slices you can overrun the bounds, consider this code.
 At <1> we create an array with a 100 elements, indexed from 0 to 99.
 Then at <2> we create a slice that has index 0 to 98.
 We assign 1 to the 99th element <3> of the slice. This works as expected.
-But at <4>} we dare to do the impossible, and and try to allocate something
+But at <4> we dare to do the impossible, and and try to allocate something
 beyond the length of the slice and we are greeted with a *runtime* error: `Error: "throw: index out of range".`
 
 If you want to extend a slice, there are a couple of built-in functions

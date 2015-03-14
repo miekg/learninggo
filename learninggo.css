@@ -17,3 +17,15 @@ span.index-ref-secondary::before {
     content: "\a    ";
     white-space: pre;
 }
+
+span.callout {
+    font-size: x-small;
+    height: 1.2em;
+    width: 1.2em;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    background: black;
+    color: white;
+}
