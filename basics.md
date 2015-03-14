@@ -594,49 +594,40 @@ be delighted to learn that you will almost never use them in Go, because there i
 much more flexible: slices.
 -->
 
-\subsection{Slices}
-\label{sec:slices}
-A slice is similar to an array, but it can grow when new elements
-are added.
+### Slices
+A slice is similar to an array, but it can grow when new elements are added.
 A slice always refers to an underlying array. What makes slices different
-from
-arrays is that a slice is a pointer \emph{to} an array;
-slices are \first{reference types}{reference types}.
-\gomarginpar{Reference types are created with \lstinline{make}. We detail this further
-in Chapter \ref{chap:beyond}.}
+from arrays is that a slice is a pointer *to* an array;
+slices are reference types.(((reference types)))
+
+A> Reference types are created with `make`. We detail this further
+A> in Chapter (#chap:beyond).
+
 That means that if you assign one slice to
-another, both refer to the \emph{same} underlying array. For instance, if a
+another, both refer to the *same* underlying array. For instance, if a
 function takes a slice argument, changes it makes to the elements of the
 slice will be visible to the caller, analogous to passing a pointer to
-the underlying array. With: \code{slice := make([]int, 10)},
+the underlying array. With: `slice := make([]int, 10)`,
 you create a slice which can hold ten elements. Note that the
 underlying array isn't specified.
 A slice is always coupled to an array that has
-a fixed size. For slices we define a \first{capacity}{slice!capacity} and a
-\first{length}{slice!length}. \index{array!length}\index{array!capacity}
-Figure \ref{fig:array-vs-slice} shows the creation of an array, then the creation of a slice.
-First we create an array of $m$ elements of the type \lstinline{int}:
-\lstinline{var array[m]int} .
-Next, we create a slice from this array:
-\lstinline{slice := array[:n]} .
+a fixed size. For slices we define a capacity (((slice,capacity))) and a
+length (((slice,length))).
+Figure (fig:array-vs-slice) shows the creation of an array, then the creation of a slice.
+First we create an array of $$m$$ elements of the type `int`: `var array[m]int` .
+
+Next, we create a slice from this array: `slice := array[:n]` .
 And now we have:
-\begin{itemize}
-\item{\lstinline{len(slice) == n}{} ;}
-\item{\lstinline{cap(slice) == m}{} ;}
-\item{\lstinline{len(array) == cap(array) == m}{} .}
-\end{itemize}
-\begin{figure}[Hh]
-\caption{Array versus slice}
-\label{fig:array-vs-slice}
-\begin{center}
-\includegraphics[scale=0.65]{fig/array-vs-slice.pdf}
-\end{center}
-\end{figure}
+
+* `len(slice) == n`
+* `cap(slice) == m`
+* `len(array) == cap(array) == m`
+
+![Array versus slice](fig/array-vs-slice.png)
 
 Given an array, or another slice, a new slice is created via
-\lstinline{a[n:m]}. This creates a new slice which refers to
-the variable \lstinline{a}, starts at index \var{n}, and ends
-before index \var{m}. It has length \lstinline{n - m}.
+`a[n:m]`. This creates a new slice which refers to the variable `a`, starts at index `n`, and ends
+before index `m`. It has length `n - m`.
 
 \begin{lstlisting}[numbers=none]
 a := [...]int{1, 2, 3, 4, 5} |\longremark{First We define \citem{} an array with five elements, from index 0 to 4.}|
