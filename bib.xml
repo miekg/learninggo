@@ -229,15 +229,6 @@
   <format type="HTML" target="http://www.vitanuova.com/inferno/papers/limbo.html" />
 </reference>
 
-<reference anchor="Newsqueak">
-  <front>
-    <title>Newsqueak: a language for communicating with mice</title>
-    <author fullname="Rob Pike" initials="R." surname="Pike" />
-    <date year="1989" />
-  </front>
-  <format type="HTML" target="http://swtch.com/~rsc/thread/newsqueak.pdf" />
-</reference>
-
 <reference anchor="Hoare">
   <front>
     <title>Communicating sequential processes (csp)</title>
@@ -245,6 +236,15 @@
     <date year="1985" />
   </front>
   <format type="PDF" target="http://www.usingcsp.com/cspbook.pdf" />
+</reference>
+
+<reference anchor="Newsqueak">
+  <front>
+    <title>Newsqueak: a language for communicating with mice</title>
+    <author fullname="Rob Pike" initials="R." surname="Pike" />
+    <date year="1989" />
+  </front>
+  <format type="HTML" target="http://swtch.com/~rsc/thread/newsqueak.pdf" />
 </reference>
 
 <reference anchor="quicksort">

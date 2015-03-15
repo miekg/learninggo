@@ -6,7 +6,7 @@ Quote: Frequently asked questions -- Go Authors
 The Go programming language is an open source project language to make
 programmers more productive.
 
-According to the website ([@go_web]) "Go is expressive, concise, clean, and
+According to the website [@go_web] "Go is expressive, concise, clean, and
 efficient". And indeed it is. My initial interest was piqued when I read early announcements about this
 new language that had built-in concurreny and a C-like syntax
 (Erlang also has built-in concurrency, but I could never get used to its syntax).
@@ -112,8 +112,8 @@ Chapter (#chap:communication)
 
 ## Official Documentation
 There is a substantial amount of documentation written about Go.
-The Go Tutorial ([@go_tutorial]), the Go Tour (with lots of exercises)
-and the Effective Go ([@effective_go]) are helpful resources. The
+The Go Tutorial [@go_tutorial], the Go Tour (with lots of exercises)
+and the Effective Go [@effective_go] are helpful resources. The
 website <http://golang.org/doc/> is a very good starting point
 for reading up on Go^[<http://golang.org/doc/> itself is served by
 `godoc`.]. Reading these documents is

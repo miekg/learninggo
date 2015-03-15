@@ -16,6 +16,11 @@ pre,code {
     font-style: italic;
 }
 
+.epigraph hr {
+    width: 30%;
+    margin-right: 0;
+}
+
 .epigraph footer span.quote-who {
     font-style: normal;
     font-variant: small-caps;
@@ -41,4 +46,12 @@ span.callout {
     border-radius: 50%;
     background: black;
     color: white;
+}
+
+a.cite {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+    top: -0.5em;
 }

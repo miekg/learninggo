@@ -4,20 +4,25 @@
 
 <script>
     $(document).ready(function() {
-      nChaps();
-      xRefs();
-      //$( "blockquote.epigraph footer" ).insertBefore( $( "<hr>" ) );
+      chapters();
+      crossReferences();
+      epigraphs();
     });
 
-    function nChaps(){
+    function chapters(){
+      appendix = 0
       $("h1").each(
         function(index){
-          $(this).prepend((index + 1) + ". ")
+          if ( $(this).hasClass("appendix") ) {
+            $(this).prepend("Appendix " + String.fromCharCode(65 + appendix++) + ". ")
+          } else {
+            $(this).prepend("Chapter " + (index + 1) + ". ")
+          }
         }
       );
     }
 
-    function xRefs() {
+    function crossReferences() {
       $("a:empty, [href^='#']").each(
         function(){
           var xid = $(this).attr("href");
@@ -25,5 +30,9 @@
           $(this).append(val)
         }
       );
+    }
+
+    function epigraphs() {
+      $("blockquote.epigraph footer").prepend( "<hr>" );
     }
 </script>
