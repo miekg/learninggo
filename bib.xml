@@ -6,6 +6,7 @@
   </front>
   <format type="HTML" target="http://golang.org/" />
 </reference>
+
 <reference anchor="go_tutorial">
   <front>
     <title>Go tutorial</title>
@@ -14,6 +15,7 @@
   </front>
   <format type="HTML" target="http://golang.org/doc/go_tutorial.html" />
 </reference>
+
 <reference anchor="effective_go">
   <front>
     <title>Effective Go</title>
@@ -22,6 +24,7 @@
   </front>
   <format type="HTML" target="http://golang.org/doc/effective_go.html" />
 </reference>
+
 <reference anchor="csp">
   <front>
     <title>Communicating sequential processes</title>
@@ -30,6 +33,7 @@
   </front>
   <format type="HTML" target="http://en.wikipedia.org/wiki/Communicating_sequential_processes" />
 </reference>
+
 <reference anchor="duck_typing">
   <front>
     <title>Duck typing</title>
@@ -38,6 +42,7 @@
   </front>
   <format type="HTML" target="http://en.wikipedia.org/wiki/Duck_typing" />
 </reference>
+
 <reference anchor="bubblesort">
   <front>
     <title>Bubble sort</title>
@@ -46,6 +51,7 @@
   </front>
   <format type="HTML" target="http://en.wikipedia.org/wiki/Bubble_sort" />
 </reference>
+
 <reference anchor="go_nuts">
   <front>
     <title>Go Nuts mailing list</title>
@@ -54,6 +60,7 @@
   </front>
   <format type="HTML" target="http://groups.google.com/group/golang-nuts" />
 </reference>
+
 <reference anchor="go_spec">
   <front>
     <title>Go language specification</title>
@@ -62,6 +69,7 @@
   </front>
   <format type="HTML" target=" http://golang.org/doc/go_spec.html" />
 </reference>
+
 <reference anchor="go_interfaces">
   <front>
     <title>Go interfaces</title>
@@ -70,6 +78,7 @@
   </front>
   <format type="HTML" target="http://www.airs.com/blog/archives/277" />
 </reference>
+
 <reference anchor="go_install">
   <front>
     <title>Getting Started</title>
@@ -78,6 +87,7 @@
   </front>
   <format type="HTML" target="http://golang.org/doc/install/" />
 </reference>
+
 <reference anchor="go_intro">
   <front>
     <title>Google's new language: Go</title>
@@ -86,6 +96,7 @@
   </front>
   <format type="HTML" target="http://scienceblogs.com/goodmath/2009/11/googles_new_language_go.php" />
 </reference>
+
 <reference anchor="go_doc">
   <front>
     <title>Go package documentation</title>
@@ -94,6 +105,7 @@
   </front>
   <format type="HTML" target="http://golang.org/doc/pkg/" />
 </reference>
+
 <reference anchor="go_cpp">
   <front>
     <title>Go for C++ programmers</title>
@@ -102,6 +114,7 @@
   </front>
   <format type="HTML" target="http://golang.org/doc/go_for_cpp_programmers.html" />
 </reference>
+
 <reference anchor="go_blog">
   <front>
     <title>The Go programming language blog</title>
@@ -110,6 +123,7 @@
   </front>
   <format type="HTML" target="http://blog.golang.org/" />
 </reference>
+
 <reference anchor="erlang">
   <front>
     <title>Erlang</title>
@@ -118,6 +132,7 @@
   </front>
   <format type="HTML" target="http://www.erlang.se/" />
 </reference>
+
 <reference anchor="scala">
   <front>
     <title>Scala</title>
@@ -125,6 +140,7 @@
     <date year="2003" />
   </front>
 </reference>
+
 <reference anchor="c">
   <front>
     <title>The C programming language</title>
@@ -132,6 +148,7 @@
     <date year="1975" />
   </front>
 </reference>
+
 <reference anchor="C++">
   <front>
     <title>The C++ programming language</title>
@@ -139,6 +156,7 @@
     <date year="1983" />
   </front>
 </reference>
+
 <reference anchor="java">
   <front>
     <title>Java</title>
@@ -147,6 +165,7 @@
   </front>
   <format type="HTML" target="http://oracle.com/java/" />
 </reference>
+
 <reference anchor="perl">
   <front>
     <title>Perl</title>
@@ -155,6 +174,7 @@
   </front>
   <format type="HTML" target="http://perl.org/" />
 </reference>
+
 <reference anchor="haskell">
   <front>
     <title>Haskell</title>
@@ -163,6 +183,7 @@
   </front>
   <format type="HTML" target="http://www.haskell.org/" />
 </reference>
+
 <reference anchor="go_youtube">
   <front>
     <title>Go youtube channel</title>
@@ -171,6 +192,7 @@
   </front>
   <format type="HTML" target="http://youtube.com/gocoding/" />
 </reference>
+
 <reference anchor="perl-packages">
   <front>
     <title>Comprehensive perl archive network</title>
@@ -179,6 +201,7 @@
   </front>
   <format type="HTML" target="http://cpan.org/" />
 </reference>
+
 <reference anchor="plan9">
   <front>
     <title>Plan 9</title>
@@ -187,6 +210,7 @@
   </front>
   <format type="HTML" target="http://plan9.bell-labs.com/plan9/index.html" />
 </reference>
+
 <reference anchor="inferno">
   <front>
     <title>Inferno</title>
@@ -195,6 +219,7 @@
   </front>
   <format type="HTML" target="http://www.vitanuova.com/inferno/" />
 </reference>
+
 <reference anchor="limbo">
   <front>
     <title>Limbo</title>
@@ -203,6 +228,7 @@
   </front>
   <format type="HTML" target="http://www.vitanuova.com/inferno/papers/limbo.html" />
 </reference>
+
 <reference anchor="Newsqueak">
   <front>
     <title>Newsqueak: a language for communicating with mice</title>
@@ -211,6 +237,7 @@
   </front>
   <format type="HTML" target="http://swtch.com/~rsc/thread/newsqueak.pdf" />
 </reference>
+
 <reference anchor="Hoare">
   <front>
     <title>Communicating sequential processes (csp)</title>
@@ -219,6 +246,7 @@
   </front>
   <format type="PDF" target="http://www.usingcsp.com/cspbook.pdf" />
 </reference>
+
 <reference anchor="quicksort">
   <front>
     <title>Quicksort</title>
@@ -227,6 +255,7 @@
   </front>
   <format type="HTML" target="http://en.wikipedia.org/wiki/Quicksort" />
 </reference>
+
 <reference anchor="iota">
   <front>
     <title>Iota</title>
@@ -235,6 +264,7 @@
   </front>
   <format type="HTML" target="http://en.wikipedia.org/wiki/Iota" />
 </reference>
+
 <reference anchor="fizzbuzz">
   <front>
     <title>Using fizzbuzz to find developers...</title>
@@ -242,6 +272,7 @@
     <date year="2010" />
   </front>
 </reference>
+
 <reference anchor="go_course_day2">
   <front>
     <title>The Go programming language, day 2</title>
@@ -250,6 +281,7 @@
   </front>
   <format type="PDF" target="http://golang.org/doc/GoCourseDay2.pdf" />
 </reference>
+
 <reference anchor="go_course_day3">
   <front>
     <title>The Go programming language, day 3</title>
@@ -258,6 +290,7 @@
   </front>
   <format type="PDF" target="http://golang.org/doc/GoCourseDay3.pdf" />
 </reference>
+
 <reference anchor="go_nuts_interfaces">
   <front>
     <title>Function accepting a slice of interface types</title>
@@ -265,6 +298,7 @@
     <date year="2010" />
   </front>
 </reference>
+
 <reference anchor="go_issue_65">
   <front>
     <title>Go issue 65: compiler can't spot guaranteed return in if statement</title>
@@ -272,6 +306,7 @@
     <date year="2010" />
   </front>
 </reference>
+
 <reference anchor="go_blog_panic">
   <front>
     <title>Defer, panic, and recover</title>
@@ -279,6 +314,7 @@
     <date year="2010" />
   </front>
 </reference>
+
 <reference anchor="go_faq">
   <front>
     <title>Go faq</title>
@@ -287,6 +323,7 @@
   </front>
   <format type="HTML" target="http://golang.org/doc/go_faq.html" />
 </reference>
+
 <reference anchor="go_release_hist">
   <front>
     <title>Go release history</title>
@@ -295,6 +332,7 @@
   </front>
   <format type="HTML" target="http://golang.org/doc/devel/release.html" />
 </reference>
+
 <reference anchor="go_profiling">
   <front>
     <title>Profiling Go programs</title>
@@ -303,6 +341,7 @@
   </front>
   <format type="HTML" target="http://blog.golang.org/2011/06/profiling-go-programs.html" />
 </reference>
+
 <reference anchor="RFC1196">
   <front>
     <title>The finger user information protocol</title>
@@ -311,6 +350,7 @@
   </front>
   <format type="TXT" target="http://www.ietf.org/rfc/rfc1196.txt" />
 </reference>
+
 <reference anchor="RFC4627">
   <front>
     <title>The application/json media type for javascript object notation (json)</title>
@@ -319,6 +359,7 @@
   </front>
   <format type="TXT" target="http://www.ietf.org/rfc/rfc4627.txt" />
 </reference>
+
 <reference anchor="RFC4641">
   <front>
     <title>Dnssec operational practices</title>
