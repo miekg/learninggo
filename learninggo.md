@@ -23,4 +23,6 @@
 # Basics
 {{basics.md}}
 
+{{bib.xml}}
+
 {backmatter}
