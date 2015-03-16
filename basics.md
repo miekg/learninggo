@@ -2,8 +2,10 @@
 > I am interested in this and hope to do something.
 Quote: On adding complex numbers to Go -- Ken Thompson
 
+
 In this chapter we will look at the basic building blocks of the Go programming
 language.
+
 
 ## Hello World
 In the Go tutorial, you get started with Go in the typical manner: printing
@@ -592,6 +594,7 @@ When using multidimensional arrays, you can use the following syntax:
 be delighted to learn that you will almost never use them in Go, because there is something
 much more flexible: slices.
 -->
+
 
 ### Slices
 A slice is similar to an array, but it can grow when new elements are added.

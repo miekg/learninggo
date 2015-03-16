@@ -23,6 +23,9 @@
 # Basics
 {{basics.md}}
 
+# Functions
+{{functions.md}}
+
 {{bib.xml}}
 
 {backmatter}
