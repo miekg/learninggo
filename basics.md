@@ -276,18 +276,17 @@ Although Go does not support operator overloading (or method
 overloading for that matter), some of the built-in
 operators *are* overloaded. For instance, `+` can be used for integers,
 floats, complex numbers and strings (adding strings is concatenating them).
+-->
 
-\section{Go Keywords}
-Let's start looking at keywords. Table \ref{tab:keywords} lists all the keywords in Go.
-\begin{table}[Hh!]
-\begin{center}
-\caption{Keywords in Go}
-\label{tab:keywords}
-\input{tab/keywords.tex}
-\end{center}
-\end{table}
+
+## Go Keywords
+Let's start looking at keywords. Table (#tab:keywords) lists all the keywords in Go.
+
+{#tab:keywords}
+{{tab/keywords.md}}
+
 We've seen some of these already. We used \key{var} and \key{const} in the
-``\nameref{sec:vars}'' section on page \pageref{sec:vars}, and we briefly looked at \key{package} and \key{import} in our "Hello World" program at the start of the chapter.
+(#vars) section,  and we briefly looked at \key{package} and \key{import} in our "Hello World" program at the start of the chapter.
 Others need more attention and have their own chapter or section:
 \begin{itemize}
 \item \key{func} is used to declare functions and methods.
@@ -593,8 +592,6 @@ When using multidimensional arrays, you can use the following syntax:
 \lstinline|a := [2][2]int{ {1,2}, {3,4} }|. Now that you know about arrays you will
 be delighted to learn that you will almost never use them in Go, because there is something
 much more flexible: slices.
--->
-
 
 ### Slices
 A slice is similar to an array, but it can grow when new elements are added.
