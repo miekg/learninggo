@@ -85,26 +85,26 @@ Here's what you can expect from each chapter:
 Chapter (#basics)
 :   We'll look at the basic types, variables, and control structures available in the language.
 
-Chapter (#chap:functions)
+Chapter (functions)
 :   Here we look at functions, the basic building blocks of Go programs.
 
-Chapter (#chap:packages)
+Chapter (packages)
 :   We'll see that functions and data can be grouped together
     in packages. We'll also see how to document and test our packages.
 
-Chapter (#chap:beyond)
+Chapter (beyond)
 :   We'll create our own types. We'll also look at memory allocations in Go.
 
-Chapter (#chap:interfaces)
+Chapter (interfaces)
 :   We'll learn how to use interfaces. Interfaces are the central concept in Go,
     as Go does not support object orientation in the traditional sense.
 
-Chapter (#chap:channels)
+Chapter (channels)
 :   We'll learn the `go` keyword, which can be used to start function in
     separate routines (called goroutines). Communication with those goroutines is
     done via channels.
 
-Chapter (#chap:communication)
+Chapter (communication)
 :   Finally we'll see how to interface with the rest of the world from within
     a Go program. We'll see how to create files and read and write to and from them.
     We'll also briefly look into networking.
