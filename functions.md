@@ -113,7 +113,12 @@ the same name for global and local variables.
 As with almost everything in Go, functions are also *just* values.
 They can be assigned to variables as follows:
 
-\lstinputlisting[label=src:anonfunc,linerange={3,}]{src/functions/anon-func.go}
+{callout="//"}
+<{{src/functions/anon-func.go}}[3,]
+
+Define a nameless function and assign to `a`.
+No `()` here. If there were we would *call* the function in `a`.
+*Now* we call the function.
 
 Functions--as--values may be used in other places, for example maps.
 Here we convert from integers to functions:
