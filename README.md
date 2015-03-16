@@ -7,4 +7,8 @@ After some post processing [the end result, can be found here](http://learninggo
 
 ## To Build YourSelf
 
-...
+* Download or `go get` [mmark](https://github.com/miekg/mmark).
+* `cd mmark/mmark`
+* `go install`
+
+And then just `make` in this repository.
