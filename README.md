@@ -1,5 +1,7 @@
 # Learning Go
 
+**WORK IN PROGRESS**
+
 This is the "Learning Go" book in mmark markdown. It is translated
 to HTML with [mmark](https://github.com/miekg/mmark).
 
