@@ -9,8 +9,7 @@ pre,code {
 }
 
 blockquote.epigraph {
-    float: right;
-    padding-left: 40%;
+    padding-left: 60%;
 }
 
 .epigraph p {
