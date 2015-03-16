@@ -5,21 +5,21 @@
 <script>
     $(document).ready(function() {
       chapters();
+      appendices
       crossReferences();
       epigraphs();
     });
 
     function chapters(){
-      appendix = 0
-      $("h1").each(
-        function(index){
-          if ( $(this).hasClass("appendix") ) {
-            $(this).prepend("Appendix " + String.fromCharCode(65 + appendix++) + ". ")
-          } else {
-            $(this).prepend("Chapter " + (index + 1) + ". ")
-          }
-        }
-      );
+      $("h1:not(.appendix)").each(function(index){
+        $(this).prepend("Chapter " + (index + 1) + ". ")
+      })
+    }
+
+    function appendices(){
+     $("h1.appendix").each(function(index){
+        $(this).prepend("Appendix " + String.fromCharCode(65 + index) + ". ")
+      })
     }
 
     function crossReferences() {
@@ -34,5 +34,18 @@
 
     function epigraphs() {
       $("blockquote.epigraph footer").prepend( "<hr>" );
+    }
+
+    function answers(){
+      $("h3#answer").click(function() {
+        $("h3#answer").nextUntil("h1,h2").toggle()
+      });
+    }
+
+    function toc(){
+      $("body").prepend("<div class=toc></div>");
+      $("h1").each(function(){
+        $("div.toc").append($(this).text()).append("<br>");
+      });
     }
 </script>
