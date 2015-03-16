@@ -86,14 +86,14 @@ b := false
 \end{minipage}
 
 On the left we use the
-\key{var} keyword to declare a variable and *then* assign a value to
-it. The code on the right uses \mbox{\key{:=}{ }} to do this in one
+`var` keyword to declare a variable and *then* assign a value to
+it. The code on the right uses \mbox{`:=`{ }} to do this in one
 step (this form may only be used *inside* functions).
 In that case the variable
 type is *deduced* from the value. A value of 15 indicates an \type{int}.
 A value of `false` tells Go that the type should be \type{bool}.
-Multiple \key{var} declarations may also be grouped; \key{const} (see ``\nameref{sec:constants}'')
-and \key{import} also allow this. Note the use of parentheses instead of braces:
+Multiple `var` declarations may also be grouped; `const` (see ``\nameref{sec:constants}'')
+and `import` also allow this. Note the use of parentheses instead of braces:
 \begin{lstlisting}[numbers=none]
 var (
     x int
@@ -153,7 +153,7 @@ not typed.
 Constants in Go are just that --- constant. They are created at compile
 time, and can only be numbers, strings, or booleans;
 `const x = 42` makes `x` a constant. You can use
-\first{\key{iota}}{keyword!iota} \footnote{The word [iota] is used in a common English phrase,
+\first{`iota`}{keyword!iota} \footnote{The word [iota] is used in a common English phrase,
 'not one iota', meaning 'not the slightest difference', in reference to
 a phrase in the New Testament: ``\emph{until heaven and earth pass away, not an
 iota, not a dot, will pass from the Law}.'' \cite{iota}}
@@ -164,9 +164,9 @@ const (
 	b
 )
 \end{lstlisting}
-The first use of \key{iota} will yield 0, so `a` is equal to 0. Whenever
-\key{iota} is used again on a new line its value is incremented with 1, so `b`
-has a value of 1. Or, as shown here, you can even let Go repeat the use of \key{iota}.
+The first use of `iota` will yield 0, so `a` is equal to 0. Whenever
+`iota` is used again on a new line its value is incremented with 1, so `b`
+has a value of 1. Or, as shown here, you can even let Go repeat the use of `iota`.
 You may also explicitly type a constant: `const b string = "0"`. Now
 `b` is a \type{string} type constant.
 
@@ -215,7 +215,7 @@ fmt.Printf("%s\n", s2) |\longremark{Finally, we print the string with `fmt.Print
 %%     "Ending part"
 %%\end{lstlisting}
 %%Then Go will not insert the semicolons in the wrong places. Another way
-%%would be to use *raw* string literals(((string literal,raw))) by using backquotes (\key{`}):
+%%would be to use *raw* string literals(((string literal,raw))) by using backquotes (```):
 %%\begin{lstlisting}[numbers=none]
 %%s := `Starting part
 %%     Ending part`
@@ -245,12 +245,12 @@ Any non-trivial program will have the need for error reporting sooner or later. 
 Go has a builtin type specially for errors, called \type{error}.
 `var e error` creates a variable `e` of type \type{error} with the
 value `nil`. This error type is an interface -- we'll look more at interfaces in Chapter
-``\ref{chap:interfaces}''. For now you can just assume that \type{error} is a type just like all other types.
+``(#chap:interfaces)''. For now you can just assume that \type{error} is a type just like all other types.
 
 \section{Operators and Built-in Functions}
 \label{sec:builtins}
 Go supports the normal set of numerical operators.
-Table \ref{tab:op-precedence}
+Table (#tab:op-precedence)
 lists the current ones and their relative precedence. They
 all associate from left to right.
 
@@ -285,38 +285,38 @@ Let's start looking at keywords. Table (#tab:keywords) lists all the keywords in
 {#tab:keywords}
 {{tab/keywords.md}}
 
-We've seen some of these already. We used \key{var} and \key{const} in the
-(#vars) section,  and we briefly looked at \key{package} and \key{import} in our "Hello World" program at the start of the chapter.
-Others need more attention and have their own chapter or section:
-\begin{itemize}
-\item \key{func} is used to declare functions and methods.
-\item \key{return} is used to return from functions. We'll look at both \key{func} and \key{return} in detail in Chapter \ref{chap:functions}.
-\item \key{go} is used for concurrency. We'll look at this in Chapter \ref{chap:channels}.
-\item \key{select} used to choose from different types of communication, We'll work with \key{select} in Chapter \ref{chap:channels}.
-\item \key{interface} is covered in Chapter \ref{chap:interfaces}.
-\item \key{struct} is used for abstract data types. We'll work with \key{struct} in Chapter \ref{chap:beyond}.
-\item \key{type} is also covered in Chapter \ref{chap:beyond}.
-\end{itemize}
+We've seen some of these already. We used `var` and `const` in the (#vars)
+section,  and we briefly looked at `package` and `import` in our "Hello World"
+program at the start of the chapter. Others need more attention and have their
+own chapter or section:
 
-\section{Control Structures}
-There are only a few control structures in Go. To write loops we use the \key{for} keyword, and there is a
-\key{switch} and of course an \key{if}. When working with channels \key{select} will be used (see Chapter \ref{chap:channels}).
+* `func` is used to declare functions and methods.
+* `return` is used to return from functions. We'll look at both `func` and `return` in detail in (#functions).
+* `go` is used for concurrency. We'll look at this in (#channels).
+* `select` used to choose from different types of communication, We'll work with `select` in (#channels).
+* `interface` is covered in (#interfaces).
+* `struct` is used for abstract data types. We'll work with `struct` in (#beyond).
+* `type` is also covered in (#beyond).
+
+
+## Control Structures
+There are only a few control structures in Go. To write loops we use the `for` keyword, and there is a
+`switch` and of course an `if`. When working with channels `select` will be used (see Chapter (#chap:channels)).
 Parentheses are are not required around the condition, and the body must *always* be brace-delimited.
 
 \subsection{If-Else}
-In Go an \first{\key{if}}{keyword!if} looks like this:
-\begin{lstlisting}
-if x > 0 {
-    return y
-} else {
-    return x
-}
-\end{lstlisting}
+In Go an \first{`if`}{keyword!if} looks like this:
 
-(((keyword,return)))
+    if x > 0 {
+        return y
+    } else {
+        return x
+    }
 
-(((keyword,if))) (((keyword,else)))
-Since \key{if} and \key{switch} accept an initialization statement, it's common to
+(((keywords,return)))
+
+(((keywords,if))) (((keywords,else)))
+Since `if` and `switch` accept an initialization statement, it's common to
 see one used to set up a (local) variable.
 \begin{lstlisting}[numbers=none]
 if err := SomethingFunction(); err == nil {
@@ -326,19 +326,19 @@ if err := SomethingFunction(); err == nil {
 }
 \end{lstlisting}
 
-It is idomatic in Go to omit the \key{else} when the \key{if} statement's body has a \key{break}, \key{continue}, \key{return} or,
-\key{goto}, so the above code would be better written as:
+It is idomatic in Go to omit the `else` when the `if` statement's body has a `break`, `continue`, `return` or,
+`goto`, so the above code would be better written as:
 \begin{lstlisting}[numbers=none]
 if err := SomethingFunction(); err != nil {
     return err
 }
 // do something
 \end{lstlisting}
-The opening brace on the first line must be positioned on the same line as the \key{if} statement. There is no
+The opening brace on the first line must be positioned on the same line as the `if` statement. There is no
 arguing about this, because this is what `gofmt` outputs.
 
 \subsection{Goto}
-Go has a \first{\key{goto}}{keyword!goto} statement --- use it wisely. With \key{goto}
+Go has a \first{`goto`}{keyword!goto} statement --- use it wisely. With `goto`
 you jump to a (((label))) label which must be defined within the current function.
 For instance, a loop in disguise:
 \begin{lstlisting}[numbers=none]
@@ -354,7 +354,7 @@ The string `Here:` indicates a label. A label does not need to start with a capi
 
 \subsection{For}
 \label{sec:for}
-The Go \first{\key{for}}{keyword!for} loop has three forms, only one of
+The Go \first{`for`}{keyword!for} loop has three forms, only one of
 which has semicolons:
 \begin{itemize}
     \item \lstinline|for init; condition; post { }| -- a loop using the syntax borrowed from C;
@@ -371,23 +371,23 @@ for i := 0; i < 10; i++ {
 Note that the variable `i` ceases to exist after the loop.
 
 \subsection{Break and Continue}
-With \first{\key{break}}{keyword!break} you can quit loops early.  By itself, \key{break} breaks
+With \first{`break`}{keyword!break} you can quit loops early.  By itself, `break` breaks
 the current loop.
 \begin{lstlisting}[numbers=none]
 for i := 0; i < 10; i++ {
     if i > 5 {
-	break|\longremark{Here we \key{break} the current loop \citem, and don't continue with the `fmt.Println(i)` statement \citemnext.}|
+	break|\longremark{Here we `break` the current loop \citem, and don't continue with the `fmt.Println(i)` statement \citemnext.}|
     }
-    fmt.Println(i)|\longremark{So we only print 0 to 5. With loops within loop you can specify a label after \key{break} to identify *which* loop to stop:}|
+    fmt.Println(i)|\longremark{So we only print 0 to 5. With loops within loop you can specify a label after `break` to identify *which* loop to stop:}|
 }
 \end{lstlisting}
 \showremarks
 
 \begin{lstlisting}[numbers=none]
-J:  for j := 0; j < 5; j++ { |\longremark{Here we define a label "J" \citem, preceding the \key{for}-loop there.}|
+J:  for j := 0; j < 5; j++ { |\longremark{Here we define a label "J" \citem, preceding the `for`-loop there.}|
         for i := 0; i < 10; i++ {
             if i > 5 {
-                break J |\longremark{When we use \key{break J} \citem, we don't break the inner loop but the "J" loop.}|
+                break J |\longremark{When we use `break J` \citem, we don't break the inner loop but the "J" loop.}|
             }
             fmt.Println(i)
         }
@@ -395,18 +395,18 @@ J:  for j := 0; j < 5; j++ { |\longremark{Here we define a label "J" \citem, pre
 \end{lstlisting}
 \showremarks
 
-With \first{\key{continue}}{keyword!continue} you begin the next iteration of the
-loop, skipping any remaining code. In the same way as \key{break},
-\key{continue} also accepts a label.
+With \first{`continue`}{keyword!continue} you begin the next iteration of the
+loop, skipping any remaining code. In the same way as `break`,
+`continue` also accepts a label.
 
 \subsection{Range}
-The keyword \first{\key{range}}{keyword!range} can be used for loops. It
+The keyword \first{`range`}{keyword!range} can be used for loops. It
 can loop over slices, arrays, strings, maps and channels (see Chapter
-\ref{chap:channels}). \key{range} is
+(#chap:channels)). `range` is
 an iterator that, when called, returns the next key-value pair from the "thing" it
-loops over. Depending on what that is, \key{range} returns different things.
+loops over. Depending on what that is, `range` returns different things.
 
-When looping over a slice or array, \key{range} returns the index in the
+When looping over a slice or array, `range` returns the index in the
 slice as the key and value belonging to that index.
 Consider this code: (((keyword,range)))
 \begin{lstlisting}[numbers=none]
@@ -415,10 +415,10 @@ for k, v := range list {
     // do something with k and v
 }
 \end{lstlisting}
-First we create a slice of strings. Then we use \key{range} to loop over them. With each iteration, \key{range} will return the index as an \type{int} and the key as a \type{string}.
+First we create a slice of strings. Then we use `range` to loop over them. With each iteration, `range` will return the index as an \type{int} and the key as a \type{string}.
 It will start with 0 and "a", so `k` will be 0 through 5, and v will be "a" through "f".
 
-You can also use \key{range} on strings directly. Then it
+You can also use `range` on strings directly. Then it
 will break out the individual Unicode characters
 \footnote{In the UTF-8 world characters are sometimes called \first{runes}{runes}.
 Mostly, when people talk about
@@ -439,16 +439,16 @@ character 'x' starts at byte position 3
 Note that '\begin{math}\Phi\end{math}' took 2 bytes, so 'x' starts at byte 3.
 
 \subsection{Switch}
-Go's \first{\key{switch}}{keyword!switch} is very flexible; you can match on much more than just
+Go's \first{`switch`}{keyword!switch} is very flexible; you can match on much more than just
 integers.
 The cases are evaluated top to bottom until
-a match is found, and if the \key{switch} has no expression it switches on
+a match is found, and if the `switch` has no expression it switches on
 \type{true}. It's therefore possible -- and idiomatic -- to write an
-\key{if-else-if-else} chain as a \key{switch}.
+`if-else-if-else` chain as a `switch`.
 \begin{lstlisting}[numbers=none]
 // Convert hexadecimal character to an int value
-switch { |\longremark{A \key{switch} without a condition is the same as \key{switch true} \citem.}|
-case '0' <= c && c <= '9':|\longremark{We list the different cases. Each \key{case} statement has a condition that is either %
+switch { |\longremark{A `switch` without a condition is the same as `switch true` \citem.}|
+case '0' <= c && c <= '9':|\longremark{We list the different cases. Each `case` statement has a condition that is either %
 true of false. Here \citem{} we check if `c` is a number.}|
     return c - '0'|\longremark{If `c` is a number we return its value \citem.}|
 case 'a' <= c && c <= 'f':|\longremark{Check if `c` falls between ``a'' and ``f'' \citem. For an ``a'' we return 10, for ``b'' we return 11, etc. We also do the same \citemnext{} thing for ``A'' to ``F''.}|
@@ -461,12 +461,12 @@ return 0
 \showremarks
 
 There is no automatic fall through, you you can use
-\first{\key{fallthrough}}{keyword!fallthrough} for that.
+\first{`fallthrough`}{keyword!fallthrough} for that.
 \begin{lstlisting}[numbers=none]
 switch i {
     case 0:  fallthrough
     case 1: |\longremark{`f()` can be called when \code{i == 0} \citem.%
-With \first{\key{default}}{keyword!default} you can specify an action%
+With \first{`default`}{keyword!default} you can specify an action%
 when none of the other cases match.}|
         f()
     default:
@@ -487,7 +487,7 @@ switch i {
 \section{Built-in Functions}
 A few functions are predefined, meaning
 you *don't* have to include any package to get
-access to them. Table \ref{tab:predef-functions} lists them all.\footnote{You can use the
+access to them. Table (#tab:predef-functions) lists them all.\footnote{You can use the
 command `godoc builtin` to read the online documentation about the built-in types and functions.}
 
 \begin{table}[Hh!]
@@ -503,7 +503,7 @@ pseudo package that is included in recent Go releases. Let's go over these funct
 
 \begin{description}
 \item[`close`] is used in
-channel communication. It closes a channel. We'll learn more about this in Chapter \ref{chap:channels}.
+channel communication. It closes a channel. We'll learn more about this in Chapter (#chap:channels).
 (((built-in,close)))
 
 \item[`delete`] is used for deleting entries in maps.
@@ -694,14 +694,14 @@ And after <2>, `n2` is 4, and `s` is `[]int{2, 3, 4, 5, 4, 5}`.
 Many other languages have a type similar to maps built-in. For instance, Perl has hashes,
 Python has its dictionaries, and C++ also has maps (as part of the libraries).
 In Go we have the
-\first{\key{map}}{keyword!map} type. A \type{map} can be thought of as an array indexed by
+\first{`map`}{keyword!map} type. A \type{map} can be thought of as an array indexed by
 strings (in its most simple form).
 
 \begin{lstlisting}[numbers=none]
 monthdays := map[string]int{
 	"Jan": 31, "Feb": 28, "Mar": 31,
 	"Apr": 30, "May": 31, "Jun": 30,    |\longremark{The general syntax for defining a map is {\tt map[<from type>]<to type>}. %
-Here, we define a map that converts from a \key{string} (month abbreviation) to an \type{int} (number of days in that month). Note that the trailing comma at %
+Here, we define a map that converts from a `string` (month abbreviation) to an \type{int} (number of days in that month). Note that the trailing comma at %
 \citem{} is *required*.}|
 	"Jul": 31, "Aug": 31, "Sep": 30,
 	"Oct": 31, "Nov": 30, "Dec": 31,
@@ -709,7 +709,7 @@ Here, we define a map that converts from a \key{string} (month abbreviation) to 
 \end{lstlisting}
 \showremarks
 
-Use \key{make} when only declaring a map:
+Use `make` when only declaring a map:
 \lstinline|monthdays := make(map[string]int)|. A map is a reference type.
 
 For indexing ("searching") the map, we use square brackets. For example,
@@ -718,12 +718,12 @@ number of days in December:\newline %% the code will overflow otherwise
 \noindent`fmt.Printf("%d\n", monthdays["Dec"])`
 
 If you are looping over an array, slice, string, or map a,
-\first{\key{range}}{keyword!range}
+\first{`range`}{keyword!range}
 clause will help you again, it returns the key and corresponding value
 with each invocation.(((keyword,range)))
 \begin{lstlisting}
 year := 0
-for _, days := range monthdays |\longremark{At \citem{} we use the underscore to ignore (assign to nothing) the key returned by \key{range}. %
+for _, days := range monthdays |\longremark{At \citem{} we use the underscore to ignore (assign to nothing) the key returned by `range`. %
 We are only interested in the values from `monthdays`.}|
     year += days
 }
