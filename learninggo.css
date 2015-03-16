@@ -8,16 +8,21 @@ pre,code {
     font-family: 'Source Code Pro', monospace;
 }
 
-.epigraph {
+blockquote.epigraph {
+    float: right;
+    padding-left: 40%;
+}
+
+.epigraph p {
     text-align: right;
 }
 
 .epigraph footer {
     font-style: italic;
+    text-align: right;
 }
 
 .epigraph hr {
-    width: 30%;
     margin-right: 0;
 }
 

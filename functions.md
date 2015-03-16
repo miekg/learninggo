@@ -16,7 +16,7 @@ Here is an example of how you can declare a function:
 {callout="//"}
     type mytype int
     func (p mytype) funcname(q int) (r,s int) { return 0,0 }
-    //<1>   <2>        <3>    <4>      <5>         <6>
+    // <1>        <2>        <3>      <4>        <5>         <6>
 
 To declare a function, you use the `func` keyword <1>.
 You can optionally bind <2> to a specific type called receiver (((functions, receiver))) (a function with a receiver is
@@ -230,17 +230,20 @@ it would be easier to see why we need the braces:
 In this (unnamed) function you can access any named return parameter:
 
     func f() (ret int)
-        defer func() { |\longremark{Here \citem{} we specify our function, the named return value `ret` is initialized with zero. The %
-    nameless function in the defer increments the value of `ret` with 1. The `return 0` on line %
-    5 *will not be the returned value*, because of `defer`. The function `f` will return 1!}|
+        defer func() { //<1>
             ret++
         }()
         return 0
     }
 
+Here <1> we specify our function, the named return value `ret` is initialized with zero. The
+nameless function in the defer increments the value of `ret` with 1. The `return 0` on line
+5 *will not be the returned value*, because of `defer`. The function `f` will return 1!
+
 
 ## Variadic Parameter
-Functions that take a variable number of parameters are known as variadic functions.(((functions, variadic)))
+Functions that take a variable number of parameters are known as variadic functions.
+(((functions, variadic)))
 To declare a function as variadic, do something like this:
 
     func myfunc(arg ...int) {}
@@ -281,7 +284,6 @@ use it wisely. So, how do you use it?
 In the words of the Go Authors [@go_blog_panic]:
 
 Panic
-
 :   is a built-in function that stops the ordinary flow of control and begins panicking. When the function
     `F` calls `panic`, execution of `F` stops, any deferred functions in `F` are executed normally, and
     then `F` returns to its caller. To the caller, `F` then
@@ -291,7 +293,6 @@ Panic
     as out-of-bounds array accesses.
 
 Recover
-
 :   is a built-in function that regains control of a panicking goroutine. Recover is *only* useful inside
     *deferred* functions. During normal execution, a call to `recover` will return `nil` and have no other effect.
     If the current goroutine is panicking, a call
@@ -332,5 +333,3 @@ anymore. Why?
 
 ## Exercises
 {{ex/functions/ex.md}}
-
-### Answers
