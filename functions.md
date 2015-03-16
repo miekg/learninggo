@@ -68,8 +68,8 @@ is checked on the second line <1>. This function prints: `9 8 7 6 5 4 3 2 1 0`, 
 
 ## Scope
 Variables declared outside any functions are *global* (((scope, local))) in Go, those
-defined in functions are *local* (((scope, local))) to those functions. If names overlap --- a
-local variable is declared with the same name as a global one --- the
+defined in functions are *local* (((scope, local))) to those functions. If names overlap - a
+local variable is declared with the same name as a global one - the
 local variable hides the global one when the current function is
 executed.
 
@@ -281,8 +281,8 @@ following example shows how to pass variadic arguments to it:
 With `myfunc2(arg...)` we pass all the parameters to `myfunc2`, but because the variadic
 parameters is just a slice, we can use some slice tricks as well.
 
-## Panic and recovering
 
+## Panic and recovering
 Go does not have an exception mechanism: you cannot throw exceptions.
 Instead it uses a panic-and-recover mechanism. It is worth remembering that you should use this as
 a last resort, your code will not look, or be, better if it is littered with panics. It's a powerful tool:
@@ -307,19 +307,24 @@ Recover
 This function checks if the function it gets as argument will panic when it is
 executed^[Modified from a presentation of Eleanor McHugh.]:
 
-    func Panic(f func()) (b bool) { |\longremark{We define a new function `Panic` that takes %
-    a function as an argument (see \nref{sec:functions as values}). It returns true if `f` panics %
-    when run, else false;}|
-        defer func() { |\longremark{We define a `defer` function that utilizes `recover`. If the %
-    current goroutine panics, this defer function will notice that. If `recover()` returns non-`nil` we set `b` %
-    to true;}|
+{callout="//"}
+    func Panic(f func()) (b bool) { //<1>
+        defer func() { //<2>
             if x := recover(); x != nil {
                 b = true
             }
         }()
-        f() |\longremark{Execute the function we received as the argument;}|
-        return |\longremark{Return the value of `b`. Because `b` is a named return parameter.}|
+        f() //<3>
+        return //<4>
     }
+
+We define a new function `Panic` <1> that takes a function as an argument (see (#functions-as-values)). It returns true if `f` panics
+when run, else false.
+We then <2> define a `defer` function that utilizes `recover`. If the
+current goroutine panics, this defer function will notice that. If `recover()` returns non-`nil` we set `b`
+to true.
+At <3> Execute the function we received as the argument.
+And finally <4> we return the value of `b`. Because `b` is a named return parameter.
 
 The following code fragment, shows how we can use this function:
 
@@ -336,6 +341,7 @@ On line 3 the `a[3] = 5` triggers a *runtime* out of bounds error which results 
 this program will print `true`.
 If we change line 2: `var a []int` to `var a [3]int` the function `panicy` does not panic
 anymore. Why?
+
 
 ## Exercises
 {{ex/functions/ex.md}}
