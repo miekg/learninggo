@@ -22,7 +22,7 @@ This first line is just required <1>. All Go files start with
 
 `import "fmt"` says we need `fmt` in
 addition to `main` <2>. A package other than `main` is commonly called a
-library, a familiar concept in many programming languages (see chapter (#chap:packages).
+library, a familiar concept in many programming languages (see Chapter (#packages).
 The line ends with a comment that begins with `//`.
 
 Next we another comment, but this one is enclosed in `/*` `*/` <3>.

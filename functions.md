@@ -234,6 +234,7 @@ it would be easier to see why we need the braces:
 
 In this (unnamed) function you can access any named return parameter:
 
+{callout="//"}
     func f() (ret int)
         defer func() { //<1>
             ret++
