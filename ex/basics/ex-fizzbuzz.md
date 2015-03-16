@@ -12,7 +12,7 @@ five, print "FizzBuzz".
 ### Answer
 1. A possible solution to this problem is the following program.
 
-{callouts="//"}
+{callout="//"}
 <{{ex/basics/src/fizzbuzz.go}}
 
 Here <1> we define two constants to make our code more readable, see (#constants).
