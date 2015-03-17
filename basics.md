@@ -461,34 +461,36 @@ return 0
 \showremarks
 
 There is no automatic fall through, you you can use
-\first{`fallthrough`}{keyword!fallthrough} for that.
-\begin{lstlisting}[numbers=none]
-switch i {
-    case 0:  fallthrough
-    case 1: |\longremark{`f()` can be called when \code{i == 0} \citem.%
-With \first{`default`}{keyword!default} you can specify an action%
-when none of the other cases match.}|
-        f()
-    default:
-        g() |\longremark{Here `g()` is called when `i` is not 0 or 1 \citem.}|
+`fallthrough` (((keywords, fallthrough))) for that.
 
-\end{lstlisting}
-\showremarks
+{callout="//"}
+    switch i {
+        case 0:  fallthrough
+        case 1: //<1>
+            f()
+        default:
+            g() //<2>
+
+`f()` can be called when \code{i == 0} <1>.
+With `default` (((keyword, default))) you can specify an action
+when none of the other cases match.
+Here `g()` is called when `i` is not 0 or 1 <2>.
 We could rewrite the above example as:
-\begin{lstlisting}[numbers=none]
-switch i {
-    case 0, 1:|\longremark{You can list cases on one line \citem, separated by commas.}|
-        f()
-    default:
-        g()
-\end{lstlisting}
-\showremarks
+
+{callout="//"}
+    switch i {
+        case 0, 1: //<1>
+            f()
+        default:
+            g()
+
+You can list cases on one line <1>, separated by commas.
 
 \section{Built-in Functions}
 A few functions are predefined, meaning
 you *don't* have to include any package to get
-access to them. Table (#tab:predef-functions) lists them all.\footnote{You can use the
-command `godoc builtin` to read the online documentation about the built-in types and functions.}
+access to them. Table (#tab:predef-functions) lists them all.^[You can use the
+command `godoc builtin` to read the online documentation about the built-in types and functions.]
 
 \begin{table}[Hh!]
 \begin{center}
@@ -498,75 +500,70 @@ command `godoc builtin` to read the online documentation about the built-in type
 \end{center}
 \end{table}
 
-These built-in functions are documented in the \package{builtin} (((package,builtin)))
+These built-in functions are documented in the `builtin` (((package,builtin)))
 pseudo package that is included in recent Go releases. Let's go over these functions briefly.
 
-\begin{description}
-\item[`close`] is used in
-channel communication. It closes a channel. We'll learn more about this in Chapter (#channels).
-(((built-in,close)))
+`close`
+:   is used in channel communication. It closes a channel. We'll learn more about this in Chapter (#channels).
+    (((built-in,close)))
 
-\item[`delete`] is used for deleting entries in maps.
-(((built-in,delete)))
+`delete`
+:   is used for deleting entries in maps. (((built-in,delete)))
 
-\item[`len` and `cap`] are used on a number of different
-types, `len` is
-used to return the lengths of strings, slices, and
-arrays. In the next section \nref{sec:arrays} we'll look at slices,
-arrays and the function
-`cap`.(((built-in,len)))(((built-in,cap)))
+`len` and `cap`
+:   are used on a number of different types, `len` is
+    used to return the lengths of strings, slices, and
+    arrays. In the next section (#arrays) we'll look at slices,
+    arrays and the function `cap`.(((built-in,len)))(((built-in,cap)))
 
-\item[`new`] is used for allocating memory for user defined
-data types. See \nref{sec:allocation with new} on page
-\pageref{sec:allocation with new}.
-(((built-in,new)))
+`new`
+:   is used for allocating memory for user defined
+    data types. See #(allocation with new).
+    (((built-in,new)))
 
-\item[`make`] is used for allocating memory for built-in
-types (maps, slices, and channels). See \nref{sec:allocation with make} on page
-\pageref{sec:allocation with make}.
-(((built-in,make)))
+`make`
+:   is used for allocating memory for built-in
+    types (maps, slices, and channels). See #(allocation with make).
+    (((built-in,make)))
 
-\item[`copy`] is for copying slices. See \nref{sec:slices} section in this chapter.
-(((built-in,copy)))
+`copy`
+:   is for copying slices. See (#slices) section in this chapter. (((built-in,copy)))
 
-\item[`append`] is for concatenating slices.
-See \nref{sec:slices} in this chapter.
-(((built-in,append)))
+`append`
+:   is for concatenating slices. See (#slices) in this chapter. (((built-in,append)))
 
-\item[`panic`, `recover`] are used for an
-*exception* mechanism. See \nref{sec:panic} on page \pageref{sec:panic} for more.
-(((built-in,panic)))
-(((built-in,recover)))
+`panic`, `recover`
+:   are used for an *exception* mechanism. See (#panic) for more.
+    (((built-in,panic)))
+    (((built-in,recover)))
 
-\item[`print`, `println`] are low level printing
-functions that can be used without reverting to the
-\package{fmt}(((package,fmt)))
-package. These are mainly used for debugging.
-(((built-in,print)))(((built-in,println)))
+`print`, `println`
+:   are low level printing functions that can be used without reverting to the
+    `fmt` (((package,fmt))) package. These are mainly used for debugging.
+    (((built-in,print)))(((built-in,println)))
 
-\item[`complex`, `real`, `imag`] all deal with
-\first{complex numbers}{complex numbers}. We will not use complex numbers in this book.
-(((built-in,complex)))
-(((built-in,real)))
-(((built-in,imag)))
-\end{description}
+`complex`, `real`, `imag`
+:   all deal with complex numbers. (((complex numbers))) We will not use complex numbers in this book.
+    (((built-in,complex)))
+    (((built-in,real)))
+    (((built-in,imag)))
 
-\section{Arrays, Slices, and Maps}
-\label{sec:arrays}
+
+## Arrays, Slices, and Maps
 To store multiple values in a list, you can use arrays, or
 their more flexible cousin: slices. A dictionary or hash type is also
 available. It is called a \type{map} in Go.
 
-\subsection{Arrays}
+### Arrays
 An array is defined by: \verb|[n]<type>|, where $n$ is the length
 of the array and \verb|<type>| is the stuff you want to store.
 To assign or index an element in the array, you use square brackets:
-\begin{lstlisting}[numbers=none]
+
 var arr [10]int
 arr[0] = 42
 arr[1] = 13
 fmt.Printf("The first element is %d\n", arr[0])
-\end{lstlisting}
+
 Array types like `var arr [10]int` have a fixed size. The
 size is *part* of the type.
 They can't grow, because then they would have a different type. Also arrays
@@ -581,10 +578,10 @@ To initialize it to something other than zero, use a
 This can be shortened to \lstinline|a := [...]int{1, 2, 3}|, where Go counts
 the elements automatically.
 
-\gomarginpar{A composite literal allows you
-to assign a value directly to an array, slice, or map.
-See \nref{sec:constructors and composite literals} on
-page \pageref{sec:constructors and composite literals} for more information.}
+A> A composite literal allows you
+A> to assign a value directly to an array, slice, or map.
+A> See (#constructors and composite literals) for more information.
+
 When declaring arrays you *always* have to type something in
 between the square brackets, either a number or three dots (\verb|...|),
 when using a composite literal.
