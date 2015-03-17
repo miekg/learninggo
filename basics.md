@@ -425,17 +425,17 @@ Mostly, when people talk about
 characters, they mean 8 bit characters. As UTF-8 characters may be up to 32 bits the word
 rune is used. In this case the type of `char` is \type{rune}.} and their start position, by parsing the UTF-8.
 The loop: (((keyword,range)))
-\begin{lstlisting}[numbers=none]
-for pos, char := range "a|$\Phi{}$|x" {
-    fmt.Printf("character '%c' starts at byte position %d\n", char, pos)
-}
-\end{lstlisting}
+
+    for pos, char := range "a|$\Phi{}$|x" {
+        fmt.Printf("character '%c' starts at byte position %d\n", char, pos)
+    }
+
 prints
-\begin{alltt}
-character 'a' starts at byte position 0
-character '\begin{math}\Phi\end{math}' starts at byte position 1
-character 'x' starts at byte position 3
-\end{alltt}
+
+    character 'a' starts at byte position 0
+    character '$$\Phi\$$' starts at byte position 1
+    character 'x' starts at byte position 3
+
 Note that '\begin{math}\Phi\end{math}' took 2 bytes, so 'x' starts at byte 3.
 
 \subsection{Switch}
@@ -550,14 +550,14 @@ their more flexible cousin: slices. A dictionary or hash type is also
 available. It is called a \type{map} in Go.
 
 ### Arrays
-An array is defined by: \verb|[n]<type>|, where $n$ is the length
-of the array and \verb|<type>| is the stuff you want to store.
+An array is defined by: `[n]<type>`, where $$n$$ is the length
+of the array and `<type>` is the stuff you want to store.
 To assign or index an element in the array, you use square brackets:
 
-var arr [10]int
-arr[0] = 42
-arr[1] = 13
-fmt.Printf("The first element is %d\n", arr[0])
+    var arr [10]int
+    arr[0] = 42
+    arr[1] = 13
+    fmt.Printf("The first element is %d\n", arr[0])
 
 Array types like `var arr [10]int` have a fixed size. The
 size is *part* of the type.
@@ -569,19 +569,19 @@ copy of the array, not a pointer to it.
 (((array,multidimensional)))
 To declare an array you can use the following: `var a [3]int`.
 To initialize it to something other than zero, use a
-\first{composite literal}{literal!composite}: \lstinline|a := [3]int{1, 2, 3}|.
-This can be shortened to \lstinline|a := [...]int{1, 2, 3}|, where Go counts
+*composite literal* (((literal, composite))): `a := [3]int{1, 2, 3}`.
+This can be shortened to `a := [...]int{1, 2, 3}`, where Go counts
 the elements automatically.
 
 A> A composite literal allows you
 A> to assign a value directly to an array, slice, or map.
-A> See (#constructors and composite literals) for more information.
+A> See (#constructors-and-composite-literals) for more information.
 
 When declaring arrays you *always* have to type something in
-between the square brackets, either a number or three dots (\verb|...|),
+between the square brackets, either a number or three dots (`...`),
 when using a composite literal.
 When using multidimensional arrays, you can use the following syntax:
-\lstinline|a := [2][2]int{ {1,2}, {3,4} }|. Now that you know about arrays you will
+`a := [2][2]int{ {1,2}, {3,4} }`. Now that you know about arrays you will
 be delighted to learn that you will almost never use them in Go, because there is something
 much more flexible: slices.
 
