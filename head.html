@@ -35,14 +35,12 @@
     }
 
     function epigraphs() {
-      $("blockquote.epigraph footer").prepend( "<hr>" );
+      $("blockquote.epigraph footer").prepend("<hr>");
     }
 
     function answers(){
-       $("h3.answer").click(function() {
-        $("h3.answer").nextUntil("h1,h2").toggle()
-       });
-       $("h3.answer").nextUntil("h1,h2").hide()
+       $("h3.answer").after("<summary>Click to see the answer</summary>");
+       $("h3.answer").nextUntil("h1,h2").wrapAll("<details></details>");
     }
 
     // TODO(miek)

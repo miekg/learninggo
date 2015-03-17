@@ -11,6 +11,6 @@
         }
 
 * Create header and footer for the page to make it more book like
-* Toggle chapters as well
+* Toggle chapters as well? With <details>?
 * Create css style (light/dark)
 * Code highlighting?

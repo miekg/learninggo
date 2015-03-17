@@ -12,6 +12,10 @@ dt,h3,h4,h5,h6 {
     font-style: italic;
 }
 
+summary {
+    font-weight: bold;
+}
+
 blockquote.epigraph {
     padding-left: 60%;
 }

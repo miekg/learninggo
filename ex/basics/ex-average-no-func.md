@@ -4,6 +4,7 @@
 1. Write code to calculate the average of a `float64` slice. In
 a later exercise you will make it into a function.
 
+
 {.answer}
 ### Answer
 

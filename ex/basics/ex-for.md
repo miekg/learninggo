@@ -8,6 +8,7 @@
 
 3.  Rewrite the loop again so that it fills an array and then prints that array to the screen.
 
+
 {.answer}
 ### Answer
 

@@ -9,6 +9,7 @@ five, print "Buzz". For numbers which are multiples of both three and
 five, print "FizzBuzz".
 
 
+{.answer}
 ### Answer
 1. A possible solution to this problem is the following program.
 
