@@ -486,19 +486,14 @@ We could rewrite the above example as:
 
 You can list cases on one line <1>, separated by commas.
 
-\section{Built-in Functions}
+## Built-in Functions
 A few functions are predefined, meaning
 you *don't* have to include any package to get
 access to them. Table (#tab:predef-functions) lists them all.^[You can use the
 command `godoc builtin` to read the online documentation about the built-in types and functions.]
 
-\begin{table}[Hh!]
-\begin{center}
-\caption{Pre--defined functions in Go}
-\label{tab:predef-functions}
-\input{tab/functions.tex}
-\end{center}
-\end{table}
+{#tab::predef-functions}
+{{tab/functions.md}}
 
 These built-in functions are documented in the `builtin` (((package,builtin)))
 pseudo package that is included in recent Go releases. Let's go over these functions briefly.
