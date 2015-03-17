@@ -2,8 +2,28 @@
 * Fix ref to citations, to use the number of the <li>
 * Fix ref to tables
 * Create TOC
+
+        function toc(){
+          $("body").prepend("<div class=toc></div>");
+          $("h1").each(function(){
+            $("div.toc").append($(this).text()).append("<br/>");
+          });
+        }
+
 * Create header and footer for the page to make it more book like
 * Toggle answers (hide/show)
+
+        function answers(){
+           $("h3#answer").click(function() {
+               $("h3#answer").nextUntil("h1,h2").toggle()
+           });
+         }                             >  function answers(){
+           $("h3#answer").click(function() {
+               $("h3#answer").nextUntil("h1,h2").toggle()
+           });
+         }
+
+
 * Toggle chapters as well
 * Create css style (light/dark)
 * Code highlighting?
