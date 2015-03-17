@@ -305,8 +305,8 @@ There are only a few control structures in Go. To write loops we use the `for` k
 (#channels)).
 Parentheses are are not required around the condition, and the body must *always* be brace-delimited.
 
-\subsection{If-Else}
-In Go an \first{`if`}{keyword!if} looks like this:
+### If-Else
+In Go an `if` (((keywords, if))) looks like this:
 
     if x > 0 {
         return y
@@ -315,74 +315,73 @@ In Go an \first{`if`}{keyword!if} looks like this:
     }
 
 (((keywords,return)))
-
-(((keywords,if))) (((keywords,else)))
+(((keywords,else)))
 Since `if` and `switch` accept an initialization statement, it's common to
 see one used to set up a (local) variable.
-\begin{lstlisting}[numbers=none]
-if err := SomethingFunction(); err == nil {
-    // do something
-} else {
-    return err
-}
-\end{lstlisting}
+
+    if err := SomeFunction(); err == nil {
+        // do something
+    } else {
+        return err
+    }
 
 It is idomatic in Go to omit the `else` when the `if` statement's body has a `break`, `continue`, `return` or,
 `goto`, so the above code would be better written as:
-\begin{lstlisting}[numbers=none]
-if err := SomethingFunction(); err != nil {
-    return err
-}
-// do something
-\end{lstlisting}
+
+    if err := SomeFunction(); err != nil {
+        return err
+    }
+    // do something
+
 The opening brace on the first line must be positioned on the same line as the `if` statement. There is no
 arguing about this, because this is what `gofmt` outputs.
 
-\subsection{Goto}
-Go has a \first{`goto`}{keyword!goto} statement --- use it wisely. With `goto`
+### Goto
+Go has a `goto` (((keyword, goto))) statement - use it wisely. With `goto`
 you jump to a (((label))) label which must be defined within the current function.
 For instance, a loop in disguise:
-\begin{lstlisting}[numbers=none]
-func myfunc() {
-        i := 0
-Here:
-        fmt.Println(i)
-        i++
-        goto Here
-}
-\end{lstlisting}
+
+    func myfunc() {
+            i := 0
+    Here:
+            fmt.Println(i)
+            i++
+            goto Here
+    }
+
 The string `Here:` indicates a label. A label does not need to start with a capital letter and is case sensitive.
 
-\subsection{For}
-\label{sec:for}
-The Go \first{`for`}{keyword!for} loop has three forms, only one of
-which has semicolons:
-\begin{itemize}
-    \item \lstinline|for init; condition; post { }| -- a loop using the syntax borrowed from C;
-    \item \lstinline|for condition { }| -- a while loop, and;
-    \item \lstinline|for { }| -- an endless loop.
-\end{itemize}
+### For
+The Go `for` (((keywords, for))) loop has three forms, only one of which has semicolons:
+
+* `for init; condition; post { }` - a loop using the syntax borrowed from C;
+* `for condition { }` - a while loop, and;
+* `for { }` - an endless loop.
+
 Short declarations make it easy to declare the index variable right in the loop.
-\begin{lstlisting}[numbers=none]
-sum := 0
-for i := 0; i < 10; i++ {
-    sum = sum + i
-}
-\end{lstlisting}
+
+    sum := 0
+    for i := 0; i < 10; i++ {
+        sum = sum + i
+    }
+
 Note that the variable `i` ceases to exist after the loop.
 
-\subsection{Break and Continue}
-With \first{`break`}{keyword!break} you can quit loops early.  By itself, `break` breaks
+### Break and Continue
+With `break` (((keywords, break))) you can quit loops early.  By itself, `break` breaks
 the current loop.
-\begin{lstlisting}[numbers=none]
+
 for i := 0; i < 10; i++ {
     if i > 5 {
 	break|\longremark{Here we `break` the current loop \citem, and don't continue with the `fmt.Println(i)` statement \citemnext.}|
     }
     fmt.Println(i)|\longremark{So we only print 0 to 5. With loops within loop you can specify a label after `break` to identify *which* loop to stop:}|
 }
-\end{lstlisting}
-\showremarks
+
+	break|\longremark{Here we `break` the current loop \citem, and don't continue with the `fmt.Println(i)` statement \citemnext.}|
+    }
+    fmt.Println(i)|\longremark{So we only print 0 to 5. With loops within loop you can specify a label after `break` to identify *which* loop to stop:}|
+}
 
 \begin{lstlisting}[numbers=none]
 J:  for j := 0; j < 5; j++ { |\longremark{Here we define a label "J" \citem, preceding the `for`-loop there.}|
@@ -396,11 +395,11 @@ J:  for j := 0; j < 5; j++ { |\longremark{Here we define a label "J" \citem, pre
 \end{lstlisting}
 \showremarks
 
-With \first{`continue`}{keyword!continue} you begin the next iteration of the
+With \first{`continue`} (((keyword, continue))) you begin the next iteration of the
 loop, skipping any remaining code. In the same way as `break`,
 `continue` also accepts a label.
 
-\subsection{Range}
+### Range
 The keyword \first{`range`}{keyword!range} can be used for loops. It
 can loop over slices, arrays, strings, maps and channels (see Chapter
 (#channels)). `range` is
@@ -409,13 +408,13 @@ loops over. Depending on what that is, `range` returns different things.
 
 When looping over a slice or array, `range` returns the index in the
 slice as the key and value belonging to that index.
-Consider this code: (((keyword,range)))
-\begin{lstlisting}[numbers=none]
-list := []string{"a", "b", "c", "d", "e", "f"}
-for k, v := range list {
-    // do something with k and v
-}
-\end{lstlisting}
+Consider this code: (((keyword, range)))
+
+    list := []string{"a", "b", "c", "d", "e", "f"}
+    for k, v := range list {
+        // do something with k and v
+    }
+
 First we create a slice of strings. Then we use `range` to loop over them. With each iteration, `range` will return the index as an \type{int} and the key as a \type{string}.
 It will start with 0 and "a", so `k` will be 0 through 5, and v will be "a" through "f".
 
