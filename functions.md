@@ -199,10 +199,10 @@ more readable and it puts the `Close` *right next* to the `Open`.
         defer file.Close() //<1>
         // Do your thing
         if failureX {
-        return false //<2>
+            return false //<2>
         }
         if failureY {
-        return false //<2>
+            return false //<2>
         }
         return true //<2>
     }
