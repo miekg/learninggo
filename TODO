@@ -1,5 +1,6 @@
 * Search and replace in vim non greedy: ":%s/\\texttt{\(.\{-}\)}/`\1`/g"
 * Fix ref to citations, to use the number of the <li>
+* Fix ref to tables
 * Create TOC
 * Create header and footer for the page to make it more book like
 * Toggle answers (hide/show)
