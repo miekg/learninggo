@@ -5,10 +5,11 @@
 <script>
     $(document).ready(function() {
       answers();
-      chapters();
       appendices
-      references();
+      chapters();
       epigraphs();
+      references();
+      toc();
     });
 
     function chapters(){
@@ -43,11 +44,11 @@
        $("h3.answer").nextUntil("h1,h2").wrapAll("<details></details>");
     }
 
-    // TODO(miek)
     function toc(){
-      $("body").prepend("<div class=toc></div>");
-      $("h1").each(function(){
-        $("div.toc").append($(this).text()).append("<br>");
+      $("body").prepend("<div class=\"toc\"></div>");
+      $("h1,h2").each(function(){
+              $("div.toc").append("<span class=\"toc " + $(this).prop("tagName").toLowerCase() + "\">" +
+                  "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></span><br>");
       });
     }
 </script>

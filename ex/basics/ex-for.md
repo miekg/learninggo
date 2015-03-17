@@ -1,5 +1,5 @@
 {.exersice difficulty="0"}
-## For-loop
+### For-loop
 
 1. Create a loop with the `for` construct. Make it loop
    10 times and print out the loop counter with the `fmt` package.

@@ -1,5 +1,5 @@
 {.exercise difficulty="1"}
-## Strings
+### Strings
 
 1. Create a Go program that prints the following (up to 100 characters):
 

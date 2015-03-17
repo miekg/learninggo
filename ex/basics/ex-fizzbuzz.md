@@ -1,5 +1,5 @@
 {.exercise, difficulty="0"}
-## FizzBuzz
+### FizzBuzz
 
 1. Solve this problem, called the Fizz-Buzz [@fizzbuzz] problem:
 

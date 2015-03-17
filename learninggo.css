@@ -1,5 +1,5 @@
 body {
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
     font-family: 'Droid Sans', serif;
 }
@@ -66,4 +66,19 @@ a.cite {
     position: relative;
     vertical-align: baseline;
     top: -0.5em;
+}
+
+.toc {
+    position: fixed;
+    left: 0px;
+    padding-left: 1em;
+}
+
+span.toc.h1 {
+    font-weight: bold;
+}
+
+span.toc.h2 {
+    font-style: italic;
+    padding-left: 2em;
 }
