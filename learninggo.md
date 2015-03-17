@@ -15,6 +15,9 @@
 %   [author.address]
 %   email = "miek@miek.nl"
 
+.# Preface
+{{preface.md}}
+
 {mainmatter}
 
 # Introduction

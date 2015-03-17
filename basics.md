@@ -22,7 +22,7 @@ This first line is just required <1>. All Go files start with
 
 `import "fmt"` says we need `fmt` in
 addition to `main` <2>. A package other than `main` is commonly called a
-library, a familiar concept in many programming languages (see Chapter (#packages).
+library, a familiar concept in many programming languages (see (#packages).
 The line ends with a comment that begins with `//`.
 
 Next we another comment, but this one is enclosed in `/*` `*/` <3>.
@@ -47,16 +47,15 @@ This results in an executable called `helloworld`. (((tooling,go run)))
 
 You can combine the above and just call `go run helloworld.go`.
 
-<!--
-\section{Variables, Types and Keywords}
-\label{sec:vars}
+
+## Variables, Types and Keywords
 In the next few sections we will look at the variables, basic types,
 keywords, and control structures of our new language.
 
 Go is different from (most) other languages in that the type of a variable
 is specified *after* the variable name. So not:
 `int a`, but `a int`. When you declare a variable it
-is assigned the ``natural'' null value for the type. This means that after
+is assigned the "natural" null value for the type. This means that after
 `var a int`, `a` has a value of 0. With
 `var s string`, `s` is assigned the zero string,
 which is `""`.
@@ -66,58 +65,43 @@ the same effect.
 (((variables,declaring)))
 (((variables,assigning)))
 
-\begin{minipage}{.5\textwidth}
-\begin{lstlisting}[linewidth=.5\textwidth,numbers=none]
-var a int
-var b bool
-a = 15
-b = false
-\end{lstlisting}
-\hfill
-\end{minipage}
-\begin{minipage}{.5\textwidth}
-\begin{lstlisting}[linewidth=.5\textwidth,numbers=none]
-
-
-a := 15
-b := false
-\end{lstlisting}
-\hfill
-\end{minipage}
+    var a int                           a := 15
+    var b bool                          b := false
+    a = 15
+    b = false
 
 On the left we use the
 `var` keyword to declare a variable and *then* assign a value to
-it. The code on the right uses \mbox{`:=`{ }} to do this in one
+it. The code on the right uses `:=` to do this in one
 step (this form may only be used *inside* functions).
 In that case the variable
-type is *deduced* from the value. A value of 15 indicates an \type{int}.
-A value of `false` tells Go that the type should be \type{bool}.
-Multiple `var` declarations may also be grouped; `const` (see ``\nameref{sec:constants}'')
+type is *deduced* from the value. A value of 15 indicates an `int`.
+A value of `false` tells Go that the type should be `bool`.
+Multiple `var` declarations may also be grouped; `const` (see (#constants))
 and `import` also allow this. Note the use of parentheses instead of braces:
-\begin{lstlisting}[numbers=none]
-var (
-    x int
-    b bool
-)
-\end{lstlisting}
+
+    var (
+        x int
+        b bool
+    )
+
 Multiple variables of the same type can also be declared on a
 single line: `var x, y int` makes `x` and `y` both
-\type{int} variables. You can also make use of \first{parallel
-assignment}{parallel assignment}: `a, b := 20, 16`.
+`int` variables. You can also make use of *parallel assignment*(((variables, {parallel assignment))): `a, b := 20, 16`.
 This makes `a` and `b` both integer variables and assigns
 20 to `a` and 16 to `b`.
 
-A special name for a variable is `\textbf{\_`} (((variables,_)))
-(underscore)(((variables,underscore))). Any value
-assigned to it is discarded (it's similar to \file{/dev/null} on Unix). In this example we only assign the integer
+A special name for a variable is *`_`* (((variables,underscore)))
+Any value
+assigned to it is discarded (it's similar to `/dev/null` on Unix). In this example we only assign the integer
 value of 35 to `b` and discard the value 34: `_, b := 34, 35`.
 Declared but otherwise *unused* variables are a compiler error in Go.
 
-\subsection{Boolean Types}
+### Boolean Types
 A boolean type represents the set of boolean truth values denoted by the
-predeclared constants *true* and *false*. The boolean type is \type{bool}.
+predeclared constants *true* and *false*. The boolean type is `bool`.
 
-\subsection{Numerical Types}
+### Numerical Types
 Go has most of the well-known types such as `int`. The `int` type
 has the appropriate length for your machine,
 meaning that on a 32-bit machine it is 32 bits and on
@@ -126,51 +110,52 @@ either 32 or 64 bits, no other values are defined. Same goes
 for `uint`, the unsigned int.
 
 If you want to be explicit about the length, you can have that too,
-with \type{int32}, or \type{uint32}. The full
+with `int32`, or `uint32`. The full
 list for (signed and unsigned) integers is
-\type{int8}, \type{int16}, \type{int32}, \type{int64} and
-\type{byte}, \type{uint8}, \type{uint16}, \type{uint32}, \type{uint64},
+`int8`, `int16`, `int32`, `int64` and
+`byte`, `uint8`, `uint16`, `uint32`, `uint64`,
 with `byte` being an
 alias for `uint8`. For floating point values there is
-\type{float32} and \type{float64} (there is no `float` type).
+`float32` and `float64` (there is no `float` type).
 A 64 bit integer or floating point value is *always* 64 bit, also on 32 bit
 architectures.
 
 Note
 that these types are all distinct and assigning variables which mix
 these types is a compiler error, like in the following code:
-\lstinputlisting[label=src:types,numbers=none]{src/basics/types.go}
 
-We declare two different integers, a and b where a is an \type{int} and
-b is an \type{int32}. We want to set b to the sum of a and a. This
+<{{src/basics/types.go}}
+
+We declare two different integers, a and b where a is an `int` and
+b is an `int32`. We want to set b to the sum of a and a. This
 fails and gives the error:
-\error{cannot use a + a (type int)  as type int32 in assignment}.
+`cannot use a + a (type int)  as type int32 in assignment`.
 Adding the constant 5 to b *does* succeed, because constants are
 not typed.
 
-\subsection{Constants}
-\label{sec:constants}
+### Constants}
+
 Constants in Go are just that --- constant. They are created at compile
 time, and can only be numbers, strings, or booleans;
 `const x = 42` makes `x` a constant. You can use
-\first{`iota`}{keyword!iota} \footnote{The word [iota] is used in a common English phrase,
+*iota*(((keywords, iota))) ^[The word iota is used in a common English phrase,
 'not one iota', meaning 'not the slightest difference', in reference to
-a phrase in the New Testament: ``\emph{until heaven and earth pass away, not an
-iota, not a dot, will pass from the Law}.'' \cite{iota}}
+a phrase in the New Testament: "*until heaven and earth pass away, not an
+iota, not a dot, will pass from the Law*." [@iota]]
 to enumerate values.
-\begin{lstlisting}[numbers=none]
-const (
-	a = iota
-	b
-)
-\end{lstlisting}
+
+    const (
+        a = iota
+        b
+    )
+
 The first use of `iota` will yield 0, so `a` is equal to 0. Whenever
 `iota` is used again on a new line its value is incremented with 1, so `b`
 has a value of 1. Or, as shown here, you can even let Go repeat the use of `iota`.
 You may also explicitly type a constant: `const b string = "0"`. Now
-`b` is a \type{string} type constant.
+`b` is a `string` type constant.
 
-\subsection{Strings}
+### Strings}
 Another important built-in type is `string`. Assigning a
 string is as simple as:
 \begin{lstlisting}[numbers=none]
@@ -224,28 +209,28 @@ fmt.Printf("%s\n", s2) |\longremark{Finally, we print the string with `fmt.Print
 %%Unlike *interpreted* string literals (((string literal,interpreted))) the value of a raw string literal
 %%is composed of the *uninterpreted* characters between the quotes.
 
-\subsection{Runes}
-`Rune` is an alias for \type{int32}. It is an UTF-8 encoded code point. When is this type useful?
+### Runes}
+`Rune` is an alias for `int32`. It is an UTF-8 encoded code point. When is this type useful?
 One example is when you're
 iterating over characters in a string. You could loop over each byte (which is only equivalent to a character
 when strings are encoded in 8-bit ASCII, which they are *not* in Go!). But to get the actual characters you
-should use the \type{rune} type.
+should use the `rune` type.
 
-\subsection{Complex Numbers}
+### Complex Numbers}
 Go has native support for complex numbers. To
-use them you need a variable of type \type{complex128} (64
-bit real and imaginary parts) or \type{complex64} (32 bit
+use them you need a variable of type `complex128` (64
+bit real and imaginary parts) or `complex64` (32 bit
 real and imaginary parts).
 Complex numbers are written as
 `re + im$$i$$`, where `re` is the real part,
 `im` is the imaginary part and $$i$$ is the literal '$$i$$' ($$\sqrt{-1}$$).
 
-\subsection{Errors}
+### Errors}
 Any non-trivial program will have the need for error reporting sooner or later. Because of this
-Go has a builtin type specially for errors, called \type{error}.
-`var e error` creates a variable `e` of type \type{error} with the
-value `nil`. This error type is an interface -- we'll look more at interfaces in Chapter
-``(#chap:interfaces)''. For now you can just assume that \type{error} is a type just like all other types.
+Go has a builtin type specially for errors, called `error`.
+`var e error` creates a variable `e` of type `error` with the
+value `nil`. This error type is an interface -- we'll look more at interfaces in
+``(#chap:interfaces)''. For now you can just assume that `error` is a type just like all other types.
 
 \section{Operators and Built-in Functions}
 \label{sec:builtins}
@@ -292,8 +277,8 @@ own chapter or section:
 
 * `func` is used to declare functions and methods.
 * `return` is used to return from functions. We'll look at both `func` and `return` in detail in (#functions).
-* `go` is used for concurrency. We'll look at this in Chapter (#channels).
-* `select` used to choose from different types of communication, We'll work with `select` in Chapter (#channels).
+* `go` is used for concurrency. We'll look at this in (#channels).
+* `select` used to choose from different types of communication, We'll work with `select` in (#channels).
 * `interface` is covered in (#interfaces).
 * `struct` is used for abstract data types. We'll work with `struct` in (#beyond).
 * `type` is also covered in (#beyond).
@@ -301,8 +286,7 @@ own chapter or section:
 
 ## Control Structures
 There are only a few control structures in Go. To write loops we use the `for` keyword, and there is a
-`switch` and of course an `if`. When working with channels `select` will be used (see Chapter
-(#channels)).
+`switch` and of course an `if`. When working with channels `select` will be used (see (#channels)).
 Parentheses are are not required around the condition, and the body must *always* be brace-delimited.
 
 ### If-Else
@@ -401,8 +385,7 @@ loop, skipping any remaining code. In the same way as `break`,
 
 ### Range
 The keyword \first{`range`}{keyword!range} can be used for loops. It
-can loop over slices, arrays, strings, maps and channels (see Chapter
-(#channels)). `range` is
+can loop over slices, arrays, strings, maps and channels (see (#channels)). `range` is
 an iterator that, when called, returns the next key-value pair from the "thing" it
 loops over. Depending on what that is, `range` returns different things.
 
@@ -415,7 +398,7 @@ Consider this code: (((keyword, range)))
         // do something with k and v
     }
 
-First we create a slice of strings. Then we use `range` to loop over them. With each iteration, `range` will return the index as an \type{int} and the key as a \type{string}.
+First we create a slice of strings. Then we use `range` to loop over them. With each iteration, `range` will return the index as an `int` and the key as a `string`.
 It will start with 0 and "a", so `k` will be 0 through 5, and v will be "a" through "f".
 
 You can also use `range` on strings directly. Then it
@@ -423,7 +406,7 @@ will break out the individual Unicode characters
 \footnote{In the UTF-8 world characters are sometimes called \first{runes}{runes}.
 Mostly, when people talk about
 characters, they mean 8 bit characters. As UTF-8 characters may be up to 32 bits the word
-rune is used. In this case the type of `char` is \type{rune}.} and their start position, by parsing the UTF-8.
+rune is used. In this case the type of `char` is `rune`.} and their start position, by parsing the UTF-8.
 The loop: (((keyword,range)))
 
     for pos, char := range "a|$\Phi{}$|x" {
@@ -438,12 +421,12 @@ prints
 
 Note that '\begin{math}\Phi\end{math}' took 2 bytes, so 'x' starts at byte 3.
 
-\subsection{Switch}
+### Switch}
 Go's \first{`switch`}{keyword!switch} is very flexible; you can match on much more than just
 integers.
 The cases are evaluated top to bottom until
 a match is found, and if the `switch` has no expression it switches on
-\type{true}. It's therefore possible -- and idiomatic -- to write an
+`true`. It's therefore possible -- and idiomatic -- to write an
 `if-else-if-else` chain as a `switch`.
 \begin{lstlisting}[numbers=none]
 // Convert hexadecimal character to an int value
@@ -499,7 +482,7 @@ These built-in functions are documented in the `builtin` (((package,builtin)))
 pseudo package that is included in recent Go releases. Let's go over these functions briefly.
 
 `close`
-:   is used in channel communication. It closes a channel. We'll learn more about this in Chapter (#channels).
+:   is used in channel communication. It closes a channel. We'll learn more about this in (#channels).
     (((built-in,close)))
 
 `delete`
@@ -547,7 +530,7 @@ pseudo package that is included in recent Go releases. Let's go over these funct
 ## Arrays, Slices, and Maps
 To store multiple values in a list, you can use arrays, or
 their more flexible cousin: slices. A dictionary or hash type is also
-available. It is called a \type{map} in Go.
+available. It is called a `map` in Go.
 
 ### Arrays
 An array is defined by: `[n]<type>`, where $$n$$ is the length
@@ -592,7 +575,7 @@ from arrays is that a slice is a pointer *to* an array;
 slices are reference types.(((reference types)))
 
 A> Reference types are created with `make`. We detail this further
-A> in Chapter (#chap:beyond).
+A> in (#chap:beyond).
 
 That means that if you assign one slice to
 another, both refer to the *same* underlying array. For instance, if a
@@ -681,19 +664,19 @@ After <1>, `n1` is 6, and `s` is `[]int{0, 1, 2, 3, 4, 5}`.
 And after <2>, `n2` is 4, and `s` is `[]int{2, 3, 4, 5, 4, 5}`.
 
 <!--
-\subsection{Maps}
-\label{sec:maps}
+### Maps
+
 Many other languages have a type similar to maps built-in. For instance, Perl has hashes,
 Python has its dictionaries, and C++ also has maps (as part of the libraries).
 In Go we have the
-\first{`map`}{keyword!map} type. A \type{map} can be thought of as an array indexed by
+\first{`map`}{keyword!map} type. A `map` can be thought of as an array indexed by
 strings (in its most simple form).
 
 \begin{lstlisting}[numbers=none]
 monthdays := map[string]int{
 	"Jan": 31, "Feb": 28, "Mar": 31,
 	"Apr": 30, "May": 31, "Jun": 30,    |\longremark{The general syntax for defining a map is {\tt map[<from type>]<to type>}. %
-Here, we define a map that converts from a `string` (month abbreviation) to an \type{int} (number of days in that month). Note that the trailing comma at %
+Here, we define a map that converts from a `string` (month abbreviation) to an `int` (number of days in that month). Note that the trailing comma at %
 \citem{} is *required*.}|
 	"Jul": 31, "Aug": 31, "Sep": 30,
 	"Oct": 31, "Nov": 30, "Dec": 31,
@@ -731,7 +714,7 @@ following: `value, present := monthdays["Jan"]`. If the key "Jan" exists, `prese
 will be true. It's more Go like to name `present` "ok", and use:
 `v, ok := monthdays["Jan"]`. In Go we call this the "comma ok" form.
 
-You can remove elements (((keyword,map remove elements))) from the \type{map}:
+You can remove elements (((keyword,map remove elements))) from the `map`:
 `delete(monthdays, "Mar")`\footnote{Always rainy in March anyway.}.
 In general the syntax `delete(m, x)` will delete the map entry
 retrieved by the expression `m[x]`.
