@@ -10,9 +10,9 @@ a later exercise you will make it into a function.
 1. The following code calculates the average.
 
 {callout="//"}
-    sum := 0.0 
+    sum := 0.0
     switch len(xs) {
-    case 0: //<1> 
+    case 0: //<1>
             avg = 0
     default: //<2>
             for _, v := range xs {

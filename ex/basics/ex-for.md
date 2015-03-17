@@ -33,9 +33,9 @@ like this (only showing the `main`-function):
         Loop:		    <2>
                 fmt.Printf("%d\n", i)
                 if i < 10 {
-                    i++ 
+                    i++
                     goto Loop <3>
-                }   
+                }
         }
 
     At <1> we define our loop variable. And at <2> we define a label and at <3> we jump

@@ -7,7 +7,7 @@ func main() {
 		FIZZ = 3 //<1>
 		BUZZ = 5
 	)
-	var p bool  //<2>
+	var p bool                 //<2>
 	for i := 1; i < 100; i++ { //<3>
 		p = false
 		if i%FIZZ == 0 { //<4>

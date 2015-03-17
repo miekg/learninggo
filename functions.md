@@ -167,26 +167,27 @@ writes and reads on it. In such a function there are often spots where
 you want to return early. If you do that, you will need to close the file
 descriptor you are working on. This often leads to the following code:
 
+{callout="//"}
     func ReadWrite() bool {
         file.Open("file")
         // Do your thing
         if failureX {
-            file.Close() |\gocircle{1}|
+            file.Close() //<1>
         return false
         }
 
         if failureY {
-        file.Close() |\gocircle{2}|
+        file.Close() //<1>
         return false
         }
-        file.Close() |\gocircle{3}|
-        return true  |\gocircle{4}|
+        file.Close() //<1>
+        return true  //<2>
     }
 
 Note that we repeat a lot of code here; you can see the that
-`file.Close()` is called at \citemref{1}, \citemref{2}, and \citemref{3}.
+`file.Close()` is called at <1>.
 To overcome this, Go has the `defer` (((keywords, defer))) keyword.
-After `defer` you specify a function which is called just *before*
+After `defer` you specify a function which is called just *before* <2>
 the current function exits.
 
 With `defer` we can rewrite the above code as follows. It makes the function

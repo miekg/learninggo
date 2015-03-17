@@ -292,8 +292,8 @@ own chapter or section:
 
 * `func` is used to declare functions and methods.
 * `return` is used to return from functions. We'll look at both `func` and `return` in detail in (#functions).
-* `go` is used for concurrency. We'll look at this in (#channels).
-* `select` used to choose from different types of communication, We'll work with `select` in (#channels).
+* `go` is used for concurrency. We'll look at this in Chapter (#channels).
+* `select` used to choose from different types of communication, We'll work with `select` in Chapter (#channels).
 * `interface` is covered in (#interfaces).
 * `struct` is used for abstract data types. We'll work with `struct` in (#beyond).
 * `type` is also covered in (#beyond).
@@ -301,7 +301,8 @@ own chapter or section:
 
 ## Control Structures
 There are only a few control structures in Go. To write loops we use the `for` keyword, and there is a
-`switch` and of course an `if`. When working with channels `select` will be used (see Chapter (#chap:channels)).
+`switch` and of course an `if`. When working with channels `select` will be used (see Chapter
+(#channels)).
 Parentheses are are not required around the condition, and the body must *always* be brace-delimited.
 
 \subsection{If-Else}
@@ -402,7 +403,7 @@ loop, skipping any remaining code. In the same way as `break`,
 \subsection{Range}
 The keyword \first{`range`}{keyword!range} can be used for loops. It
 can loop over slices, arrays, strings, maps and channels (see Chapter
-(#chap:channels)). `range` is
+(#channels)). `range` is
 an iterator that, when called, returns the next key-value pair from the "thing" it
 loops over. Depending on what that is, `range` returns different things.
 
@@ -503,7 +504,7 @@ pseudo package that is included in recent Go releases. Let's go over these funct
 
 \begin{description}
 \item[`close`] is used in
-channel communication. It closes a channel. We'll learn more about this in Chapter (#chap:channels).
+channel communication. It closes a channel. We'll learn more about this in Chapter (#channels).
 (((built-in,close)))
 
 \item[`delete`] is used for deleting entries in maps.
@@ -642,7 +643,7 @@ From this we create <2> a slice with the elements from index 2 to 3, this slices
 Then we we create another slice <3> from `a`: with the elements from index 1 to 4,
 this contains: `2, 3, 4, 5`.
 With `a:[:]` <4> we create a slice with of all the elements in the array. This is a shorthand for: `a[0:len(a)]`.
-And with `a[:4]` <5> we create a slice with the elements from index 
+And with `a[:4]` <5> we create a slice with the elements from index
 0 to 3, this is short for: `a[0:4]`, and gives us a slices that contains: `1, 2, 3, 4`.
 With `s2[:]` we create a slice from the slice `s2` <6>, note that `s5` still refers to the array `a`.
 Finally, we create a slice with the elements from index 3 to 3 *and* also set the cap to 4 <6>.
@@ -672,7 +673,7 @@ Here's an example: (((built-in,append)))
 At <1> we append a single element, making `s1` equal to `[]int{0, 0, 2}`.
 At <2> we append multiple elements, making `s2` equal to `[]int{0, 0, 2, 3, 5, 7}`.
 And at <3> we append a slice, giving us `s3` equal to `[]int{0, 0, 2, 3, 5, 7, 0, 0}`.
-Note the three dots used after `s0...`! This is needed make it clear explicit that you're 
+Note the three dots used after `s0...`! This is needed make it clear explicit that you're
 appending another slice, instead of a single value.
 
 The copy function copies slice elements from a source to a destination, and returns the number of elements it copied. This number is the minimum of the length of the source and the length of the destination.
