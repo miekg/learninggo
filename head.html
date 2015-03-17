@@ -45,10 +45,11 @@
     }
 
     function toc(){
-      $("body").prepend("<div class=\"toc\"></div>");
+      $("body").prepend("<ul class=\"toc\"></ul>");
       $("h1,h2").each(function(){
-              $("div.toc").append("<span class=\"toc " + $(this).prop("tagName").toLowerCase() + "\">" +
-                  "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></span><br>");
+              // Need sublists for H2.
+              $("ul.toc").append("<li class=\"toc\">" +
+                  "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></li>");
       });
     }
 </script>

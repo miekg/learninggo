@@ -68,17 +68,14 @@ a.cite {
     top: -0.5em;
 }
 
-.toc {
+ul.toc {
     position: fixed;
     left: 0px;
     padding-left: 1em;
+    list-style-type: none;
 }
 
-span.toc.h1 {
-    font-weight: bold;
-}
-
-span.toc.h2 {
-    font-style: italic;
-    padding-left: 2em;
+li.toc {
+    /* font-weight: bold;
+    font-style: italic; */
 }
