@@ -173,12 +173,12 @@ descriptor you are working on. This often leads to the following code:
         // Do your thing
         if failureX {
             file.Close() //<1>
-        return false
+            return false
         }
 
         if failureY {
-        file.Close() //<1>
-        return false
+            file.Close() //<1>
+            return false
         }
         file.Close() //<1>
         return true  //<2>
