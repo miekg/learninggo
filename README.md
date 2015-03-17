@@ -14,4 +14,5 @@ Note this is a temporary location.
 * `cd mmark/mmark`
 * `go install`
 
-And then just `make` in this repository.
+And then just `make` in this repository, and `cd fix; make` to make the `.png` from the `.svg`
+with Inkscape.

@@ -4,9 +4,10 @@
 
 <script>
     $(document).ready(function() {
+      answers();
       chapters();
       appendices
-      crossReferences();
+      references();
       epigraphs();
     });
 
@@ -23,7 +24,7 @@
     }
 
     // Does not work for citations that are also a ref, see Fizzbuzz.
-    function crossReferences() {
+    function references() {
       $("a:empty, [href^='#']").each(
         function(){
           var xid = $(this).attr("href");
@@ -38,11 +39,13 @@
     }
 
     function answers(){
-      $("h3#answer").click(function() {
-        $("h3#answer").nextUntil("h1,h2").toggle()
-      });
+       $("h3.answer").click(function() {
+        $("h3.answer").nextUntil("h1,h2").toggle()
+       });
+       $("h3.answer").nextUntil("h1,h2").hide()
     }
 
+    // TODO(miek)
     function toc(){
       $("body").prepend("<div class=toc></div>");
       $("h1").each(function(){
