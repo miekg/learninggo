@@ -224,14 +224,14 @@ With `defer` you can even change return values, provided that
 you are using named result parameters and a function literal
 (((functions, literal)))^[A function literal is sometimes called a closure (((closure))).], i.e:
 
-    defer func() \{ /* ... */ \}()
+    defer func() {/* ... */}()
 
 Here we use a function without a name and specify the body of the function inline, basically
 we're creating a nameless function on the spot. The final braces are needed because `defer`
 needs a function call, not a function value. If our anonymous function would take an parameter
 it would be easier to see why we need the braces:
 
-    defer func(x int) \{ /* ... */ \(5)
+    defer func(x int) {/* ... */}(5)
 
 In this (unnamed) function you can access any named return parameter:
 
