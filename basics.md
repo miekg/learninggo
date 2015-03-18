@@ -97,9 +97,11 @@ assigned to it is discarded (it's similar to `/dev/null` on Unix). In this examp
 value of 35 to `b` and discard the value 34: `_, b := 34, 35`.
 Declared but otherwise *unused* variables are a compiler error in Go.
 
+
 ### Boolean Types
 A boolean type represents the set of boolean truth values denoted by the
 predeclared constants *true* and *false*. The boolean type is `bool`.
+
 
 ### Numerical Types
 Go has most of the well-known types such as `int`. The `int` type
@@ -133,7 +135,8 @@ fails and gives the error:
 Adding the constant 5 to b *does* succeed, because constants are
 not typed.
 
-### Constants}
+
+### Constants
 
 Constants in Go are just that --- constant. They are created at compile
 time, and can only be numbers, strings, or booleans;
@@ -155,68 +158,46 @@ has a value of 1. Or, as shown here, you can even let Go repeat the use of `iota
 You may also explicitly type a constant: `const b string = "0"`. Now
 `b` is a `string` type constant.
 
-### Strings}
+
+### Strings
 Another important built-in type is `string`. Assigning a
 string is as simple as:
-\begin{lstlisting}[numbers=none]
-s := "Hello World!"
-\end{lstlisting}
+
+    s := "Hello World!"
+
 Strings in Go are a sequence of UTF-8 characters enclosed in double
 quotes ("). If you use the single quote (') you mean one character
 (encoded in UTF-8) --- which is *not* a `string` in Go.
 
 Once assigned to a variable, the string cannot be changed: strings in Go are
 immutable. If you are coming from C, not that the following is not legal in Go:
-\begin{lstlisting}[numbers=none]
-var s string = "hello"
-s[0] = 'c'
-\end{lstlisting}
+
+    var s string = "hello"
+    s[0] = 'c'
+
 To do this in Go you will need the following:
-\begin{lstlisting}[numbers=none]
+
 s := "hello"
-c := []rune(s)	    |\longremark{Here we convert `s` to an array of runes \citem.}|
-c[0] = 'c'	    |\longremark{We change the first element of this array \citem.}|
-s2 := string(c)     |\longremark{Then we create a *new* string `s2` with the alteration \citem.}|
-fmt.Printf("%s\n", s2) |\longremark{Finally, we print the string with `fmt.Printf` \citem.}|
-\end{lstlisting}
-\showremarks
+c := []rune(s)	    //<1>
+c[0] = 'c'	        //<2>
+s2 := string(c)     //<3>
+fmt.Printf("%s\n", s2) //<4>
 
-%% remove this section.
-%%Due to the insertion of semicolons (see \cite{effective_go} section
-%%``Semicolons''), you need to be careful with using multi line strings. If
-%%you write:
-%%\begin{lstlisting}[numbers=none]
-%%s := "Starting part"
-%%    + "Ending part"
-%%\end{lstlisting}
-%%This is transformed into:
-%%\begin{lstlisting}[numbers=none]
-%%s := "Starting part";
-%%    + "Ending part";
-%%\end{lstlisting}
-%%Which is not valid syntax, you need to write:
-%%\begin{lstlisting}[numbers=none]
-%%s := "Starting part" +
-%%     "Ending part"
-%%\end{lstlisting}
-%%Then Go will not insert the semicolons in the wrong places. Another way
-%%would be to use *raw* string literals(((string literal,raw))) by using backquotes (```):
-%%\begin{lstlisting}[numbers=none]
-%%s := `Starting part
-%%     Ending part`
-%%\end{lstlisting}
-%%Be aware that in this last example `s` now also contains the newline.
-%%Unlike *interpreted* string literals (((string literal,interpreted))) the value of a raw string literal
-%%is composed of the *uninterpreted* characters between the quotes.
+Here we convert `s` to an array of runes <1>.
+We change the first element of this array <1>.
+Then we create a *new* string `s2` with the alteration <3>.
+Finally, we print the string with `fmt.Printf` <4>.
 
-### Runes}
-`Rune` is an alias for `int32`. It is an UTF-8 encoded code point. When is this type useful?
+
+### Runes
+`Rune` is an alias for `int32`. It is an UTF-8 encoded code point. When is this type useful? ((runes))
 One example is when you're
 iterating over characters in a string. You could loop over each byte (which is only equivalent to a character
 when strings are encoded in 8-bit ASCII, which they are *not* in Go!). But to get the actual characters you
 should use the `rune` type.
 
-### Complex Numbers}
+
+### Complex Numbers
 Go has native support for complex numbers. To
 use them you need a variable of type `complex128` (64
 bit real and imaginary parts) or `complex64` (32 bit
@@ -225,30 +206,29 @@ Complex numbers are written as
 `re + im$$i$$`, where `re` is the real part,
 `im` is the imaginary part and $$i$$ is the literal '$$i$$' ($$\sqrt{-1}$$).
 
-### Errors}
+
+### Errors
 Any non-trivial program will have the need for error reporting sooner or later. Because of this
 Go has a builtin type specially for errors, called `error`.
 `var e error` creates a variable `e` of type `error` with the
 value `nil`. This error type is an interface -- we'll look more at interfaces in
-``(#chap:interfaces)''. For now you can just assume that `error` is a type just like all other types.
+chap:interfaces). For now you can just assume that `error` is a type just like all other types.
 
-\section{Operators and Built-in Functions}
-\label{sec:builtins}
+
+## Operators and Built-in Functions
+
 Go supports the normal set of numerical operators.
 Table (#tab:op-precedence)
 lists the current ones and their relative precedence. They
 all associate from left to right.
 
-\begin{table}[Hh!]
-\begin{center}
 \caption{Operator precedence}
 \label{tab:op-precedence}
 \input{tab/precedence.tex}
-\end{center}
-\end{table}
-\verb|+ - * /| and \verb|%| all do what you would expect,
-\verb!& | ^!
-and \verb!&^! are bit operators for
+
+`+ - * /` and `%` all do what you would expect,
+`& | ^`
+and `&^` are bit operators for
 \first{bitwise *and*}{operator!bitwise!and},
 \first{bitwise *or*}{operator!bitwise!or}, \first{bitwise *xor*}{operator!bit
 wise xor}, and \first{bit clear}{operator!bitwise!clear} respectively.
@@ -261,7 +241,6 @@ Although Go does not support operator overloading (or method
 overloading for that matter), some of the built-in
 operators *are* overloaded. For instance, `+` can be used for integers,
 floats, complex numbers and strings (adding strings is concatenating them).
--->
 
 
 ## Go Keywords
@@ -288,6 +267,7 @@ own chapter or section:
 There are only a few control structures in Go. To write loops we use the `for` keyword, and there is a
 `switch` and of course an `if`. When working with channels `select` will be used (see (#channels)).
 Parentheses are are not required around the condition, and the body must *always* be brace-delimited.
+
 
 ### If-Else
 In Go an `if` (((keywords, if))) looks like this:
@@ -320,6 +300,7 @@ It is idomatic in Go to omit the `else` when the `if` statement's body has a `br
 The opening brace on the first line must be positioned on the same line as the `if` statement. There is no
 arguing about this, because this is what `gofmt` outputs.
 
+
 ### Goto
 Go has a `goto` (((keyword, goto))) statement - use it wisely. With `goto`
 you jump to a (((label))) label which must be defined within the current function.
@@ -334,6 +315,7 @@ For instance, a loop in disguise:
     }
 
 The string `Here:` indicates a label. A label does not need to start with a capital letter and is case sensitive.
+
 
 ### For
 The Go `for` (((keywords, for))) loop has three forms, only one of which has semicolons:
@@ -351,6 +333,7 @@ Short declarations make it easy to declare the index variable right in the loop.
 
 Note that the variable `i` ceases to exist after the loop.
 
+
 ### Break and Continue
 With `break` (((keywords, break))) you can quit loops early.  By itself, `break` breaks
 the current loop.
@@ -367,7 +350,7 @@ for i := 0; i < 10; i++ {
     fmt.Println(i)|\longremark{So we only print 0 to 5. With loops within loop you can specify a label after `break` to identify *which* loop to stop:}|
 }
 
-\begin{lstlisting}[numbers=none]
+
 J:  for j := 0; j < 5; j++ { |\longremark{Here we define a label "J" \citem, preceding the `for`-loop there.}|
         for i := 0; i < 10; i++ {
             if i > 5 {
@@ -376,7 +359,7 @@ J:  for j := 0; j < 5; j++ { |\longremark{Here we define a label "J" \citem, pre
             fmt.Println(i)
         }
     }
-\end{lstlisting}
+
 \showremarks
 
 With \first{`continue`} (((keyword, continue))) you begin the next iteration of the
@@ -403,45 +386,44 @@ It will start with 0 and "a", so `k` will be 0 through 5, and v will be "a" thro
 
 You can also use `range` on strings directly. Then it
 will break out the individual Unicode characters
-\footnote{In the UTF-8 world characters are sometimes called \first{runes}{runes}.
+^[In the UTF-8 world characters are sometimes called *runes* (((runes))).]
 Mostly, when people talk about
 characters, they mean 8 bit characters. As UTF-8 characters may be up to 32 bits the word
-rune is used. In this case the type of `char` is `rune`.} and their start position, by parsing the UTF-8.
+rune is used. In this case the type of `char` is `rune`. and their start position, by parsing the UTF-8.
 The loop: (((keyword,range)))
 
-    for pos, char := range "a|$\Phi{}$|x" {
+    for pos, char := range "Gő!" {
         fmt.Printf("character '%c' starts at byte position %d\n", char, pos)
     }
 
 prints
 
-    character 'a' starts at byte position 0
-    character '$$\Phi\$$' starts at byte position 1
-    character 'x' starts at byte position 3
+    character 'G' starts at byte position 0
+    character 'ő' starts at byte position 1
+    character '!' starts at byte position 3
 
 Note that '\begin{math}\Phi\end{math}' took 2 bytes, so 'x' starts at byte 3.
 
-### Switch}
+
+### Switch
 Go's \first{`switch`}{keyword!switch} is very flexible; you can match on much more than just
 integers.
 The cases are evaluated top to bottom until
 a match is found, and if the `switch` has no expression it switches on
 `true`. It's therefore possible -- and idiomatic -- to write an
 `if-else-if-else` chain as a `switch`.
-\begin{lstlisting}[numbers=none]
-// Convert hexadecimal character to an int value
-switch { |\longremark{A `switch` without a condition is the same as `switch true` \citem.}|
-case '0' <= c && c <= '9':|\longremark{We list the different cases. Each `case` statement has a condition that is either %
-true of false. Here \citem{} we check if `c` is a number.}|
-    return c - '0'|\longremark{If `c` is a number we return its value \citem.}|
-case 'a' <= c && c <= 'f':|\longremark{Check if `c` falls between ``a'' and ``f'' \citem. For an ``a'' we return 10, for ``b'' we return 11, etc. We also do the same \citemnext{} thing for ``A'' to ``F''.}|
-    return c - 'a' + 10
-case 'A' <= c && c <= 'F':|\longremarkempty|
-    return c - 'A' + 10
-}
-return 0
-\end{lstlisting}
-\showremarks
+
+    // Convert hexadecimal character to an int value
+    switch { |\longremark{A `switch` without a condition is the same as `switch true` \citem.}|
+    case '0' <= c && c <= '9':|\longremark{We list the different cases. Each `case` statement has a condition that is either %
+    true of false. Here \citem{} we check if `c` is a number.}|
+        return c - '0'|\longremark{If `c` is a number we return its value \citem.}|
+    case 'a' <= c && c <= 'f':|\longremark{Check if `c` falls between ``a'' and ``f'' \citem. For an ``a'' we return 10, for ``b'' we return 11, etc. We also do the same \citemnext{} thing for ``A'' to ``F''.}|
+        return c - 'a' + 10
+    case 'A' <= c && c <= 'F':|\longremarkempty|
+        return c - 'A' + 10
+    }
+    return 0
 
 There is no automatic fall through, you you can use
 `fallthrough` (((keywords, fallthrough))) for that.
@@ -468,6 +450,7 @@ We could rewrite the above example as:
             g()
 
 You can list cases on one line <1>, separated by commas.
+
 
 ## Built-in Functions
 A few functions are predefined, meaning
@@ -532,6 +515,7 @@ To store multiple values in a list, you can use arrays, or
 their more flexible cousin: slices. A dictionary or hash type is also
 available. It is called a `map` in Go.
 
+
 ### Arrays
 An array is defined by: `[n]<type>`, where $$n$$ is the length
 of the array and `<type>` is the stuff you want to store.
@@ -567,6 +551,7 @@ When using multidimensional arrays, you can use the following syntax:
 `a := [2][2]int{ {1,2}, {3,4} }`. Now that you know about arrays you will
 be delighted to learn that you will almost never use them in Go, because there is something
 much more flexible: slices.
+
 
 ### Slices
 A slice is similar to an array, but it can grow when new elements are added.
@@ -664,7 +649,6 @@ For example:
 After <1>, `n1` is 6, and `s` is `[]int{0, 1, 2, 3, 4, 5}`.
 And after <2>, `n2` is 4, and `s` is `[]int{2, 3, 4, 5, 4, 5}`.
 
-<!--
 ### Maps
 
 Many other languages have a type similar to maps built-in. For instance, Perl has hashes,
@@ -673,17 +657,15 @@ In Go we have the
 \first{`map`}{keyword!map} type. A `map` can be thought of as an array indexed by
 strings (in its most simple form).
 
-\begin{lstlisting}[numbers=none]
-monthdays := map[string]int{
-	"Jan": 31, "Feb": 28, "Mar": 31,
-	"Apr": 30, "May": 31, "Jun": 30,    |\longremark{The general syntax for defining a map is {\tt map[<from type>]<to type>}. %
-Here, we define a map that converts from a `string` (month abbreviation) to an `int` (number of days in that month). Note that the trailing comma at %
-\citem{} is *required*.}|
-	"Jul": 31, "Aug": 31, "Sep": 30,
-	"Oct": 31, "Nov": 30, "Dec": 31,
-}
-\end{lstlisting}
-\showremarks
+
+    monthdays := map[string]int{
+        "Jan": 31, "Feb": 28, "Mar": 31,
+        "Apr": 30, "May": 31, "Jun": 30,    |\longremark{The general syntax for defining a map is {\tt map[<from type>]<to type>}. %
+    Here, we define a map that converts from a `string` (month abbreviation) to an `int` (number of days in that month). Note that the trailing comma at %
+    \citem{} is *required*.}|
+        "Jul": 31, "Aug": 31, "Sep": 30,
+        "Oct": 31, "Nov": 30, "Dec": 31,
+    }
 
 Use `make` when only declaring a map:
 \lstinline|monthdays := make(map[string]int)|. A map is a reference type.
@@ -697,15 +679,13 @@ If you are looping over an array, slice, string, or map a,
 \first{`range`}{keyword!range}
 clause will help you again, it returns the key and corresponding value
 with each invocation.(((keyword,range)))
-\begin{lstlisting}
-year := 0
-for _, days := range monthdays |\longremark{At \citem{} we use the underscore to ignore (assign to nothing) the key returned by `range`. %
-We are only interested in the values from `monthdays`.}|
-    year += days
-}
-fmt.Printf("Numbers of days in a year: %d\n", year)
-\end{lstlisting}
-\showremarks
+
+    year := 0
+    for _, days := range monthdays |\longremark{At \citem{} we use the underscore to ignore (assign to nothing) the key returned by `range`. %
+    We are only interested in the values from `monthdays`.}|
+        year += days
+    }
+    fmt.Printf("Numbers of days in a year: %d\n", year)
 
 (((keyword,map adding elements)))
 To add elements to the map, you would add new month with: \lstinline|monthdays["Undecim"] = 30|. If you use a key that
