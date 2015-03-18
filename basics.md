@@ -649,57 +649,61 @@ For example:
 After <1>, `n1` is 6, and `s` is `[]int{0, 1, 2, 3, 4, 5}`.
 And after <2>, `n2` is 4, and `s` is `[]int{2, 3, 4, 5, 4, 5}`.
 
-### Maps
 
+### Maps
 Many other languages have a type similar to maps built-in. For instance, Perl has hashes,
 Python has its dictionaries, and C++ also has maps (as part of the libraries).
 In Go we have the
-\first{`map`}{keyword!map} type. A `map` can be thought of as an array indexed by
+`map` (((keyword, map))) type. A `map` can be thought of as an array indexed by
 strings (in its most simple form).
 
 
     monthdays := map[string]int{
         "Jan": 31, "Feb": 28, "Mar": 31,
-        "Apr": 30, "May": 31, "Jun": 30,    |\longremark{The general syntax for defining a map is {\tt map[<from type>]<to type>}. %
-    Here, we define a map that converts from a `string` (month abbreviation) to an `int` (number of days in that month). Note that the trailing comma at %
-    \citem{} is *required*.}|
+        "Apr": 30, "May": 31, "Jun": 30,    //<1>
         "Jul": 31, "Aug": 31, "Sep": 30,
         "Oct": 31, "Nov": 30, "Dec": 31,
     }
 
+The general syntax for defining a map is `map[<from type>]<to type>`. Here, we
+define a map that converts from a `string` (month abbreviation) to an `int`
+(number of days in that month). Note that the trailing comma at <1> is
+*required*.
+
 Use `make` when only declaring a map:
-\lstinline|monthdays := make(map[string]int)|. A map is a reference type.
+`monthdays := make(map[string]int)`. A map is a reference type.
 
 For indexing ("searching") the map, we use square brackets. For example,
 suppose we want to print the
-number of days in December:\newline %% the code will overflow otherwise
-\noindent`fmt.Printf("%d\n", monthdays["Dec"])`
+number of days in December: `fmt.Printf("%d\n", monthdays["Dec"])`
 
 If you are looping over an array, slice, string, or map a,
-\first{`range`}{keyword!range}
+`range` (((keywords, range)))
 clause will help you again, it returns the key and corresponding value
-with each invocation.(((keyword,range)))
+with each invocation.
 
+{callout="//"}
     year := 0
-    for _, days := range monthdays |\longremark{At \citem{} we use the underscore to ignore (assign to nothing) the key returned by `range`. %
-    We are only interested in the values from `monthdays`.}|
+    for _, days := range monthdays //<1>
         year += days
     }
     fmt.Printf("Numbers of days in a year: %d\n", year)
 
+At <1> we use the underscore to ignore (assign to nothing) the key returned by `range`.
+We are only interested in the values from `monthdays`.
+
 (((keyword,map adding elements)))
-To add elements to the map, you would add new month with: \lstinline|monthdays["Undecim"] = 30|. If you use a key that
-already exists, the value will be silently overwritten: \lstinline|monthdays["Feb"] = 29|.
-To test for existence (((keyword,map existence))), you would use the
+
+To add elements to the map, you would add new month with: `monthdays["Undecim"] = 30`. If you use a key that
+already exists, the value will be silently overwritten: `monthdays["Feb"] = 29`.
+To test for existence (((keywords, map existence))), you would use the
 following: `value, present := monthdays["Jan"]`. If the key "Jan" exists, `present`
 will be true. It's more Go like to name `present` "ok", and use:
 `v, ok := monthdays["Jan"]`. In Go we call this the "comma ok" form.
 
 You can remove elements (((keyword,map remove elements))) from the `map`:
-`delete(monthdays, "Mar")`\footnote{Always rainy in March anyway.}.
-In general the syntax `delete(m, x)` will delete the map entry
-retrieved by the expression `m[x]`.
--->
+`delete(monthdays, "Mar")` ^[Always rainy in March anyway.].
+In general the syntax `delete(m, x)` will delete the map entry retrieved by the expression `m[x]`.
 
 ## Exercises
 {{ex/basics/ex.md}}
