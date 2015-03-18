@@ -4,6 +4,10 @@ body {
     font-family: 'Droid Sans', serif;
 }
 
+body p {
+    width: 50%;
+}
+
 pre,code {
     font-family: 'Source Code Pro', monospace;
 }
@@ -22,6 +26,7 @@ blockquote.epigraph {
 
 .epigraph p {
     text-align: right;
+    width: 100%;
 }
 
 .epigraph footer {
