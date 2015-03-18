@@ -454,7 +454,7 @@ There is no automatic fall through, you you can use
         default:
             g() //<2>
 
-`f()` can be called when \code{i == 0} <1>.
+`f()` can be called when `i == 0` <1>.
 With `default` (((keyword, default))) you can specify an action
 when none of the other cases match.
 Here `g()` is called when `i` is not 0 or 1 <2>.
@@ -626,6 +626,7 @@ When working with slices you can overrun the bounds, consider this code.
 
 {callout="//"}
 <{{src/basics/array-and-slices.go}}
+
 At <1> we create an array with a 100 elements, indexed from 0 to 99.
 Then at <2> we create a slice that has index 0 to 98.
 We assign 1 to the 99th element <3> of the slice. This works as expected.
