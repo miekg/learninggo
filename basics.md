@@ -232,10 +232,10 @@ and `&^` are bit operators for
 \first{bitwise *and*}{operator!bitwise!and},
 \first{bitwise *or*}{operator!bitwise!or}, \first{bitwise *xor*}{operator!bit
 wise xor}, and \first{bit clear}{operator!bitwise!clear} respectively.
-The \verb|&&| and \verb/||/ operators are
+The `&&` and `||` operators are
 logical \first{*and*}{operator!and} and
 logical \first{*or*}{operator!or}. Not listed in the table
-is the logical \first{not}{operator!not}: \verb/!/
+is the logical \first{not}{operator!not}: `!`
 
 Although Go does not support operator overloading (or method
 overloading for that matter), some of the built-in
@@ -362,12 +362,12 @@ J:  for j := 0; j < 5; j++ { |\longremark{Here we define a label "J" \citem, pre
 
 \showremarks
 
-With \first{`continue`} (((keyword, continue))) you begin the next iteration of the
+With `continue` (((keyword, continue))) you begin the next iteration of the
 loop, skipping any remaining code. In the same way as `break`,
 `continue` also accepts a label.
 
 ### Range
-The keyword \first{`range`}{keyword!range} can be used for loops. It
+The keyword `range` (((keywords, range))) can be used for loops. It
 can loop over slices, arrays, strings, maps and channels (see (#channels)). `range` is
 an iterator that, when called, returns the next key-value pair from the "thing" it
 loops over. Depending on what that is, `range` returns different things.
@@ -402,11 +402,11 @@ prints
     character 'ő' starts at byte position 1
     character '!' starts at byte position 3
 
-Note that '\begin{math}\Phi\end{math}' took 2 bytes, so 'x' starts at byte 3.
+Note that `ő` took 2 bytes, so 'x' starts at byte 3. TODO(miek): check and change.
 
 
 ### Switch
-Go's \first{`switch`}{keyword!switch} is very flexible; you can match on much more than just
+Go's `switch` (((keywords, switch))) is very flexible; you can match on much more than just
 integers.
 The cases are evaluated top to bottom until
 a match is found, and if the `switch` has no expression it switches on
