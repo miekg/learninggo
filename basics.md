@@ -87,7 +87,7 @@ and `import` also allow this. Note the use of parentheses instead of braces:
 
 Multiple variables of the same type can also be declared on a
 single line: `var x, y int` makes `x` and `y` both
-`int` variables. You can also make use of *parallel assignment*(((variables, {parallel assignment))): `a, b := 20, 16`.
+`int` variables. You can also make use of *parallel assignment*(((variables, parallel assignment))): `a, b := 20, 16`.
 This makes `a` and `b` both integer variables and assigns
 20 to `a` and 16 to `b`.
 
@@ -222,20 +222,19 @@ Table (#tab:op-precedence)
 lists the current ones and their relative precedence. They
 all associate from left to right.
 
-\caption{Operator precedence}
-\label{tab:op-precedence}
-\input{tab/precedence.tex}
+{#tab:op-precedence}
+{{tab/precedence.md}}
 
 `+ - * /` and `%` all do what you would expect,
 `& | ^`
 and `&^` are bit operators for
-\first{bitwise *and*}{operator!bitwise!and},
-\first{bitwise *or*}{operator!bitwise!or}, \first{bitwise *xor*}{operator!bit
-wise xor}, and \first{bit clear}{operator!bitwise!clear} respectively.
+bitwise *and*(((operators, bitwise and))),
+bitwise *or*(((operators, bitwise or))), bitwise *xor*(((operators, bit wise xor))),
+and bit clear (((operators, bitwise clear))) respectively.
 The `&&` and `||` operators are
-logical \first{*and*}{operator!and} and
-logical \first{*or*}{operator!or}. Not listed in the table
-is the logical \first{not}{operator!not}: `!`
+logical *and* (((operators, and))) and
+logical *or* (((operators, or))). Not listed in the table
+is the logical not (((operators, not))): `!`
 
 Although Go does not support operator overloading (or method
 overloading for that matter), some of the built-in
@@ -658,6 +657,7 @@ In Go we have the
 strings (in its most simple form).
 
 
+{callout="//"}
     monthdays := map[string]int{
         "Jan": 31, "Feb": 28, "Mar": 31,
         "Apr": 30, "May": 31, "Jun": 30,    //<1>
