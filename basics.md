@@ -337,33 +337,35 @@ Note that the variable `i` ceases to exist after the loop.
 With `break` (((keywords, break))) you can quit loops early.  By itself, `break` breaks
 the current loop.
 
-for i := 0; i < 10; i++ {
-    if i > 5 {
-	break|\longremark{Here we `break` the current loop \citem, and don't continue with the `fmt.Println(i)` statement \citemnext.}|
-    }
-    fmt.Println(i)|\longremark{So we only print 0 to 5. With loops within loop you can specify a label after `break` to identify *which* loop to stop:}|
-}
-
-	break|\longremark{Here we `break` the current loop \citem, and don't continue with the `fmt.Println(i)` statement \citemnext.}|
-    }
-    fmt.Println(i)|\longremark{So we only print 0 to 5. With loops within loop you can specify a label after `break` to identify *which* loop to stop:}|
-}
-
-
-J:  for j := 0; j < 5; j++ { |\longremark{Here we define a label "J" \citem, preceding the `for`-loop there.}|
-        for i := 0; i < 10; i++ {
-            if i > 5 {
-                break J |\longremark{When we use `break J` \citem, we don't break the inner loop but the "J" loop.}|
-            }
-            fmt.Println(i)
+{callout="//"}
+    for i := 0; i < 10; i++ {
+        if i > 5 {
+        break //<1>
         }
+        fmt.Println(i) //<2>
     }
 
-\showremarks
+Here we `break` the current loop <1>, and don't continue with the `fmt.Println(i)` statement <2>.
+So we only print 0 to 5. With loops within loop you can specify a label after `break` to identify *which* loop to stop:
+
+
+{callout="//"}
+    J:  for j := 0; j < 5; j++ { //<1>
+            for i := 0; i < 10; i++ {
+                if i > 5 {
+                    break J //<2>
+                }
+                fmt.Println(i)
+            }
+        }
+
+Here we define a label "J" <1>, preceding the `for`-loop there.
+When we use `break J` <2>, we don't break the inner loop but the "J" loop.
 
 With `continue` (((keyword, continue))) you begin the next iteration of the
 loop, skipping any remaining code. In the same way as `break`,
 `continue` also accepts a label.
+
 
 ### Range
 The keyword `range` (((keywords, range))) can be used for loops. It
@@ -412,17 +414,24 @@ a match is found, and if the `switch` has no expression it switches on
 `true`. It's therefore possible -- and idiomatic -- to write an
 `if-else-if-else` chain as a `switch`.
 
+{calout="//"}
     // Convert hexadecimal character to an int value
-    switch { |\longremark{A `switch` without a condition is the same as `switch true` \citem.}|
-    case '0' <= c && c <= '9':|\longremark{We list the different cases. Each `case` statement has a condition that is either %
-    true of false. Here \citem{} we check if `c` is a number.}|
-        return c - '0'|\longremark{If `c` is a number we return its value \citem.}|
-    case 'a' <= c && c <= 'f':|\longremark{Check if `c` falls between ``a'' and ``f'' \citem. For an ``a'' we return 10, for ``b'' we return 11, etc. We also do the same \citemnext{} thing for ``A'' to ``F''.}|
+    switch { //<1>
+    case '0' <= c && c <= '9': //<2>
+        return c - '0' //<3>
+    case 'a' <= c && c <= 'f': //<4>
         return c - 'a' + 10
-    case 'A' <= c && c <= 'F':|\longremarkempty|
+    case 'A' <= c && c <= 'F': //<5>
         return c - 'A' + 10
     }
     return 0
+
+A `switch` without a condition is the same as `switch true` //<1>.
+We list the different cases. Each `case` statement has a condition that is either
+true of false. Here <2> we check if `c` is a number.
+If `c` is a number we return its value <3>.
+Check if `c` falls between ``a'' and ``f'' <4>. For an ``a'' we return 10, for ``b'' we
+return 11, etc. We also do the same <5> thing for ``A'' to ``F''.
 
 There is no automatic fall through, you you can use
 `fallthrough` (((keywords, fallthrough))) for that.
