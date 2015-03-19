@@ -7,12 +7,12 @@ The Go programming language is an open source project language to make
 programmers more productive.
 
 According to the website [@go_web] "Go is expressive, concise, clean, and
-efficient". And indeed it is. My initial interest was piqued when I read early announcements about this
-new language that had built-in concurreny and a C-like syntax
-(Erlang also has built-in concurrency, but I could never get used to its syntax).
-Go is a compiled statically typed language that feels like
-a dynamically typed, interpreted language. My go to (scripting!) language Perl has taken a back seat
-now that Go is around.
+efficient". And indeed it is. My initial interest was piqued when I read early
+announcements about this new language that had built-in concurreny and a C-like
+syntax (Erlang also has built-in concurrency, but I could never get used to its
+syntax). Go is a compiled statically typed language that feels like
+a dynamically typed, interpreted language. My go to (scripting!) language Perl
+has taken a back seat now that Go is around.
 
 The unique Go language is defined by these principles:
 
@@ -66,19 +66,17 @@ And Erlang runs in a virtual machine, while Go is compiled.
 
 
 ## How to Read this Book
-I've written this book for people who already know some programming languages and how
-to program.
-In order to use this book, you (of course) need Go installed on your system, but you can easily
-try examples online in the Go playground^[<http://play.golang.org>.].
-All exercises in this book work with Go 1, the first stable release
-of Go -- if not, it's a bug.
+I've written this book for people who already know some programming languages
+and how to program. In order to use this book, you (of course) need Go installed
+on your system, but you can easily try examples online in the Go
+playground^[<http://play.golang.org>.]. All exercises in this book work with Go
+1, the first stable release of Go -- if not, it's a bug.
 
-The best way to learn Go is to create your own programs.
-Each chapter therefore includes exercises (and answers to exercises)
-to acquaint you with the language. Each exercise
-is either *easy*, *intermediate*, or *difficult*.
-The answers are included after the exercises on a new page.
-Some exercises don't have an answer; these are marked with an asterisk.
+The best way to learn Go is to create your own programs. Each chapter therefore
+includes exercises (and answers to exercises) to acquaint you with the language.
+Each exercise is either *easy*, *intermediate*, or *difficult*. The answers are
+included after the exercises on a new page. Some exercises don't have an answer;
+these are marked with an asterisk.
 
 Here's what you can expect from each chapter:
 
@@ -111,20 +109,19 @@ Here's what you can expect from each chapter:
 
 
 ## Official Documentation
-There is a substantial amount of documentation written about Go.
-The Go Tutorial [@go_tutorial], the Go Tour (with lots of exercises)
-and the Effective Go [@effective_go] are helpful resources. The
-website <http://golang.org/doc/> is a very good starting point
-for reading up on Go^[<http://golang.org/doc/> itself is served by
-`godoc`.]. Reading these documents is
-certainly not required, but it is recommended.
+There is a substantial amount of documentation written about Go. The Go Tutorial
+[@go_tutorial], the Go Tour (with lots of exercises) and the Effective Go
+[@effective_go] are helpful resources. The website <http://golang.org/doc/> is
+a very good starting point for reading up on Go^[<http://golang.org/doc/> itself
+is served by `godoc`.]. Reading these documents is certainly not required, but
+it is recommended.
 
 > When searching on the internet use the term "golang" instead of plain "go".
 
 Go comes with its own documentation in the form of a program called
-`godoc`^[When building from source it must be installed
-separately with `go get golang.org/x/tools/cmd/godoc`.].
-If you are interested in the documentation for the built-ins, simply do this:
+`godoc`^[When building from source it must be installed separately with `go get
+golang.org/x/tools/cmd/godoc`.]. If you are interested in the documentation for
+the built-ins, simply do this:
 
     % godoc builtin
 
