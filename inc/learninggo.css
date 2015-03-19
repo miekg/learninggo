@@ -1,11 +1,6 @@
 body {
-    width: 70%;
     margin: 0 auto;
     font-family: 'Droid Sans', serif;
-}
-
-body p {
-    width: 50%;
 }
 
 pre,code {
@@ -20,13 +15,17 @@ summary {
     /* font-weight: bold; */
 }
 
+.book {
+    width: 50%;
+    padding-left: 20%;
+}
+
 blockquote.epigraph {
-    padding-left: 60%;
+    padding-left: 20%;
 }
 
 .epigraph p {
     text-align: right;
-    width: 100%;
 }
 
 .epigraph footer {
