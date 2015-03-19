@@ -1,16 +1,20 @@
 package main
 
-func average(xs []float64) (avg float64) { |\longremark{At \citem{} We use a named return parameter.}|
+func average(xs []float64) (avg float64) { //<1>
 	sum := 0.0
 	switch len(xs) {
-	case 0:                 |\longremark{If the length of \ttt{xs} is zero \citem{}, we return 0.}|
+	case 0:                 //<2>
 		avg = 0
-	default:                |\longremark{Otherwise \citem, we calculate the average.}|
+	default:                //<3>
 		for _, v := range xs {
 			sum += v
 		}
-		avg = sum / float64(len(xs)) |\longremark{At \citem{} we % 
-convert the value to a \key{float64} to make the division work as \ttt{len} returns an \ttt{int}.}|
+		avg = sum / float64(len(xs)) //<4>
 	}
-	return  |\longremark{Finally, at \citem{} we reutrn our avarage.}|
+	return  //<5>
 }
+
+At <1> we use a named return parameter.  If the length of `xs` is zero <2>, we
+return 0.  Otherwise <3>, we calculate the average.  At <4>  we convert the
+value to a `float64` to make the division work as `len` returns an `int`.
+Finally, at <5> we reutrn our avarage.

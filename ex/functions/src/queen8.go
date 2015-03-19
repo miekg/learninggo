@@ -30,7 +30,7 @@ func main() {
 func tryQueen(x int) {
 	for y := 0; y < size; y++ {
 		if col[y] == false && leftdiag[x-y+norm] == false && rightdiag[x+y] == false {
-			B[y][x] = "Q"	// reverse coordinates so it prints correctly
+			B[y][x] = "Q" // reverse coordinates so it prints correctly
 			col[y] = true
 			leftdiag[x-y+norm] = true
 			rightdiag[x+y] = true
