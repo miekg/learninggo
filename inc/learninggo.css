@@ -94,7 +94,10 @@ ul.toc {
     list-style-type: none;
 }
 
-li.toc {
-    /* font-weight: bold;
-    font-style: italic; */
+li.toc-h1 {
+}
+
+li.toc-h2 {
+    padding-left: 1em;
+    font-style: italic;
 }
