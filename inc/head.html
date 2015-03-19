@@ -27,8 +27,20 @@
 
     // Does not work for citations that are also a ref, see Fizzbuzz.
     function references() {
-      $("a:empty:not(.cite), [href^='#']").each(
+      $("a.cite").each(
         function(){
+          var xid = $(this).attr("href");
+          var val = $(xid).index() + 1; // 0 based
+          $(this).append("[" + val + "]")
+        }
+      );
+
+      $("a:empty, [href^='#']").each(
+        function(){
+          // don't how to select for this, test for it here.
+          if ($(this).hasClass("cite")) {
+              return
+          }
           var xid = $(this).attr("href");
           var val = $(xid).text();
           $(this).append(val)

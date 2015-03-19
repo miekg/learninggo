@@ -229,7 +229,7 @@
   <format type="HTML" target="http://www.vitanuova.com/inferno/papers/limbo.html" />
 </reference>
 
-<reference anchor="Hoare">
+<reference anchor="csp">
   <front>
     <title>Communicating sequential processes (csp)</title>
     <author fullname="C. A. R. Hoare" initials="C. A. R." surname="Hoare" />

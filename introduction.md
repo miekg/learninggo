@@ -29,7 +29,7 @@ Concurrent
 
 Channels
 :   Communication with these goroutines is done, either via shared state or
-    via (((channels))) channels [@csp] [@hoare].
+    via (((channels))) channels [@csp].
 
 Fast
 :   Compilation is fast and execution is fast. The aim is

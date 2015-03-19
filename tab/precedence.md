@@ -1,4 +1,4 @@
-Precedence | Operator(s)}
+Precedence | Operator(s)
 -----------|------------------
 Highest    |	`*  /  %  <<  >>  &  &^`
            |	`+  -  | ^`
@@ -6,4 +6,4 @@ Highest    |	`*  /  %  <<  >>  &  &^`
            |	`<-`
            |	`&&`
 Lowest     |	`||`
-Table: Operator precedence
+Table: Operator precedence.
