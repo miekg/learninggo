@@ -158,11 +158,12 @@ immutable. If you are coming from C, not that the following is not legal in Go:
 
 To do this in Go you will need the following:
 
-s := "hello"
-c := []rune(s)	    //<1>
-c[0] = 'c'	        //<2>
-s2 := string(c)     //<3>
-fmt.Printf("%s\n", s2) //<4>
+{callout="//"}
+    s := "hello"
+    c := []rune(s)	    //<1>
+    c[0] = 'c'	        //<2>
+    s2 := string(c)     //<3>
+    fmt.Printf("%s\n", s2) //<4>
 
 Here we convert `s` to an array of runes <1>. We change the first element of
 this array <1>. Then we create a *new* string `s2` with the alteration <3>.
@@ -180,7 +181,7 @@ get the actual characters you should use the `rune` type.
 ### Complex Numbers
 Go has native support for complex numbers. To use them you need a variable of
 type `complex128` (64 bit real and imaginary parts) or `complex64` (32 bit real
-and imaginary parts). Complex numbers are written as `re + im$$i$$`, where `re`
+and imaginary parts). Complex numbers are written as `re + im`$$i$$, where `re`
 is the real part, `im` is the imaginary part and $$i$$ is the literal '$$i$$'
 ($$\sqrt{-1}$$).
 
