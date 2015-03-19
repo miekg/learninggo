@@ -1,5 +1,4 @@
-More more more
-
+*More text here*
 
 "Learning Go" has been translated into:
 

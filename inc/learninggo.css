@@ -21,10 +21,11 @@ summary {
 }
 
 blockquote.epigraph {
-    padding-left: 20%;
+    text-align: right;
 }
 
 .epigraph p {
+    padding-left: 20%;
     text-align: right;
 }
 
@@ -35,6 +36,7 @@ blockquote.epigraph {
 
 .epigraph hr {
     margin-right: 0;
+    width: 50%;
 }
 
 .epigraph footer span.quote-who {
@@ -48,6 +50,19 @@ blockquote.epigraph {
 }
 
 span.index-ref-secondary::before {
+    content: "\a    ";
+    white-space: pre;
+}
+
+span.index-ref-secondary {
+    padding-left: 2em;
+}
+
+span.index-ref-primary {
+    font-style: italic;
+}
+
+span.index-ref-primary::before {
     content: "\a    ";
     white-space: pre;
 }
