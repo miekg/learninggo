@@ -37,7 +37,7 @@
 
       $("a:empty, [href^='#']").each(
         function(){
-          // don't how to select for this, test for it here.
+          // skip class=cite
           if ($(this).hasClass("cite")) {
               return
           }
