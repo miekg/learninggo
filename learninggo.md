@@ -29,6 +29,6 @@
 # Functions
 {{functions.md}}
 
-{{bib.xml}}
+{{inc/bib.xml}}
 
 {backmatter}
