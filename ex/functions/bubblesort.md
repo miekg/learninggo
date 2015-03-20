@@ -1,13 +1,12 @@
 {.exercise difficulty="1"}
 ### Bubble sort
-}
 1. Write a function that performs a bubble sort on a slice of ints. From [@bubblesort]:
 
   > It works by repeatedly stepping through the list to be sorted, comparing each
   > pair of adjacent items and swapping them if they are in the wrong order. The
   > pass through the list is repeated until no swaps are needed, which indicates
   > that the list is sorted. The algorithm gets its name from the way smaller
-  > elements ``bubble'' to the top of the list. 
+  > elements "bubble" to the top of the list. 
 
 It also gives an example in pseudo code:
 

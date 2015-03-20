@@ -1,3 +1,3 @@
-{{ex/basics/ex-for.md}}
-{{ex/basics/ex-average-no-func.md}}
-{{ex/basics/ex-fizzbuzz.md}}
+{{ex/basics/for.md}}
+{{ex/basics/average-no-func.md}}
+{{ex/basics/fizzbuzz.md}}

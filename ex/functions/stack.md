@@ -64,7 +64,7 @@ to
 
         func (s *stack) push(k int).
 
-        We should now use `new()` (see (#allocation-with-new)).
+We should now use `new()` (see (#allocation-with-new)).
 in (#beyond) to create a *pointer* to a newly
 allocated `stack`, so line 1 from the example above needs to be
 `s := new(stack)` .
