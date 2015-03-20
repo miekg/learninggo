@@ -7,6 +7,7 @@
 ### Answer
 1. The following function calculates the average:
 
+ {callout="//"}
   <{{ex/functions/src/ave.go}}
 
   At <1> we use a named return parameter.  If the length of `xs` is zero <2>, we

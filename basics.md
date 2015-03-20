@@ -83,7 +83,7 @@ x, y int` makes `x` and `y` both `int` variables. You can also make use of
 This makes `a` and `b` both integer variables and assigns
 20 to `a` and 16 to `b`.
 
-A special name for a variable is *`_`* (((variables,underscore))) Any value
+A special name for a variable is `_`. (((variables,underscore))) Any value
 assigned to it is discarded (it's similar to `/dev/null` on Unix). In this
 example we only assign the integer value of 35 to `b` and discard the value 34:
 `_, b := 34, 35`. Declared but otherwise *unused* variables are a compiler error
@@ -643,9 +643,9 @@ thought of as an array indexed by strings (in its most simple form).
 {callout="//"}
     monthdays := map[string]int{
         "Jan": 31, "Feb": 28, "Mar": 31,
-        "Apr": 30, "May": 31, "Jun": 30,    //<1>
+        "Apr": 30, "May": 31, "Jun": 30,
         "Jul": 31, "Aug": 31, "Sep": 30,
-        "Oct": 31, "Nov": 30, "Dec": 31,
+        "Oct": 31, "Nov": 30, "Dec": 31, //<1>
     }
 
 The general syntax for defining a map is `map[<from type>]<to type>`. Here, we

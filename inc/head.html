@@ -14,7 +14,7 @@
     });
 
     function chapters(){
-      $("h1:not(.appendix)").each(function(index){
+      $("h1:not(.appendix):not(.preface)").each(function(index){
         $(this).prepend("Chapter " + (index + 1) + ". ")
       })
     }

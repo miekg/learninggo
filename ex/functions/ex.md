@@ -3,3 +3,7 @@
 {{ex/functions/ex-for.md}}
 {{ex/functions/ex-fib.md}}
 {{ex/functions/ex-vararg.md}}
+{{ex/functions/ex-funcfunc.md}}
+{{ex/functions/ex-min.md}}
+{{ex/functions/ex-map.md}}
+{{ex/functions/ex-stack.md}}
