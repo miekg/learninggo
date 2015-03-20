@@ -473,11 +473,9 @@ functions briefly.
     types (maps, slices, and channels). See #(allocation with make).
     (((built-in,make)))
 
-`copy`
-:   is for copying slices. See (#slices) section in this chapter. (((built-in,copy)))
-
-`append`
-:   is for concatenating slices. See (#slices) in this chapter. (((built-in,append)))
+`copy`, `append`
+:   `copy` is for copying slices. (((built-in,copy)))
+    And `append` is for concatenating slices. See (#slices) in this chapter. (((built-in,append)))
 
 `panic`, `recover`
 :   are used for an *exception* mechanism. See (#panic) for more.
