@@ -5,59 +5,52 @@ Quote: Go For C++ Programmers -- Go Authors
 
 In this chapter we delve deeper in to the language.
 
-Go has pointers.
-There is however no pointer arithmetic, so they act more like
-references than pointers that you may know from C. Pointers
-are useful.
-Remember that when you call a function in Go, the variables are
-*pass-by-value*. So, for efficiency and the possibility to modify a
-passed value *in* functions we have pointers.
+Go has pointers. There is however no pointer arithmetic, so they act more like
+references than pointers that you may know from C. Pointers are useful. Remember
+that when you call a function in Go, the variables are
+*pass-by-value*. So, for efficiency and the possibility to modify a passed value
+ *in* functions we have pointers.
 
-You declare a pointer by prefixing the type with an
-'`*`':
-`var p *int`. Now `p` is a pointer to an integer value.
-All newly declared variables are assigned their zero value and pointers
-are no different. A newly declared pointer, or just a pointer that points to
-nothing, has a \first{nil}{nil}-value. In other languages this is often called
-a NULL pointer in Go it is just `nil`. To make
-a pointer point to something you can use the \first{address-of operator}{operator!address-of}
-(`\&`), which we demonstrate here:
-\begin{lstlisting}[label=src:pointers]
-var p *int
-fmt.Printf("%v", p) |\coderemark{Prints `nil`}|
+You declare a pointer by prefixing the type with an '`*`': `var p *int`. Now `p`
+is a pointer to an integer value. All newly declared variables are assigned
+their zero value and pointers are no different. A newly declared pointer, or
+just a pointer that points to nothing, has a nil-value (((nil))). In other
+languages this is often called a NULL pointer in Go it is just `nil`. To make
+a pointer point to something you can use the address-of operator (((operators, address-of)))
+(`&`), which we demonstrate here:
 
-var i int	    |\longremark{Declare \citem{} an integer variable `i`}.|
-p = &i		    |\longremark{Make `p` point \citem{} to `i`}, i.e. take the address of `i`.|
+{callout="//"}
+    var p *int
+    fmt.Printf("%v", p) //<1>
 
-fmt.Printf("%v", p) |\longremark{And this \citem{} will print something like `0x7ff96b81c000a`. %
-De-referencing a pointer is done by prefixing the pointer variable with '`*`'.}|
-\end{lstlisting}
-\showremarks
-\begin{lstlisting}[label=src:deref]
-p = &i			|\longremark{Again \citem{} take the address of `i`.}|
-*p = 8			|\longremark{We are now changing \citem{} the value of `i`, by virtue of `p`.}|
-fmt.Printf("%v\n", *p)  |\longremark{And this \citem{} will print 8.}|
-fmt.Printf("%v\n", i)	|\longremark{Here \citem{} too.}|
-\end{lstlisting}
-\showremarks
+    var i int	    //<2>
+    p = &i		    //<3>
 
-\label{main:pointer arithmetic}
-As said, there is no pointer arithmetic, so if you write:
-`*p++`, it is interpreted as `(*p)++`: first
-reference and then increment the value.\index{operator!increment}
-\footnote{See exercise \the\value{chapter}-\ref{ex:pointer arithmetic}.}
+    fmt.Printf("%v", p) //<4>
+
+This <1> Prints `nil`. Declare <2> an integer variable `i`. Make `p` point <3>
+to `i`, i.e. take the address of `i`. And this <4>\citem{} will print something
+like `0x7ff96b81c000a`. De-referencing a pointer is done by prefixing the
+pointer variable with `*`.
+
+As said, there is no pointer arithmetic, so if you write: `*p++`, it is
+interpreted as `(*p)++`: first reference and then increment the
+value.(((operators, increment)))
+
 
 ## Allocation
-Go also has garbage collection, meaning that you don't have to worry about memory deallocation.\footnote{The downside
-is that you know have to worry about garbage collection. If you really need it garbage collection in a Go program
-can be disabled by running it with the environment variable `GOGC` set to `off`: `GOGC=off ./myprogram`.}
+Go also has garbage collection, meaning that you don't have to worry about
+memory deallocation.\footnote{The downside is that you know have to worry about
+garbage collection. If you really need it garbage collection in a Go program can
+be disabled by running it with the environment variable `GOGC` set to `off`:
+`GOGC=off ./myprogram`.}
 
 To allocate memory Go has two primitives, `new` and `make`. They do different
 things and apply to different types, which can be confusing, but the
 rules are simple.
 The following sections show how to handle allocation
 in Go and hopefully clarifies the somewhat artificial distinction between
-\first{`new`}{built-in!new} and \first{`make`}{built-in!make}.
+`new` (((built-in, new))) and `make` (((built-in!make))).
 
 
 ### Allocation with new
@@ -70,7 +63,7 @@ a newly allocated zero value of type `T`. This is important to
 remember.
 
 The documentation for `bytes.Buffer` states
-that ``the zero value for Buffer is an empty buffer ready to use.''
+that "the zero value for Buffer is an empty buffer ready to use.".
 Similarly, `sync.Mutex` does not have an explicit constructor or Init
 method. Instead, the zero value for a `sync.Mutex` is defined to be an
 unlocked mutex.
@@ -99,15 +92,20 @@ a pointer to a newly allocated, zeroed slice structure, that is, a
 pointer to a `nil` slice value.
 These examples illustrate the difference between `new` and
 `make`.
-\begin{lstlisting}
-var p *[]int = new([]int)       |\coderemark{Allocates slice structure;rarely useful}|
-var v  []int = make([]int, 100) |\coderemark{`v` refers to a new array of 100 ints}|
 
-var p *[]int = new([]int)       |\coderemark{Unnecessarily complex}|
-*p = make([]int, 100, 100)
+{callout="//"}
+    var p *[]int = new([]int)       //<1>
+    var v  []int = make([]int, 100) //<2>
 
-v := make([]int, 100)           |\coderemark{Idiomatic}|
-\end{lstlisting}
+    var p *[]int = new([]int)       //<3>
+    *p = make([]int, 100, 100)
+
+    v := make([]int, 100)           //<4>
+
+Allocates <1> slice structure; rarely useful.
+`v` <2> refers to a new array of 100 ints.
+At <3> we make it unnecessarily complex, <4> is more idiomatic.
+
 Remember that `make` applies only to maps, slices and channels and does
 not return a pointer. To obtain an explicit pointer allocate with
 `new`.
@@ -121,128 +119,123 @@ A> * `make(T)` returns an initialized `T`
 A>
 A> And of course `make` is only used for slices, maps and channels.
 
+
 ### Constructors and composite literals
-\label{sec:constructors and composite literals}
+
 Sometimes the zero value isn't good enough and an initializing
 constructor is necessary, as in this example taken from the package
 `os`.
-\begin{lstlisting}
-func NewFile(fd int, name string) *File {
-    if fd < 0 {
-        return nil
-    }
-    f := new(File)
-    f.fd = fd
-    f.name = name
-    f.dirinfo = nil
-    f.nepipe = 0
-    return f
-}
-\end{lstlisting}
-There's a lot of boiler plate in there. We can simplify it using a
-\first{composite literal}{literal!composite}, which is an expression that
-creates a new instance each time it is evaluated.
 
-\begin{lstlisting}
-func NewFile(fd int, name string) *File {
-    if fd < 0 {
-        return nil
+    func NewFile(fd int, name string) *File {
+        if fd < 0 {
+            return nil
+        }
+        f := new(File)
+        f.fd = fd
+        f.name = name
+        f.dirinfo = nil
+        f.nepipe = 0
+        return f
     }
-    f := File{fd, name, nil, 0}	|\coderemark{Create a new `File`}|
-    return &f	|\coderemark{Return the address of `f`}|
-}
-\end{lstlisting}
-It is OK to return the address of a local variable;
-the storage associated with the variable survives after the function
-returns.
+
+There's a lot of boiler plate in there. We can simplify it using a
+*composite literal* (((literal, composite))), which is an expression that
+ creates a new instance each time it is evaluated.
+
+{callout="//"}
+    func NewFile(fd int, name string) *File {
+        if fd < 0 {
+            return nil
+        }
+        f := File{fd, name, nil, 0}
+        return &f	//<1>
+    }
+
+It is OK to return the address of a local variable <1> the storage associated
+with the variable survives after the function returns.
 
 In fact, taking the address of a composite literal allocates a
 fresh instance each time it is evaluated, so we can combine these last
-two lines.\footnote{Taking the address of a composite literal tells the
-compiler to allocate it on the heap, not the stack.}
-\begin{lstlisting}
-return &File{fd, name, nil, 0}
-\end{lstlisting}
-The items (called \first{fields}{fields}) of a composite
+two lines.^[Taking the address of a composite literal tells the
+compiler to allocate it on the heap, not the stack.]
+
+    return &File{fd, name, nil, 0}
+
+The items (called fields) of a composite
 literal are laid out in order and must all be
 present. However, by labeling the elements explicitly as field:value
 pairs, the initializers can appear in any order, with the missing ones
 left as their respective zero values. Thus we could say
 
-\begin{lstlisting}
-return &File{fd: fd, name: name}
-\end{lstlisting}
+    return &File{fd: fd, name: name}
+
 As a limiting case, if a composite literal contains no fields at all, it
 creates a zero value for the type. The expressions
-`new(File)` and
-\lstinline|&File{}| are equivalent.
+`new(File)` and `&File{}` are equivalent. In fact the use of `new` is discouraged.
 
 Composite literals can also be created for arrays, slices, and maps,
 with the field labels being indices or map keys as appropriate. In these
 examples, the initializations work regardless of the values of
-`Enone`, and `Einval`, as long as they are distinct.
-\begin{lstlisting}
-ar := [...]string{Enone: "no error", Einval: "invalid argument"}
-sl := []string{Enone: "no error", Einval: "invalid argument"}
-ma := map[int]string {Enone: "no error", Einval: "invalid argument"}
-\end{lstlisting}
+`Enone`, and `Einval`, as long as they are distinct:
+
+    ar := [...]string{Enone: "no error", Einval: "invalid argument"}
+    sl := []string{Enone: "no error", Einval: "invalid argument"}
+    ma := map[int]string {Enone: "no error", Einval: "invalid argument"}
+
 
 
 ## Defining your own types
 Of course Go allows you to define new types, it does this
-with the \first{`type`}{keyword!type} keyword:
-\begin{lstlisting}
-type foo int
-\end{lstlisting}
+with the `type`(((keywords, type))) keyword:
+`type foo int`
+
 Creates
 a new type `foo` which acts like an `int`.
 Creating more sophisticated types is done with the
-\first{`struct`}{keyword!struct}
+`struct` (((keywords, struct)))
 keyword.
 An example would be when we want record somebody's name (`string`)
 and age (`int`) in a single structure and make it a new type:
-\lstinputlisting[label=src:struct]{src/beyond/struct.go}
 
-Apropos, the output of `fmt.Printf("%v\n", a)` is
-\begin{alltt}
-&\{Pete 42\}
-\end{alltt}
+<{src/beyond/struct.go}}
+
+Apropos, the output of `fmt.Printf("%v\n", a)` is `&{Pete 42}`
 
 That is nice!
 Go knows how to print your structure. If you
 only want to print one, or a few, fields of the structure you'll
-need to use \verb|.<field name>|. For example to only print the name:
-\begin{lstlisting}
-fmt.Printf("%s", a.name) |\coderemark{\%s formats a string}|
-\end{lstlisting}
-%% add text if a is a pointer
+need to use `.<field name>`. For example to only print the name:
+
+    fmt.Printf("%s", a.name)
+
+
 
 ### More on structure fields
-As said each item in a structure is called a \index{field}{field}.
-A struct with no fields: \lstinline|struct {}|
+As said each item in a structure is called a field (((field)).
+A struct with no fields: `struct {}`
 
-Or one with four\footnote{Yes, four (4).} fields:
-\begin{lstlisting}
-struct {
-        x, y int
-        A *[]int
-        F func()
-}
-\end{lstlisting}
+Or one with four fields:
+
+    struct {
+            x, y int
+            A *[]int
+            F func()
+    }
+
 If you omit the name for a field, you create an
-\first{anonymous field}{field!anonymous}, for instance:
-\begin{lstlisting}
+anonymous field (((field, anonymous))), for instance:
+
 struct {
-        T1        |\coderemark{Field name is `T1`}|
-        *T2       |\coderemark{Field name is `T2`}|
-        P.T3      |\coderemark{Field name is `T3`}|
-        x, y int  |\coderemark{Field names are `x` and `y`}|
+        T1        // Field name is T1.
+        *T2       // Field name is T2.
+        P.T3      // Field name is T3.
+        x, y int  // Field names are x and y.
 }
-\end{lstlisting}
+
 Note that field names that start with a capital letter are exported, i.e. can be
 set or read from other packages. Field names that start with a lowercase are private
-to the current package. The same goes for functions defined in packages, see chapter
-\ref{chap:packages} for the details.
+to the current package. The same goes for functions defined in packages, see
+(#packages) for the details.
 
 
 ### Methods
