@@ -5,5 +5,5 @@ Highest    |	`*  /  %  <<  >>  &  &^`
            |	`==  !=  <  <=  >  >=`
            |	`<-`
            |	`&&`
-Lowest     |	`||`
+Lowest     |	\|\|
 Table: Operator precedence.

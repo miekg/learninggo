@@ -90,7 +90,7 @@ Here's what you can expect from each chapter:
 :   We'll see that functions and data can be grouped together
     in packages. We'll also see how to document and test our packages.
 
-(#beyond)
+(#beyond-the-basics)
 :   We'll create our own types. We'll also look at memory allocations in Go.
 
 (#interfaces)

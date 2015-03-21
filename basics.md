@@ -217,10 +217,10 @@ concatenating them).
 
 
 ## Go Keywords
-Let's start looking at keywords. Table (#tab:keywords) lists all the keywords in
+Let's start looking at keywords, (#tab-keywords) lists all the keywords in
 Go.
 
-{#tab:keywords}
+{#tab-keywords}
 {{tab/keywords.md}}
 
 We've seen some of these already. We used `var` and `const` in the (#vars)

@@ -8,6 +8,7 @@
       answers();
       appendices
       chapters();
+      tables();
       epigraphs();
       references();
       toc();
@@ -15,7 +16,7 @@
 
     function chapters(){
       $("h1:not(.appendix):not(.preface)").each(function(index){
-        $(this).prepend("Chapter " + (index + 1) + ". ")
+        $(this).prepend("Chapter " + (index+1) + ". ")
       })
     }
 
@@ -25,8 +26,14 @@
       })
     }
 
+    function tables(){
+      $("table > caption").each(function(index){
+        $(this).prepend("Table " + (index+1) + ". ")
+      })
+    }
+
     // Does not work for citations that are also a ref, see Fizzbuzz.
-    function references() {
+    function references(){
       $("a.cite").each(
         function(){
           var xid = $(this).attr("href");
@@ -42,8 +49,13 @@
               return
           }
           var xid = $(this).attr("href");
+          // Split out the different things we can reference
+          if ($(xid).is("table")) {
+              $(this).append("Table " + ($(xid).index) + 1));
+              return
+          }
           var val = $(xid).text();
-          $(this).append(val)
+          $(this).append(val);
         }
       );
     }
