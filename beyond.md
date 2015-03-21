@@ -16,8 +16,8 @@ is a pointer to an integer value. All newly declared variables are assigned
 their zero value and pointers are no different. A newly declared pointer, or
 just a pointer that points to nothing, has a nil-value (((nil))). In other
 languages this is often called a NULL pointer in Go it is just `nil`. To make
-a pointer point to something you can use the address-of operator (((operators, address-of)))
-(`&`), which we demonstrate here:
+a pointer point to something you can use the address-of operator
+(((operators, address-of))) (`&`), which we demonstrate here:
 
 {callout="//"}
     var p *int
@@ -29,7 +29,7 @@ a pointer point to something you can use the address-of operator (((operators, a
     fmt.Printf("%v", p) //<4>
 
 This <1> Prints `nil`. Declare <2> an integer variable `i`. Make `p` point <3>
-to `i`, i.e. take the address of `i`. And this <4>\citem{} will print something
+to `i`, i.e. take the address of `i`. And this <4> will print something
 like `0x7ff96b81c000a`. De-referencing a pointer is done by prefixing the
 pointer variable with `*`.
 
@@ -40,58 +40,47 @@ value.(((operators, increment)))
 
 ## Allocation
 Go also has garbage collection, meaning that you don't have to worry about
-memory deallocation.\footnote{The downside is that you know have to worry about
-garbage collection. If you really need it garbage collection in a Go program can
-be disabled by running it with the environment variable `GOGC` set to `off`:
-`GOGC=off ./myprogram`.}
+memory deallocation.^[The downside is that you know have to worry about garbage
+collection. If you really need it garbage collection in a Go program can be
+disabled by running it with the environment variable `GOGC` set to `off`:
+`GOGC=off ./myprogram`.]
 
 To allocate memory Go has two primitives, `new` and `make`. They do different
-things and apply to different types, which can be confusing, but the
-rules are simple.
-The following sections show how to handle allocation
-in Go and hopefully clarifies the somewhat artificial distinction between
-`new` (((built-in, new))) and `make` (((built-in!make))).
+things and apply to different types, which can be confusing, but the rules are
+simple. The following sections show how to handle allocation in Go and hopefully
+clarifies the somewhat artificial distinction between `new` (((built-in, new)))
+and `make` (((built-in!make))).
 
 
 ### Allocation with new
-The built-in function `new` is
-essentially the same as its namesakes in other languages: `new(T)`
-allocates zeroed storage for a new item of type `T` and returns its
-address, a value of type `*T`.
-Or in other words, it returns a pointer to
-a newly allocated zero value of type `T`. This is important to
+The built-in function `new` is essentially the same as its namesakes in other
+languages: `new(T)` allocates zeroed storage for a new item of type `T` and
+returns its address, a value of type `*T`. Or in other words, it returns
+a pointer to a newly allocated zero value of type `T`. This is important to
 remember.
 
-The documentation for `bytes.Buffer` states
-that "the zero value for Buffer is an empty buffer ready to use.".
-Similarly, `sync.Mutex` does not have an explicit constructor or Init
-method. Instead, the zero value for a `sync.Mutex` is defined to be an
-unlocked mutex.
+The documentation for `bytes.Buffer` states that "the zero value for Buffer is
+an empty buffer ready to use.". Similarly, `sync.Mutex` does not have an
+explicit constructor or Init method. Instead, the zero value for a `sync.Mutex`
+is defined to be an unlocked mutex.
 
 
 ### Allocation with make
-The built-in function `make(T, args)` serves a purpose
-different from `new(T)`. It creates slices, maps, and channels *only*, and
-it returns an initialized (not zero!) value of type `T`, and not a pointer:
-`*T`. The reason
-for the distinction is that these three types are, under the covers,
-references to data structures that must be initialized before use. A
-slice, for example, is a three-item descriptor containing a pointer to
-the data (inside an array), the length, and the capacity; until those
-items are initialized, the slice is `nil`. For slices, maps, and channels,
-`make` initializes the internal data structure and prepares the value for
-use.
+The built-in function `make(T, args)` serves a purpose different from `new(T)`.
+It creates slices, maps, and channels *only*, and it returns an initialized (not
+zero!) value of type `T`, and not a pointer: `*T`. The reason for the
+distinction is that these three types are, under the covers, references to data
+structures that must be initialized before use. A slice, for example, is
+a three-item descriptor containing a pointer to the data (inside an array), the
+length, and the capacity; until those items are initialized, the slice is `nil`.
+For slices, maps, and channels, `make` initializes the internal data structure
+and prepares the value for use.
 
-For instance,
-`make([]int, 10, 100)`
-allocates an array of 100 ints and then creates a slice structure with
-length 10 and a capacity of 100 pointing at the first 10 elements of the
-array. In contrast,
-`new([]int)` returns
-a pointer to a newly allocated, zeroed slice structure, that is, a
-pointer to a `nil` slice value.
-These examples illustrate the difference between `new` and
-`make`.
+For instance, `make([]int, 10, 100)` allocates an array of 100 ints and then
+creates a slice structure with length 10 and a capacity of 100 pointing at the
+first 10 elements of the array. In contrast, `new([]int)` returns a pointer to
+a newly allocated, zeroed slice structure, that is, a pointer to a `nil` slice
+value. These examples illustrate the difference between `new` and `make`.
 
 {callout="//"}
     var p *[]int = new([]int)       //<1>
@@ -121,7 +110,6 @@ A> And of course `make` is only used for slices, maps and channels.
 
 
 ### Constructors and composite literals
-
 Sometimes the zero value isn't good enough and an initializing
 constructor is necessary, as in this example taken from the package
 `os`.
@@ -241,156 +229,124 @@ to the current package. The same goes for functions defined in packages, see
 ### Methods
 If you create functions that work on your newly defined type, you can
 take two routes:
-\begin{enumerate}
-\item Create a function that takes the type as an argument.
-\begin{lstlisting}
-func doSomething(n1 *NameAge, n2 int) { /* */ }
-\end{lstlisting}
-This is (you might have guessed) a \first{*function call*}{function!call}.
-\item Create a function that works on the type (see *receiver* in
-listing \ref{src:function definition}):
-\begin{lstlisting}
-func (n1 *NameAge) doSomething(n2 int) { /* */ }
-\end{lstlisting}
-This is a \first{*method call*}{method call}, which can be
-used as:
-\begin{lstlisting}
-var n *NameAge
-n.doSomething(2)
-\end{lstlisting}
-\end{enumerate}
+
+1. Create a function that takes the type as an argument.
+
+        func doSomething(n1 *NameAge, n2 int) { /* */ }
+
+2. Create a function that works on the type (see *receiver* in (#function-definition)):
+
+        func (n1 *NameAge) doSomething(n2 int) { /* */ }
+
+   This is a method call, which can be used as:
+
+        var n *NameAge
+        n.doSomething(2)
+
+
 Whether to use a function or method is entirely up to the programmer, but
 if you want to satisfy an interface (see the next chapter) you must use
 methods. If no such requirement exists it is a matter of taste whether
 to use functions or methods.
 
 But keep the following in mind, this is quoted from [@go_spec]:
-\begin{quote}
-If `x` is
-addressable and `&x`'s method set contains `m`,
-`x.m()` is shorthand for \mbox{`(&x).m()`}.
-\end{quote}
+
+> If `x` is
+> addressable and `&x`'s method set contains `m`,
+> `x.m()` is shorthand for \mbox{`(&x).m()`}.
+
 In the above case this means that the following is *not* an
 error:
-\begin{lstlisting}
-var n NameAge	    |\coderemark{Not a pointer}|
-n.doSomething(2)
-\end{lstlisting}
-Here Go will search the method list for `n` of type `NameAge`,
-come up empty and will then *also* search the method list for
-the type `*NameAge` and will translate this call to
-`(&n).doSomething(2)`.
+
+    var n NameAge	    // Not a pointer
+    n.doSomething(2)
+
+Here Go will search the method list for `n` of type `NameAge`, come up empty and
+will then *also* search the method list for the type `*NameAge` and will
+translate this call to `(&n).doSomething(2)`.
 
 There is a subtle but major difference between the following type
 declarations. Also see \cite[section~``Type Declarations'']{go_spec}.
 Suppose we have:
-\begin{lstlisting}
-// A Mutex is a data type with two methods, Lock and Unlock.
-type Mutex struct         { /* Mutex fields */ }
-func (m *Mutex) Lock()    { /* Lock impl. */ }
-func (m *Mutex) Unlock()  { /* Unlock impl. */ }
-\end{lstlisting}
+
+    // A Mutex is a data type with two methods, Lock and Unlock.
+    type Mutex struct         { /* Mutex fields */ }
+    func (m *Mutex) Lock()    { /* Lock impl. */ }
+    func (m *Mutex) Unlock()  { /* Unlock impl. */ }
+
 We now create two types in two different manners:
-\begin{itemize}
-    \item{\lstinline|type NewMutex Mutex|};
-    \item{\lstinline|type PrintableMutex struct{Mutex}|}.
-\end{itemize}
-`NewMutex` is equal to `Mutex`, but
-it *does not* have *any* of the methods of `Mutex`. In other words
-its method set is empty.
-But `PrintableMutex` *has* \first{*inherited*}{methods!inherited} the
-method set from `Mutex`. The Go term for this is \first{*embedding*}{structures!embed}.
-In the words of [@go_spec]:
-\begin{quote}
-The method set of `*PrintableMutex` contains the methods
-`Lock` and `Unlock` bound to its anonymous field `Mutex`.
-\end{quote}
+
+* `type NewMutex Mutex`.
+* `type PrintableMutex struct{Mutex}`. 
+
+`NewMutex` is equal to `Mutex`, but it *does not* have *any* of the methods of
+`Mutex`. In other words its method set is empty. But `PrintableMutex` *has*
+*inherited* (((methods, inherited))) the method set from `Mutex`. The Go term
+for this is *embedding* (((structures, embed))). In the words of [@go_spec]:
+
+> The method set of `*PrintableMutex` contains the methods
+> `Lock` and `Unlock` bound to its anonymous field `Mutex`.
+
 
 
 ## Conversions
-Sometimes you want to convert a type to another type.
-This is possible in Go, but
-there are some rules. For starters, converting from one value to another
-is done by operators (that look like functions: `byte()`) and not all conversions are allowed.
+Sometimes you want to convert a type to another type. This is possible in Go,
+but there are some rules. For starters, converting from one value to another is
+done by operators (that look like functions: `byte()`) and not all conversions
+are allowed.
 
-\begin{table}[Hh!]
-\begin{center}
-\caption[Valid conversions]{Valid conversions,
-`float64` works the same as `float32`. Note that
-float32 has been abbreviated to flt32 in this table to make it fit on the page.}
-\label{tab:convesion}
-\input{tab/conversion.tex}
-\end{center}
-\end{table}
+{{tab/conversion.md}}
 
-\begin{itemize}
-\item{
-From a `string` to a slice of bytes or runes.
-\begin{lstlisting}
-mystring := "hello this is string"
-\end{lstlisting}
+* From a `string` to a slice of bytes or runes.
 
-\begin{lstlisting}
-byteslice := []byte(mystring)
-\end{lstlisting}
-Converts to a `byte` slice, each `byte` contains the integer value
-of the corresponding byte in the string. Note that as strings in Go
-are encoded in UTF-8 some characters in the string may end up in 1, 2, 3
-or 4 bytes.
-\begin{lstlisting}
-runeslice  := []rune(mystring)
-\end{lstlisting}
-Converts to an `rune` slice, each `rune` contains a Unicode code
-point. Every character from the string corresponds to one rune.
-}
-\item{
-From a slice of bytes or runes to a `string`.
-\begin{lstlisting}
-b := []byte{'h','e','l','l','o'} |\coderemark{Composite literal}|
-s := string(b)
-i := []rune{257,1024,65}
-r := string(i)
-\end{lstlisting}
-}
-\end{itemize}
+        mystring := "hello this is string"
+        byteslice := []byte(mystring)
+
+    Converts to a `byte` slice, each `byte` contains the integer value of the
+    corresponding byte in the string. Note that as strings in Go are encoded in
+    UTF-8 some characters in the string may end up in 1, 2, 3 or 4 bytes.
+
+        runeslice  := []rune(mystring)
+
+    Converts to an `rune` slice, each `rune` contains a Unicode code point.
+    Every character from the string corresponds to one rune.
+
+* From a slice of bytes or runes to a `string`.
+
+        b := []byte{'h','e','l','l','o'} // Composite literal.
+        s := string(b)
+        i := []rune{257,1024,65}
+        r := string(i)
+
 For numeric values the following conversions are defined:
-\begin{itemize}
-\item{Convert to an integer with a specific (bit) length:
-`uint8(int)`;}
-\item{From floating point to an integer value:
-`int(float32)`. This discards the fraction part
-from the floating point value;}
-\item{The other way around: `float32(int)`;}
-\end{itemize}
+
+* Convert to an integer with a specific (bit) length: `uint8(int)`
+* From floating point to an integer value: `int(float32)`. This discards the
+  fraction part from the floating point value.
+* And the other way around: `float32(int)`.
 
 
 ### User defined types and conversions
-How can you convert between the types you have defined
-yourself?
-We create two types here `Foo` and `Bar`, where
-`Bar` is an alias for `Foo`:
-\begin{lstlisting}
-type foo struct { int }  |\coderemark{Anonymous struct field}|
-type bar foo             |\coderemark{bar is an alias for foo}|
-\end{lstlisting}
+How can you convert between the types you have defined yourself? We create two
+types here `Foo` and `Bar`, where `Bar` is an alias for `Foo`:
+
+    type foo struct { int }  // Anonymous struct field.
+    type bar foo             // bar is an alias for foo.
+
 
 Then we:
-\begin{lstlisting}
-var b bar = bar{1} |\coderemark{Declare `b` to be a `bar`}|
-var f foo = b	   |\coderemark{Assign `b` to `f`}|
-\end{lstlisting}
+
+var b bar = bar{1} // Declare `b` to be a `bar`.
+var f foo = b	   // Assign `b` to `f`.
+
 Which fails on the last line with:
+`cannot use b (type bar) as type foo in assignment`
 
-\noindent\error{cannot use b (type bar) as type foo in assignment}
+This can be fixed with a conversion: `var f foo = foo(b)`
 
-\noindent{}This can be fixed with a conversion:
-\begin{lstlisting}
-var f foo = foo(b)
-\end{lstlisting}
-Note that converting structures that are not identical in their fields
-is more difficult. Also note that converting `b` to a plain
-`int` also fails; an integer is not the same as a structure containing
-an integer.
+Note that converting structures that are not identical in their fields is more
+difficult. Also note that converting `b` to a plain `int` also fails; an integer
+is not the same as a structure containing an integer.
 
 ## Exercises
 \input{ex/beyond/ex.tex}
