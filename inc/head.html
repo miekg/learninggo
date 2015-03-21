@@ -51,8 +51,8 @@
           var xid = $(this).attr("href");
           // Split out the different things we can reference
           if ($(xid).is("table")) {
-              $(this).append("Table " + ($(xid).index) + 1));
-              return
+              $(this).append("Table " + ($(xid).index) + 1);
+              return;
           }
           var val = $(xid).text();
           $(this).append(val);
