@@ -88,10 +88,6 @@ a.cite {
 }
 
 ul.toc {
-    position: fixed;
-    left: 0px;
-    padding-left: 1em;
-    list-style-type: none;
 }
 
 li.toc-h1 {

@@ -15,20 +15,35 @@
 %   [author.address]
 %   email = "miek@miek.nl"
 
+
 .# Preface
 {{preface.md}}
 
+
 {mainmatter}
+
 
 # Introduction
 {{introduction.md}}
 
+
 # Basics
 {{basics.md}}
+
 
 # Functions
 {{functions.md}}
 
+
+# Packages
+{{packages.md}}
+
+
+# Beyond the basics
+{{beyond.md}}
+
+
 {{inc/bib.xml}}
+
 
 {backmatter}
