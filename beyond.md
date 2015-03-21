@@ -197,7 +197,7 @@ keyword.
 An example would be when we want record somebody's name (`string`)
 and age (`int`) in a single structure and make it a new type:
 
-<{src/beyond/struct.go}}
+<{{src/beyond/struct.go}}
 
 Apropos, the output of `fmt.Printf("%v\n", a)` is `&{Pete 42}`
 

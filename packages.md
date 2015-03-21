@@ -25,7 +25,7 @@ This means the function is *exported*, and may be used outside our package (more
 The function `odd` <3> does not start with a capital letter, so it is a *private* function.
 
 Now we just need to build the package. We create a directory under `$GOPATH`,
-and copy `even.go` there (see \nref{sec:building a program} in (#introduction)).
+and copy `even.go` there (see (#building-a-program) in (#introduction)).
 
     % mkdir $GOPATH/src/even
     % cp even.go $GOPATH/src/even
@@ -92,7 +92,7 @@ source directory; the package in `src/compress/gzip` is imported as
 
 It is important to avoid stuttering when naming naming things.
 For instance, the buffered reader type in the
-`bufio`\index{package!bufio}
+`bufio` (((package, bufio)))
 package is
 called `Reader`, not `BufReader`, because users see it as
 `bufio.Reader`,
@@ -102,7 +102,7 @@ Similarly, the function to make new instances of
 `ring.Ring` (package `container/ring`), would normally
 be called `NewRing`, but since `Ring` is the only type exported by the
 package, and since the package is called
-`ring`\index{package!ring}, it's called
+`ring`(((package, ring))), it's called
 just `New`.
 Clients of the package see that as `ring.New`. Use the package structure
 to help you choose good names.
@@ -127,31 +127,30 @@ consists out of multiple files the package comment should only appear in one fil
 common convention (in really big packages) is to have a separate `doc.go` that
 only holds the package comment. Here is a snippet
 from the official `regexp` package:
-\begin{alltt}
-/*
-    The regexp package implements a simple library for
-    regular expressions.
 
-    The syntax of the regular expressions accepted is:
+    /*
+        The regexp package implements a simple library for
+        regular expressions.
 
-    regexp:
-        concatenation { '|' concatenation }
-*/
-package regexp
-\end{alltt}
+        The syntax of the regular expressions accepted is:
+
+        regexp:
+            concatenation { '|' concatenation }
+    */
+    package regexp
+
 
 Each defined (and exported) function should have a small line of text
 documenting the behavior of the function. Again to extend our `even`
 package:
-\begin{alltt}
-// Even returns true of i is even. Otherwise false is returned.
-func Even(i int) bool \{
-\end{alltt}
+
+    // Even returns true of i is even. Otherwise false is returned.
+    func Even(i int) bool \{
+
 And even though `odd` is not exported, it's good form to document it as well.
-\begin{alltt}
-// odd is to opposite of Even.
-func odd(i int) bool \{
-\end{alltt}
+
+    // odd is to opposite of Even.
+    func odd(i int) bool \{
 
 
 ## Testing packages
