@@ -196,11 +196,11 @@ now you can just assume that `error` is a type just like all other types.
 
 ## Operators and Built-in Functions
 
-Go supports the normal set of numerical operators. Table (#tab:op-precedence)
-lists the current ones and their relative precedence. They all associate from
+Go supports the normal set of numerical operators. See (#tab-op-precedence)
+for lists the current ones and their relative precedence. They all associate from
 left to right.
 
-{#tab:op-precedence}
+{#tab-op-precedence}
 {{tab/precedence.md}}
 
 `+ - * /` and `%` all do what you would expect, `& | ^` and `&^` are bit
@@ -439,11 +439,11 @@ You can list cases on one line <1>, separated by commas.
 
 ## Built-in Functions
 A few functions are predefined, meaning you *don't* have to include any package
-to get access to them. Table (#tab:predef-functions) lists them all.^[You can
+to get access to them. (#tab-predef-functions) lists them all.^[You can
 use the command `godoc builtin` to read the online documentation about the
 built-in types and functions.]
 
-{#tab::predef-functions}
+{#tab-predef-functions}
 {{tab/functions.md}}
 
 These built-in functions are documented in the `builtin` (((package,builtin)))
@@ -550,7 +550,7 @@ passing a pointer to the underlying array. With: `slice := make([]int, 10)`, you
 create a slice which can hold ten elements. Note that the underlying array isn't
 specified. A slice is always coupled to an array that has a fixed size. For
 slices we define a capacity (((slice,capacity))) and a length
-(((slice,length))). Figure (fig:array-vs-slice) shows the creation of an array,
+(((slice,length))). (#fig-array-vs-slice) shows the creation of an array,
 then the creation of a slice. First we create an array of $$m$$ elements of the
 type `int`: `var array[m]int` .
 
@@ -560,6 +560,7 @@ Next, we create a slice from this array: `slice := array[:n]` . And now we have:
 * `cap(slice) == m`
 * `len(array) == cap(array) == m`
 
+{#fig-array-vs-slice}
 ![Array versus slice](fig/array-vs-slice.png "An array versus a slice.")
 
 Given an array, or another slice, a new slice is created via `a[n:m]`. This
