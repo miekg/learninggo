@@ -88,6 +88,7 @@ a.cite {
 }
 
 ul.toc {
+    list-style-type: none;
 }
 
 li.toc-h1 {
