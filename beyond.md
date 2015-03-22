@@ -29,9 +29,9 @@ a pointer point to something you can use the address-of operator
     fmt.Printf("%v", p) //<4>
 
 This <1> Prints `nil`. Declare <2> an integer variable `i`. Make `p` point <3>
-to `i`, i.e. take the address of `i`. And this <4> will print something
-like `0x7ff96b81c000a`. De-referencing a pointer is done by prefixing the
-pointer variable with `*`.
+to `i`, i.e. take the address of `i`. And this <4> will print something like
+`0x7ff96b81c000a`. De-referencing a pointer is done by prefixing the pointer
+variable with `*`.
 
 As said, there is no pointer arithmetic, so if you write: `*p++`, it is
 interpreted as `(*p)++`: first reference and then increment the
@@ -91,13 +91,11 @@ value. These examples illustrate the difference between `new` and `make`.
 
     v := make([]int, 100)           //<4>
 
-Allocates <1> slice structure; rarely useful.
-`v` <2> refers to a new array of 100 ints.
-At <3> we make it unnecessarily complex, <4> is more idiomatic.
+Allocates <1> slice structure; rarely useful. `v` <2> refers to a new array of
+100 ints. At <3> we make it unnecessarily complex, <4> is more idiomatic.
 
-Remember that `make` applies only to maps, slices and channels and does
-not return a pointer. To obtain an explicit pointer allocate with
-`new`.
+Remember that `make` applies only to maps, slices and channels and does not
+return a pointer. To obtain an explicit pointer allocate with `new`.
 
 A> New allocates; make initializes.
 A>
@@ -110,9 +108,8 @@ A> And of course `make` is only used for slices, maps and channels.
 
 
 ### Constructors and composite literals
-Sometimes the zero value isn't good enough and an initializing
-constructor is necessary, as in this example taken from the package
-`os`.
+Sometimes the zero value isn't good enough and an initializing constructor is
+necessary, as in this example taken from the package `os`.
 
     func NewFile(fd int, name string) *File {
         if fd < 0 {
@@ -142,67 +139,58 @@ There's a lot of boiler plate in there. We can simplify it using a
 It is OK to return the address of a local variable <1> the storage associated
 with the variable survives after the function returns.
 
-In fact, taking the address of a composite literal allocates a
-fresh instance each time it is evaluated, so we can combine these last
-two lines.^[Taking the address of a composite literal tells the
-compiler to allocate it on the heap, not the stack.]
+In fact, taking the address of a composite literal allocates a fresh instance
+each time it is evaluated, so we can combine these last two lines.^[Taking the
+address of a composite literal tells the compiler to allocate it on the heap,
+not the stack.]
 
     return &File{fd, name, nil, 0}
 
-The items (called fields) of a composite
-literal are laid out in order and must all be
-present. However, by labeling the elements explicitly as field:value
-pairs, the initializers can appear in any order, with the missing ones
-left as their respective zero values. Thus we could say
+The items (called fields) of a composite literal are laid out in order and must
+all be present. However, by labeling the elements explicitly as field:value
+pairs, the initializers can appear in any order, with the missing ones left as
+their respective zero values. Thus we could say
 
     return &File{fd: fd, name: name}
 
-As a limiting case, if a composite literal contains no fields at all, it
-creates a zero value for the type. The expressions
-`new(File)` and `&File{}` are equivalent. In fact the use of `new` is discouraged.
+As a limiting case, if a composite literal contains no fields at all, it creates
+a zero value for the type. The expressions `new(File)` and `&File{}` are
+equivalent. In fact the use of `new` is discouraged.
 
-Composite literals can also be created for arrays, slices, and maps,
-with the field labels being indices or map keys as appropriate. In these
-examples, the initializations work regardless of the values of
-`Enone`, and `Einval`, as long as they are distinct:
+Composite literals can also be created for arrays, slices, and maps, with the
+field labels being indices or map keys as appropriate. In these examples, the
+initializations work regardless of the values of `Enone`, and `Einval`, as long
+as they are distinct:
 
     ar := [...]string{Enone: "no error", Einval: "invalid argument"}
     sl := []string{Enone: "no error", Einval: "invalid argument"}
     ma := map[int]string {Enone: "no error", Einval: "invalid argument"}
 
 
-
 ## Defining your own types
-Of course Go allows you to define new types, it does this
-with the `type`(((keywords, type))) keyword:
-`type foo int`
+Of course Go allows you to define new types, it does this with the
+`type`(((keywords, type))) keyword: `type foo int`
 
-Creates
-a new type `foo` which acts like an `int`.
-Creating more sophisticated types is done with the
-`struct` (((keywords, struct)))
-keyword.
-An example would be when we want record somebody's name (`string`)
-and age (`int`) in a single structure and make it a new type:
+Creates a new type `foo` which acts like an `int`. Creating more sophisticated
+types is done with the `struct` (((keywords, struct))) keyword. An example would
+be when we want record somebody's name (`string`) and age (`int`) in a single
+structure and make it a new type:
 
 <{{src/beyond/struct.go}}
 
 Apropos, the output of `fmt.Printf("%v\n", a)` is `&{Pete 42}`
 
-That is nice!
-Go knows how to print your structure. If you
-only want to print one, or a few, fields of the structure you'll
-need to use `.<field name>`. For example to only print the name:
+That is nice! Go knows how to print your structure. If you only want to print
+one, or a few, fields of the structure you'll need to use `.<field name>`. For
+example to only print the name:
 
     fmt.Printf("%s", a.name)
 
 
 
 ### More on structure fields
-As said each item in a structure is called a field (((field)).
-A struct with no fields: `struct {}`
-
-Or one with four fields:
+As said each item in a structure is called a field (((field)). A struct with no
+fields: `struct {}`. Or one with four fields:
 
     struct {
             x, y int
@@ -210,25 +198,25 @@ Or one with four fields:
             F func()
     }
 
-If you omit the name for a field, you create an
-anonymous field (((field, anonymous))), for instance:
+If you omit the name for a field, you create an anonymous field (((field,
+anonymous))), for instance:
 
-struct {
+    struct {
         T1        // Field name is T1.
         *T2       // Field name is T2.
         P.T3      // Field name is T3.
         x, y int  // Field names are x and y.
-}
+    }
 
 Note that field names that start with a capital letter are exported, i.e. can be
-set or read from other packages. Field names that start with a lowercase are private
-to the current package. The same goes for functions defined in packages, see
-(#packages) for the details.
+set or read from other packages. Field names that start with a lowercase are
+private to the current package. The same goes for functions defined in packages,
+see (#packages) for the details.
 
 
 ### Methods
-If you create functions that work on your newly defined type, you can
-take two routes:
+If you create functions that work on your newly defined type, you can take two
+routes:
 
 1. Create a function that takes the type as an argument.
 
@@ -244,10 +232,10 @@ take two routes:
         n.doSomething(2)
 
 
-Whether to use a function or method is entirely up to the programmer, but
-if you want to satisfy an interface (see the next chapter) you must use
-methods. If no such requirement exists it is a matter of taste whether
-to use functions or methods.
+Whether to use a function or method is entirely up to the programmer, but if you
+want to satisfy an interface (see the next chapter) you must use methods. If no
+such requirement exists it is a matter of taste whether to use functions or
+methods.
 
 But keep the following in mind, this is quoted from [@go_spec]:
 
@@ -255,8 +243,7 @@ But keep the following in mind, this is quoted from [@go_spec]:
 > addressable and `&x`'s method set contains `m`,
 > `x.m()` is shorthand for \mbox{`(&x).m()`}.
 
-In the above case this means that the following is *not* an
-error:
+In the above case this means that the following is *not* an error:
 
     var n NameAge	    // Not a pointer
     n.doSomething(2)
@@ -265,9 +252,8 @@ Here Go will search the method list for `n` of type `NameAge`, come up empty and
 will then *also* search the method list for the type `*NameAge` and will
 translate this call to `(&n).doSomething(2)`.
 
-There is a subtle but major difference between the following type
-declarations. Also see \cite[section~``Type Declarations'']{go_spec}.
-Suppose we have:
+There is a subtle but major difference between the following type declarations.
+Also see the Section "Type Declarations" [@go_spec]. Suppose we have:
 
     // A Mutex is a data type with two methods, Lock and Unlock.
     type Mutex struct         { /* Mutex fields */ }
@@ -277,12 +263,12 @@ Suppose we have:
 We now create two types in two different manners:
 
 * `type NewMutex Mutex`.
-* `type PrintableMutex struct{Mutex}`. 
+* `type PrintableMutex struct{Mutex}`.
 
 `NewMutex` is equal to `Mutex`, but it *does not* have *any* of the methods of
 `Mutex`. In other words its method set is empty. But `PrintableMutex` *has*
 *inherited* (((methods, inherited))) the method set from `Mutex`. The Go term
-for this is *embedding* (((structures, embed))). In the words of [@go_spec]:
+ for this is *embedding* (((structures, embed))). In the words of [@go_spec]:
 
 > The method set of `*PrintableMutex` contains the methods
 > `Lock` and `Unlock` bound to its anonymous field `Mutex`.
@@ -333,11 +319,10 @@ types here `Foo` and `Bar`, where `Bar` is an alias for `Foo`:
     type foo struct { int }  // Anonymous struct field.
     type bar foo             // bar is an alias for foo.
 
-
 Then we:
 
-var b bar = bar{1} // Declare `b` to be a `bar`.
-var f foo = b	   // Assign `b` to `f`.
+    var b bar = bar{1} // Declare `b` to be a `bar`.
+    var f foo = b	   // Assign `b` to `f`.
 
 Which fails on the last line with:
 `cannot use b (type bar) as type foo in assignment`

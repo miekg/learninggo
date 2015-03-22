@@ -129,12 +129,12 @@ Each defined (and exported) function should have a small line of text
 documenting the behavior of the function. Again to extend our `even` package:
 
     // Even returns true of i is even. Otherwise false is returned.
-    func Even(i int) bool \{
+    func Even(i int) bool {
 
 And even though `odd` is not exported, it's good form to document it as well.
 
     // odd is to opposite of Even.
-    func odd(i int) bool \{
+    func odd(i int) bool {
 
 
 ## Testing packages
@@ -149,7 +149,7 @@ our `even` package, `go test` yields:
     ?       even    [no test files]
 
 Let us fix this by defining a test in a test file. Test files reside in the
-package directory and are named `*\_test.go`. Those test files are just like
+package directory and are named `*_test.go`. Those test files are just like
 other Go programs, but `go test` will only execute the test functions. Each test
 function has the same signature and its name should start with
 `Test`: `func TestXxx(t *testing.T)` .
@@ -172,10 +172,10 @@ functions. These are the most important ones (see `go doc testing` or `go help t
   log.
 
 * `func (t *T) Fatal(args ...interface{})`, `Fatal` is equivalent to `Log()`
-  followed by \func{FailNow()}.
+  followed by `FailNow()`.
 
 Putting all this together we can write our test. First we pick a name:
-`even\_test.go`. Then we add the following contents:
+`even_test.go`. Then we add the following contents:
 
 {callout="//"}
 <{{src/packages/even_test.go}}
@@ -216,6 +216,7 @@ N> shows that you really put in the effort.
 The Go test suite also allows you to incorperate example functions which serve
 as documentation *and* as tests. These functions need to start with `Example`.
 
+{callout="//"}
     func ExampleEven() {
         if Even(2) {
             fmt.Printf("Is even\n")
