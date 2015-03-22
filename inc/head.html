@@ -20,9 +20,8 @@
       $("h1:not(.appendix):not(.preface)").each(function(index){
         $(this).prepend("Chapter " + (index+1) + ". ")
       })
-      $("h1:not(.appendix):not(.preface)").nextUntil("h1").wrapAll("<div class=\"chapter\"></div>");
-      $("h1.appendix").nextUntil("h1").wrapAll("<div class=\"appendix\"></div>");
-      $("h1.preface").nextUntil("h1").wrapAll("<div class=\"preface\"></div>");
+      // messes with the toc
+    //  $("h1:not(.appendix):not(.preface)").nextUntil("h1").wrapAll("<div class=\"chapter\"></div>");
     }
 
     function appendices(){
