@@ -232,7 +232,7 @@ a mismatch the test fails.
 
 ## Useful packages
 The standard libary of Go includes a huge number of packages. It is very
-enlightening to browse the `\$GOROOT/src/pkg` directory and look at the
+enlightening to browse the `$GOROOT/src/pkg` directory and look at the
 packages. We cannot comment on each package, but the following are worth
 a mention: ^[The descriptions are copied from the packages' `go doc`.]
 
@@ -333,4 +333,4 @@ a mention: ^[The descriptions are copied from the packages' `go doc`.]
 
 
 ## Exercises
-\input{ex/packages/ex.tex}
+{{ex/packages/ex.md}}
