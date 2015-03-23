@@ -22,7 +22,7 @@ a standalone executable.
 
 `import "fmt"` says we need `fmt` in addition to `main` <2>. A package other
 than `main` is commonly called a library, a familiar concept in many programming
-languages (see (#packages). The line ends with a comment that begins with `//`.
+languages (see (#packages)). The line ends with a comment that begins with `//`.
 
 Next we another comment, but this one is enclosed in `/*` `*/` <3>. When your Go
 program is executed, the first function called will be `main.main()`, which
