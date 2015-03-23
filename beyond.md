@@ -231,7 +231,6 @@ routes:
         var n *NameAge
         n.doSomething(2)
 
-
 Whether to use a function or method is entirely up to the programmer, but if you
 want to satisfy an interface (see the next chapter) you must use methods. If no
 such requirement exists it is a matter of taste whether to use functions or
@@ -272,7 +271,6 @@ We now create two types in two different manners:
 
 > The method set of `*PrintableMutex` contains the methods
 > `Lock` and `Unlock` bound to its anonymous field `Mutex`.
-
 
 
 ## Conversions
