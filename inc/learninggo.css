@@ -87,6 +87,16 @@ a.cite {
     top: -0.5em;
 }
 
+ol.bibliography {
+    counter-reset: cite;
+    list-style-type: none;
+}
+
+li.bibliography:before {
+    content: "[" counter(cite) "] ";
+    counter-increment: cite;
+}
+
 ul.toc {
     list-style-type: none;
 }
