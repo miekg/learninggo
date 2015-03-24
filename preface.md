@@ -1,4 +1,5 @@
-*More text here*
+The [source of this book](github.com/miekg/learninggo) is written in [mmark](github.com/miekg/mmark) and
+is converted from the [original latex source](github.com/miekg/gobook).
 
 "Learning Go" has been translated into:
 
@@ -7,9 +8,13 @@
 *All example code used in this book is hereby put in the public domain.*
 
 > This work is licensed under the Attribution-NonCommercial-ShareAlike 3.0 Unported License. To
-> view a copy of this license, visit <http://creativecommons.org/licenses/by-nc-sa/3.0/> 
+> view a copy of this license, visit <http://creativecommons.org/licenses/by-nc-sa/3.0/>
 > or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 
-The following people more large or small contributions to earlier version of this book:
+The following people made large or small contributions to earlier versions of this book:
 
 {{contributors.md}}
+
+I hope this book is useful.
+
+Miek Gieben, London, 2015.

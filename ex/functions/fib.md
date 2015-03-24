@@ -1,4 +1,4 @@
-{.exercis, difficulty="1"}
+{.exercise difficulty="1"}
 ### Fibonacci
 
 1.  The Fibonacci sequence starts as follows: $$1, 1, 2, 3, 5, 8, 13, \ldots$$
