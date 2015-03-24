@@ -332,4 +332,4 @@ difficult. Also note that converting `b` to a plain `int` also fails; an integer
 is not the same as a structure containing an integer.
 
 ## Exercises
-\input{ex/beyond/ex.tex}
+{{ex/beyond/ex.md}}
