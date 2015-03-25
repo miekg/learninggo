@@ -1,6 +1,5 @@
-\input{ex/beyond/ex-pointer-arith.tex}
 {{ex/beyond/map.md}}
 {{ex/beyond/pointers.md}}
-\input{ex/beyond/ex-doubly-linked-list.tex}
+{{ex/beyond/doubly-linked-list.md}}
 {{ex/beyond/cat.md}}
-\input{ex/beyond/ex-pointers-method.tex}
+{{ex/beyond/pointers-method.md}}

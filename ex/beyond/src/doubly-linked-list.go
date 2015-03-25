@@ -1,14 +1,13 @@
 package main
 
-|\longremark{Include all the packages we need.}|
 import (
-	"errors"
+	"errors" //<1>
 	"fmt"
 )
 
-type Value int |\longremark{Declare a type for the value our list will contain;}|
+type Value int //<2>
 
-type Node struct { |\longremark{declare a type for the each node in our list;}|
+type Node struct { //<3>
 	Value
 	prev, next *Node
 }
@@ -17,8 +16,7 @@ type List struct {
 	head, tail *Node
 }
 
-|\longremark{Mimic the interface of container/list.}|
-func (l *List) Front() *Node {
+func (l *List) Front() *Node { //<4>
 	return l.head
 }
 
@@ -27,15 +25,15 @@ func (n *Node) Next() *Node {
 }
 
 func (l *List) Push(v Value) *List {
-	n := &Node{Value: v} |\longremark{When pushing, create a new Node with the provided value;}|
+	n := &Node{Value: v} //<5>
 
-	if l.head == nil { |\longremark{if the list is empty, put the new node at the head;}|
+	if l.head == nil { //<6>
 		l.head = n
 	} else {
-		l.tail.next = n |\longremark{otherwise put it at the tail;}|
-		n.prev = l.tail |\longremark{make sure the new node points back to the previously existing one;}|
+		l.tail.next = n //<7>
+		n.prev = l.tail //<8>
 	}
-	l.tail = n |\longremark{point tail to the newly inserted node.}|
+	l.tail = n //<9>
 
 	return l
 }
@@ -43,13 +41,13 @@ func (l *List) Push(v Value) *List {
 var errEmpty = errors.New("List is empty")
 
 func (l *List) Pop() (v Value, err error) {
-	if l.tail == nil { |\longremark{When popping, return an error if the list is empty;}|
+	if l.tail == nil { //<10>
 		err = errEmpty
 	} else {
-		v = l.tail.Value |\longremark{otherwise save the last value;}|
-		l.tail = l.tail.prev |\longremark{discard the last node from the list;}|
+		v = l.tail.Value     //<11>
+		l.tail = l.tail.prev //<12>
 		if l.tail == nil {
-			l.head = nil |\longremark{and make sure the list is consistent if it becomes empty;}|
+			l.head = nil //<13>
 		}
 	}
 
@@ -67,7 +65,7 @@ func main() {
 		fmt.Printf("%v\n", n.Value)
 	}
 
-        fmt.Println()
+	fmt.Println()
 
 	for v, err := l.Pop(); err == nil; v, err = l.Pop() {
 		fmt.Printf("%v\n", v)

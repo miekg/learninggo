@@ -1,5 +1,5 @@
 {.exercise difficulty="1"}
-### Pointers}
+### Pointers
 
 1.  Suppose we have defined the following structure:
 
@@ -8,10 +8,10 @@
             age	 int
         }
 
-What is the difference between the following two lines?
+   What is the difference between the following two lines?
 
-    var p1 Person
-    p2 := new(Person)
+        var p1 Person
+        p2 := new(Person)
 
 
 2.  What is the difference between the following two allocations?
