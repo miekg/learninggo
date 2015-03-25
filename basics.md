@@ -233,8 +233,8 @@ own chapter or section:
 * `go` is used for concurrency. We'll look at this in (#channels).
 * `select` used to choose from different types of communication, We'll work with `select` in (#channels).
 * `interface` is covered in (#interfaces).
-* `struct` is used for abstract data types. We'll work with `struct` in (#beyond).
-* `type` is also covered in (#beyond).
+* `struct` is used for abstract data types. We'll work with `struct` in (#beyond-the-basics).
+* `type` is also covered in (#beyond-the-basics).
 
 
 ## Control Structures
@@ -541,7 +541,7 @@ arrays is that a slice is a pointer *to* an array; slices are reference
 types.(((reference types)))
 
 A> Reference types are created with `make`. We detail this further
-A> in (#chap:beyond).
+A> in (#beyond-the-basics).
 
 That means that if you assign one slice to another, both refer to the *same*
 underlying array. For instance, if a function takes a slice argument, changes it
