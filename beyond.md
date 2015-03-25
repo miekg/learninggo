@@ -279,6 +279,7 @@ but there are some rules. For starters, converting from one value to another is
 done by operators (that look like functions: `byte()`) and not all conversions
 are allowed.
 
+{#tab-conversion}
 {{tab/conversion.md}}
 
 * From a `string` to a slice of bytes or runes.

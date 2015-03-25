@@ -1,10 +1,6 @@
 The [source of this book](github.com/miekg/learninggo) is written in [mmark](github.com/miekg/mmark) and
 is converted from the [original latex source](github.com/miekg/gobook).
 
-"Learning Go" has been translated into:
-
-* Chinese, by Xing Xing, 这里是中文译本: <http://www.mikespook.com/learning-go/>
-
 *All example code used in this book is hereby put in the public domain.*
 
 > This work is licensed under the Attribution-NonCommercial-ShareAlike 3.0 Unported License. To
@@ -14,6 +10,10 @@ is converted from the [original latex source](github.com/miekg/gobook).
 The following people made large or small contributions to earlier versions of this book:
 
 {{contributors.md}}
+
+"Learning Go" has been translated into:
+
+* Chinese, by Xing Xing, 这里是中文译本: <http://www.mikespook.com/learning-go/>
 
 I hope this book is useful.
 
