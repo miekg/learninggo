@@ -222,7 +222,7 @@ routes:
 
         func doSomething(n1 *NameAge, n2 int) { /* */ }
 
-2. Create a function that works on the type (see *receiver* in (#function-definition)):
+2. Create a function that works on the type (see *receiver* in (#functions)):
 
         func (n1 *NameAge) doSomething(n2 int) { /* */ }
 

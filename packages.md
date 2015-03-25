@@ -22,7 +22,7 @@ our package (more on that later). The function `odd` <3> does not start with
 a capital letter, so it is a *private* function.
 
 Now we just need to build the package. We create a directory under `$GOPATH`,
-and copy `even.go` there (see (#building-a-program) in (#introduction)).
+and copy `even.go` there (see (#compiling-and-running-code) in (#basics)).
 
     % mkdir $GOPATH/src/even
     % cp even.go $GOPATH/src/even
@@ -291,7 +291,6 @@ a mention: ^[The descriptions are copied from the packages' `go doc`.]
 `flag`
 :   (((package, flag)))
     The `flag` package implements command-line flag parsing.
-    See (#option-parsing).
 
 `encoding/json`
 :   (((package, encoding/json)))

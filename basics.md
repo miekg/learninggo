@@ -223,7 +223,7 @@ Go.
 {#tab-keywords}
 {{tab/keywords.md}}
 
-We've seen some of these already. We used `var` and `const` in the (#vars)
+We've seen some of these already. We used `var` and `const` in the (#variables-types-and-keywords)
 section,  and we briefly looked at `package` and `import` in our "Hello World"
 program at the start of the chapter. Others need more attention and have their
 own chapter or section:
@@ -478,7 +478,7 @@ functions briefly.
     And `append` is for concatenating slices. See (#slices) in this chapter. (((built-in,append)))
 
 `panic`, `recover`
-:   are used for an *exception* mechanism. See (#panic) for more.
+:   are used for an *exception* mechanism. See (#panic-and-recovering) for more.
     (((built-in,panic)))
     (((built-in,recover)))
 

@@ -7,7 +7,7 @@
         p := plusTwo()
         fmt.Printf("%v\n", p(2))
 
-    Which should print 4. See (#sec:callbacks).
+    Which should print 4. See (#callbacks).
 
 2. Generalize the function from above and and create a `plusX(x)` which returns functions that add `x` to an integer.
 
