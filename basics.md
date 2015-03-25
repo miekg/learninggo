@@ -393,7 +393,7 @@ found, and if the `switch` has no expression it switches on `true`. It's
 therefore possible -- and idiomatic -- to write an `if-else-if-else` chain as
 a `switch`.
 
-{calout="//"}
+{callout="//"}
     // Convert hexadecimal character to an int value
     switch { //<1>
     case '0' <= c && c <= '9': //<2>

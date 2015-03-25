@@ -1,7 +1,7 @@
 {.exercise difficulty="0"}
 ### FizzBuzz
 
-1. Solve this problem, called the Fizz-Buzz [@fizzbuzz] problem:
+1. Solve this problem, called the Fizz-Buzz [@fizzbuzz_cite] problem:
 
 Write a program that prints the numbers from 1 to 100. But for multiples
 of three print, "Fizz" instead of the number, and for multiples of
