@@ -11,6 +11,7 @@ nav {
     right:0;
     display: block;
     text-align: center;
+    z-index: 5;
 }
 
 nav ul {
