@@ -2,6 +2,10 @@
 
 /* css below only deals with placement of elements */
 
+.book {
+    width: 90%;
+}
+
 blockquote.epigraph {
     text-align: right;
 }
