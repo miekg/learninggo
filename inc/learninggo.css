@@ -39,7 +39,8 @@ nav > ul > li:hover > a {
 
 .header-link {
     position: absolute;
-    left: 3%;
+    font-size: 14pt;
+    left: 30px;
     opacity: 0;
     transition: opacity 0.2s ease-in-out 0.1s;
     color: black;
