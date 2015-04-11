@@ -88,7 +88,7 @@
     // exclude answers and index
     function toc(){
       $("body").prepend("<ul class=\"toc\"></ul>");
-      $("h1,h2,h3").each(function(){
+      $("h1,h2").each(function(){
               $("ul.toc").append("<li class=\"toc-" + $(this)[0].tagName.toLowerCase() + "\">" +
                   "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></li>");
       });

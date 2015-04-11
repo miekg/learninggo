@@ -8,6 +8,7 @@
 
 blockquote.epigraph {
     text-align: right;
+    border-left: none;
 }
 
 .epigraph p {
@@ -21,7 +22,7 @@ blockquote.epigraph {
 }
 
 .epigraph hr {
-    margin-right: 0;
+    margin-left: 50%;
     width: 50%;
 }
 
@@ -55,7 +56,7 @@ span.index-ref-primary::before {
 
 span.callout {
     font-size: x-small;
-    height: 1.2em;
+    height: 1.3em;
     width: 1.2em;
     display: inline-block;
     text-align: center;
