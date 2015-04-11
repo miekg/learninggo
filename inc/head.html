@@ -116,7 +116,8 @@
             id = $el.attr('id');
             icon = '<i>&para;</i>';
             if (id) {
-                return $el.prepend($("<a />").addClass("header-link").attr("href", "#" + id).html(icon));
+                return $el.prepend($("<a />").addClass("header-link").attr("href",
+                        window.location.pathname + "#" + id).html(icon));
             }
         });
     }
