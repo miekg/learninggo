@@ -13,6 +13,8 @@
       figures();
       tables();
 
+      html();
+
       references();
       toc();
     });
@@ -90,5 +92,13 @@
               $("ul.toc").append("<li class=\"toc-" + $(this)[0].tagName.toLowerCase() + "\">" +
                   "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></li>");
       });
+    }
+
+    // include some html
+    function html() {
+        var fork = $('<div>');
+        fork.load('inc/forkme.html', function(){
+            $(this).insertAfter("body");
+        });
     }
 </script>
