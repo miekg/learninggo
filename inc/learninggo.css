@@ -37,6 +37,24 @@ nav > ul > li:hover > a {
     text-decoration: underline;
 }
 
+.header-link {
+    position: absolute;
+    left: 3%;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out 0.1s;
+    color: black;
+}
+
+/* http://ben.balter.com/2014/03/13/pages-anchor-links/ */
+h1:hover .header-link,
+h2:hover .header-link,
+h3:hover .header-link,
+h4:hover .header-link,
+h5:hover .header-link,
+h6:hover .header-link {
+    opacity: 1;
+}
+
 .book {
     width: 90%;
 }

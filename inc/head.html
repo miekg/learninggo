@@ -6,6 +6,7 @@
 <script>
     $(document).ready(function() {
       $("body").wrapInner("<div class=\"book\"></div>")
+
       answers();
       appendices
       chapters();
@@ -17,6 +18,8 @@
 
       references();
       toc();
+
+      links();
     });
 
     function chapters(){
@@ -103,6 +106,18 @@
         var nav = $('<div>');
         nav.load('inc/nav.html', function(){
             $(this).insertBefore("h1#preface");
+        });
+    }
+
+    function links() {
+        return $(":header[id]").each(function(i, el) {
+            var $el, icon, id;
+            $el = $(el);
+            id = $el.attr('id');
+            icon = '<i>&para;</i>';
+            if (id) {
+                return $el.prepend($("<a />").addClass("header-link").attr("href", "#" + id).html(icon));
+            }
         });
     }
 </script>
