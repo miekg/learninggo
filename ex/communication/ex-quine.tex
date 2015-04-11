@@ -1,0 +1,28 @@
+\begin{Exercise}[title={Quine},difficulty=2]
+A \emph{Quine} is a program that prints itself.
+\label{ex:quine}
+\Question\label{ex:quine q1} Write a Quine in Go.
+\end{Exercise}
+
+\begin{Answer}
+\begin{lbar}
+This solution is from Russ Cox. It was posted to 
+the Go Nuts mailing list.
+\end{lbar}
+\Question 
+\begin{lstlisting}[caption=A Go quine]
+/* Go quine */
+package main
+import "fmt"
+func main() {
+ fmt.Printf("%s%c%s%c\n", q, 0x60, q, 0x60)
+}
+var q = `/* Go quine */
+package main
+import "fmt"
+func main() {
+ fmt.Printf("%s%c%s%c\n", q, 0x60, q, 0x60)
+}
+var q = `
+\end{lstlisting}
+\end{Answer}
