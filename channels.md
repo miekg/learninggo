@@ -1,0 +1,196 @@
+\epi{%
+\begin{itemize}
+\item{"Parallelism is about performance;}
+\item{Concurrency is about program design."}
+\end{itemize}%
+}{\textit{Google IO 2010}\\\textsc{ROB PIKE}}
+In this chapter we will show off Go's ability for
+concurrent programming using channels and goroutines. Goroutines
+are the central entity in Go's ability for concurrency. But what
+*is* a goroutine? From [@effective_go]:
+\begin{quote}
+They're called goroutines because the existing terms --- threads, coroutines,
+processes, and so on --- convey inaccurate connotations. A goroutine has a simple
+model: \emph{it is a function executing in parallel with other goroutines in the same
+address space}. It is lightweight, costing little more than the allocation of
+stack space. And the stacks start small, so they are cheap, and grow by
+allocating (and freeing) heap storage as required.
+\end{quote}
+A \first{goroutine}{goroutine} is a normal function, except that you start
+it with the keyword \first{`go`}{keyword!go}.
+\begin{lstlisting}
+ready("Tea", 2)	    |\coderemark{Normal function call}|
+go ready("Tea", 2)  |\coderemark{`ready()` started as goroutine}|
+\end{lstlisting}
+The following idea for a program was taken from [@go_course_day3]. 
+We run a function as two goroutines, the goroutines wait for an amount of
+time and then print something to the screen. 
+On the lines 14 and 15 we start the goroutines.
+The `main` function
+waits long enough, so that both goroutines will have printed their text. Right
+now we wait for 5 seconds on line 17, but in fact we have no idea how
+long we should wait until all goroutines have exited.
+\lstinputlisting[numbers=right,label=src:sleeping,firstnumber=8,caption=Go routines in action,linerange={8,18}]{src/sleep.go}
+Listing (#src:sleeping) outputs:
+\begin{display}
+I'm waiting         \coderemark{Right away}
+Coffee is ready!    \coderemark{After 1 second}
+Tea is ready!       \coderemark{After 2 seconds}
+\end{display}
+
+If we did not wait for the goroutines (i.e. remove line 17) the program
+would be terminated immediately and any running goroutines would
+*die with it*. 
+To fix this we need some kind of mechanism which allows us to
+communicate with the goroutines. This mechanism is available
+to us in the form of \first{channels}{channels}. A
+\first{channel}{channel} can be
+compared to a two-way pipe in Unix shells: you can send to and receive
+values from it. Those values can only be of a specific type: the
+type of the channel. If we define a channel, we must also define the
+type of the values we can send on the channel. Note that we must use
+`make` to create a channel:
+\begin{lstlisting}
+ci := make(chan int)
+cs := make(chan string)
+cf := make(chan interface{})
+\end{lstlisting}
+Makes `ci` a channel on which we can send and receive integers,
+makes `cs` a channel for strings and `cf` a channel for types
+that satisfy the empty interface. 
+Sending on a channel and receiving from it, is done with the same operator:
+`<-`. (((operator!channel)))
+Depending on the operands it figures out what to do:
+\begin{lstlisting}
+ci <- 1	    |\coderemark{*Send* the integer 1 to the channel `ci`}|
+<-ci	    |\coderemark{*Receive* an integer from the channel `ci`}|
+i := <-ci   |\coderemark{*Receive* from the channel `ci` and store it in `i`}|
+\end{lstlisting}
+Let's put this to use.
+\begin{lstlisting}[numbers=none,caption=Go routines and a channel,label=src:sleeping with channels]
+var c chan int |\longremark{Declare `c` to be a variable that is a %
+channel of ints. That is: this channel can move integers. Note %
+that this variable is global so that the goroutines have access to it;}|
+
+func ready(w string, sec int) {
+	time.Sleep(time.Duration(sec) * time.Second)
+	fmt.Println(w, "is ready!")
+	c <- 1	|\longremark{Send the integer 1 on the channel `c`;}|
+}
+
+func main() {
+	c = make(chan int) |\longremark{Initialize `c`;}|
+	go ready("Tea", 2) |\longremark{Start the goroutines with the keyword `go`;}|
+	go ready("Coffee", 1)
+	fmt.Println("I'm waiting, but not too long")
+	<-c |\longremark{Wait until we receive a value from the channel. Note that the value we receive is discarded;}|
+	<-c |\longremark{Two goroutines, two values to receive.}|
+}
+\end{lstlisting}
+
+\showremarks
+There is still some remaining ugliness; we have to read twice from
+the channel (lines 14 and 15). This is OK in this case, but what if
+we don't know how many goroutines we started? This is where another
+Go built-in comes in: \first{`select`}{keyword!select}. With `select` you 
+can (among other things) listen for incoming data on a channel.
+
+Using `select` in our program does not really make it shorter,
+because we run too few go\-routines. We remove the lines 14 and 15 and
+replace them with the following:
+\begin{lstlisting}[caption=Using select,numbers=right,firstnumber=14]
+L: for {
+	select {
+	case <-c:
+		i++ 
+		if i > 1 { 
+			break L
+		}   
+	}   
+}   
+\end{lstlisting}
+We will now wait as long as it takes. Only when we have received more than
+one reply on the channel `c` will we exit the loop `L`.
+
+### Make it run in parallel
+While our goroutines were running concurrently, they were not running in
+parallel. When you do not tell Go anything there can only be one
+goroutine running at a time. With `runtime.GOMAXPROCS(n)` you
+can set the number of goroutines that can run in parallel. From
+the documentation:
+\begin{quote}
+GOMAXPROCS sets the maximum number of CPUs that can be executing
+simultaneously and returns the previous setting. If n < 1, it does not
+change the current setting. \emph{This call will go away when the scheduler
+improves.}
+\end{quote}
+If you do not want to change any source code you can also set an
+environment variable \verb|GOMAXPROCS| to the desired value.
+%% test
+%%\marginpar{%
+%%$$\left\{
+%%\begin{array}{l}
+%%\parbox{2cm}{
+%%hallo Yppp hallo Yppp hallo Yppp
+%%hallo Yppp hallo Yppp hallo Yppp
+%%hallo Yppp
+%%}
+%%\end{array}
+%%\right.$$
+%%}
+
+%%## So many channels and still \ldots
+## More on channels
+
+When you create a channel in Go with `ch := make(chan bool)`, 
+an \first{unbuffered channel}{channel!unbuffered} for
+bools is created. What does this mean for your program? For one, if you
+read (`value := <-ch`) it will block until there is data to
+receive. Secondly anything sending (`ch<-5`) will block until there
+is somebody to read it. 
+Unbuffered channels make a perfect tool for synchronizing multiple
+goroutines.
+(((channel!blocking read)))
+(((channel!blocking write)))
+
+But Go allows you to specify the buffer size of
+a channel, which is quite simply how many elements a channel can hold.
+`ch := make(chan bool, 4)`, creates a buffered channel of
+bools that can hold 4 elements. The first 4 elements in this channel
+are written without any blocking.
+When you write the 5$^{th}$ element, your
+code *will* block, until another goroutine reads some elements from the
+channel to make room. 
+(((channel!non-blocking read)))
+(((channel!non-blocking write)))
+
+In conclusion, the following is true in Go:
+$$
+\textrm{`ch := make(chan type, value)`}
+\left\{
+\begin{array}{ll}
+value == 0 & \rightarrow \textrm{unbuffered)} \\
+value >  0 & \rightarrow \textrm{buffer *value* elements}
+\end{array}
+\right.
+$$
+
+### Closing channels
+When a channel is closed the reading side needs to know this.
+The following code will check if a channel is closed.
+\begin{lstlisting}
+x, ok = <-ch
+\end{lstlisting}
+Where `ok` is set to `true` the channel is not closed
+*and* we've read something.
+Otherwise `ok` is set to `false`. In that case the channel
+was closed.
+
+## Exercises
+\input{ex-channels/ex-for-channels.tex}
+
+\input{ex-channels/ex-fib.tex}
+
+\cleardoublepage
+## Answers
+\shipoutAnswer
