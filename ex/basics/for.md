@@ -1,4 +1,4 @@
-{.exersice difficulty="0"}
+{.exersice data-difficulty="0"}
 ### For-loop
 
 1. Create a loop with the `for` construct. Make it loop

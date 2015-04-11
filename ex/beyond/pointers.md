@@ -1,4 +1,4 @@
-{.exercise difficulty="1"}
+{.exercise data-difficulty="1"}
 ### Pointers
 
 1.  Suppose we have defined the following structure:

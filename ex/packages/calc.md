@@ -1,4 +1,4 @@
-{.exercise difficulty="2"}
+{.exercise data-difficulty="2"}
 ### Calculator
 1. Create a reverse polish calculator. Use your stack package.
 

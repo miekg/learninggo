@@ -1,4 +1,4 @@
-{.exercise difficulty="1"}
+{.exercise data-difficulty="1"}
 ### Stack
 1. Create a simple stack which can hold a
 fixed number of ints. It does not have to grow beyond this limit.

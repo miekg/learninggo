@@ -1,4 +1,4 @@
-{.exercise difficulty="2"}
+{.exercise data-difficulty="2"}
 ### Map function with interfaces
 1. Use the answer from the earlier map exercise but now
   make it generic using interfaces. Make it at least work for

@@ -1,4 +1,4 @@
-{.exercise difficulty="1"}
+{.exercise data-difficulty="1"}
 ### Var args
 
 1.  Write a function that takes a variable number of ints and print each integer on a separate line.

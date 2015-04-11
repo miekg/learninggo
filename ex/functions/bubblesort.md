@@ -1,4 +1,4 @@
-{.exercise difficulty="1"}
+{.exercise data-difficulty="1"}
 ### Bubble sort
 1. Write a function that performs a bubble sort on a slice of ints. From [@bubblesort]:
 

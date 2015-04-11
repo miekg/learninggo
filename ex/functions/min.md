@@ -1,4 +1,4 @@
-{.exercise difficulty="0"}
+{.exercise data-difficulty="0"}
 ### Minimum
 1.  Write a function that finds the
 maximum value in an `int` slice (`[]int`).

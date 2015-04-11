@@ -1,4 +1,4 @@
-{.exercise difficulty="2"}
+{.exercise data-difficulty="2"}
 ### Method calls
 1. Suppose we have the following
 program. Note the package `container/vector` was once part

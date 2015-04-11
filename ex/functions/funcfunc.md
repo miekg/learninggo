@@ -1,4 +1,4 @@
-{.exercise difficulty="1"}
+{.exercise data-difficulty="1"}
 ### Functions that return functions
 
 1. Write a function that returns a function that performs a $$+2$$ on integers. Name the function `plusTwo`.

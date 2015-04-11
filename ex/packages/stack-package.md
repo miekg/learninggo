@@ -1,4 +1,4 @@
-{.exercise difficulty="0"}
+{.exercise data-difficulty="0"}
 ### Stack as package
 
 1. See the Stack exercise. In this exercise we want to create a separate package

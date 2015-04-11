@@ -1,4 +1,4 @@
-{.exercise difficulty="1"}
+{.exercise data-difficulty="1"}
 ### Cat
 
 1. Write a program which mimics the Unix program `cat`.

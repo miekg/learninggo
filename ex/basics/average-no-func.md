@@ -1,4 +1,4 @@
-{.exercise difficulty="1"}
+{.exercise data-difficulty="1"}
 ### Average
 
 1. Write code to calculate the average of a `float64` slice. In

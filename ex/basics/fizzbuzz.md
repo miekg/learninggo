@@ -1,4 +1,4 @@
-{.exercise difficulty="0"}
+{.exercise data-difficulty="0"}
 ### FizzBuzz
 
 1. Solve this problem, called the Fizz-Buzz [@fizzbuzz_cite] problem:

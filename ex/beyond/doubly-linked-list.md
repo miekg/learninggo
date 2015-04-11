@@ -1,4 +1,4 @@
-{.exercise difficulty="1"}
+{.exercise data-difficulty="1"}
 ### Linked List
 
 1. Make use of the package `container/list` to create
