@@ -117,6 +117,7 @@ span.index-ref-primary::before {
 
 span.callout {
     font-size: x-small;
+    font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, monospace;
     height: 1.3em;
     width: 1.2em;
     display: inline-block;
