@@ -10,12 +10,12 @@ maximum value in an `int` slice (`[]int`).
 
  {callout="//"}
     func max(l []int) (max int) {   //<1>
-            max = l[0]      
+            max = l[0]
             for _, v := range l {   //<2>
                     if v > max {    //<3>
-                            max = v 
-                    }   
-            }   
+                            max = v
+                    }
+            }
             return //<4>
     }
 

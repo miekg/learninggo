@@ -49,7 +49,7 @@
 {backmatter}
 
 
-<!-- fake stuff to fix the reference for the time begin -->
+<!-- fake stuff to fix the reference for the time being -->
 # Fake 1 {#channels}
 
 # Fake 2 {#interfaces}
