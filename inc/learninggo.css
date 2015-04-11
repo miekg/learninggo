@@ -1,14 +1,61 @@
 @import url("orderedlist-minimal.css");
 
-/* css below only deals with placement of elements */
+nav {
+    background-color: #f8f8f8;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 3px 3px -1px rgba(0, 0, 0, 0.055);
+    color: black;
+    font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color:black;
+    font-weight:300;
+
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+
+    display: block;
+    text-align: center;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style-type: none;
+}
+
+nav > ul > li > a {
+    display: block;
+    line-height: 4em;
+    padding: 0 24px;
+    text-decoration: none;
+}
+
+nav > ul > li:hover {
+    background-color: rgb( 40, 44, 47 );
+}
+
+nav > ul > li:hover > a {
+    color: rgb( 255, 255, 255 );
+}
 
 .book {
     width: 90%;
 }
 
+h1 {
+    padding-bottom: 2em;
+    font-size: 3em;
+}
+
 blockquote.epigraph {
     text-align: right;
     border-left: none;
+    padding-bottom: 2em;
 }
 
 .epigraph p {
