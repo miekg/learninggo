@@ -5,15 +5,10 @@ nav {
     border: 1px solid #e5e5e5;
     box-shadow: 0 3px 3px -1px rgba(0, 0, 0, 0.055);
     color: black;
-    font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color:black;
-    font-weight:300;
-
     position:fixed;
     top:0;
     left:0;
     right:0;
-
     display: block;
     text-align: center;
 }
@@ -36,11 +31,10 @@ nav > ul > li > a {
 }
 
 nav > ul > li:hover {
-    background-color: rgb( 40, 44, 47 );
 }
 
 nav > ul > li:hover > a {
-    color: rgb( 255, 255, 255 );
+    text-decoration: underline;
 }
 
 .book {
