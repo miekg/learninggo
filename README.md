@@ -6,7 +6,6 @@ This is the "Learning Go" book in mmark markdown. It is translated
 to HTML with [mmark](https://github.com/miekg/mmark).
 
 After some post processing [the end result, can be found here](http://miek.nl/go/learninggo.html).
-Note this is a temporary location.
 
 ## To Build YourSelf
 
