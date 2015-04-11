@@ -1,4 +1,4 @@
-Make it look like:
+Make it look more like:
 
 http://producingoss.com/en/index.html
 
@@ -9,6 +9,6 @@ Fonts:
 
 # TODO
 
-index must be nicer.
-
-hide answers to exercises
+* index must be nicer
+* hide answers to exercises
+* mobile tweaks

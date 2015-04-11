@@ -1,0 +1,448 @@
+{.epigraph}
+> I have this phobia about having my body penetrated surgically. You know what
+> I mean? 
+Quote: eXistenZ -- Ted Pikul
+
+N> The following text is partly from [@go_interfaces].
+
+In Go, the word *interface*(((interface))) is overloaded to mean several
+different things. Every type has an interface, which is the *set of methods
+defined* for (((interface, set of methods))) that type. This bit of code defines
+a struct type `S` with one field, and defines two methods for `S`.
+
+    type S struct { i int }
+    func (p *S) Get() int { return p.i }
+    func (p *S) Put(v int) { p.i = v }
+Figure: Defining a struct and methods on it.
+
+You can also define an (((interface, type)))interface type, which is simply
+a set of methods. This defines an interface `I` with two methods:
+
+    type I interface {
+      Get() int
+      Put(int)
+    }
+
+
+`S` is a valid *implementation* for interface `I`, because it defines the two
+methods which `I` requires. Note that this is true even though there is
+no explicit declaration that `S` implements `I`.
+
+A Go program can use
+this fact via yet another meaning of interface, which is an
+interface value: (((interface, value)))
+
+    func f(p I) {  |\longremark{Declare a function that takes an interface type %
+    as the argument;}|
+        fmt.Println(p.Get()) |\longremark{As `p` implements interface `I` %
+    it *must* have the `Get()` method;}|
+        p.Put(1) |\longremark{Same holds for the `Put()` method.}|
+    }
+
+\showremarks
+Here the variable `p` holds a value of interface type. Because
+`S` implements `I`, we can call `f` passing in a pointer to a
+value of type `S`: `var s S; f(&s)`
+
+The reason we need to take the address of `s`, rather than a value of type
+`S`, is because we defined the methods on `s` to operate on
+pointers, see the code above in listing (#src:interface object).
+This is not a requirement --- we could have defined the methods to take
+values --- but then the `Put` method would not work as expected.
+
+The fact that you do not need to declare whether or not a type implements an
+interface means that Go implements a form of duck typing (((duck, typing)))
+[@duck_typing]. This is not pure duck typing, because when possible the
+Go compiler will statically check whether the type implements the interface.
+However, Go does have a purely dynamic aspect, in that you can convert from one
+interface type to another. In the general case, that conversion is checked at
+run time. If the conversion is invalid --- if the type of the value stored in
+the existing interface value does not satisfy the interface to which it is being
+converted --- the program will fail with a run time error.
+
+Interfaces in Go are similar to ideas in several other programming languages:
+pure abstract virtual base classes in C++, typeclasses in Haskell or duck typing
+in Python. However there is no other language which combines interface values,
+static type checking, dynamic run time conversion, and no requirement for
+explicitly declaring that a type satisfies an interface. The result in Go is
+powerful, flexible, efficient, and easy to write.
+
+
+### Which is what?
+
+Let's define another type that also implements the interface `I`:
+
+    type R struct { i int }
+    func (p *R) Get() int { return p.i }
+    func (p *R) Put(v int) { p.i = v }
+
+The function `f` can now accept variables of type `R` and `S`.
+Suppose you need to know the actual type in the function `f`. In Go you can
+figure that out by using a type switch ((type switch)).
+
+    func f(p I) {
+        switch t := p.(type) { |\longremark{The type switch. Use `(type)` in a `switch` %
+    statement. We store the type in the variable `t`;}|
+            case *S: |\longremark{The actual type of `p` is a pointer to `S`;}|
+            case *R: |\longremark{The actual type of `p` is a pointer to `R`;}|
+            case S:  |\longremark{The actual type of `p` is a `S`;}|
+            case R:  |\longremark{The actual type of `p` is a `R`;}|
+            default: |\longremark{It's another type that implements `I`.}|
+        }
+    }
+
+\showremarks
+Using `(type)` outside a `switch` is illegal. A type switch isn't the only way
+to discover the type at *run-time*. You can also use a "comma, ok" form to see
+if an interface type implements a specific interface:
+
+    if t, ok := something.(I); ok {
+       // something implements the interface I
+       // t is the type it has
+    }
+
+When you are sure a variable implements an interface you can use:
+`t := something.(I)` .
+
+
+### Empty interface
+
+Since every type satisfies the empty interface: `interface{}`. We can create
+a generic function which has an empty interface as its argument:
+
+\begin{lstlisting}[caption=A function with an empty interface argument,label=src:interface empty]
+func g(something interface{}) int {
+    return something.(I).Get()
+}
+\end{lstlisting}
+The `return something.(I).Get()` is the tricky bit in this function.
+The value `something` has type `interface{}`, meaning no guarantee
+of any methods at all: it could contain any type. The `.(I)`
+is a \first{type assertion}{type assertion} which converts `something` to an interface of
+type `I`. If we have that type we can invoke the `Get()`
+function.
+So if we create a new variable of the type `*S`, we can just
+call `g()`, because `*S` also implements the empty interface.
+
+    s = new(S)
+    fmt.Println(g(s));
+
+The call to `g` will work fine and will print 0. If we however invoke `g()` with
+a value that does not implement `I` we have a problem:
+
+\begin{lstlisting}[caption=Failing to implement an interface,label=src:interface fail]
+i := 5		|\coderemark{Make i a "lousy" `int`}|
+fmt.Println(g(i))
+\end{lstlisting}
+This compiles, but when we run this we get slammed with: "panic: interface
+conversion: int is not main.I: missing method Get".
+
+Which is completely true, the built-in type `int` does not have a `Get()`
+method.
+
+
+## Methods
+
+Methods are functions that have a receiver (see (#functions)).
+You can define methods on any type (except on non-local types, this includes
+built-in types: the type `int` can not have methods).
+You can however make a new integer type with its own methods. For example:
+\begin{lstlisting}
+type Foo int
+
+func (self Foo) Emit() {
+  fmt.Printf("%v", self)
+}
+
+type Emitter interface {
+  Emit()
+}
+\end{lstlisting}
+Doing this on non-local (types defined in other packages) types yields:
+% Empty line here is critical, otherwise no new paragraph is created
+
+\begin{lstlisting}[linewidth=.7\textwidth,caption=Failure extending built-in types]
+func (i int) Emit() {
+  fmt.Printf("%d", i)
+}
+\end{lstlisting}
+\error{cannot define new methods\\ on non-local type int}
+
+\begin{lstlisting}[caption=Failure extending non-local types]
+func (a *net.AddrError) Emit() {
+  fmt.Printf("%v", a)
+}
+\end{lstlisting}
+\error{cannot define new methods\\ on non-local type net.AddrError}
+
+
+### Methods on interface types
+
+An interface defines a set of methods. A method contains the actual code.
+In other words, an interface is the definition and the methods are the implementation.
+So a receiver can not be an interface
+type, doing so results in a \error{invalid receiver type ...} compiler
+error. The authoritative word from the language spec [@go_spec]:
+\begin{quote}
+The receiver type must be of the form `T` or `*T` where
+`T` is a type name. `T` is called the receiver base type or just base
+type. The base type must
+not be a pointer or interface type and must be declared in the same
+package as the method.
+\end{quote}
+
+\begin{lbar}[Pointers to interfaces]
+Creating a pointer to an interface value is a useless action in Go.
+It is in fact illegal to
+create a pointer to an interface value. The release notes for the release \gorelease{2010-10-13}
+that
+made them illegal leave no room for doubt:
+\begin{quote}
+The language change is that uses of pointers to interface values no longer
+automatically de-reference the pointer.  A pointer to an interface value is more
+often a beginner's bug than correct code.
+\end{quote}
+From the [@go_faq]. If not for this restriction, this code:
+\begin{lstlisting}
+var buf bytes.Buffer
+io.Copy(buf, os.Stdin)
+\end{lstlisting}
+would copy standard input into a copy of `buf`, not into `buf` itself.
+This is almost never the desired behavior.
+\end{lbar}
+
+
+## Interface names
+
+By convention, one-method interfaces are named by the method name plus
+the *-er* suffix: Read*er*, Writ*er*, Formatt*er* etc.
+
+There are a number of such names and it's productive to honor them and
+the function names they capture. `Read`, `Write`,
+`Close`, `Flush`, `String` and
+so on have canonical signatures and meanings. To avoid confusion, don't
+give your method one of those names unless it has the same signature and
+meaning. Conversely, if your type implements a method with the same
+meaning as a method on a well-known type, give it the same name and
+signature; call your string-converter method `String` not
+`ToString`. ^[Text copied from [@effective_go].]
+
+
+## A sorting example
+
+Recall the Bubblesort exercise (Q(#ex:bubble)), where we sorted an
+array of integers:
+
+    func bubblesort(n []int) {
+        for i := 0; i < len(n)-1; i++ {
+            for j := i + 1; j < len(n); j++ {
+                if n[j] < n[i] {
+                    n[i], n[j] = n[j], n[i]
+            }
+            }
+        }
+    }
+
+A version that sorts strings is identical except for the signature of
+the function:
+\begin{lstlisting}
+func bubblesortString(n []string) { /* ... */ }
+\end{lstlisting}
+Using this approach would lead to two functions, one for each type. By using
+interfaces we can make this more (((generic))) generic.
+Let's create a new function that will sort both strings and
+integers, something along the lines of this non-working example:
+
+{callout="//"}
+    func sort(i []interface{}) { |\longremark{Our function will receive a slice of %
+    empty interfaces;}|
+        switch i.(type) {        |\longremark{Using a type switch we find out what the %
+    actual type is of the input;}|
+        case string:         |\longremark{And then sort accordingly;}|
+            // ...
+        case int:
+            // ...
+        }
+        return /* ... */ |\longremark{Return the sorted slice.}|
+    }
+
+\showremarks
+But when we call this function with \lstinline|sort([]int{1, 4, 5})|, it
+fails with:\\
+\error{cannot use i (type []int) as type []interface { } in function argument}
+
+This is because Go can not easily convert to a *slice* of interfaces.
+Just converting to an interface is easy, but to a slice is much more costly.
+To keep a
+\gomarginpar{The full mailing list discussion on this subject
+can be found at [@go_nuts_interfaces].}
+long story short: Go does not (implicitly) convert slices for you.
+
+So what is the Go way of creating such a "generic" function?
+Instead of doing the type inference ourselves with a type switch, we let
+Go do it implicitly:
+The following steps are required:
+\begin{enumerate}
+\item Define an interface type (called `Sorter` here) with a number of
+methods needed for sorting.
+We will at least need a function to get the length of the slice,
+a function to compare two values and a swap function;
+\begin{lstlisting}
+type Sorter interface {
+    Len() int           |\coderemark{`len()` as a method}|
+    Less(i, j int) bool |\coderemark{`p[j] $<$ p[i]` as a method}|
+    Swap(i, j int)      |\coderemark{`p[i], p[j] = p[j], p[i]` as a method}|
+}
+\end{lstlisting}
+\item Define new types for the slices we want to sort. Note that we
+declare slice types;
+\begin{lstlisting}
+type Xi []int
+type Xs []string
+\end{lstlisting}
+\item Implementation of the methods of the `Sorter` interface.
+For integers:
+\begin{lstlisting}
+func (p Xi) Len() int               {return len(p)}
+func (p Xi) Less(i int, j int) bool {return p[j] < p[i]}
+func (p Xi) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
+\end{lstlisting}
+And for strings:
+\begin{lstlisting}
+func (p Xs) Len() int               {return len(p)}
+func (p Xs) Less(i int, j int) bool {return p[j] < p[i]}
+func (p Xs) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
+\end{lstlisting}
+\item Write a *generic* Sort function that works on the `Sorter` interface.
+
+    func Sort(x Sorter) { |\longremark{`x` is now of the `Sorter` type;}|
+        for i := 0; i < x.Len() - 1; i++ { |\longremark{Using the defined functions, we implement Bubblesort.}|
+        for j := i + 1; j < x.Len(); j++ {
+            if x.Less(i, j) {
+            x.Swap(i, j)
+            }
+        }
+        }
+    }
+
+\showremarks
+\end{enumerate}
+We can now use your generic `Sort` function as follows:
+\begin{lstlisting}
+ints := Xi{44, 67, 3, 17, 89, 10, 73, 9, 14, 8}
+strings := Xs{"nut", "ape", "elephant", "zoo", "go"}
+
+Sort(ints)
+fmt.Printf("%v\n", ints)
+Sort(strings)
+fmt.Printf("%v\n", strings)
+\end{lstlisting}
+
+
+### Listing interfaces in interfaces
+
+Take a look at the following example of an interface definition, this one is
+from the package `container/heap`:
+
+    type Interface interface {
+        sort.Interface
+        Push(x interface{})
+        Pop() interface{}
+    }
+
+Here another interface is listed inside the definition of `heap.Interface`, this
+may look odd, but is perfectly valid, remember that on the surface an interface is nothing
+more than a listing of methods. `sort.Interface` is also such a listing, so it is
+perfectly legal to include it in the interface.
+
+
+### Introspection and reflection
+
+In the following example we want to look at the "tag" (here named "namestr") defined in the
+type definition of `Person`. To do this we need the
+`reflect`(((package!reflect))) package (there is no other way in Go). Keep in mind
+that looking at a tag means going back to the *type* definition. So
+we use the `reflect` package to figure out the type of the variable
+and *then* access the tag.
+
+\input{fig/reflection.tex}
+\showremarks
+
+%% look at layout
+To make the difference between types and values more clear,
+take a look at the following code:
+\begin{lstlisting}[caption=Reflection and the type and value]
+func show(i interface{}) {
+    switch t := i.(type) {
+      case *Person:
+        t := reflect.TypeOf(i)  |\coderemark{Type meta data}|
+        v := reflect.ValueOf(i) |\coderemark{Actual values}|
+	tag := t.Elem().Field(0).Tag |\longremark{Here we want to get to the "tag". %
+So we need `Elem()` to redirect the pointer, access the first field and get the tag. %
+Note we operate on `t` a `reflect.Type`;}|
+	name := v.Elem().Field(0).String() |\longremark{Now we want to get access to the %
+*value* of one of the members and we %
+employ\newline`Elem()` on `v` to do the redirection. %
+Now we have arrived at the structure. Then we go to the first field %
+`Field(0)` and invoke the `String()` method on %
+it. %
+\begin{figure}[H] %
+\hskip3\baselineskip\parbox{0.7\textwidth}{\caption[Peeling away the layers using reflection]{Peeling away the %
+layers using reflection. %
+Going from a `*Person` via `Elem()` using the %
+methods described in `go doc reflect` to get the %
+actual `string` contained within.}} %
+ %
+\begin{center} %
+\includegraphics[scale=0.75]{fig/reflection.pdf} %
+\end{center}\end{figure} %
+}|
+    }
+}
+\end{lstlisting}
+\showremarks
+
+Setting a value works similarly as getting a value, but only works on
+*exported* members. Again some code:
+
+\begin{lstlisting}[caption=Reflect with private member]
+type Person struct {
+ name string |\coderemark{name}|
+ age  int
+}
+
+func Set(i interface{}) {
+ switch i.(type) {
+ case *Person:
+  r := reflect.ValueOf(i)
+  r.Elem(0).Field(0).SetString("Albert Einstein")
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Reflect with public member]
+type Person struct {
+ Name string |\coderemark{*N*ame}|
+ age  int
+}
+
+func Set(i interface{}) {
+ switch i.(type) {
+ case *Person:
+  r := reflect.ValueOf(i)
+  r.Elem().Field(0).SetString("Albert Einstein")
+  }
+}
+\end{lstlisting}
+
+The code on the left compiles and runs, but when you run it, you are greeted with a
+stack trace and a *run time* error:
+"panic: reflect.Value.SetString using value obtained using unexported field".
+
+The code on the right works OK and sets the member `Name` to "Albert Einstein".
+Of course this only works when you call `Set()` with a pointer argument.
+
+
+## Exercises
+
+{{ex/interfaces//ex.md}}
