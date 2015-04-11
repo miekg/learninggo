@@ -13,7 +13,7 @@ After some post processing [the end result, can be found here](http://miek.nl/go
 * `cd mmark/mmark`
 * `go install`
 
-And then just `make` in this repository, and `cd fix; make` to make the `.png` from the `.svg`
+And then just `make` in this repository, and `cd fig; make` to make the `.png` from the `.svg`
 with Inkscape.
 
 ## Notes
