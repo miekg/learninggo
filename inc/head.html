@@ -83,10 +83,10 @@
       // $("h3.answer").nextUntil("h1,h2").wrapAll("<details></details>");
     }
 
+    // exclude answers and index
     function toc(){
       $("body").prepend("<ul class=\"toc\"></ul>");
-      $("h1,h2").each(function(){
-              // Need sublists for H2.
+      $("h1,h2,h3").each(function(){
               $("ul.toc").append("<li class=\"toc-" + $(this)[0].tagName.toLowerCase() + "\">" +
                   "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></li>");
       });

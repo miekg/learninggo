@@ -90,3 +90,8 @@ li.toc-h2 {
     padding-left: 1em;
     font-style: italic;
 }
+
+li.toc-h3 {
+    padding-left: 2em;
+    font-style: italic;
+}
