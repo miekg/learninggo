@@ -16,3 +16,7 @@ Note this is a temporary location.
 
 And then just `make` in this repository, and `cd fix; make` to make the `.png` from the `.svg`
 with Inkscape.
+
+## Notes
+
+The stack exercise and solution uses `struct` which are not being dealt with yet.
