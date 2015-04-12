@@ -43,6 +43,10 @@
 {{beyond.md}}
 
 
+# Interfaces
+{{interfaces.md}}
+
+
 {{inc/bib.xml}}
 
 
@@ -51,7 +55,5 @@
 
 <!-- fake stuff to fix the reference for the time being -->
 # Fake 1 {#channels}
-
-# Fake 2 {#interfaces}
 
 ## Fake 3 {#introspection-and-reflection}

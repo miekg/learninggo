@@ -3,12 +3,11 @@
 > I mean?
 Quote: eXistenZ -- Ted Pikul
 
-N> The following text is partly from [@go_interfaces].
-
 In Go, the word *interface*(((interface))) is overloaded to mean several
 different things. Every type has an interface, which is the *set of methods
 defined* for (((interface, set of methods))) that type. This bit of code defines
-a struct type `S` with one field, and defines two methods for `S`.
+a struct type `S` with one field, and defines two methods for `S`. ^[The following text is partly from [@go_interfaces].]
+
 
     type S struct { i int }
     func (p *S) Get() int  { return p.i }
@@ -67,7 +66,7 @@ explicitly declaring that a type satisfies an interface. The result in Go is
 powerful, flexible, efficient, and easy to write.
 
 
-### Which is what?
+## Which is what?
 
 Let's define another type `R` that also implements the interface `I`:
 
@@ -108,7 +107,7 @@ a specific interface. If `ok` is true, `t` will hold the type of `something`.
 When you are sure a variable implements an interface you can use: `t := something.(I)` .
 
 
-### Empty interface
+## Empty interface
 
 Since every type satisfies the empty interface: `interface{}`. We can create
 a generic function which has an empty interface as its argument:
@@ -165,7 +164,7 @@ Doing this on non-local (types defined in other packages) types yields an error
 "cannot define new methods on non-local type int".
 
 
-### Methods on interface types
+## Methods on interface types
 
 An interface defines a set of methods. A method contains the actual code. In
 other words, an interface is the definition and the methods are the
@@ -311,7 +310,7 @@ fmt.Printf("%v\n", strings)
 \end{lstlisting}
 
 
-### Listing interfaces in interfaces
+## Listing interfaces in interfaces
 
 Take a look at the following example of an interface definition, this one is
 from the package `container/heap`:
@@ -328,7 +327,7 @@ more than a listing of methods. `sort.Interface` is also such a listing, so it i
 perfectly legal to include it in the interface.
 
 
-### Introspection and reflection
+## Introspection and reflection
 
 In the following example we want to look at the "tag" (here named "namestr")
 defined in the type definition of `Person`. To do this we need the
