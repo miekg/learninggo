@@ -1,11 +1,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <script src="inc/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 <script src="inc/orderedlist-minimal.scale.fix.js"></script>
+<script src="inc/jquery.waypoints.min.js"></script>
 
 <script>
     $(document).ready(function() {
       $("body").wrapInner("<div class=\"book\"></div>")
+
+      // waypoints for nav, no idea, why I need proper js here.
+      $("h1").waypoint(function(e, direction) {
+          // because we insert a para symbol for easy deeplinking, we
+          // should take the string from the second char on.
+          $("#nav-h1").text(this.element.textContent.substring(1));
+          // reset the other one
+          $("#nav-h2").text("");
+      });
+      $("h2").waypoint(function(e, direction) {
+          $("#nav-h2").text(this.element.textContent.substring(1));
+      });
+
 
       answers();
       appendices
@@ -20,6 +35,7 @@
       toc();
 
       links();
+
     });
 
     function chapters(){
