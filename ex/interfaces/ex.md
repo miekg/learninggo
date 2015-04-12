@@ -1,0 +1,1 @@
+{{ex/interfaces/minmax.md}}

@@ -1,5 +1,5 @@
 {.exercise data-dificulty="2"}
- ### Interfaces and max()}
+ ### Interfaces and max()
 
 In the maximum exercise we created a max function that works on a slice of
 integers.  The question now is to create a program that shows the maximum number
