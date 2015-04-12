@@ -371,6 +371,8 @@ actual `string` contained within.}} %
 }|
     }
 }
+![Peeling away the layers using reflection.](fig/reflection.png "Peeling away the layers using reflection.")
+
 \end{lstlisting}
 \showremarks
 
