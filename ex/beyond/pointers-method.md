@@ -34,7 +34,7 @@ above (the Push statements) work correct then?
 
 {.answer}
 ### Answer
-1. The type of `k1` is `vector.IntVector`. Why? We use 
+1. The type of `k1` is `vector.IntVector`. Why? We use
 a composite literal (the `{}`), so we get a value of that type
 back. The variable `k2` is of `*vector.IntVector`, because we
 take the address (`&`) of the composite literal. And finally
@@ -52,6 +52,6 @@ where among other things it says:
 
 In other words because `k1` is addressable and
 `*vector.IntVector` *does* have the `Push` method, the
-call `k1.Push(2)` is translated by Go into 
+call `k1.Push(2)` is translated by Go into
 `(&k1).Push(2)` which makes the type system happy again (and
-you too --- now you know this).^[Also see (#methods) in this chapter.]
+you too -- now you know this).^[Also see (#methods) in this chapter.]

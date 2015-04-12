@@ -9,8 +9,8 @@ concurrent programming using channels and goroutines. Goroutines
 are the central entity in Go's ability for concurrency. But what
 *is* a goroutine? From [@effective_go]:
 \begin{quote}
-They're called goroutines because the existing terms --- threads, coroutines,
-processes, and so on --- convey inaccurate connotations. A goroutine has a simple
+They're called goroutines because the existing terms -- threads, coroutines,
+processes, and so on -- convey inaccurate connotations. A goroutine has a simple
 model: \emph{it is a function executing in parallel with other goroutines in the same
 address space}. It is lightweight, costing little more than the allocation of
 stack space. And the stacks start small, so they are cheap, and grow by

@@ -112,19 +112,16 @@ When you are sure a variable implements an interface you can use: `t := somethin
 Since every type satisfies the empty interface: `interface{}`. We can create
 a generic function which has an empty interface as its argument:
 
-\begin{lstlisting}[caption=A function with an empty interface argument,label=src:interface empty]
-func g(something interface{}) int {
-    return something.(I).Get()
-}
-\end{lstlisting}
-The `return something.(I).Get()` is the tricky bit in this function.
-The value `something` has type `interface{}`, meaning no guarantee
-of any methods at all: it could contain any type. The `.(I)`
-is a \first{type assertion}{type assertion} which converts `something` to an interface of
-type `I`. If we have that type we can invoke the `Get()`
-function.
-So if we create a new variable of the type `*S`, we can just
-call `g()`, because `*S` also implements the empty interface.
+    func g(something interface{}) int {
+        return something.(I).Get()
+    }
+
+The `return something.(I).Get()` is the tricky bit in this function. The value
+`something` has type `interface{}`, meaning no guarantee of any methods at all:
+it could contain any type. The `.(I)` is a type assertion (((type assertion)))
+which converts `something` to an interface of type `I`. If we have that type we
+can invoke the `Get()` function. So if we create a new variable of the type
+`*S`, we can just call `g()`, because `*S` also implements the empty interface.
 
     s = new(S)
     fmt.Println(g(s));
@@ -132,10 +129,9 @@ call `g()`, because `*S` also implements the empty interface.
 The call to `g` will work fine and will print 0. If we however invoke `g()` with
 a value that does not implement `I` we have a problem:
 
-\begin{lstlisting}[caption=Failing to implement an interface,label=src:interface fail]
-i := 5		|\coderemark{Make i a "lousy" `int`}|
-fmt.Println(g(i))
-\end{lstlisting}
+    i :=
+    fmt.Println(g(i))
+
 This compiles, but when we run this we get slammed with: "panic: interface
 conversion: int is not main.I: missing method Get".
 
@@ -204,8 +200,7 @@ string-converter method `String` not `ToString`. ^[Text copied from
 
 ## A sorting example
 
-Recall the Bubblesort exercise (Q(#ex:bubble)), where we sorted an
-array of integers:
+Recall the Bubblesort exercise, where we sorted an array of integers:
 
     func bubblesort(n []int) {
         for i := 0; i < len(n)-1; i++ {
@@ -217,97 +212,94 @@ array of integers:
         }
     }
 
-A version that sorts strings is identical except for the signature of
-the function: `func bubblesortString(n []string) { /* ... */ }` .
-Using this approach would lead to two functions, one for each type. By using
-interfaces we can make this more (((generic))) generic. Let's create a new
-function that will sort both strings and integers, something along the lines of
-this non-working example:
+A version that sorts strings is identical except for the signature of the
+function: `func bubblesortString(n []string) { /* ... */ }` . Using this
+approach would lead to two functions, one for each type. By using interfaces we
+can make this more (((generic))) generic. Let's create a new function that will
+sort both strings and integers, something along the lines of this non-working
+example:
 
 {callout="//"}
-    func sort(i []interface{}) { |\longremark{Our function will receive a slice of %
-    empty interfaces;}|
-        switch i.(type) {        |\longremark{Using a type switch we find out what the %
-    actual type is of the input;}|
-        case string:         |\longremark{And then sort accordingly;}|
+    func sort(i []interface{}) {  //<1>
+        switch i.(type) {         //<2>
+        case string:              //<3>
             // ...
         case int:
             // ...
         }
-        return /* ... */ |\longremark{Return the sorted slice.}|
+        return /* ... */          //<4>
     }
 
-\showremarks
-But when we call this function with `sort([]int{1, 4, 5})`, it
-fails with:
+Our function will receive a slice of empty interfaces at <1>. We then <2> use a
+type switch to find out what the actual type of the input is. And then <3>
+then sort accordingly. And, when done, return <4> the sorted slice.
+
+But when we call this function with `sort([]int{1, 4, 5})`, it fails with:
 "cannot use i (type []int) as type []interface { } in function argument"
 
 This is because Go can not easily convert to a *slice* of interfaces.
 Just converting to an interface is easy, but to a slice is much more costly.
 To keep a
-\gomarginpar{The full mailing list discussion on this subject
-can be found at [@go_nuts_interfaces].}
+A> The full mailing list discussion on this subject can be found at [@go_nuts_interfaces].
 long story short: Go does not (implicitly) convert slices for you.
 
 So what is the Go way of creating such a "generic" function?
 Instead of doing the type inference ourselves with a type switch, we let
 Go do it implicitly:
 The following steps are required:
-\begin{enumerate}
-\item Define an interface type (called `Sorter` here) with a number of
-methods needed for sorting.
-We will at least need a function to get the length of the slice,
-a function to compare two values and a swap function;
-\begin{lstlisting}
-type Sorter interface {
-    Len() int           |\coderemark{`len()` as a method}|
-    Less(i, j int) bool |\coderemark{`p[j] $<$ p[i]` as a method}|
-    Swap(i, j int)      |\coderemark{`p[i], p[j] = p[j], p[i]` as a method}|
-}
-\end{lstlisting}
-\item Define new types for the slices we want to sort. Note that we
-declare slice types;
-\begin{lstlisting}
-type Xi []int
-type Xs []string
-\end{lstlisting}
-\item Implementation of the methods of the `Sorter` interface.
-For integers:
-\begin{lstlisting}
-func (p Xi) Len() int               {return len(p)}
-func (p Xi) Less(i int, j int) bool {return p[j] < p[i]}
-func (p Xi) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
-\end{lstlisting}
-And for strings:
-\begin{lstlisting}
-func (p Xs) Len() int               {return len(p)}
-func (p Xs) Less(i int, j int) bool {return p[j] < p[i]}
-func (p Xs) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
-\end{lstlisting}
-\item Write a *generic* Sort function that works on the `Sorter` interface.
 
-    func Sort(x Sorter) { |\longremark{`x` is now of the `Sorter` type;}|
-        for i := 0; i < x.Len() - 1; i++ { |\longremark{Using the defined functions, we implement Bubblesort.}|
-        for j := i + 1; j < x.Len(); j++ {
-            if x.Less(i, j) {
-            x.Swap(i, j)
+* Define an interface type (called `Sorter` here) with a number of methods
+  needed for sorting. We will at least need a function to get the length of the
+  slice, a function to compare two values and a swap function.
+
+        type Sorter interface {
+            Len() int           // len() as a method.
+            Less(i, j int) bool // p[j] < p[i] as a method.
+            Swap(i, j int)      // p[i], p[j] = p[j], p[i] as a method.
+        }
+
+* Define new types for the slices we want to sort. Note that we declare slice types:
+
+        type Xi []int
+        type Xs []string
+
+* Implementation of the methods of the `Sorter` interface.
+  For integers:
+
+        func (p Xi) Len() int               {return len(p)}
+        func (p Xi) Less(i int, j int) bool {return p[j] < p[i]}
+        func (p Xi) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
+
+    And for strings:
+
+        func (p Xs) Len() int               {return len(p)}
+        func (p Xs) Less(i int, j int) bool {return p[j] < p[i]}
+        func (p Xs) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
+
+* Write a *generic* Sort function that works on the `Sorter` interface.
+  {callout="//"}
+         func Sort(x Sorter) { //<1>
+            for i := 0; i < x.Len() - 1; i++ { //<2>
+                for j := i + 1; j < x.Len(); j++ {
+                    if x.Less(i, j) {
+                        x.Swap(i, j)
+                    }
+                }
             }
-        }
-        }
-    }
+         }
 
-\showremarks
-\end{enumerate}
-We can now use your generic `Sort` function as follows:
-\begin{lstlisting}
-ints := Xi{44, 67, 3, 17, 89, 10, 73, 9, 14, 8}
-strings := Xs{"nut", "ape", "elephant", "zoo", "go"}
+    At <1> `x` is now of the `Sorter` type and using de defined methods for this interface we implement
+    Bubblesort at <2>.
 
-Sort(ints)
-fmt.Printf("%v\n", ints)
-Sort(strings)
-fmt.Printf("%v\n", strings)
-\end{lstlisting}
+Now we can use our *generic* `Sort` function as follows:
+
+    ints := Xi{44, 67, 3, 17, 89, 10, 73, 9, 14, 8}
+    strings := Xs{"nut", "ape", "elephant", "zoo", "go"}
+
+    Sort(ints)
+    fmt.Printf("%v\n", ints)
+    Sort(strings)
+    fmt.Printf("%v\n", strings)
 
 
 ## Listing interfaces in interfaces
@@ -346,7 +338,7 @@ the tag.
      switch t := reflect.TypeOf(i); t.Kind() {
      case reflect.Ptr: //<2>
         tag := t.Elem().Field(0).Tag
-     //       <3>        <4>     <5>
+     //         <3>        <4>     <5>
 Figure: Introspection using reflection.
 
 We are calling `ShowTag` at <1> with a `*Person`, so at <2> we're expecting
