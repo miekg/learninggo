@@ -408,9 +408,9 @@ a `switch`.
 A `switch` without a condition is the same as `switch true` <1>. We list the
 different cases. Each `case` statement has a condition that is either true of
 false. Here <2> we check if `c` is a number. If `c` is a number we return its
-value <3>. Check if `c` falls between ``a'' and ``f'' <4>. For an ``a'' we
-return 10, for ``b'' we return 11, etc. We also do the same <5> thing for ``A''
-to ``F''.
+value <3>. Check if `c` falls between "a" and "f" <4>. For an "a" we
+return 10, for "b" we return 11, etc. We also do the same <5> thing for "A"
+to "F".
 
 There is no automatic fall through, you you can use
 `fallthrough` (((keywords, fallthrough))) for that.
