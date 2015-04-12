@@ -338,7 +338,7 @@ the tag.
      switch t := reflect.TypeOf(i); t.Kind() {
      case reflect.Ptr: //<2>
         tag := t.Elem().Field(0).Tag
-     //         <3>        <4>     <5>
+     //         <3>         <4>      <5>
 Figure: Introspection using reflection.
 
 We are calling `ShowTag` at <1> with a `*Person`, so at <2> we're expecting
@@ -348,89 +348,78 @@ documentation ^[`go doc reflect`]:
 > Elem returns a type's element type.
 > It panics if the type's Kind is not Array, Chan, Map, Ptr, or Slice.
 
-So on `t` we use `Elem()` to get the value the pointer points to.
-We have now dereferenced the pointer and are "inside" our structure.
-We then <4> use `Field(0)` to access the zeroth field.
+So on `t` we use `Elem()` to get the value the pointer points to. We have now
+dereferenced the pointer and are "inside" our structure. We then <4> use
+`Field(0)` to access the zeroth field.
 
-The struct `StructField` has a `Tag` member which
-returns the tag-name as a string. So on the $$0^{th}$$ field we can
-unleash `.Tag` <5> to access this name: `Field(0).Tag`. This gives us `namestr`.
+The struct `StructField` has a `Tag` member which returns the tag-name as
+a string. So on the $$0^{th}$$ field we can unleash `.Tag` <5> to access this
+name: `Field(0).Tag`. This gives us `namestr`.
 
 To make the difference between types and values more clear, take a look at the
 following code:
 
-\begin{lstlisting}[caption=Reflection and the type and value]
-func show(i interface{}) {
-    switch t := i.(type) {
-      case *Person:
-        t := reflect.TypeOf(i)  |\coderemark{Type meta data}|
-        v := reflect.ValueOf(i) |\coderemark{Actual values}|
-	tag := t.Elem().Field(0).Tag |\longremark{Here we want to get to the "tag". %
-So we need `Elem()` to redirect the pointer, access the first field and get the tag. %
-Note we operate on `t` a `reflect.Type`;}|
-	name := v.Elem().Field(0).String() |\longremark{Now we want to get access to the %
-*value* of one of the members and we %
-employ\newline`Elem()` on `v` to do the redirection. %
-Now we have arrived at the structure. Then we go to the first field %
-`Field(0)` and invoke the `String()` method on %
-it. %
-\begin{figure}[H] %
-\hskip3\baselineskip\parbox{0.7\textwidth}{\caption[Peeling away the layers using reflection]{Peeling away the %
-layers using reflection. %
-Going from a `*Person` via `Elem()` using the %
-methods described in `go doc reflect` to get the %
-actual `string` contained within.}} %
- %
-\begin{center} %
-\includegraphics[scale=0.75]{fig/reflection.pdf} %
-\end{center}\end{figure} %
-}|
+{callout="//"}
+    func show(i interface{}) {
+        switch t := i.(type) {
+          case *Person:
+            t := reflect.TypeOf(i)  //<1>
+            v := reflect.ValueOf(i) //<2>
+            tag := t.Elem().Field(0).Tag //<3>
+            name := v.Elem().Field(0).String() //<4>
+        }
     }
-}
-![Peeling away the layers using reflection.](fig/reflection.png "Peeling away the layers using reflection.")
+Figure: Reflection and the type and value.
 
-\end{lstlisting}
-\showremarks
+At <1> we create `t` the type data of `i`, and `v` gets the actual values at
+<2>. Here at <3> we want to get to the "tag". So we need `Elem()` to redirect
+the pointer, access the first field and get the tag. Note that we operate on `t`
+a `reflect.Type`. Now <4> we want to get access to the *value* of one of the
+members and we employ `Elem()` on `v` to do the redirection. we have "arrived"
+at the structure. Then we go to the first field `Field(0)` and invoke the
+`String()` method on it.
+
+![Peeling away the layers using reflection.](fig/reflection.png "Peeling away the layers using reflection.
+Going from a `*Person` via `Elem` using the methods described in `go doc reflect` to get the actual `string` contained within.")
 
 Setting a value works similarly as getting a value, but only works on
 *exported* members. Again some code:
 
-\begin{lstlisting}[caption=Reflect with private member]
-type Person struct {
- name string |\coderemark{name}|
- age  int
-}
+    type Person struct {
+        name string
+        age  int
+    }
 
-func Set(i interface{}) {
- switch i.(type) {
- case *Person:
-  r := reflect.ValueOf(i)
-  r.Elem(0).Field(0).SetString("Albert Einstein")
-  }
-}
-\end{lstlisting}
+    func Set(i interface{}) {
+        switch i.(type) {
+        case *Person:
+            r := reflect.ValueOf(i)
+            r.Elem(0).Field(0).SetString("Albert Einstein")
+        }
+    }
+Figure: Reflect with *private* member.
 
-\begin{lstlisting}[caption=Reflect with public member]
-type Person struct {
- Name string |\coderemark{*N*ame}|
- age  int
-}
+    type Person struct {
+        Name string
+        age  int
+    }
 
-func Set(i interface{}) {
- switch i.(type) {
- case *Person:
-  r := reflect.ValueOf(i)
-  r.Elem().Field(0).SetString("Albert Einstein")
-  }
-}
-\end{lstlisting}
+    func Set(i interface{}) {
+        switch i.(type) {
+        case *Person:
+            r := reflect.ValueOf(i)
+            r.Elem().Field(0).SetString("Albert Einstein")
+        }
+    }
+Figure: Reflect with *public* member.
 
-The code on the left compiles and runs, but when you run it, you are greeted with a
+The first program compiles and runs, but when you run it, you are greeted with a
 stack trace and a *run time* error:
 "panic: reflect.Value.SetString using value obtained using unexported field".
 
 The code on the right works OK and sets the member `Name` to "Albert Einstein".
 Of course this only works when you call `Set()` with a pointer argument.
+
 
 ## Exercises
 
