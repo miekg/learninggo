@@ -1,6 +1,6 @@
 {.epigraph}
 > I have this phobia about having my body penetrated surgically. You know what
-> I mean? 
+> I mean?
 Quote: eXistenZ -- Ted Pikul
 
 N> The following text is partly from [@go_interfaces].
@@ -11,7 +11,7 @@ defined* for (((interface, set of methods))) that type. This bit of code defines
 a struct type `S` with one field, and defines two methods for `S`.
 
     type S struct { i int }
-    func (p *S) Get() int { return p.i }
+    func (p *S) Get() int  { return p.i }
     func (p *S) Put(v int) { p.i = v }
 Figure: Defining a struct and methods on it.
 
@@ -25,30 +25,29 @@ a set of methods. This defines an interface `I` with two methods:
 
 
 `S` is a valid *implementation* for interface `I`, because it defines the two
-methods which `I` requires. Note that this is true even though there is
-no explicit declaration that `S` implements `I`.
+methods which `I` requires. Note that this is true even though there is no
+explicit declaration that `S` implements `I`.
 
-A Go program can use
-this fact via yet another meaning of interface, which is an
+A Go program can use this fact via yet another meaning of interface, which is an
 interface value: (((interface, value)))
 
-    func f(p I) {  |\longremark{Declare a function that takes an interface type %
-    as the argument;}|
-        fmt.Println(p.Get()) |\longremark{As `p` implements interface `I` %
-    it *must* have the `Get()` method;}|
-        p.Put(1) |\longremark{Same holds for the `Put()` method.}|
+{callout="//"}
+    func f(p I) { //<1>
+        fmt.Println(p.Get()) //<2>
+        p.Put(1) //<3>
     }
 
-\showremarks
-Here the variable `p` holds a value of interface type. Because
-`S` implements `I`, we can call `f` passing in a pointer to a
-value of type `S`: `var s S; f(&s)`
+At <1> we declare a function that takes an interface type as the argument.
+Because `p` implements `I`, it *must* have the `Get()` method, which we call at
+<2>. And the same holds true for the `Put()` method at <3>. Because `S`
+implements `I`, we can call the function `f` passing in a pointer to a value of
+type `S`: `var s S; f(&s)`
 
-The reason we need to take the address of `s`, rather than a value of type
-`S`, is because we defined the methods on `s` to operate on
-pointers, see the code above in listing (#src:interface object).
-This is not a requirement --- we could have defined the methods to take
-values --- but then the `Put` method would not work as expected.
+The reason we need to take the address of `s`, rather than a value of type `S`,
+is because we defined the methods on `s` to operate on pointers, see the
+definition in the code above. This is not a requirement -- we could have defined
+the methods to take values -- but then the `Put` method would not work as
+expected.
 
 The fact that you do not need to declare whether or not a type implements an
 interface means that Go implements a form of duck typing (((duck, typing)))
@@ -56,9 +55,9 @@ interface means that Go implements a form of duck typing (((duck, typing)))
 Go compiler will statically check whether the type implements the interface.
 However, Go does have a purely dynamic aspect, in that you can convert from one
 interface type to another. In the general case, that conversion is checked at
-run time. If the conversion is invalid --- if the type of the value stored in
+run time. If the conversion is invalid -- if the type of the value stored in
 the existing interface value does not satisfy the interface to which it is being
-converted --- the program will fail with a run time error.
+converted -- the program will fail with a run time error.
 
 Interfaces in Go are similar to ideas in several other programming languages:
 pure abstract virtual base classes in C++, typeclasses in Haskell or duck typing
@@ -70,39 +69,43 @@ powerful, flexible, efficient, and easy to write.
 
 ### Which is what?
 
-Let's define another type that also implements the interface `I`:
+Let's define another type `R` that also implements the interface `I`:
 
     type R struct { i int }
-    func (p *R) Get() int { return p.i }
+    func (p *R) Get() int  { return p.i }
     func (p *R) Put(v int) { p.i = v }
 
 The function `f` can now accept variables of type `R` and `S`.
+
 Suppose you need to know the actual type in the function `f`. In Go you can
 figure that out by using a type switch ((type switch)).
 
+{callout="//"}
     func f(p I) {
-        switch t := p.(type) { |\longremark{The type switch. Use `(type)` in a `switch` %
-    statement. We store the type in the variable `t`;}|
-            case *S: |\longremark{The actual type of `p` is a pointer to `S`;}|
-            case *R: |\longremark{The actual type of `p` is a pointer to `R`;}|
-            case S:  |\longremark{The actual type of `p` is a `S`;}|
-            case R:  |\longremark{The actual type of `p` is a `R`;}|
-            default: |\longremark{It's another type that implements `I`.}|
+        switch t := p.(type) { //<1>
+            case *S: //<2>
+            case *R: //<2>
+            case S:  //<2>
+            case R:  //<2>
+            default: //<3>
         }
     }
 
-\showremarks
-Using `(type)` outside a `switch` is illegal. A type switch isn't the only way
-to discover the type at *run-time*. You can also use a "comma, ok" form to see
-if an interface type implements a specific interface:
+At <1> we use the type switch, note that the `.(type)` syntax in *only* valid
+within a `switch` statement. We store the type in the variable `t`. The
+subsequent cases <2> each check for a different *actual* type. And we can even
+have a `default` <3> clause.
 
-    if t, ok := something.(I); ok {
-       // something implements the interface I
-       // t is the type it has
+A type switch isn't the only way to discover the type at *run-time*.
+
+{callout="//"}
+    if t, ok := something.(I); ok { //<1>
+        // ...
     }
 
-When you are sure a variable implements an interface you can use:
-`t := something.(I)` .
+You can also use a "comma, ok" form <1> to see if an interface type implements
+a specific interface. If `ok` is true, `t` will hold the type of `something`.
+When you are sure a variable implements an interface you can use: `t := something.(I)` .
 
 
 ### Empty interface
@@ -147,85 +150,57 @@ Methods are functions that have a receiver (see (#functions)).
 You can define methods on any type (except on non-local types, this includes
 built-in types: the type `int` can not have methods).
 You can however make a new integer type with its own methods. For example:
-\begin{lstlisting}
-type Foo int
 
-func (self Foo) Emit() {
-  fmt.Printf("%v", self)
-}
+    type Foo int
 
-type Emitter interface {
-  Emit()
-}
-\end{lstlisting}
-Doing this on non-local (types defined in other packages) types yields:
-% Empty line here is critical, otherwise no new paragraph is created
+    func (self Foo) Emit() {
+      fmt.Printf("%v", self)
+    }
 
-\begin{lstlisting}[linewidth=.7\textwidth,caption=Failure extending built-in types]
-func (i int) Emit() {
-  fmt.Printf("%d", i)
-}
-\end{lstlisting}
-\error{cannot define new methods\\ on non-local type int}
+    type Emitter interface {
+      Emit()
+    }
 
-\begin{lstlisting}[caption=Failure extending non-local types]
-func (a *net.AddrError) Emit() {
-  fmt.Printf("%v", a)
-}
-\end{lstlisting}
-\error{cannot define new methods\\ on non-local type net.AddrError}
+Doing this on non-local (types defined in other packages) types yields an error
+"cannot define new methods on non-local type int".
 
 
 ### Methods on interface types
 
-An interface defines a set of methods. A method contains the actual code.
-In other words, an interface is the definition and the methods are the implementation.
-So a receiver can not be an interface
-type, doing so results in a \error{invalid receiver type ...} compiler
-error. The authoritative word from the language spec [@go_spec]:
-\begin{quote}
-The receiver type must be of the form `T` or `*T` where
-`T` is a type name. `T` is called the receiver base type or just base
-type. The base type must
-not be a pointer or interface type and must be declared in the same
-package as the method.
-\end{quote}
+An interface defines a set of methods. A method contains the actual code. In
+other words, an interface is the definition and the methods are the
+implementation. So a receiver can not be an interface type, doing so results in
+a "invalid receiver type ..." compiler error. The authoritative word from the
+language spec [@go_spec]:
 
-\begin{lbar}[Pointers to interfaces]
-Creating a pointer to an interface value is a useless action in Go.
-It is in fact illegal to
-create a pointer to an interface value. The release notes for the release \gorelease{2010-10-13}
-that
-made them illegal leave no room for doubt:
-\begin{quote}
-The language change is that uses of pointers to interface values no longer
-automatically de-reference the pointer.  A pointer to an interface value is more
-often a beginner's bug than correct code.
-\end{quote}
-From the [@go_faq]. If not for this restriction, this code:
-\begin{lstlisting}
-var buf bytes.Buffer
-io.Copy(buf, os.Stdin)
-\end{lstlisting}
-would copy standard input into a copy of `buf`, not into `buf` itself.
-This is almost never the desired behavior.
-\end{lbar}
+> The receiver type must be of the form `T` or `*T` where `T` is a type name. `T`
+> is called the receiver base type or just base type. The base type must not be
+> a pointer or interface type and must be declared in the same package as the
+> method.
+
+
+A> Creating a pointer to an interface value is a useless action in Go. It is in
+A> fact illegal to create a pointer to an interface value. The release notes for an
+A> earlier Go release that made them illegal leave no room for doubt:
+A>
+A> > The language change is that uses of pointers to interface values no longer
+A> > automatically de-reference the pointer.  A pointer to an interface value is
+A> > more often a beginner's bug than correct code.
 
 
 ## Interface names
 
-By convention, one-method interfaces are named by the method name plus
-the *-er* suffix: Read*er*, Writ*er*, Formatt*er* etc.
+By convention, one-method interfaces are named by the method name plus the *-er*
+suffix: Read*er*, Writ*er*, Formatt*er* etc.
 
-There are a number of such names and it's productive to honor them and
-the function names they capture. `Read`, `Write`,
-`Close`, `Flush`, `String` and
-so on have canonical signatures and meanings. To avoid confusion, don't
-give your method one of those names unless it has the same signature and
-meaning. Conversely, if your type implements a method with the same
-meaning as a method on a well-known type, give it the same name and
-signature; call your string-converter method `String` not
-`ToString`. ^[Text copied from [@effective_go].]
+There are a number of such names and it's productive to honor them and the
+function names they capture. `Read`, `Write`, `Close`, `Flush`, `String` and so
+on have canonical signatures and meanings. To avoid confusion, don't give your
+method one of those names unless it has the same signature and meaning.
+Conversely, if your type implements a method with the same meaning as a method
+on a well-known type, give it the same name and signature; call your
+string-converter method `String` not `ToString`. ^[Text copied from
+[@effective_go].]
 
 
 ## A sorting example
@@ -238,20 +213,17 @@ array of integers:
             for j := i + 1; j < len(n); j++ {
                 if n[j] < n[i] {
                     n[i], n[j] = n[j], n[i]
-            }
+                }
             }
         }
     }
 
 A version that sorts strings is identical except for the signature of
-the function:
-\begin{lstlisting}
-func bubblesortString(n []string) { /* ... */ }
-\end{lstlisting}
+the function: `func bubblesortString(n []string) { /* ... */ }` .
 Using this approach would lead to two functions, one for each type. By using
-interfaces we can make this more (((generic))) generic.
-Let's create a new function that will sort both strings and
-integers, something along the lines of this non-working example:
+interfaces we can make this more (((generic))) generic. Let's create a new
+function that will sort both strings and integers, something along the lines of
+this non-working example:
 
 {callout="//"}
     func sort(i []interface{}) { |\longremark{Our function will receive a slice of %
@@ -267,9 +239,9 @@ integers, something along the lines of this non-working example:
     }
 
 \showremarks
-But when we call this function with \lstinline|sort([]int{1, 4, 5})|, it
-fails with:\\
-\error{cannot use i (type []int) as type []interface { } in function argument}
+But when we call this function with `sort([]int{1, 4, 5})`, it
+fails with:
+"cannot use i (type []int) as type []interface { } in function argument"
 
 This is because Go can not easily convert to a *slice* of interfaces.
 Just converting to an interface is easy, but to a slice is much more costly.
