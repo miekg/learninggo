@@ -330,19 +330,44 @@ perfectly legal to include it in the interface.
 
 ### Introspection and reflection
 
-In the following example we want to look at the "tag" (here named "namestr") defined in the
-type definition of `Person`. To do this we need the
-`reflect`(((package!reflect))) package (there is no other way in Go). Keep in mind
-that looking at a tag means going back to the *type* definition. So
-we use the `reflect` package to figure out the type of the variable
-and *then* access the tag.
+In the following example we want to look at the "tag" (here named "namestr")
+defined in the type definition of `Person`. To do this we need the
+`reflect`(((package!reflect))) package (there is no other way in Go). Keep in
+mind that looking at a tag means going back to the *type* definition. So we use
+the `reflect` package to figure out the type of the variable and *then* access
+the tag.
 
-\input{fig/reflection.tex}
-\showremarks
+{callout="//"}
+    type Person struct {
+        name string "namestr"
+        age  int
+    }
 
-%% look at layout
-To make the difference between types and values more clear,
-take a look at the following code:
+    func ShowTag(i interface{}) { //<1>
+     switch t := reflect.TypeOf(i); t.Kind() {
+     case reflect.Ptr: //<2>
+        tag := t.Elem().Field(0).Tag
+     //       <3>        <4>     <5>
+Figure: Introspection using reflection.
+
+We are calling `ShowTag` at <1> with a `*Person`, so at <2> we're expecting
+a `reflect.Ptr`. We are dealing with a `Type` <3> and according to the
+documentation ^[`go doc reflect`]:
+
+> Elem returns a type's element type.
+> It panics if the type's Kind is not Array, Chan, Map, Ptr, or Slice.
+
+So on `t` we use `Elem()` to get the value the pointer points to.
+We have now dereferenced the pointer and are "inside" our structure.
+We then <4> use `Field(0)` to access the zeroth field.
+
+The struct `StructField` has a `Tag` member which
+returns the tag-name as a string. So on the $$0^{th}$$ field we can
+unleash `.Tag` <5> to access this name: `Field(0).Tag`. This gives us `namestr`.
+
+To make the difference between types and values more clear, take a look at the
+following code:
+
 \begin{lstlisting}[caption=Reflection and the type and value]
 func show(i interface{}) {
     switch t := i.(type) {
@@ -415,7 +440,6 @@ stack trace and a *run time* error:
 
 The code on the right works OK and sets the member `Name` to "Albert Einstein".
 Of course this only works when you call `Set()` with a pointer argument.
-
 
 ## Exercises
 
