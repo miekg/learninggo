@@ -40,6 +40,8 @@
     });
 
     function chapters(){
+        // This is the only spot where I used knowledge of the doc, i.e.
+        // Preface is the first chapter.
       $("h1:not(.appendix):not(.preface)").each(function(index){
         $(this).prepend("Chapter " + (index+1) + ". ")
       })
@@ -100,11 +102,6 @@
       $("blockquote.epigraph footer").prepend("<hr>");
     }
 
-    function answers(){
-      // $("h3.answer").after("<summary>Click to see the answer</summary>");
-      // $("h3.answer").nextUntil("h1,h2").wrapAll("<details></details>");
-    }
-
     // exclude answers and index
     function toc(){
       //$("body").prepend("<ul class=\"toc\"></ul>");
@@ -127,9 +124,9 @@
     }
 
     function navtoc(){
-      $("#nav-toc-h0").prepend("<ul class=\"nav-toc-h0\"></ul>");
+        // TODO: does not work
       $("h1").each(function(){
-              $(".nav-toc-h0").append("<li class=\"nav-toc-h0\">" +
+              $("ul#nav-toc-h0").append("<li class=\"nav-toc-h0\">" +
                   "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></li>");
       });
     }
@@ -146,4 +143,17 @@
             }
         });
     }
+
+   // $("h3.answer").after("<summary>Click to see the answer</summary>");
+   // $("h3.answer").nextUntil("h1,h2").wrapAll("<details></details>");
+   function answers() {
+        $("h3:contains('Answer')").addClass("closed")
+
+        $("h3:contains('Answer')").each(function() {
+           $(this).click(function(){ $(this).nextUntil("h1,h2,h3").slideToggle("fast");
+                $(this).toggleClass("open closed");
+           });
+           $(this).nextUntil("h1,h2,h3").slideUp();
+        });
+   }
 </script>

@@ -146,6 +146,18 @@ li.bibliography:before {
     counter-increment: cite;
 }
 
+.closed:before {
+    content: "▷ ";
+    color: #0000EE;
+    margin-right: 6px;
+}
+
+.open:before {
+    content: "▽ ";
+    color: #0000EE;
+    margin-right: 6px;
+}
+
 ul.toc {
     list-style-type: none;
 }
