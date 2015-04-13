@@ -47,6 +47,14 @@
 {{interfaces.md}}
 
 
+# Concurrency
+{{channels.md}}
+
+
+# Communication
+{{communication.md}}
+
+
 {{inc/bib.xml}}
 
 

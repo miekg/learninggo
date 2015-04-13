@@ -97,7 +97,7 @@ Here's what you can expect from each chapter:
 :   We'll learn how to use interfaces. Interfaces are the central concept in Go,
     as Go does not support object orientation in the traditional sense.
 
-(#channels)
+(#concurrency)
 :   We'll learn the `go` keyword, which can be used to start function in
     separate routines (called goroutines). Communication with those goroutines is
     done via channels.
