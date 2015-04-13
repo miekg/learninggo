@@ -1,5 +1,5 @@
 \epi{"Good communication is as stimulating as black coffee, and just as hard
-to sleep after."}{\textsc{ANNE MORROW LINDBERGH}}
+to sleep after."}{\textsc{Anne Morrow Lindbergh}}
 In this chapter we are going to look at the building blocks in Go for 
 communicating with the outside world. We will look at files, directories, networking
 and executing other programs. Central to Go's I/O are the interfaces `io.Reader`

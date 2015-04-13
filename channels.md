@@ -22,9 +22,9 @@ it with the keyword \first{`go`}{keyword!go}.
 ready("Tea", 2)	    |\coderemark{Normal function call}|
 go ready("Tea", 2)  |\coderemark{`ready()` started as goroutine}|
 \end{lstlisting}
-The following idea for a program was taken from [@go_course_day3]. 
+The following idea for a program was taken from [@go_course_day3].
 We run a function as two goroutines, the goroutines wait for an amount of
-time and then print something to the screen. 
+time and then print something to the screen.
 On the lines 14 and 15 we start the goroutines.
 The `main` function
 waits long enough, so that both goroutines will have printed their text. Right
@@ -40,7 +40,7 @@ Tea is ready!       \coderemark{After 2 seconds}
 
 If we did not wait for the goroutines (i.e. remove line 17) the program
 would be terminated immediately and any running goroutines would
-*die with it*. 
+*die with it*.
 To fix this we need some kind of mechanism which allows us to
 communicate with the goroutines. This mechanism is available
 to us in the form of \first{channels}{channels}. A
@@ -57,7 +57,7 @@ cf := make(chan interface{})
 \end{lstlisting}
 Makes `ci` a channel on which we can send and receive integers,
 makes `cs` a channel for strings and `cf` a channel for types
-that satisfy the empty interface. 
+that satisfy the empty interface.
 Sending on a channel and receiving from it, is done with the same operator:
 `<-`. (((operator!channel)))
 Depending on the operands it figures out what to do:
@@ -92,7 +92,7 @@ func main() {
 There is still some remaining ugliness; we have to read twice from
 the channel (lines 14 and 15). This is OK in this case, but what if
 we don't know how many goroutines we started? This is where another
-Go built-in comes in: \first{`select`}{keyword!select}. With `select` you 
+Go built-in comes in: \first{`select`}{keyword!select}. With `select` you
 can (among other things) listen for incoming data on a channel.
 
 Using `select` in our program does not really make it shorter,
@@ -102,12 +102,12 @@ replace them with the following:
 L: for {
 	select {
 	case <-c:
-		i++ 
-		if i > 1 { 
+		i++
+		if i > 1 {
 			break L
-		}   
-	}   
-}   
+		}
+	}
+}
 \end{lstlisting}
 We will now wait as long as it takes. Only when we have received more than
 one reply on the channel `c` will we exit the loop `L`.
@@ -142,12 +142,12 @@ environment variable \verb|GOMAXPROCS| to the desired value.
 %%## So many channels and still \ldots
 ## More on channels
 
-When you create a channel in Go with `ch := make(chan bool)`, 
+When you create a channel in Go with `ch := make(chan bool)`,
 an \first{unbuffered channel}{channel!unbuffered} for
 bools is created. What does this mean for your program? For one, if you
 read (`value := <-ch`) it will block until there is data to
 receive. Secondly anything sending (`ch<-5`) will block until there
-is somebody to read it. 
+is somebody to read it.
 Unbuffered channels make a perfect tool for synchronizing multiple
 goroutines.
 (((channel!blocking read)))
@@ -160,7 +160,7 @@ bools that can hold 4 elements. The first 4 elements in this channel
 are written without any blocking.
 When you write the 5$^{th}$ element, your
 code *will* block, until another goroutine reads some elements from the
-channel to make room. 
+channel to make room.
 (((channel!non-blocking read)))
 (((channel!non-blocking write)))
 
