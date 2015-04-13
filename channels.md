@@ -155,12 +155,13 @@ channel to make room.
 (((channel!non-blocking write)))
 
 In conclusion, the following is true in Go:
+
 $$
-\textrm{`ch := make(chan type, value)`}
+\textrm{ch := make(chan type, value)}
 \left\{
 \begin{array}{ll}
 value == 0 & \rightarrow \textrm{unbuffered)} \\
-value >  0 & \rightarrow \textrm{buffer *value* elements}
+value >  0 & \rightarrow \textrm{buffer value elements}
 \end{array}
 \right.
 $$

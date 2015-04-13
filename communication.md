@@ -3,23 +3,39 @@
 > to sleep after.
 Quote: Anne Morrow Lindbergh
 
-In this chapter we are going to look at the building blocks in Go for 
-communicating with the outside world. We will look at files, directories, networking
-and executing other programs. Central to Go's I/O are the interfaces `io.Reader`
-and `io.Writer`.
+In this chapter we are going to look at the building blocks in Go for
+communicating with the outside world. We will look at files, directories,
+networking and executing other programs. Central to Go's I/O are the interfaces
+`io.Reader` and `io.Writer`. The `io.Reader` interface specifies one method
+`Read(p []byte) (n int, err err)`.
 
 Reading from (and writing to) files is easy in Go. This program
-only uses the `os` package to read data from the file \file{/etc/passwd}.
-\lstinputlisting[caption=Reading from a file (unbuffered),label=src:read]{src/file.go}
-The following is happening here:
-\showremarks
-If you want to use \first{buffered}{buffered} IO there is the
-`bufio`(((package!bufio))) package:
-\lstinputlisting[caption=Reading from a file (buffered),label=src:bufread]{src/buffile.go}
-\showremarks
+only uses the `os` package to read data from the file `/etc/passwd`.
+
+{callout="//"}
+<{{src/communication/file.go}}
+
+We open the file at <1> with `os.Open` that returns a `*os.File`
+`*os.File` implements `io.Reader` and `io.Writer` interface.
+After the `Open` we directly put the `f.Close()` which we defer until the function
+return. At <3> we call `Read` on `f` and read up to 1024 bytes at the time. If anything
+fails we bail out at <4>. If the number of bytes read is 0 we've read the end of the 
+file <5>. And at <6> we output the buffer to standard output.
+
+If you want to use buffered (((io, buffered))) I/O there is the
+`bufio`(((package, bufio))) package:
+
+{callout="//"}
+<{{src/communication/buffile.go}}
+
+Again, we open <1> the file. Then at <2> we
+Turn `f` into a buffered `Reader`. `NewReader` expects an `io.Reader`, so you this will work.
+Then at <4> we read and at <5> we write. We also call `Flush()` at <3> to flush all output.
+This entire program could be optimized further by using `io.Copy`.
+
 
 ## io.Reader
-As mentioned above the \first{io.Reader}{io.Reader} is an important interface in the language Go. A lot
+As mentioned above the `io.Reader` (((io.Reader))) is an important interface in the language Go. A lot
 (if not all) functions that need to read from something take an `io.Reader`(((package!io)))
 as input. To fulfill the interface a type needs to implement only one method: \func{Read(p []byte) (n
 int, err error)}. The writing side is (you may have guessed) an `io.Writer`, which has
