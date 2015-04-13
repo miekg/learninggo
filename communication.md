@@ -84,99 +84,106 @@ The similarity between these two examples have prompted comments that Go has a
 "script"-like feel to it, i.e. programming in Go can be compared to programming in
 an interpreted language (Python, Ruby, Perl or PHP).
 
+
 ## Command line arguments
 
-Arguments from the command line are available inside your program via
-the string slice `os.Args`, provided you have imported the package
-`os`. The `flag` package has a more sophisticated
-interface, and also provides a way to parse flags. Take this example
-from a DNS query tool:
-\begin{lstlisting}
-dnssec := flag.Bool("dnssec", false, "Request DNSSEC records") |\longremark{Define a `bool` flag, %%
-`-dnssec`. The variable must be a pointer otherwise the package can not set its value;}|
-port := flag.String("port", "53", "Set the query port")      |\longremark{Idem, but for a `port` option;}|
-flag.Usage = func() {   |\longremark{Slightly redefine the `Usage` function, to be a little more verbose;}|
-    fmt.Fprintf(os.Stderr, "Usage: %s [OPTIONS] [name ...]\n", os.Args[0])
-    flag.PrintDefaults() |\longremark{For every flag given, `PrintDefaults` will output the help string;}|
-}
-flag.Parse()   |\longremark{Parse the flags and fill the variables.}|
-\end{lstlisting}
-\showremarks
-After the flags have been parsed you can used them:
-\begin{lstlisting}
-if *dnssec {    |\coderemark{Dereference the `dnssec` flag variable}|
-    // do something
-}
-\end{lstlisting}
+Arguments from the command line are available inside your program via the string
+slice `os.Args`, provided you have imported the package `os`. The `flag` package
+(((package, flag)))
+has a more sophisticated interface, and also provides a way to parse flags. Take
+this example from a DNS query tool:
+
+{callout="//"}
+    dnssec := flag.Bool("dnssec", false, "Request DNSSEC records") //<1>
+    port := flag.String("port", "53", "Set the query port") //<2>
+    flag.Usage = func() {   //<3>
+        fmt.Fprintf(os.Stderr, "Usage: %s [OPTIONS] [name ...]\n", os.Args[0])
+        flag.PrintDefaults() //<4>
+    }
+    flag.Parse() //<4>
+
+At <1> we define a `bool` flag `-dnssec`. Note that this function returns
+a *pointer* to the value, the `dnssec` is now a pointer to a `bool`. At <2> we
+define an `strings` flag. Then at <3> we *redefine* the `Usage` variable of the
+flag package so we can add some extra text. The `PrintDefaults` at <4> will
+output the default help for the flags that are defined. Note even without
+redefining a `flag.Usage` a `-h` is support and will just output the help text
+for each of the flags. Finally at <4> we call `Parse` that parses the command
+line andn fill the fill the variables.
+
+After the flags have been parsed you can used them: `if *dnssec { ... }`
 
 ## Executing commands
-The `os/exec`(((package!os/exec))) package has functions to run external commands, and is the premier way to
-execute commands from within a Go program. It works by defining a `*exec.Cmd` structure for which it
-defines a number of methods.
-Let's execute \verb|ls -l|:
-\begin{lstlisting}
-import "os/exec"
 
-cmd := exec.Command("/bin/ls", "-l")    |\coderemark{Create a `*cmd`}|
-err := cmd.Run()                        |\coderemark{`Run()` it}|
-\end{lstlisting}
-The above example just runs "ls -l" without doing anything with the returned data,
-capturing the standard output from a command is done as follows:
-\begin{lstlisting}
-import "os/exec"
+The `os/exec`(((package,os/exec))) package has functions to run external
+commands, and is the premier way to execute commands from within a Go program.
+It works by defining a `*exec.Cmd` structure for which it defines a number of
+methods. Let's execute `ls -l`:
 
-cmd := exec.Command("/bin/ls", "-l")
-buf, err := cmd.Output()                 |\coderemark{`buf` is a (`[]byte`)}|
-\end{lstlisting}
+    import "os/exec"
+
+    cmd := exec.Command("/bin/ls", "-l")
+    err := cmd.Run()
+
+The above example just runs "ls -l" without doing anything with the returned
+data, capturing the standard output from a command is done as follows:
+
+    cmd := exec.Command("/bin/ls", "-l")
+    buf, err := cmd.Output()
+
+And `buf` is byte slice, that you can further use in your program.
+
 
 ## Networking
-All network related types and functions can be found in the package `net`. One of the
-most important functions in there is `Dial`(((networking!Dial))). When you `Dial`
-into a remote system the function returns a `Conn` interface type, which can be used
-to send and receive information. The function `Dial` neatly abstracts away the network
-family and transport. So IPv4 or IPv6, TCP or UDP can all share a common interface.
 
-Dialing a remote system (port 80) over TCP, then UDP and lastly TCP over IPv6 looks
-like this\footnote{In case
-you are wondering, 192.0.32.10 and 2620:0:2d0:200::10 are \url{www.example.org}.}:
-\begin{lstlisting}
-conn, e := Dial("tcp", "192.0.32.10:80")
-conn, e := Dial("udp", "192.0.32.10:80")
-conn, e := Dial("tcp", "[2620:0:2d0:200::10]:80") |\coderemark{Mandatory brackets}|
-\end{lstlisting}
+All network related types and functions can be found in the package `net`. One
+of the most important functions in there is `Dial`(((networking, Dial))). When
+you `Dial` into a remote system the function returns a `Conn` interface type,
+which can be used to send and receive information. The function `Dial` neatly
+abstracts away the network family and transport. So IPv4 or IPv6, TCP or UDP can
+all share a common interface.
+
+Dialing a remote system (port 80) over TCP, then UDP and lastly TCP over IPv6
+looks like this^[In case you are wondering, 192.0.32.10 and 2620:0:2d0:200::10
+are <www.example.org>.]:
+
+    conn, e := Dial("tcp", "192.0.32.10:80")
+    conn, e := Dial("udp", "192.0.32.10:80")
+    conn, e := Dial("tcp", "[2620:0:2d0:200::10]:80")
 
 If there were no errors (returned in `e`), you can use `conn` to read and write.
-The primitives defined in the package `net` are:
-
-> // `Read` reads data from the connection.
-> `Read(b []byte) (n int, err error)`
-
-This makes `conn` an `io.Reader`.
-
->> // `Write` writes data to the connection.
->> `Write(b []byte) (n int, err error)`
-
-This makes `conn` also an `io.Writer`, in fact `conn` is an
-`io.ReadWriter`.^[The variable `conn` also implements a `close` method, this
-really makes it an `io.ReadWriteCloser`.]
+And `conn` implements the `io.Reader` and `io.Writer` interface. ^[The variable
+`conn` also implements a `close` method, this really makes it an
+`io.ReadWriteCloser`.]
 
 But these are the low level nooks and crannies, you will almost always use
-higher level packages. Such as the `http` package. For instance a simple Get for
+higher level packages, such as the `http` package. For instance a simple Get for
 http:
 
     package main
-    import ( "io/ioutil"; "http"; "fmt" )
+
+    import (
+        "fmt"
+        "http"
+        "io/ioutil"
+    )
 
     func main() {
-            r, err := http.Get("http://www.google.com/robots.txt") |\longremark{Use http's `Get` to retrieve the html;}|
-            if err != nil { fmt.Printf("%s\n", err.String()); return } |\longremark{Error handling;}|
-            b, err := ioutil.ReadAll(r.Body)    |\longremark{Read the entire document into `b`;}|
-            r.Body.Close()
-            if err == nil { fmt.Printf("%s", string(b)) } |\longremark{If everything was OK, print the document.}|
+        r, err := http.Get("http://www.google.com/robots.txt")
+        if err != nil {
+            fmt.Printf("%s\n", err.String())
+            return
+        }
+        b, err := ioutil.ReadAll(r.Body)
+        r.Body.Close()
+        if err == nil {
+            fmt.Printf("%s", string(b))
+        }
     }
 
 
 ## Exercises
+
 \input{ex-communication/ex-processes.tex}
 
 \input{ex-communication/ex-wordcount.tex}
