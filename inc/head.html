@@ -34,6 +34,8 @@
       references();
       toc();
 
+      navtoc();
+
       links();
     });
 
@@ -105,11 +107,11 @@
 
     // exclude answers and index
     function toc(){
-      $("body").prepend("<ul class=\"toc\"></ul>");
-      $("h1,h2").each(function(){
-              $("ul.toc").append("<li class=\"toc-" + $(this)[0].tagName.toLowerCase() + "\">" +
-                  "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></li>");
-      });
+      //$("body").prepend("<ul class=\"toc\"></ul>");
+      //$("h1,h2").each(function(){
+      //        $("ul.toc").append("<li class=\"toc-" + $(this)[0].tagName.toLowerCase() + "\">" +
+      //            "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></li>");
+      //});
     }
 
     // include some html
@@ -122,6 +124,14 @@
         nav.load('inc/nav.html', function(){
             $(this).insertBefore("h1#preface");
         });
+    }
+
+    function navtoc(){
+      $("#nav-toc-h0").prepend("<ul class=\"nav-toc-h0\"></ul>");
+      $("h1").each(function(){
+              $(".nav-toc-h0").append("<li class=\"nav-toc-h0\">" +
+                  "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></li>");
+      });
     }
 
     function links() {
