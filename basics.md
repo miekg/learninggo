@@ -412,8 +412,8 @@ value <3>. Check if `c` falls between "a" and "f" <4>. For an "a" we
 return 10, for "b" we return 11, etc. We also do the same <5> thing for "A"
 to "F".
 
-There is no automatic fall through, you you can use
-`fallthrough` (((keywords, fallthrough))) for that.
+There is no automatic fall through, you can use `fallthrough` (((keywords,
+fallthrough))) for that.
 
 {callout="//"}
     switch i {
