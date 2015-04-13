@@ -19,7 +19,7 @@ We open the file at <1> with `os.Open` that returns a `*os.File`
 `*os.File` implements `io.Reader` and `io.Writer` interface.
 After the `Open` we directly put the `f.Close()` which we defer until the function
 return. At <3> we call `Read` on `f` and read up to 1024 bytes at the time. If anything
-fails we bail out at <4>. If the number of bytes read is 0 we've read the end of the 
+fails we bail out at <4>. If the number of bytes read is 0 we've read the end of the
 file <5>. And at <6> we output the buffer to standard output.
 
 If you want to use buffered (((io, buffered))) I/O there is the
@@ -37,9 +37,8 @@ This entire program could be optimized further by using `io.Copy`.
 ## io.Reader
 As mentioned above the `io.Reader` (((io.Reader))) is an important interface in the language Go. A lot
 (if not all) functions that need to read from something take an `io.Reader`(((package!io)))
-as input. To fulfill the interface a type needs to implement only one method: \func{Read(p []byte) (n
-int, err error)}. The writing side is (you may have guessed) an `io.Writer`, which has
-the `Write` method.
+as input. To fulfill the interface a type needs to implement that one method.
+The writing side `io.Writer`, has the `Write` method.
 
 If you think of a new type in your program or package and you make it fulfill the `io.Reader`
 or `io.Writer` interface, *the whole standard Go library can be used* on that type!
@@ -60,7 +59,7 @@ A more robust method (but slightly more complicated) is `ReadLine`, see the docu
 of the `bufio` package.
 
 A common scenario in shell scripting is that you want to check if a directory
-exists and if not, create one. 
+exists and if not, create one.
 
 \begin{minipage}{.5\textwidth}
 \begin{lstlisting}[language=sh,caption={Create a directory with the shell}]
@@ -135,7 +134,7 @@ All network related types and functions can be found in the package `net`. One o
 most important functions in there is `Dial`(((networking!Dial))). When you `Dial`
 into a remote system the function returns a `Conn` interface type, which can be used
 to send and receive information. The function `Dial` neatly abstracts away the network
-family and transport. So IPv4 or IPv6, TCP or UDP can all share a common interface. 
+family and transport. So IPv4 or IPv6, TCP or UDP can all share a common interface.
 
 Dialing a remote system (port 80) over TCP, then UDP and lastly TCP over IPv6 looks
 like this\footnote{In case
@@ -148,36 +147,34 @@ conn, e := Dial("tcp", "[2620:0:2d0:200::10]:80") |\coderemark{Mandatory bracket
 
 If there were no errors (returned in `e`), you can use `conn` to read and write.
 The primitives defined in the package `net` are:
-\begin{quote}
-// `Read` reads data from the connection.\\
-`Read(b []byte) (n int, err error)`
-\end{quote}
+
+> // `Read` reads data from the connection.
+> `Read(b []byte) (n int, err error)`
+
 This makes `conn` an `io.Reader`.
 
-\begin{quote}
-// `Write` writes data to the connection.\\
-`Write(b []byte) (n int, err error)`
-\end{quote}
+>> // `Write` writes data to the connection.
+>> `Write(b []byte) (n int, err error)`
+
 This makes `conn` also an `io.Writer`, in fact `conn` is an
-`io.ReadWriter`.\footnote{The variable `conn` also implements a `close` method, this really makes
-it an `io.ReadWriteCloser`.}
+`io.ReadWriter`.^[The variable `conn` also implements a `close` method, this
+really makes it an `io.ReadWriteCloser`.]
 
-But these are the low level nooks and crannies\footnote{Exercise Q(#ex:echo) is about using
-these.}, you will almost always use higher level packages.
-Such as the `http` package. For instance a simple Get for http:
-\begin{lstlisting}
-package main
-import ( "io/ioutil"; "http"; "fmt" ) |\longremark{The imports needed;}|
+But these are the low level nooks and crannies, you will almost always use
+higher level packages. Such as the `http` package. For instance a simple Get for
+http:
 
-func main() {
-        r, err := http.Get("http://www.google.com/robots.txt") |\longremark{Use http's `Get` to retrieve the html;}|
-        if err != nil { fmt.Printf("%s\n", err.String()); return } |\longremark{Error handling;}|
-        b, err := ioutil.ReadAll(r.Body)    |\longremark{Read the entire document into `b`;}|
-        r.Body.Close()  
-        if err == nil { fmt.Printf("%s", string(b)) } |\longremark{If everything was OK, print the document.}|
-}
-\end{lstlisting}
-\showremarks
+    package main
+    import ( "io/ioutil"; "http"; "fmt" )
+
+    func main() {
+            r, err := http.Get("http://www.google.com/robots.txt") |\longremark{Use http's `Get` to retrieve the html;}|
+            if err != nil { fmt.Printf("%s\n", err.String()); return } |\longremark{Error handling;}|
+            b, err := ioutil.ReadAll(r.Body)    |\longremark{Read the entire document into `b`;}|
+            r.Body.Close()
+            if err == nil { fmt.Printf("%s", string(b)) } |\longremark{If everything was OK, print the document.}|
+    }
+
 
 ## Exercises
 \input{ex-communication/ex-processes.tex}
