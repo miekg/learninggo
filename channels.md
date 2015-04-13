@@ -1,9 +1,8 @@
-\epi{%
-\begin{itemize}
-\item{"Parallelism is about performance;}
-\item{Concurrency is about program design."}
-\end{itemize}%
-}{\textit{Google IO 2010}\\\textsc{ROB PIKE}}
+{.epigraph}
+> * Parallelism is about performance.
+> * Concurrency is about program design.
+Quote: Google IO 2010 -- Rob Pike
+
 In this chapter we will show off Go's ability for
 concurrent programming using channels and goroutines. Goroutines
 are the central entity in Go's ability for concurrency. But what
