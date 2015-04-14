@@ -66,6 +66,7 @@ integer 1 to the channel `ci`. `<-ci`,{*Receive* an integer from the channel
 
 Let's put this to use.
 
+{callout="//"}
     var c chan int //<1>
 
     func ready(w string, sec int) {
