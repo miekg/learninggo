@@ -87,6 +87,10 @@ blockquote.epigraph {
     width: 50%;
 }
 
+.epigraph > ul {
+    text-align: right;
+}
+
 .epigraph footer span.quote-who {
     font-style: normal;
     font-variant: small-caps;
