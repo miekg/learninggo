@@ -35,6 +35,7 @@ This entire program could be optimized further by using `io.Copy`.
 
 
 ## io.Reader
+
 As mentioned above the `io.Reader` (((io.Reader))) is an important interface in the language Go. A lot
 (if not all) functions that need to read from something take an `io.Reader`(((package!io)))
 as input. To fulfill the interface a type needs to implement that one method.
@@ -43,17 +44,22 @@ The writing side `io.Writer`, has the `Write` method.
 If you think of a new type in your program or package and you make it fulfill the `io.Reader`
 or `io.Writer` interface, *the whole standard Go library can be used* on that type!
 
+
 ## Some examples
+
 The previous program reads a file in its entirety, but a more common scenario is that
 you want to read a file on a line-by-line basis. The following snippet shows a way
-to do just that:
+to do just that (we're discarding the error returned from `os.Open` here to keep
+the examples smaller -- don't ever do this in real life code).
 
-\begin{lstlisting}
-f, _ := os.Open("/etc/passwd"); defer f.Close()
-r := bufio.NewReader(f) |\coderemark{Make it a bufio to access the ReadString method}|
-s, ok := r.ReadString('\n') |\coderemark{Read a line from the input}|
-// ... \coderemark{`s` holds the string, with the `strings` package you can parse it}
-\end{lstlisting}
+    f, _ := os.Open("/etc/passwd"); defer f.Close()
+    r := bufio.NewReader(f) //<1>
+    s, ok := r.ReadString('\n') //<2>
+    //<3>
+
+At <1> make `f` a `bufio` to have access to the `ReadString` method. Then at <2> we read
+a line from the input, `s`  now holds to string which we can manipulate with, for instance,
+the `strings` pacakge.
 
 A more robust method (but slightly more complicated) is `ReadLine`, see the documentation
 of the `bufio` package.
@@ -61,28 +67,16 @@ of the `bufio` package.
 A common scenario in shell scripting is that you want to check if a directory
 exists and if not, create one.
 
-\begin{minipage}{.5\textwidth}
-\begin{lstlisting}[language=sh,caption={Create a directory with the shell}]
-if [ ! -e name ]; then
-    mkdir name
-else
-    # error
-fi
-\end{lstlisting}
-\end{minipage}
-\hspace{1em}
-\begin{minipage}{.5\textwidth}
-\begin{lstlisting}[caption={Create a directory with Go}]
-if f, e := os.Stat("name"); e != nil {
-    os.Mkdir("name", 0755)
-} else {
-    // error
-}
-\end{lstlisting}
-\end{minipage}
-The similarity between these two examples have prompted comments that Go has a
-"script"-like feel to it, i.e. programming in Go can be compared to programming in
-an interpreted language (Python, Ruby, Perl or PHP).
+    if [ ! -e name ]; then          if f, e := os.Stat("name"); e != nil {
+        mkdir name                      os.Mkdir("name", 0755)
+    else                            } else {
+        # error                         // error
+    fi                              }
+
+The similarity between these two examples (and with other scripting languages)
+have prompted comments that Go has a "script"-like feel to it, i.e. programming
+in Go can be compared to programming in an interpreted language (Python, Ruby,
+Perl or PHP).
 
 
 ## Command line arguments
@@ -112,6 +106,7 @@ for each of the flags. Finally at <4> we call `Parse` that parses the command
 line andn fill the fill the variables.
 
 After the flags have been parsed you can used them: `if *dnssec { ... }`
+
 
 ## Executing commands
 
