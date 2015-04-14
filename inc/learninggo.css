@@ -90,6 +90,14 @@ blockquote.epigraph {
 }
 
 .epigraph > ul {
+    /* bullets are misplaced, remove them all together,
+     * looks nicer too
+     */
+    list-style-type: none;
+    text-align: right;
+}
+
+.epigraph > ul > li {
     text-align: right;
 }
 
