@@ -89,6 +89,18 @@ blockquote.epigraph {
     width: 50%;
 }
 
+.epigraph > ul {
+    /* bullets are misplaced, remove them all together,
+     * looks nicer too
+     */
+    list-style-type: none;
+    text-align: right;
+}
+
+.epigraph > ul > li {
+    text-align: right;
+}
+
 .epigraph footer span.quote-who {
     font-style: normal;
     font-variant: small-caps;
