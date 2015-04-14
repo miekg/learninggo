@@ -64,6 +64,8 @@ h6:hover .header-link {
 h1 {
     padding-bottom: 2em;
     font-size: 3em;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 1em;
 }
 
 blockquote.epigraph {
