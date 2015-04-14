@@ -59,7 +59,7 @@ the examples smaller -- don't ever do this in real life code).
 
 At <1> make `f` a `bufio` to have access to the `ReadString` method. Then at <2> we read
 a line from the input, `s`  now holds to string which we can manipulate with, for instance,
-the `strings` pacakge.
+the `strings` package.
 
 A more robust method (but slightly more complicated) is `ReadLine`, see the documentation
 of the `bufio` package.
@@ -103,7 +103,7 @@ flag package so we can add some extra text. The `PrintDefaults` at <4> will
 output the default help for the flags that are defined. Note even without
 redefining a `flag.Usage` a `-h` is support and will just output the help text
 for each of the flags. Finally at <4> we call `Parse` that parses the command
-line andn fill the fill the variables.
+line and fill the fill the variables.
 
 After the flags have been parsed you can used them: `if *dnssec { ... }`
 
