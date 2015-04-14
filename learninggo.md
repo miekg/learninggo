@@ -59,9 +59,3 @@
 
 
 {backmatter}
-
-
-<!-- fake stuff to fix the reference for the time being -->
-# Fake 1 {#channels}
-
-## Fake 3 {#introspection-and-reflection}

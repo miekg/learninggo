@@ -184,20 +184,4 @@ http:
 
 ## Exercises
 
-\input{ex-communication/ex-processes.tex}
-
-\input{ex-communication/ex-wordcount.tex}
-
-\input{ex-communication/ex-uniq.tex}
-
-\input{ex-communication/ex-quine.tex}
-
-\input{ex-communication/ex-echo.tex}
-
-\input{ex-communication/ex-numbercruncher.tex}
-
-\input{ex-communication/ex-finger.tex}
-
-\cleardoublepage
-## Answers
-\shipoutAnswer
+{{ex/communication/ex.md}}
