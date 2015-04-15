@@ -121,11 +121,14 @@
 
     function navtoc(){
       $("li#nav-toc-h0").append("<ul class=\"nav-toc-h0\"></ul>");
-      $("li#nav-toc-h1").append("<ul class=\"nav-toc-h1\"></ul>");
-      $("li#nav-toc-h2").append("<ul class=\"nav-toc-h2\"></ul>");
 
       $("h1").each(function(){
               $("ul.nav-toc-h0").append("<li><a href=\"#" + $(this).attr("id") + "\">" + $(this).text().substring(1)).append("</a></li>");
+              var ids = $(this).attr("id")
+              $("ul.nav-toc-h0").append("<ul id=\"nav-toc-h1" + ids + "\"></ul>");
+              $(this).nextUntil("h1", "h2").each(function() {
+                $("#nav-toc-h1" + ids).append("<li><a href=\"#" + $(this).attr("id") + "\">" + $(this).text().substring(1)).append("</a></li>");
+              });
       });
     }
 
