@@ -1,6 +1,6 @@
 package main //<1>
 
-import "fmt" // Implements formatted I/O. <2>
+import "fmt" //<2> Implements formatted I/O. 
 
 /* Print something */ <3>
 func main() { //<4>
