@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"net"
 	"os/user"
-	"strconv"
 )
 
 func main() {

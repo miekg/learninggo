@@ -1,5 +1,10 @@
 package main
-import ( "net"; "fmt";"bufio" )
+
+import (
+	"bufio"
+	"fmt"
+	"net"
+)
 
 func main() {
 	l, err := net.Listen("tcp", "127.0.0.1:8053")
@@ -7,7 +12,9 @@ func main() {
 		fmt.Printf("Failure to listen: %s\n", err.Error())
 	}
 	for {
-		if c, err := l.Accept(); err == nil { Echo(c) }
+		if c, err := l.Accept(); err == nil {
+			Echo(c)
+		}
 	}
 }
 
