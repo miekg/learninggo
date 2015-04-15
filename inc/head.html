@@ -45,8 +45,6 @@
       $("h1:not(.appendix):not(.preface)").each(function(index){
         $(this).prepend("Chapter " + (index+1) + ". ")
       })
-      // messes with the toc
-    //  $("h1:not(.appendix):not(.preface)").nextUntil("h1").wrapAll("<div class=\"chapter\"></div>");
     }
 
     function appendices(){
@@ -102,7 +100,6 @@
       $("blockquote.epigraph footer").prepend("<hr>");
     }
 
-    // exclude answers and index
     function toc(){
       //$("body").prepend("<ul class=\"toc\"></ul>");
       //$("h1,h2").each(function(){
@@ -124,9 +121,10 @@
     }
 
     function navtoc(){
-        // TODO: does not work
+      // TODO: does not work
+      $("#nav-toc-h0").prepend("<ul class=\"nav-toc-h0\"></ul>");
       $("h1").each(function(){
-              $("ul#nav-toc-h0").append("<li class=\"nav-toc-h0\">" +
+              $(".nav-toc-h0").append("<li class=\"nav-toc-h0\">" +
                   "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></li>");
       });
     }
@@ -144,8 +142,6 @@
         });
     }
 
-   // $("h3.answer").after("<summary>Click to see the answer</summary>");
-   // $("h3.answer").nextUntil("h1,h2").wrapAll("<details></details>");
    function answers() {
         $("h3:contains('Answer')").addClass("closed")
 
