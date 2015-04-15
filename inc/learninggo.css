@@ -121,12 +121,20 @@ span.index-ref-secondary {
 }
 
 span.index-ref-primary {
+    position: relative;
+    left: -0.5em;
     font-style: italic;
 }
 
 span.index-ref-primary::before {
     content: "\a    ";
     white-space: pre;
+}
+
+h3.index-ref-char {
+    padding-top: 1em;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 span.callout {

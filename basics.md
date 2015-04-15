@@ -278,7 +278,7 @@ outputs.
 
 
 ### Goto
-Go has a `goto` (((keyword, goto))) statement - use it wisely. With `goto` you
+Go has a `goto` (((keywords, goto))) statement - use it wisely. With `goto` you
 jump to a (((label))) label which must be defined within the current function.
 For instance, a loop in disguise:
 
@@ -342,7 +342,7 @@ you can specify a label after `break` to identify *which* loop to stop:
 Here we define a label "J" <1>, preceding the `for`-loop there. When we use
 `break J` <2>, we don't break the inner loop but the "J" loop.
 
-With `continue` (((keyword, continue))) you begin the next iteration of the
+With `continue` (((keywords, continue))) you begin the next iteration of the
 loop, skipping any remaining code. In the same way as `break`, `continue` also
 accepts a label.
 
@@ -354,7 +354,7 @@ iterator that, when called, returns the next key-value pair from the "thing" it
 loops over. Depending on what that is, `range` returns different things.
 
 When looping over a slice or array, `range` returns the index in the slice as
-the key and value belonging to that index. Consider this code: (((keyword, range)))
+the key and value belonging to that index. Consider this code: (((keywords, range)))
 
     list := []string{"a", "b", "c", "d", "e", "f"}
     for k, v := range list {
@@ -371,7 +371,7 @@ individual Unicode characters ^[In the UTF-8 world characters are sometimes
 called *runes* (((runes))).] Mostly, when people talk about characters, they
 mean 8 bit characters. As UTF-8 characters may be up to 32 bits the word rune is
 used. In this case the type of `char` is `rune`. and their start position, by
-parsing the UTF-8. The loop: (((keyword,range)))
+parsing the UTF-8. The loop: (((keywords,range)))
 
     for pos, char := range "Gő!" {
         fmt.Printf("character '%c' starts at byte position %d\n", char, pos)
@@ -423,7 +423,7 @@ fallthrough))) for that.
         default:
             g() //<2>
 
-`f()` can be called when `i == 0` <1>. With `default` (((keyword, default))) you
+`f()` can be called when `i == 0` <1>. With `default` (((keywords, default))) you
 can specify an action when none of the other cases match. Here `g()` is called
 when `i` is not 0 or 1 <2>. We could rewrite the above example as:
 
@@ -635,7 +635,7 @@ And after <2>, `n2` is 4, and `s` is `[]int{2, 3, 4, 5, 4, 5}`.
 ### Maps
 Many other languages have a type similar to maps built-in. For instance, Perl
 has hashes, Python has its dictionaries, and C++ also has maps (as part of the
-libraries). In Go we have the `map` (((keyword, map))) type. A `map` can be
+libraries). In Go we have the `map` (((keywords, map))) type. A `map` can be
 thought of as an array indexed by strings (in its most simple form).
 
 
@@ -673,7 +673,7 @@ with each invocation.
 At <1> we use the underscore to ignore (assign to nothing) the key returned by
 `range`. We are only interested in the values from `monthdays`.
 
-(((keyword,map adding elements)))
+(((keywords, map adding elements)))
 
 To add elements to the map, you would add new month with: `monthdays["Undecim"]
 = 30`. If you use a key that already exists, the value will be silently
@@ -683,7 +683,7 @@ If the key "Jan" exists, `present` will be true. It's more Go like to name
 `present` "ok", and use: `v, ok := monthdays["Jan"]`. In Go we call this the
 "comma ok" form.
 
-You can remove elements (((keyword,map remove elements))) from the `map`:
+You can remove elements (((keywords, map remove elements))) from the `map`:
 `delete(monthdays, "Mar")` ^[Always rainy in March anyway.]. In general the
 syntax `delete(m, x)` will delete the map entry retrieved by the expression
 `m[x]`.

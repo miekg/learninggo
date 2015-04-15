@@ -323,7 +323,7 @@ perfectly legal to include it in the interface.
 
 In the following example we want to look at the "tag" (here named "namestr")
 defined in the type definition of `Person`. To do this we need the
-`reflect`(((package!reflect))) package (there is no other way in Go). Keep in
+`reflect`(((package,reflect))) package (there is no other way in Go). Keep in
 mind that looking at a tag means going back to the *type* definition. So we use
 the `reflect` package to figure out the type of the variable and *then* access
 the tag.

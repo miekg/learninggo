@@ -23,7 +23,7 @@ Clean and Simple
 Concurrent
 :   Go makes it easy to "fire off" functions to be
     run as *very* lightweight threads. These threads are called
-    goroutines (((goroutines)))^[Yes, that sounds a lot like
+    goroutines (((goroutine)))^[Yes, that sounds a lot like
     *co*routines, but goroutines are slightly different as we will
     see in Chapter (#channels).] in Go.
 

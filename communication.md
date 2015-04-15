@@ -37,7 +37,7 @@ This entire program could be optimized further by using `io.Copy`.
 ## io.Reader
 
 As mentioned above the `io.Reader` (((io.Reader))) is an important interface in the language Go. A lot
-(if not all) functions that need to read from something take an `io.Reader`(((package!io)))
+(if not all) functions that need to read from something take an `io.Reader`(((package, io)))
 as input. To fulfill the interface a type needs to implement that one method.
 The writing side `io.Writer`, has the `Write` method.
 

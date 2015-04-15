@@ -17,7 +17,7 @@ But what *is* a goroutine, from [@effective_go]:
 > allocating (and freeing) heap storage as required.
 
 A goroutine (((goroutine))) is a normal function, except that you start
-it with the keyword `go`. (((keyword, go)))
+it with the keyword `go`. (((keywords, go)))
 
     ready("Tea", 2)	    // Normal function call.
     go ready("Tea", 2)  // ... as goroutine.
@@ -58,7 +58,7 @@ Makes `ci` a channel on which we can send and receive integers,
 makes `cs` a channel for strings and `cf` a channel for types
 that satisfy the empty interface.
 Sending on a channel and receiving from it, is done with the same operator:
-`<-`. (((operator!channel)))
+`<-`. (((operators, channel)))
 
 Depending on the operands it figures out what to do, `ci <- 1`, *Send* the
 integer 1 to the channel `ci`. `<-ci`,{*Receive* an integer from the channel
@@ -94,7 +94,7 @@ values to receive.
 
 There is still some remaining ugliness; we have to read twice from the channel
 <5>). This is OK in this case, but what if we don't know how many goroutines we
-started? This is where another Go built-in comes in: `select` (((keyword,
+started? This is where another Go built-in comes in: `select` (((keywords,
 select))). With `select` you can (among other things) listen for incoming data
 on a channel.
 

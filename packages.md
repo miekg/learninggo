@@ -10,9 +10,9 @@ names is to use lowercase characters. Go packages may consist of multiple files,
 but they share the `package <name>` line. Let's define a package `even` in the
 file `even.go`.
 
-(((function, exported)))
-(((function, private)))
-(((function, public)))
+(((functions, exported)))
+(((functions, private)))
+(((functions, public)))
 {callout="//"}
 <{{src/packages/even.go}}
 

@@ -49,7 +49,7 @@ To allocate memory Go has two primitives, `new` and `make`. They do different
 things and apply to different types, which can be confusing, but the rules are
 simple. The following sections show how to handle allocation in Go and hopefully
 clarifies the somewhat artificial distinction between `new` (((built-in, new)))
-and `make` (((built-in!make))).
+and `make` (((built-in,make))).
 
 
 ### Allocation with new
