@@ -16,11 +16,10 @@
           $("#nav-h1").text(this.element.textContent.substring(1));
           // reset the other one
           $("#nav-h2").text("");
-      });
+      }, {offset: '75%'});
       $("h2").waypoint(function(e, direction) {
           $("#nav-h2").text(this.element.textContent.substring(1));
-      });
-
+      }, {offset: '75%'});
 
       answers();
       appendices
@@ -97,14 +96,6 @@
       $("blockquote.epigraph footer").prepend("<hr>");
     }
 
-//    function toc(){
-      //$("body").prepend("<ul class=\"toc\"></ul>");
-      //$("h1,h2").each(function(){
-      //        $("ul.toc").append("<li class=\"toc-" + $(this)[0].tagName.toLowerCase() + "\">" +
-      //            "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></li>");
-      //});
-//    }
-
     // include some html
     function html() {
         var fork = $('<div>');
@@ -122,14 +113,15 @@
     function navtoc(){
       $("li#nav-toc-h0").append("<ul class=\"nav-toc-h0\"></ul>");
 
-      $("h1").each(function(){
-              $("ul.nav-toc-h0").append("<li><a href=\"#" + $(this).attr("id") + "\">" + $(this).text().substring(1)).append("</a></li>");
-              var ids = $(this).attr("id")
-              $("ul.nav-toc-h0").append("<ul id=\"nav-toc-h1" + ids + "\"></ul>");
-              $(this).nextUntil("h1", "h2").each(function() {
-                $("#nav-toc-h1" + ids).append("<li><a href=\"#" + $(this).attr("id") + "\">" + $(this).text().substring(1)).append("</a></li>");
-              });
-      });
+      // all works, this needs to fix the css to actual make a drop down menu
+      // $("h1").each(function(){
+      //         $("ul.nav-toc-h0").append("<li><a href=\"#" + $(this).attr("id") + "\">" + $(this).text().substring(1)).append("</a></li>");
+      //         var ids = $(this).attr("id")
+      //         $("ul.nav-toc-h0").append("<ul id=\"nav-toc-h1" + ids + "\"></ul>");
+      //          $(this).nextUntil("h1", "h2").each(function() {
+      //           $("#nav-toc-h1" + ids).append("<li><a href=\"#" + $(this).attr("id") + "\">" + $(this).text().substring(1)).append("</a></li>");
+      //         });
+      //  });
     }
 
     function links() {

@@ -31,8 +31,7 @@ nav > ul > li > a {
     text-decoration: none;
 }
 
-nav > ul > li:hover {
-}
+nav > ul > li:hover {}
 
 nav > ul > li:hover > a {
     text-decoration: underline;
@@ -178,25 +177,4 @@ li.bibliography:before {
     content: "▽ ";
     color: #0000EE;
     margin-right: 6px;
-}
-
-ul.toc {
-    list-style-type: none;
-}
-
-li.toc-h1 {
-}
-
-li.toc-h2 {
-    padding-left: 1em;
-    font-style: italic;
-}
-
-li.toc-h3 {
-    padding-left: 2em;
-    font-style: italic;
-}
-
-ul.nav-toc-h0 > li {
-    display: block;
 }

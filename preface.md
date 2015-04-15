@@ -1,6 +1,6 @@
 The [source of this book](https://github.com/miekg/learninggo) is written in
 [mmark](https://github.com/miekg/mmark) and is converted from the [original
-latex source](https://github.com/miekg/gobook).
+LaTeX source](https://github.com/miekg/gobook).
 
 *All example code used in this book is hereby put in the public domain.*
 
@@ -12,7 +12,7 @@ The following people made large or small contributions to earlier versions of th
 
 {{contributors.md}}
 
-"Learning Go" has been translated into:
+"Learning Go" has been translated into (note that this used to original LaTeX source).
 
 * Chinese, by Xing Xing, 这里是中文译本: <http://www.mikespook.com/learning-go/>
 
