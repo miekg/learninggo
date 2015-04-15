@@ -1,2 +1,2 @@
 {{ex/channels/for-channels.md}}
-{{fib.md}}
+{{ex/channels/fib.md}}
