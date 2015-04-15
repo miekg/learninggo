@@ -9,7 +9,7 @@
     $(document).ready(function() {
       $("body").wrapInner("<div class=\"book\"></div>")
 
-      // waypoints for nav, no idea, why I need proper js here.
+      // waypoints for nav, no idea why I need proper js here.
       $("h1").waypoint(function(e, direction) {
           // because we insert a para symbol for easy deeplinking, we
           // should take the string from the second char on.
@@ -32,9 +32,6 @@
       html();
 
       references();
-      toc();
-
-      navtoc();
 
       links();
     });
@@ -100,13 +97,13 @@
       $("blockquote.epigraph footer").prepend("<hr>");
     }
 
-    function toc(){
+//    function toc(){
       //$("body").prepend("<ul class=\"toc\"></ul>");
       //$("h1,h2").each(function(){
       //        $("ul.toc").append("<li class=\"toc-" + $(this)[0].tagName.toLowerCase() + "\">" +
       //            "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></li>");
       //});
-    }
+//    }
 
     // include some html
     function html() {
@@ -117,15 +114,18 @@
         var nav = $('<div>');
         nav.load('inc/nav.html', function(){
             $(this).insertBefore("h1#preface");
+            // call navtoc as we now have the thing loaded.
+            navtoc();
         });
     }
 
     function navtoc(){
-      // TODO: does not work
-      $("#nav-toc-h0").prepend("<ul class=\"nav-toc-h0\"></ul>");
+      $("li#nav-toc-h0").append("<ul class=\"nav-toc-h0\"></ul>");
+      $("li#nav-toc-h1").append("<ul class=\"nav-toc-h1\"></ul>");
+      $("li#nav-toc-h2").append("<ul class=\"nav-toc-h2\"></ul>");
+
       $("h1").each(function(){
-              $(".nav-toc-h0").append("<li class=\"nav-toc-h0\">" +
-                  "<a href=\"#" + $(this).attr("id") + "\">" + $(this).text()).append("</a></li>");
+              $("ul.nav-toc-h0").append("<li><a href=\"#" + $(this).attr("id") + "\">" + $(this).text().substring(1)).append("</a></li>");
       });
     }
 

@@ -196,3 +196,7 @@ li.toc-h3 {
     padding-left: 2em;
     font-style: italic;
 }
+
+ul.nav-toc-h0 > li {
+    display: block;
+}
