@@ -144,10 +144,10 @@ blocking write)))
 But Go allows you to specify the buffer size of a channel, which is quite simply
 how many elements a channel can hold. `ch := make(chan bool, 4)`, creates
 a buffered channel of bools that can hold 4 elements. The first 4 elements in
-this channel are written without any blocking. When you write the 5^th^
-element, your code *will* block, until another goroutine reads some elements
-from the channel to make room. (((channel, non-blocking read))) (((channel,
-non-blocking write)))
+this channel are written without any blocking. When you write the 5^th^ element,
+your code *will* block, until another goroutine reads some elements from the
+channel to make room. (((channel, non-blocking read))) (((channel, non-blocking
+write)))
 
 In conclusion, the following is true in Go:
 
@@ -173,4 +173,4 @@ channel was closed.
 
 ## Exercises
 
-{{ex/channels/ex.md}
+{{ex/channels/ex.md}}
