@@ -115,7 +115,7 @@ We will now wait as long as it takes. Only when we have received more than one
 reply on the channel `c` will we exit the loop `L`.
 
 
-### Make it run in parallel
+## Make it run in parallel
 
 While our goroutines were running concurrently, they were not running in
 parallel. When you do not tell Go anything there can only be one goroutine
