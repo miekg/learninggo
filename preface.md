@@ -12,7 +12,7 @@ The following people made large or small contributions to earlier versions of th
 
 {{contributors.md}}
 
-"Learning Go" has been translated into (note that this used to original LaTeX source).
+"Learning Go" has been translated into (note that this used the original LaTeX source).
 
 * Chinese, by Xing Xing, 这里是中文译本: <http://www.mikespook.com/learning-go/>
 
