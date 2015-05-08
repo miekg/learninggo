@@ -38,7 +38,7 @@
     function chapters(){
         // This is the only spot where I used knowledge of the doc, i.e.
         // Preface is the first chapter.
-      $("h1:not(.appendix):not(.preface)").each(function(index){
+      $("h1:not(.appendix):not(.preface):not(.title)").each(function(index){
         $(this).prepend("Chapter " + (index+1) + ". ")
       })
     }
@@ -56,7 +56,7 @@
     }
 
     function figures(){
-      $("figure > figcaption").each(function(index){
+      $("figure:not(.title) > figcaption").each(function(index){
         $(this).prepend("Figure " + (index+1) + ". ")
       })
     }

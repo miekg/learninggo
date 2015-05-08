@@ -15,6 +15,10 @@
 %   [author.address]
 %   email = "miek@miek.nl"
 
+{.title}
+![](fig/bumper-inverse.png)
+{.title}
+# Learning Go
 
 .# Preface
 {{preface.md}}

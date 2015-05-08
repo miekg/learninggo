@@ -37,6 +37,13 @@ nav > ul > li:hover > a {
     text-decoration: underline;
 }
 
+h1.title {
+    text-align: center;
+    font-size: 42pt;
+    text-decoration: underline;
+    letter-spacing: 0.2em;
+}
+
 .header-link {
     position: absolute;
     font-size: 14pt;
