@@ -41,6 +41,7 @@ h1.title {
     text-align: center;
     font-size: 42pt;
     letter-spacing: 0.4em;
+    text-transform: uppercase;
 }
 
 .header-link {
