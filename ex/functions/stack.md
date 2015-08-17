@@ -78,7 +78,9 @@ And our two functions become:
 
         func (s *stack) pop() int {
                 s.i--
-                return s.data[s.i]
+                ret := s.data[s.i]
+                s.data[s.i] = 0
+                return ret
         }
 
 Which we then use as follows:
