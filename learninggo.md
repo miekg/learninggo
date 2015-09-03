@@ -5,8 +5,8 @@
 % ipr= "trust200902"
 % date = 2015-01-07T00:00:00Z
 % area = "Application"
-% workgroup = "language"
-% keyword = ["Go Language Computer"]
+% workgroup = "Go"
+% keyword = ["Go", "Language", "Computer"]
 %
 % [[author]]
 % initials="R."
@@ -15,16 +15,15 @@
 %   [author.address]
 %   email = "miek@miek.nl"
 
-{.title}
-![](fig/bumper-inverse.png)
-{.title}
-# Learning Go
-
 .# Preface
 {{preface.md}}
 
-
 {mainmatter}
+
+{.title}
+# Learning Go
+{.title}
+![](fig/bumper-inverse.png)
 
 
 # Introduction
