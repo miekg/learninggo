@@ -1,6 +1,6 @@
 {.epigraph}
 > "^"
-Quote: Answer to whether there is a bit wise negation operator. -- Ken Thompson
+Quote: Answer to whether there is a bit wise negation operator -- Ken Thompson
 
 A package is a collection of functions and data.
 
