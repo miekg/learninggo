@@ -248,8 +248,8 @@ In this (unnamed) function you can access any named return parameter:
     }
 
 Here <1> we specify our function, the named return value `ret` is initialized
-with zero. The nameless function in the defer increments the value of `ret` with
-1. The `return 0` on line
+with zero. The nameless function in the defer increments the value of `ret` 
+with 1. The `return 0` on line
 5 *will not be the returned value*, because of `defer`. The function `f` will
 return 1!
 
