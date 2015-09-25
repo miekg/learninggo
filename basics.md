@@ -135,8 +135,8 @@ not a dot, will pass from the Law*." [@iota]] to enumerate values.
     )
 
 The first use of `iota` will yield 0, so `a` is equal to 0. Whenever `iota` is
-used again on a new line its value is incremented with 1, so `b` has a value of
-1. Or, as shown here, you can even let Go repeat the use of `iota`. You may also
+used again on a new line its value is incremented with 1, so `b` has a value of 1.
+Or, as shown here, you can even let Go repeat the use of `iota`. You may also
 explicitly type a constant: `const b string = "0"`. Now `b` is a `string` type
 constant.
 
