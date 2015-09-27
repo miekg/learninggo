@@ -117,9 +117,10 @@ follows:
 {callout="//"}
 <{{src/functions/anon-func.go}}[3,]
 
-Define a nameless function and assign to `a`. No `()` here. If there were we
-would *call* the function in `a`.
-*Now* we call the function.
+`a` is defined as an anonymous (nameless) function. 
+Note the lack of parentheses `()` after `a`. If there were, that would be to *call*
+some function with the name `a` before we have defined what `a` is. Once `a` is 
+defined, then we can *call* it.
 
 Functions--as--values may be used in other places, for example maps. Here we
 convert from integers to functions:
