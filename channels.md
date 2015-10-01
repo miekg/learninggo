@@ -24,7 +24,7 @@ it with the keyword `go`. (((keywords, go)))
 
 
 {callout="//"}
-<{{src/concurrency/sleep.go}}[8,18]
+<{{src/channels/sleep.go}}[8,18]
 Figure: Go routines in action.
 
 The following idea for a program was taken from [@go_course_day3]. We run

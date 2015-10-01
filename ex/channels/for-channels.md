@@ -1,7 +1,7 @@
 {.exercise data-difficulty="1"}
 ### Channels
 
-1. Modify the program you created in exercise Q\ref{ex:for-loop} to use
+1. Modify the program you created in exercise (#forloop) to use
    channels, in other words, the function called in the body should now be
    a goroutine and communication should happen via channels. You should not
    worry yourself on how the goroutine terminates.
@@ -14,24 +14,26 @@
    remedy both issues. Do this.
 
 ### Answer
-1. A possible program is: 
-\lstinputlisting[label=go-chan,caption=Channels in Go,numbers=right]{ex-channels/src/for-chan.go}
+1. A possible program is:
 
-We start of in the usual way, then at line 6 we create a new channel of
-ints. In the next line we fire off the function `shower` with
-the `ch` variable as it argument, so that we may communicate with
-it. Next we start our for-loop (lines 8-10) and in the loop
-we send (with `<-`) our number to the function (now a goroutine) `shower`.
+   <{{ex/channels/src/for-chan.go}}
 
-In the function `shower` we wait (as this blocks) until we receive a number (line
-15). Any received number is printed (line 16) and then continue the endless loop
-started on line 14.
+   We start of in the usual way, then at line 6 we create a new channel of
+   ints. In the next line we fire off the function `shower` with
+   the `ch` variable as it argument, so that we may communicate with
+   it. Next we start our for-loop (lines 8-10) and in the loop
+   we send (with `<-`) our number to the function (now a goroutine) `shower`.
+
+   In the function `shower` we wait (as this blocks) until we receive a number
+   (line 15). Any received number is printed (line 16) and then continue the
+   endless loop started on line 14.
 
 2. An answer is
-\lstinputlisting[label=go-quit-chan,caption=Adding an extra quit channel,numbers=right]{ex-channels/src/for-quit-chan.go}
 
-On line 20 we read from the quit channel and we discard the value we
-read. We could have used `q := <-quit`, but then we would have used
-the variable only once --- which is illegal in Go. Another trick you
-might have pulled out of your hat may be: `_ = <-quit`. This is
-valid in Go, but idomatic Go is the one given on line 20.
+   <{{ex/channels/src/for-quit-chan.go}
+
+   On line 20 we read from the quit channel and we discard the value we read. We
+   could have used `q := <-quit`, but then we would have used the variable only
+   once --- which is illegal in Go. Another trick you might have pulled out of
+   your hat may be: `_ = <-quit`. This is valid in Go, but idomatic Go is the
+   one given on line 20.
