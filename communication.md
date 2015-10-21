@@ -140,7 +140,7 @@ all share a common interface.
 
 Dialing a remote system (port 80) over TCP, then UDP and lastly TCP over IPv6
 looks like this^[In case you are wondering, 192.0.32.10 and 2620:0:2d0:200::10
-are <www.example.org>.]:
+are <http://www.example.org>.]:
 
     conn, e := Dial("tcp", "192.0.32.10:80")
     conn, e := Dial("udp", "192.0.32.10:80")

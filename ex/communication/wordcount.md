@@ -1,5 +1,5 @@
-{.exercise data-difficulty="0"
-Word and letter count
+{.exercise data-difficulty="0"}
+### Word and Letter Count
 
 Write a small program that reads text from standard input and performs the
 following actions:
