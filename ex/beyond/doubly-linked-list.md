@@ -12,12 +12,12 @@ as above.
 ### Answer
 1. The following is the implementation of a program using doubly
    linked lists from `container/list`.
-   <{{ex/beyond/src/doubly-linked-list-container.go}}
+   <{{src/doubly-linked-list-container.go}}
 
 2. The following is a program implementing a simple doubly
  linked list supporting `int` values.
  {callout="//"}
-  <{{ex/beyond/src/doubly-linked-list.go}}
+  <{{src/doubly-linked-list.go}}
 
 Import <1> the packages we will need. At <2> we declare a type for the value our list will contain,
 this is not strictly neccesary. And at <3> we declare a type for the each node in our list.

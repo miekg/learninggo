@@ -11,7 +11,7 @@ goroutine.
 ### Answer
 
 A simple echo server might be:
-<{{ex/communication/src/echo.go}}
+<{{src/echo.go}}
 
 When started you should see the following:
 

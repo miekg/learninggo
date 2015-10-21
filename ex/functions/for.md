@@ -8,4 +8,4 @@
 ### Answer
 
 1.
- <{{ex/functions/src/for-func.go}}
+ <{{src/for-func.go}}

@@ -13,7 +13,7 @@
 ### Answer
 
 1. There are many possibilities. One solutions could be:
-<{{ex/basics/src/for.go}}
+<{{src/for.go}}
     Let's compile this and look at the output.
 
         % go build for.go
@@ -44,7 +44,7 @@
 
 3. The following is one possible solution:
     {callout="//"}
-    <{{ex/basics/src/for-arr.go}}
+    <{{src/for-arr.go}}
 
     Here <1> we create an array with 10 elements.
     Which we then fill <2> one by one. And finally we print it <3> with `%v` which lets

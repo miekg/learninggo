@@ -14,7 +14,7 @@ five, print "FizzBuzz".
 1. A possible solution to this problem is the following program.
 
 {callout="//"}
-<{{ex/basics/src/fizzbuzz.go}}
+<{{src/fizzbuzz.go}}
 
 Here <1> we define two constants to make our code more readable, see (#constants).
 At <2> we define a boolean that keeps track if we already printed something.

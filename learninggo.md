@@ -11,7 +11,7 @@
 % [pi]
 % private = "yes"
 % footer = "" # Don't have the Expires ...
-% header = "Golang"
+% header = "Go"
 %
 % [[author]]
 % initials = "R."
