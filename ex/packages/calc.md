@@ -6,4 +6,4 @@
 {.answer}
 ### Answer
 1. This is one answer:
- <{{src/calc.go}}
+ <{{ex/packages/src/calc.go}}

@@ -16,7 +16,7 @@ have to read from standard input.
 
 The following program is an implementation of wc(1).
 {callout="//"}
-<{{src/wc.go}}
+<{{ex/communication/src/wc.go}}
 
 At <1> we create a new reader that reads from standard input, we then read from
 the input at <2>. And at <3> we check the value of `ok` and if we received an

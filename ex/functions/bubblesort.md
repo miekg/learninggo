@@ -27,7 +27,7 @@ It also gives an example in pseudo code:
 1.  Bubble sort isn't terribly efficient. For $$n$$ elements it scales $$O(n^2)$$.
     But bubble sort is easy to implement:
 
-    <{{src/bubblesort.go}}[4,18]
+    <{{ex/functions/src/bubblesort.go}}[4,18]
 
     Because a slice is a reference type, the `bubblesort` function works and
     does not need to return a sorted slice.

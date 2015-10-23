@@ -11,9 +11,9 @@ it should print only those item which don't have the same successor:
     'a' 'b' 'a' 'c' 'd' 'e' 'f'
 
 The next listing is a Perl implementation of the algorithm.
-<{{src/uniq.pl}}
+<{{ex/communication/src/uniq.pl}}
 
 ### Answer
 
 The following is a `uniq` implementation in Go.
-<{{src/uniq.go}}
+<{{ex/communication/src/uniq.go}}

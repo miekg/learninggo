@@ -15,12 +15,12 @@
  for our stack. First, the exported functions should begin with a capital
  letter and so should `Stack`. The package file is named `stack-as-package.go`
  and contains:
-    <{{src/stack-as-package.go}}
+    <{{ex/packages/src/stack-as-package.go}}
 
 2. To make the unit testing work properly you need to do some
  preparations. We'll come to those in a minute. First the actual unit test.
  Create a file with the name `pushpop_test.go`, with the following contents:
- <{{src/pushpop_test.go}}
+ <{{ex/packages/src/pushpop_test.go}}
 
 For `go test` to work we need to put our package files in a directory
 under `$GOPATH/src`:

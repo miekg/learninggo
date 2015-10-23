@@ -1,6 +1,7 @@
 {.exercise data-difficulty="2"}
 ### Number cruncher
 
+
 * Pick six (6) random numbers from this list: $$1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
   25, 50, 75, 100$$ Numbers may be picked multiple times.
 * Pick one (1) random number ($$i$$) in the range: $$1 \ldots 1000$$.
@@ -19,6 +20,7 @@ a similar format (i.e. output should be infix with parenthesis) as used above.
 Calculate *all* possible solutions and show them (or only show how many there
 are). In the example above there are 544 ways to do it.
 
+
 ### Answer
 
 The following is one possibility. It uses recursion and backtracking to get
@@ -33,4 +35,4 @@ an answer. When starting `permrec` we give 977 as the first argument:
     (((75+(8*6))*8)-7)/1 = 977  #544
 
 
-<{{src/permrec.go}}
+<{{ex/communication/src/permrec.go}}

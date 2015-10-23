@@ -13,7 +13,7 @@
 1. The following is implemention of `cat` which also supports a \-n flag to number each line.
 
  {callout="//"}
- <{{src/cat.go}}
+ <{{ex/beyond/src/cat.go}}
 
  At <1> we include all the packages we need.
  Here <2> we define a new flag "n", which defaults to off. Note that we get the help (-h) for free.
@@ -26,4 +26,4 @@
   contain a newline. Or worse, when the input contains one line without a
   closing newline nothing is shown at all. A better solution is the following 
   program.
-  <{{src/cat2.go}}
+  <{{ex/beyond/src/cat2.go}}

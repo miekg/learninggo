@@ -1,2 +1,2 @@
-{{minmax.md}}
-{{pointers-and-reflect.md}}
+{{ex/interfaces/minmax.md}}
+{{ex/interfaces/pointers-and-reflect.md}}

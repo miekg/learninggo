@@ -13,7 +13,7 @@
 1. The following program calculates Fibonacci numbers:
 
  {callout="//"}
-<{{src/fib.go}}
+<{{ex/functions/src/fib.go}}
 
 At <1> we create an array to hold the integers up to the value given in
 the function call.  At <2> we start the Fibonacci calculation. Then <3>:

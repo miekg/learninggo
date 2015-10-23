@@ -20,4 +20,4 @@ show the contents of that file. So your program needs to be able to figure out:
 ### Answer
 A> This solution is from Fabian Becker.
 
-<{{src/finger.go}}
+<{{ex/communication/src/finger.go}}
