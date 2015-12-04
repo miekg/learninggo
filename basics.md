@@ -151,7 +151,7 @@ If you use the single quote (') you mean one character (encoded in UTF-8) ---
 which is *not* a `string` in Go.
 
 Once assigned to a variable, the string cannot be changed: strings in Go are
-immutable. If you are coming from C, not that the following is not legal in Go:
+immutable. If you are coming from C, note that the following is not legal in Go:
 
     var s string = "hello"
     s[0] = 'c'
