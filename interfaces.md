@@ -91,7 +91,9 @@ figure that out by using a type switch ((type switch)).
 At <1> we use the type switch, note that the `.(type)` syntax in *only* valid
 within a `switch` statement. We store the type in the variable `t`. The
 subsequent cases <2> each check for a different *actual* type. And we can even
-have a `default` <3> clause.
+have a `default` <3> clause. It is worth pointing out that both `case R` and
+`case s` aren't possible, because `p` needs to be a pointer in order to satisfy
+`i`.
 
 A type switch isn't the only way to discover the type at *run-time*.
 
