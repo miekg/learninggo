@@ -84,8 +84,6 @@ figure that out by using a type switch ((type switch)).
         switch t := p.(type) { //<1>
             case *S: //<2>
             case *R: //<2>
-            case S:  //<2>
-            case R:  //<2>
             default: //<3>
         }
     }
