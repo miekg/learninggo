@@ -11,9 +11,6 @@ After some post processing [the end result, can be found here](http://miek.nl/go
 * `cd mmark/mmark`
 * `go install`
 
-And then just `make` in this repository, and `cd fig; make` to make the `.png` from the `.svg`
-with Inkscape.
-
 ## Notes
 
 The stack exercise and solution uses `struct` which are not being dealt with yet.
