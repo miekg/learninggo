@@ -11,6 +11,8 @@ After some post processing [the end result, can be found here](http://miek.nl/go
 * `cd mmark/mmark`
 * `go install`
 
+And then just `make` in this repository.
+
 ## Notes
 
 The stack exercise and solution uses `struct` which are not being dealt with yet.
