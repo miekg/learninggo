@@ -383,7 +383,7 @@ prints
     character 'ő' starts at byte position 1
     character '!' starts at byte position 3
 
-Note that `ő` took 2 bytes, so 'x' starts at byte 3. TODO(miek): check and change.
+Note that `ő` took 2 bytes, so '!' starts at byte 3.
 
 
 ### Switch
