@@ -166,7 +166,7 @@ To do this in Go you will need the following:
     fmt.Printf("%s\n", s2) //<4>
 
 Here we convert `s` to an array of runes <1>. We change the first element of
-this array <1>. Then we create a *new* string `s2` with the alteration <3>.
+this array <2>. Then we create a *new* string `s2` with the alteration <3>.
 Finally, we print the string with `fmt.Printf` <4>.
 
 
