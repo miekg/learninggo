@@ -465,12 +465,12 @@ functions briefly.
 
 `new`
 :   is used for allocating memory for user defined
-    data types. See #(allocation with new).
+    data types. See (#allocation-with-new).
     (((built-in,new)))
 
 `make`
 :   is used for allocating memory for built-in
-    types (maps, slices, and channels). See #(allocation with make).
+    types (maps, slices, and channels). See (#allocation-with-make).
     (((built-in,make)))
 
 `copy`, `append`
