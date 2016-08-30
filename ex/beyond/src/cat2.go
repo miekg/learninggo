@@ -14,7 +14,7 @@ func cat(r *bufio.Reader) {
 	i := 1
 	for {
 		buf, e := r.ReadBytes('\n')
-		if e == io.EOF {
+		if e == io.EOF && string(buf) == "" {
 			break
 		}
 		if *numberFlag {
