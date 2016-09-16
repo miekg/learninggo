@@ -45,7 +45,7 @@ code".]
 
 The names are not mandatory but they can make code shorter and clearer:
 *they are documentation*. However don't overuse this features, especially in
- longer function where it might not be immediately apperent what is returned.
+ longer functions where it might not be immediately apparent what is returned.
 
 Functions can be declared in any order you wish. The compiler scans the entire
 file before execution, so function prototyping is a thing of the past in Go. Go
