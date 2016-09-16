@@ -45,7 +45,7 @@ code".]
 
 The names are not mandatory but they can make code shorter and clearer:
 *they are documentation*. However don't overuse this features, especially in
- longer function where it might not be immediately apperent what is returned.
+ longer functions where it might not be immediately apparent what is returned.
 
 Functions can be declared in any order you wish. The compiler scans the entire
 file before execution, so function prototyping is a thing of the past in Go. Go
@@ -79,7 +79,7 @@ In the following example we call `g()` from `f()`:
 {callout="//"}
     package main
 
-    var a int
+    var a int // <1>
 
     func main() {
             a = 5
@@ -88,7 +88,7 @@ In the following example we call `g()` from `f()`:
     }
 
     func f() {
-            a := 6
+            a := 6 // <2>
             print(a)
             g()
     }
@@ -98,9 +98,9 @@ In the following example we call `g()` from `f()`:
     }
 
 
-On line 3 we declare `a` to be a global variable of type `int`. Then in the
+Here <1>, we declare `a` to be a global variable of type `int`. Then in the
 `main` function we give the *global* `a` the value of 5, after printing it we
-call the function `f`. Then on line 12 `a := 6`, we create a *new, local*
+call the function `f`. Then here <2>, `a := 6`, we create a *new, local*
 variable also called `a`. This new `a` gets the value of 6, which we then print.
 Then we call `g`, which uses the *global* `a` again and prints `a`'s value set
 in `main`. Thus the output will be: `565`. A *local* variable is *only* valid
@@ -117,10 +117,10 @@ follows:
 {callout="//"}
 <{{src/functions/anon-func.go}}[3,]
 
-`a` is defined as an anonymous (nameless) function. 
+`a` is defined as an anonymous (nameless) function <1>.
 Note the lack of parentheses `()` after `a`. If there were, that would be to *call*
 some function with the name `a` before we have defined what `a` is. Once `a` is 
-defined, then we can *call* it.
+defined, then we can *call* it, <3>.
 
 Functions--as--values may be used in other places, for example maps. Here we
 convert from integers to functions:
