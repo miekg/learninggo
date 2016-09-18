@@ -8,7 +8,7 @@ func fibonacci(value int) []int {
 	for n := 2; n < value; n++ {
 		x[n] = x[n-1] + x[n-2] //<3>
 	}
-	return x //<3>
+	return x //<4>
 }
 
 func main() {
