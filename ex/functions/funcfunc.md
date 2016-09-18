@@ -14,28 +14,25 @@
 
 {.answer}
 ### Answer
-1.
-
-{callout="//"}
-    func main() {
-            p2 := plusTwo()
-            fmt.Printf("%v\n",p2(2))
-    }
-
-    func plusTwo() func(int) int { //<1>
-            return func(x int) int { return x + 2 } //<2>
-    }
-
-Define a new function that returns a function: `return func(x int) int { return x + 2 }`
+1. Define a new function that returns a function: `return func(x int) int { return x + 2 }`
 Function literals at work, we define the +2--function right there in the return statement.
 
-2. 
-Here we use a closure:
+	{callout="//"}
+		func main() {
+				p2 := plusTwo()
+				fmt.Printf("%v\n",p2(2))
+		}
 
- {callout="//"}
-    func plusX(x int) func(int) int { //<1>
-            return func(y int) int { return x + y } //<2>
-    }
+		func plusTwo() func(int) int { //<1>
+				return func(x int) int { return x + 2 } //<2>
+		}
 
-Here <1>, we again define a function that returns a function.
-We use the *local* variable `x` in the function literal at <2>.
+2. Here we use a closure:
+
+	{callout="//"}
+		func plusX(x int) func(int) int { //<1>
+				return func(y int) int { return x + y } //<2>
+		}
+
+	Here <1>, we again define a function that returns a function.
+	We use the *local* variable `x` in the function literal at <2>.
