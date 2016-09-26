@@ -25,7 +25,7 @@ Concurrent
     run as *very* lightweight threads. These threads are called
     goroutines (((goroutine)))^[Yes, that sounds a lot like
     *co*routines, but goroutines are slightly different as we will
-    see in Chapter (#channels).] in Go.
+    see in (#communication).] in Go.
 
 Channels
 :   Communication with these goroutines is done, either via shared state or
