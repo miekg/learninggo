@@ -38,7 +38,7 @@ long we should wait until all goroutines have exited. This outputs:
     Coffee is ready!    // After 1 second
     Tea is ready!       // After 2 seconds
 
-If we did not wait for the goroutines (i.e. remove thei last line at <2>) the
+If we did not wait for the goroutines (i.e. remove the last line at <2>) the
 program would be terminated immediately and any running goroutines would
 *die with it*.
 
