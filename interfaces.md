@@ -77,7 +77,7 @@ Let's define another type `R` that also implements the interface `I`:
 The function `f` can now accept variables of type `R` and `S`.
 
 Suppose you need to know the actual type in the function `f`. In Go you can
-figure that out by using a type switch ((type switch)).
+figure that out by using a type switch(((type switch))).
 
 {callout="//"}
     func f(p I) {
