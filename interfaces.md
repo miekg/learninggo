@@ -287,7 +287,7 @@ The following steps are required:
             }
          }
 
-    At <1> `x` is now of the `Sorter` type and using de defined methods for this interface we implement
+    At <1> `x` is now of the `Sorter` type and using the defined methods for this interface we implement
     Bubblesort at <2>.
 
 Now we can use our *generic* `Sort` function as follows:
