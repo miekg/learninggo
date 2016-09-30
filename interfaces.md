@@ -109,7 +109,7 @@ When you are sure a variable implements an interface you can use: `t := somethin
 
 ## Empty interface
 
-Since every type satisfies the empty interface: `interface{}`. We can create
+Since every type satisfies the empty interface: `interface{}` we can create
 a generic function which has an empty interface as its argument:
 
     func g(something interface{}) int {
