@@ -26,7 +26,7 @@ function. Here <4> we define that the variable `q` of type `int` is the input
 parameter. Parameters are passed *pass-by-value*.(((functions, pass-by-value)))
 The variables `r` and `s` <5> are the *named return parameters* (((functions,
 named return parameters))) for this function. Functions in Go can have multiple
-return values. This is very useful to return a value *and* and error. This
+return values. This is very useful to return a value *and* error. This
 removes the need for in-band error returns (such as -1 for `EOF`) and modifying
 an argument. If you want the return parameters not to be named you only give the
 types: `(int, int)`. If you have only one value to return you may omit the
@@ -44,7 +44,7 @@ to do more with less code.^[This is a motto of Go; "Do *more* with *less*
 code".]
 
 The names are not mandatory but they can make code shorter and clearer:
-*they are documentation*. However don't overuse this features, especially in
+*they are documentation*. However don't overuse this feature, especially in
  longer functions where it might not be immediately apparent what is returned.
 
 Functions can be declared in any order you wish. The compiler scans the entire
@@ -160,7 +160,7 @@ this one as a callback we need to use this signature:
 Here we create a new function that takes two parameters: `y int`, i.e. just an
 `int` and `f func(int)`, i.e. a function that takes an int and returns nothing.
 The parameter `f` is the variable holding that function. It can be used as any
-other function, and we exectute the function on line 2 with the parameter `y`:
+other function, and we execute the function on line 2 with the parameter `y`:
 `f(y)`
 
 
