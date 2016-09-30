@@ -172,7 +172,7 @@ Finally, we print the string with `fmt.Printf` <4>.
 
 ### Runes
 `Rune` is an alias for `int32`. It is an UTF-8 encoded code point. When is this
-type useful? ((runes)) One example is when you're iterating over characters in
+type useful? (((runes))) One example is when you're iterating over characters in
 a string. You could loop over each byte (which is only equivalent to a character
 when strings are encoded in 8-bit ASCII, which they are *not* in Go!). But to
 get the actual characters you should use the `rune` type.
@@ -190,7 +190,7 @@ is the real part, `im` is the imaginary part and $$i$$ is the literal '$$i$$'
 Any non-trivial program will have the need for error reporting sooner or later.
 Because of this Go has a builtin type specially for errors, called `error`. `var
 e error` creates a variable `e` of type `error` with the value `nil`. This error
-type is an interface -- we'll look more at interfaces in chap:interfaces). For
+type is an interface -- we'll look more at interfaces in (#interfaces)). For
 now you can just assume that `error` is a type just like all other types.
 
 
@@ -573,18 +573,19 @@ ends before index `m`. It has length `n - m`.
     s2 := a[1:5] <3>
     s3 := a[:]   <4>
     s4 := a[:4]  <5>
-    s6 := a[2:4:5] <6>
+    s5 := s2[:] <6>
+    s6 := a[2:4:5] <7>
 
 <!-- Double check this -->
 First we define <1> an array with five elements, from index 0 to 4.
 From this we create <2> a slice with the elements from index 2 to 3, this slices contains: `3, 4`.
 Then we we create another slice <3> from `a`: with the elements from index 1 to 4,
 this contains: `2, 3, 4, 5`.
-With `a:[:]` <4> we create a slice with of all the elements in the array. This is a shorthand for: `a[0:len(a)]`.
+With `a[:]` <4> we create a slice with all the elements in the array. This is a shorthand for: `a[0:len(a)]`.
 And with `a[:4]` <5> we create a slice with the elements from index
 0 to 3, this is short for: `a[0:4]`, and gives us a slices that contains: `1, 2, 3, 4`.
 With `s2[:]` we create a slice from the slice `s2` <6>, note that `s5` still refers to the array `a`.
-Finally, we create a slice with the elements from index 3 to 3 *and* also set the cap to 4 <6>.
+Finally, we create a slice with the elements from index 3 to 3 *and* also set the cap to 4 <7>.
 
 When working with slices you can overrun the bounds, consider this code.
 
