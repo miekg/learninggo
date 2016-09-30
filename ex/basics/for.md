@@ -28,7 +28,7 @@
 2. Rewriting the loop results in code that should look something
     like this (only showing the `main`-function):
 
-   {callout="yes"}
+    {callout="yes"}
         func main() {
                 i := 0	<1>
         Loop:		    <2>
@@ -39,7 +39,7 @@
                 }
         }
 
-   At <1> we define our loop variable. And at <2> we define a label and at <3> we jump
+    At <1> we define our loop variable. And at <2> we define a label and at <3> we jump
    to this label.
 
 3. The following is one possible solution:
