@@ -573,18 +573,19 @@ ends before index `m`. It has length `n - m`.
     s2 := a[1:5] <3>
     s3 := a[:]   <4>
     s4 := a[:4]  <5>
-    s6 := a[2:4:5] <6>
+    s5 := s2[:] <6>
+    s6 := a[2:4:5] <7>
 
 <!-- Double check this -->
 First we define <1> an array with five elements, from index 0 to 4.
 From this we create <2> a slice with the elements from index 2 to 3, this slices contains: `3, 4`.
 Then we we create another slice <3> from `a`: with the elements from index 1 to 4,
 this contains: `2, 3, 4, 5`.
-With `a:[:]` <4> we create a slice with of all the elements in the array. This is a shorthand for: `a[0:len(a)]`.
+With `a[:]` <4> we create a slice with all the elements in the array. This is a shorthand for: `a[0:len(a)]`.
 And with `a[:4]` <5> we create a slice with the elements from index
 0 to 3, this is short for: `a[0:4]`, and gives us a slices that contains: `1, 2, 3, 4`.
 With `s2[:]` we create a slice from the slice `s2` <6>, note that `s5` still refers to the array `a`.
-Finally, we create a slice with the elements from index 3 to 3 *and* also set the cap to 4 <6>.
+Finally, we create a slice with the elements from index 3 to 3 *and* also set the cap to 4 <7>.
 
 When working with slices you can overrun the bounds, consider this code.
 
