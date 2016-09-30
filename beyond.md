@@ -189,7 +189,7 @@ example to only print the name:
 
 
 ### More on structure fields
-As said each item in a structure is called a field (((field)). A struct with no
+As said each item in a structure is called a field(((field))). A struct with no
 fields: `struct {}`. Or one with four fields:
 
     struct {
