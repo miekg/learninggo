@@ -239,9 +239,8 @@ But when we call this function with `sort([]int{1, 4, 5})`, it fails with:
 
 This is because Go can not easily convert to a *slice* of interfaces.
 Just converting to an interface is easy, but to a slice is much more costly.
-To keep a
-A> The full mailing list discussion on this subject can be found at [@go_nuts_interfaces].
-long story short: Go does not (implicitly) convert slices for you.
+The full mailing list discussion on this subject can be found at
+[@go_nuts_interfaces]. To keep a long story short: Go does not (implicitly) convert slices for you.
 
 So what is the Go way of creating such a "generic" function?
 Instead of doing the type inference ourselves with a type switch, we let
