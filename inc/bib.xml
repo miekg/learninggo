@@ -313,6 +313,7 @@
     <author fullname="Go Authors" initials="G." surname="Authors" />
     <date year="2010" />
   </front>
+  <format type="HTML" target="https://blog.golang.org/defer-panic-and-recover" />
 </reference>
 
 <reference anchor="go_faq">

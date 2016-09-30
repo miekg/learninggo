@@ -9,7 +9,7 @@
 
     Which should print 4. See (#callbacks).
 
-2. Generalize the function from above and and create a `plusX(x)` which returns functions that add `x` to an integer.
+2. Generalize the function from above and create a `plusX(x)` which returns functions that add `x` to an integer.
 
 
 {.answer}
