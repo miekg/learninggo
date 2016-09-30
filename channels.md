@@ -60,9 +60,11 @@ that satisfy the empty interface.
 Sending on a channel and receiving from it, is done with the same operator:
 `<-`. (((operators, channel)))
 
-Depending on the operands it figures out what to do, `ci <- 1`, *Send* the
-integer 1 to the channel `ci`. `<-ci`,{*Receive* an integer from the channel
-`ci`. `i := <-ci`,*Receive* from the channel `ci` and store it in `i`.
+Depending on the operands it figures out what to do:
+
+    ci <- 1   // *Send* the integer 1 to the channel ci.
+    <-ci      // *Receive* an integer from the channel ci.
+    i := <-ci // *Receive* from the channel ci and store it in i.
 
 Let's put this to use.
 
