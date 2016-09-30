@@ -52,6 +52,7 @@ you want to read a file on a line-by-line basis. The following snippet shows a w
 to do just that (we're discarding the error returned from `os.Open` here to keep
 the examples smaller -- don't ever do this in real life code).
 
+{callout="//"}
     f, _ := os.Open("/etc/passwd"); defer f.Close()
     r := bufio.NewReader(f) //<1>
     s, ok := r.ReadString('\n') //<2>
