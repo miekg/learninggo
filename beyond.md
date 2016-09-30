@@ -240,7 +240,7 @@ But keep the following in mind, this is quoted from [@go_spec]:
 
 > If `x` is
 > addressable and `&x`'s method set contains `m`,
-> `x.m()` is shorthand for \mbox{`(&x).m()`}.
+> `x.m()` is shorthand for `(&x).m()`.
 
 In the above case this means that the following is *not* an error:
 
