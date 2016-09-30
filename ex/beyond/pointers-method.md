@@ -47,8 +47,8 @@ where among other things it says:
 > A method call `x.m()` is valid if the method set of (the type of)
 > `x`
 > contains `m` and the argument list can be assigned to the parameter list
-> of `m`. If `x` is addressable and `\&x`'s method set
-> contains `m`, `x.m()` is shorthand for `(\&x).m()`.
+> of `m`. If `x` is addressable and `&x`'s method set
+> contains `m`, `x.m()` is shorthand for `(&x).m()`.
 
 In other words because `k1` is addressable and
 `*vector.IntVector` *does* have the `Push` method, the
