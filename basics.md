@@ -172,7 +172,7 @@ Finally, we print the string with `fmt.Printf` <4>.
 
 ### Runes
 `Rune` is an alias for `int32`. It is an UTF-8 encoded code point. When is this
-type useful? ((runes)) One example is when you're iterating over characters in
+type useful? (((runes))) One example is when you're iterating over characters in
 a string. You could loop over each byte (which is only equivalent to a character
 when strings are encoded in 8-bit ASCII, which they are *not* in Go!). But to
 get the actual characters you should use the `rune` type.
