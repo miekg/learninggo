@@ -2,7 +2,7 @@
 ### Method calls
 1. Suppose we have the following
 program. Note the package `container/vector` was once part
-of Go, but has been removed when the `append` built-in was introduced.
+of Go, but was removed when the `append` built-in was introduced.
 However, for this question this isn't important. The package implemented
 a stack-like structure, with push and pop methods.
 
