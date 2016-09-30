@@ -20,7 +20,7 @@ Here is an example of how you can declare a function:
 
 To declare a function, you use the `func` keyword <1>. You can optionally bind
 <2> to a specific type called receiver (((functions, receiver))) (a function
-with a receiver is usually called an method (((functions, method))). This will
+with a receiver is usually called a method(((functions, method)))). This will
 be explored in Chapter (#interfaces). Next <3> you write the name of your
 function. Here <4> we define that the variable `q` of type `int` is the input
 parameter. Parameters are passed *pass-by-value*.(((functions, pass-by-value)))
