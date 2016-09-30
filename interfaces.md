@@ -416,7 +416,7 @@ The first program compiles and runs, but when you run it, you are greeted with a
 stack trace and a *run time* error:
 "panic: reflect.Value.SetString using value obtained using unexported field".
 
-The code on the right works OK and sets the member `Name` to "Albert Einstein".
+The second program works OK and sets the member `Name` to "Albert Einstein".
 Of course this only works when you call `Set()` with a pointer argument.
 
 
