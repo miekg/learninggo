@@ -171,7 +171,7 @@ as they are distinct:
 Of course Go allows you to define new types, it does this with the
 `type`(((keywords, type))) keyword: `type foo int`
 
-Creates a new type `foo` which acts like an `int`. Creating more sophisticated
+This creates a new type `foo` which acts like an `int`. Creating more sophisticated
 types is done with the `struct` (((keywords, struct))) keyword. An example would
 be when we want record somebody's name (`string`) and age (`int`) in a single
 structure and make it a new type:
