@@ -77,7 +77,7 @@ Let's define another type `R` that also implements the interface `I`:
 The function `f` can now accept variables of type `R` and `S`.
 
 Suppose you need to know the actual type in the function `f`. In Go you can
-figure that out by using a type switch ((type switch)).
+figure that out by using a type switch(((type switch))).
 
 {callout="//"}
     func f(p I) {
@@ -88,8 +88,8 @@ figure that out by using a type switch ((type switch)).
         }
     }
 
-At <1> we use the type switch, note that the `.(type)` syntax in *only* valid
-within a `switch` statement. We store the type in the variable `t`. The
+At <1> we use the type switch, note that the `.(type)` syntax is *only* valid
+within a `switch` statement. We store the value in the variable `t`. The
 subsequent cases <2> each check for a different *actual* type. And we can even
 have a `default` <3> clause. It is worth pointing out that both `case R` and
 `case s` aren't possible, because `p` needs to be a pointer in order to satisfy
@@ -109,7 +109,7 @@ When you are sure a variable implements an interface you can use: `t := somethin
 
 ## Empty interface
 
-Since every type satisfies the empty interface: `interface{}`. We can create
+Since every type satisfies the empty interface: `interface{}` we can create
 a generic function which has an empty interface as its argument:
 
     func g(something interface{}) int {
@@ -239,9 +239,8 @@ But when we call this function with `sort([]int{1, 4, 5})`, it fails with:
 
 This is because Go can not easily convert to a *slice* of interfaces.
 Just converting to an interface is easy, but to a slice is much more costly.
-To keep a
-A> The full mailing list discussion on this subject can be found at [@go_nuts_interfaces].
-long story short: Go does not (implicitly) convert slices for you.
+The full mailing list discussion on this subject can be found at
+[@go_nuts_interfaces]. To keep a long story short: Go does not (implicitly) convert slices for you.
 
 So what is the Go way of creating such a "generic" function?
 Instead of doing the type inference ourselves with a type switch, we let
@@ -288,7 +287,7 @@ The following steps are required:
             }
          }
 
-    At <1> `x` is now of the `Sorter` type and using de defined methods for this interface we implement
+    At <1> `x` is now of the `Sorter` type and using the defined methods for this interface we implement
     Bubblesort at <2>.
 
 Now we can use our *generic* `Sort` function as follows:
@@ -417,7 +416,7 @@ The first program compiles and runs, but when you run it, you are greeted with a
 stack trace and a *run time* error:
 "panic: reflect.Value.SetString using value obtained using unexported field".
 
-The code on the right works OK and sets the member `Name` to "Albert Einstein".
+The second program works OK and sets the member `Name` to "Albert Einstein".
 Of course this only works when you call `Set()` with a pointer argument.
 
 
