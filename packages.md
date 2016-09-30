@@ -50,7 +50,7 @@ because we are trying to use a
 
     myeven.go: cannot refer to unexported name even.odd
 
-Note that the "starts with captial $$\rightarrow$$ exported", "starts with
+Note that the "starts with capital $$\rightarrow$$ exported", "starts with
 lower\-case $$\rightarrow$$ private" rule also extends to other names (new
 types, global variables) defined in the package. Note that the term "capital" is
 not limited to US-ASCII -- it extends to all bicameral alphabets (Latin, Greek,
@@ -81,7 +81,7 @@ Another convention is that the package name is the base name of its source
 directory; the package in `src/compress/gzip` is imported as `compress/gzip` but
 has name `gzip`, not `compress/gzip`.
 
-It is important to avoid stuttering when naming naming things. For instance, the
+It is important to avoid stuttering when naming things. For instance, the
 buffered reader type in the `bufio` (((package, bufio))) package is called
 `Reader`, not `BufReader`, because users see it as `bufio.Reader`, which is
 a clear, concise name.
@@ -101,14 +101,14 @@ names don't automatically make things more readable.
 When we created our `even` package, we skipped over an important item:
 documentation. Each package should have a *package comment*, a block comment
 preceding the `package` clause. In our case we should extend the beginning of
-the package \gocircle{1}, with:
+the package, with:
 
     // The even package implements a fast function for detecting if an integer
     // is even or not.
     package even
 
 When running `go doc` this will show up at the top of the page. When a package
-consists out of multiple files the package comment should only appear in one
+consists of multiple files the package comment should only appear in one
 file. A common convention (in really big packages) is to have a separate
 `doc.go` that only holds the package comment. Here is a snippet from the
 official `regexp` package:
@@ -133,7 +133,7 @@ documenting the behavior of the function. Again to extend our `even` package:
 
 And even though `odd` is not exported, it's good form to document it as well.
 
-    // odd is to opposite of Even.
+    // odd is the opposite of Even.
     func odd(i int) bool {
 
 
@@ -209,11 +209,11 @@ We now get:
 
 And you can act accordingly (by fixing the test for instance).
 
-N> Writing new packages should go hand in hand with writing (some)
-N> documentation and test functions. It will make your code better and it
-N> shows that you really put in the effort.
+Writing new packages should go hand in hand with writing (some)
+documentation and test functions. It will make your code better and it
+shows that you really put in the effort.
 
-The Go test suite also allows you to incorperate example functions which serve
+The Go test suite also allows you to incorporate example functions which serve
 as documentation *and* as tests. These functions need to start with `Example`.
 
 {callout="//"}
