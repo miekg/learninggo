@@ -25,7 +25,7 @@ The stack in the figure could be represented as: `[0:m] [1:l] [2:k]` .
             data [10]int
         }
 
-Next we need the \func{push} and \func{pop} functions to actually
+Next we need the `push` and `pop` functions to actually
 use the thing. First we show the *wrong* solution!
 
 In Go, data passed to functions is *passed-by-value* meaning a copy
