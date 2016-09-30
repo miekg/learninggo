@@ -349,7 +349,7 @@ The following code fragment, shows how we can use this function:
 
 On line 3 the `a[3] = 5` triggers a *runtime* out of bounds error which results
 in a panic. Thus this program will print `true`. If we change line 2: `var
-a []int` to `var a [3]int` the function `panicy` does not panic anymore. Why?
+a []int` to `var a [4]int` the function `panicy` does not panic anymore. Why?
 
 ## Exercises
 
