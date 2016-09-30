@@ -173,7 +173,8 @@ will check if a channel is closed.
 
 Where `ok` is set to `true` the channel is not closed
 *and* we've read something. Otherwise `ok` is set to `false`. In that case the
-channel was closed.
+channel was closed and the value received is a zero value of the
+channel's type.
 
 
 ## Exercises
