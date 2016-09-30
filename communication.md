@@ -52,13 +52,13 @@ you want to read a file on a line-by-line basis. The following snippet shows a w
 to do just that (we're discarding the error returned from `os.Open` here to keep
 the examples smaller -- don't ever do this in real life code).
 
+{callout="//"}
     f, _ := os.Open("/etc/passwd"); defer f.Close()
     r := bufio.NewReader(f) //<1>
     s, ok := r.ReadString('\n') //<2>
-    //<3>
 
 At <1> make `f` a `bufio` to have access to the `ReadString` method. Then at <2> we read
-a line from the input, `s`  now holds to string which we can manipulate with, for instance,
+a line from the input, `s`  now holds a string which we can manipulate with, for instance,
 the `strings` package.
 
 A more robust method (but slightly more complicated) is `ReadLine`, see the documentation
@@ -101,9 +101,9 @@ a *pointer* to the value, the `dnssec` is now a pointer to a `bool`. At <2> we
 define an `strings` flag. Then at <3> we *redefine* the `Usage` variable of the
 flag package so we can add some extra text. The `PrintDefaults` at <4> will
 output the default help for the flags that are defined. Note even without
-redefining a `flag.Usage` a `-h` is support and will just output the help text
+redefining a `flag.Usage` the flag `-h` is supported and will just output the help text
 for each of the flags. Finally at <4> we call `Parse` that parses the command
-line and fill the fill the variables.
+line and fills the variables.
 
 After the flags have been parsed you can used them: `if *dnssec { ... }`
 
