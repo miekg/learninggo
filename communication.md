@@ -56,7 +56,6 @@ the examples smaller -- don't ever do this in real life code).
     f, _ := os.Open("/etc/passwd"); defer f.Close()
     r := bufio.NewReader(f) //<1>
     s, ok := r.ReadString('\n') //<2>
-    //<3>
 
 At <1> make `f` a `bufio` to have access to the `ReadString` method. Then at <2> we read
 a line from the input, `s`  now holds to string which we can manipulate with, for instance,
