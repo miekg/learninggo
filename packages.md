@@ -101,7 +101,7 @@ names don't automatically make things more readable.
 When we created our `even` package, we skipped over an important item:
 documentation. Each package should have a *package comment*, a block comment
 preceding the `package` clause. In our case we should extend the beginning of
-the package \gocircle{1}, with:
+the package, with:
 
     // The even package implements a fast function for detecting if an integer
     // is even or not.
@@ -209,9 +209,9 @@ We now get:
 
 And you can act accordingly (by fixing the test for instance).
 
-N> Writing new packages should go hand in hand with writing (some)
-N> documentation and test functions. It will make your code better and it
-N> shows that you really put in the effort.
+Writing new packages should go hand in hand with writing (some)
+documentation and test functions. It will make your code better and it
+shows that you really put in the effort.
 
 The Go test suite also allows you to incorporate example functions which serve
 as documentation *and* as tests. These functions need to start with `Example`.
