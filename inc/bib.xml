@@ -369,3 +369,12 @@
   </front>
   <format type="TXT" target="http://www.ietf.org/rfc/rfc4641.txt" />
 </reference>
+
+<reference anchor="go_1_5_release_notes">
+  <front>
+    <title>Go 1.5 Release Notes</title>
+    <author fullname="Go Authors" initials="G." surname="Authors" />
+    <date year="2010" />
+  </front>
+  <format type="HTML" target="https://golang.org/doc/go1.5" />
+</reference>

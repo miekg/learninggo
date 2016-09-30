@@ -18,7 +18,7 @@
 
    <{{ex/channels/src/for-chan.go}}
 
-   We start of in the usual way, then at line 6 we create a new channel of
+   We start in the usual way, then at line 6 we create a new channel of
    ints. In the next line we fire off the function `shower` with
    the `ch` variable as it argument, so that we may communicate with
    it. Next we start our for-loop (lines 8-10) and in the loop

@@ -38,7 +38,7 @@ long we should wait until all goroutines have exited. This outputs:
     Coffee is ready!    // After 1 second
     Tea is ready!       // After 2 seconds
 
-If we did not wait for the goroutines (i.e. remove thei last line at <2>) the
+If we did not wait for the goroutines (i.e. remove the last line at <2>) the
 program would be terminated immediately and any running goroutines would
 *die with it*.
 
@@ -60,9 +60,11 @@ that satisfy the empty interface.
 Sending on a channel and receiving from it, is done with the same operator:
 `<-`. (((operators, channel)))
 
-Depending on the operands it figures out what to do, `ci <- 1`, *Send* the
-integer 1 to the channel `ci`. `<-ci`,{*Receive* an integer from the channel
-`ci`. `i := <-ci`,*Receive* from the channel `ci` and store it in `i`.
+Depending on the operands it figures out what to do:
+
+    ci <- 1   // *Send* the integer 1 to the channel ci.
+    <-ci      // *Receive* an integer from the channel ci.
+    i := <-ci // *Receive* from the channel ci and store it in i.
 
 Let's put this to use.
 
@@ -130,13 +132,16 @@ goroutines that can run in parallel. From the documentation:
 If you do not want to change any source code you can also set an environment
 variable `GOMAXPROCS` to the desired value.
 
+Note that the above discussion relates to older versions of Go. From
+version 1.5 and above, `GOMAXPROCS` defaults to the number of CPU
+cores[@go_1_5_release_notes].
 
 ## More on channels
 
 When you create a channel in Go with `ch := make(chan bool)`, an unbuffered
 channel (((channel, unbuffered))) for bools is created. What does this mean for
 your program? For one, if you read (`value := <-ch`) it will block until there
-is data to receive. Secondly anything sending (`ch<-5`) will block until there
+is data to receive. Secondly anything sending (`ch <- true`) will block until there
 is somebody to read it. Unbuffered channels make a perfect tool for
 synchronizing multiple goroutines. (((channel, blocking read))) (((channel,
 blocking write)))
@@ -168,7 +173,8 @@ will check if a channel is closed.
 
 Where `ok` is set to `true` the channel is not closed
 *and* we've read something. Otherwise `ok` is set to `false`. In that case the
-channel was closed.
+channel was closed and the value received is a zero value of the
+channel's type.
 
 
 ## Exercises
