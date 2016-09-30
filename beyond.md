@@ -171,7 +171,7 @@ as they are distinct:
 Of course Go allows you to define new types, it does this with the
 `type`(((keywords, type))) keyword: `type foo int`
 
-Creates a new type `foo` which acts like an `int`. Creating more sophisticated
+This creates a new type `foo` which acts like an `int`. Creating more sophisticated
 types is done with the `struct` (((keywords, struct))) keyword. An example would
 be when we want record somebody's name (`string`) and age (`int`) in a single
 structure and make it a new type:
@@ -189,7 +189,7 @@ example to only print the name:
 
 
 ### More on structure fields
-As said each item in a structure is called a field (((field)). A struct with no
+As said each item in a structure is called a field(((field))). A struct with no
 fields: `struct {}`. Or one with four fields:
 
     struct {
@@ -240,7 +240,7 @@ But keep the following in mind, this is quoted from [@go_spec]:
 
 > If `x` is
 > addressable and `&x`'s method set contains `m`,
-> `x.m()` is shorthand for \mbox{`(&x).m()`}.
+> `x.m()` is shorthand for `(&x).m()`.
 
 In the above case this means that the following is *not* an error:
 

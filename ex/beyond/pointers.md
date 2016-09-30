@@ -8,7 +8,7 @@
             age	 int
         }
 
-   What is the difference between the following two lines?
+    What is the difference between the following two lines?
 
         var p1 Person
         p2 := new(Person)
