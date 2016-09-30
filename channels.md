@@ -141,7 +141,7 @@ cores[@go_1_5_release_notes].
 When you create a channel in Go with `ch := make(chan bool)`, an unbuffered
 channel (((channel, unbuffered))) for bools is created. What does this mean for
 your program? For one, if you read (`value := <-ch`) it will block until there
-is data to receive. Secondly anything sending (`ch<-5`) will block until there
+is data to receive. Secondly anything sending (`ch <- true`) will block until there
 is somebody to read it. Unbuffered channels make a perfect tool for
 synchronizing multiple goroutines. (((channel, blocking read))) (((channel,
 blocking write)))
