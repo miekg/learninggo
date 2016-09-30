@@ -132,6 +132,9 @@ goroutines that can run in parallel. From the documentation:
 If you do not want to change any source code you can also set an environment
 variable `GOMAXPROCS` to the desired value.
 
+Note that the above discussion relates to older versions of Go. From
+version 1.5 and above, `GOMAXPROCS` defaults to the number of CPU
+cores[@go_1_5_release_notes].
 
 ## More on channels
 
