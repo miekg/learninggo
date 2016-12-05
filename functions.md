@@ -144,7 +144,7 @@ Because functions are values they are easy to pass to functions, from where they
 can be used as callbacks. First define a function that does "something" with an
 integer value:
 
-    func printit(x int)
+    func printit(x int) {
         fmt.Printf("%v\n", x)
     }
 

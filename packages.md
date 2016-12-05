@@ -216,12 +216,12 @@ shows that you really put in the effort.
 The Go test suite also allows you to incorporate example functions which serve
 as documentation *and* as tests. These functions need to start with `Example`.
 
-{callout="//"}
+{callout="yes"}
     func ExampleEven() {
         if Even(2) {
             fmt.Printf("Is even\n")
         }
-        // Output: //<1>
+        // Output: <1>
         // Is even
     }
 

@@ -276,29 +276,31 @@ The following steps are required:
         func (p Xs) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
 
 * Write a *generic* Sort function that works on the `Sorter` interface.
-  {callout="//"}
-         func Sort(x Sorter) { //<1>
-            for i := 0; i < x.Len() - 1; i++ { //<2>
-                for j := i + 1; j < x.Len(); j++ {
-                    if x.Less(i, j) {
-                        x.Swap(i, j)
-                    }
-                }
-            }
-         }
 
-    At <1> `x` is now of the `Sorter` type and using the defined methods for this interface we implement
-    Bubblesort at <2>.
 
-Now we can use our *generic* `Sort` function as follows:
+	{callout="//"}
+		func Sort(x Sorter) {
+			for i := 0; i < x.Len() - 1; i++ { // <1>
+				for j := i + 1; j < x.Len(); j++ { //<2>
+					if x.Less(i, j) {
+						x.Swap(i, j)
+					}
+				}
+			}
+		}
 
-    ints := Xi{44, 67, 3, 17, 89, 10, 73, 9, 14, 8}
-    strings := Xs{"nut", "ape", "elephant", "zoo", "go"}
+	At <1> `x` is now of the `Sorter` type and using the defined methods for this interface we implement
+	Bubblesort at <2>.
 
-    Sort(ints)
-    fmt.Printf("%v\n", ints)
-    Sort(strings)
-    fmt.Printf("%v\n", strings)
+	Now we can use our *generic* `Sort` function as follows:
+
+		ints := Xi{44, 67, 3, 17, 89, 10, 73, 9, 14, 8}
+		strings := Xs{"nut", "ape", "elephant", "zoo", "go"}
+
+		Sort(ints)
+		fmt.Printf("%v\n", ints)
+		Sort(strings)
+		fmt.Printf("%v\n", strings)
 
 
 ## Listing interfaces in interfaces
