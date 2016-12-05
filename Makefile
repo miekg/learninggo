@@ -6,5 +6,8 @@ learninggo.html: *.md src/*/*.go ex/*/*.md tab/*.md inc/learninggo.css inc/head.
 learninggo.txt: *.md src/*/*.go ex/*/*.md tab/*.md inc/learninggo.css inc/head.html
 	mmark -xml2 -page learninggo.md > learninggo.xml && xml2rfc learninggo.xml
 
+addhl: learninggo.html
+	./addhl.sh
+
 clean:
 	rm -f learninggo.html learninggo.txt
