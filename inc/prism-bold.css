@@ -27,8 +27,8 @@
 /* .token.regex, */
 /* .token.important, */
 /* .token.variable, */
+/* .token.function, */
 
-.token.function,
 .token.builtin,
 .token.keyword,
 .token.important{
