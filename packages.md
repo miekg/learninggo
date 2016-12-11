@@ -103,9 +103,11 @@ documentation. Each package should have a *package comment*, a block comment
 preceding the `package` clause. In our case we should extend the beginning of
 the package, with:
 
-    // The even package implements a fast function for detecting if an integer
-    // is even or not.
-    package even
+~~~go
+// The even package implements a fast function for detecting if an integer
+// is even or not.
+package even
+~~~
 
 When running `go doc` this will show up at the top of the page. When a package
 consists of multiple files the package comment should only appear in one
@@ -113,28 +115,34 @@ file. A common convention (in really big packages) is to have a separate
 `doc.go` that only holds the package comment. Here is a snippet from the
 official `regexp` package:
 
-    /*
-        The regexp package implements a simple library for
-        regular expressions.
+~~~go
+/*
+    The regexp package implements a simple library for
+    regular expressions.
 
-        The syntax of the regular expressions accepted is:
+    The syntax of the regular expressions accepted is:
 
-        regexp:
-            concatenation { '|' concatenation }
-    */
-    package regexp
+    regexp:
+        concatenation { '|' concatenation }
+*/
+package regexp
+~~~
 
 
 Each defined (and exported) function should have a small line of text
 documenting the behavior of the function. Again to extend our `even` package:
 
-    // Even returns true of i is even. Otherwise false is returned.
-    func Even(i int) bool {
+~~~go
+// Even returns true of i is even. Otherwise false is returned.
+func Even(i int) bool {
+~~~
 
 And even though `odd` is not exported, it's good form to document it as well.
 
-    // odd is the opposite of Even.
-    func odd(i int) bool {
+~~~go
+// odd is the opposite of Even.
+func odd(i int) bool {
+~~~
 
 
 ## Testing packages
@@ -192,13 +200,15 @@ moment we have been waiting form executing the test.
 Our test ran and reported `ok`. Success! If we redefine our test function, we
 can see the result of a failed test:
 
-    // Entering the twilight zone
-    func TestEven(t *testing.T) {
-            if Even(2) {
-                    t.Log("2 should be odd!")
-                    t.Fail()
-            }
+~~~go
+// Entering the twilight zone
+func TestEven(t *testing.T) {
+    if Even(2) {
+        t.Log("2 should be odd!")
+        t.Fail()
     }
+}
+~~~
 
 We now get:
 
@@ -216,14 +226,16 @@ shows that you really put in the effort.
 The Go test suite also allows you to incorporate example functions which serve
 as documentation *and* as tests. These functions need to start with `Example`.
 
-{callout="yes"}
-    func ExampleEven() {
-        if Even(2) {
-            fmt.Printf("Is even\n")
-        }
-        // Output: <1>
-        // Is even
+{callout="//"}
+~~~go
+func ExampleEven() {
+    if Even(2) {
+        fmt.Printf("Is even\n")
     }
+    // Output: //<1>
+    // Is even
+}
+~~~
 
 Those last two comments lines <1> are part of the example, `go test` uses those
 to check the *generated* output with the text in the comments. If there is

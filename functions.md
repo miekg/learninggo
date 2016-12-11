@@ -14,9 +14,11 @@ happens in them.
 Here is an example of how you can declare a function:
 
 {callout="//"}
-    type mytype int
-    func (p mytype) funcname(q int) (r,s int) { return 0,0 }
-    // <1>        <2>        <3>      <4>        <5>         <6>
+~~~go
+type mytype int
+func (p mytype) funcname(q int) (r,s int) { return 0,0 }
+// <1>        <2>        <3>      <4>        <5>         <6>
+~~~
 
 To declare a function, you use the `func` keyword <1>. You can optionally bind
 <2> to a specific type called receiver (((functions, receiver))) (a function
@@ -54,13 +56,15 @@ functions. See the Section (#functions-as-values) in this chapter. Recursive
 functions work just as in other languages:
 
 {callout="//"}
-    func rec(i int) {
-       if i == 10 { //<1>
-            return
-       }
-       rec(i+1) //<2>
-       fmt.Printf("%d ", i)
+~~~go
+func rec(i int) {
+    if i == 10 { //<1>
+        return
     }
+    rec(i+1) //<2>
+    fmt.Printf("%d ", i)
+}
+~~~
 
 Here <2> we call the same function again, `rec` returns when `i` has the value
 10, this is checked on the second line <1>. This function prints: `9
@@ -77,26 +81,27 @@ names overlap - a local variable is declared with the same name as a global one
 In the following example we call `g()` from `f()`:
 
 {callout="//"}
-    package main
+~~~go
+package main
 
-    var a int // <1>
+var a int // <1>
 
-    func main() {
-            a = 5
-            print(a)
-            f()
-    }
+func main() {
+    a = 5
+    print(a)
+    f()
+}
 
-    func f() {
-            a := 6 // <2>
-            print(a)
-            g()
-    }
+func f() {
+    a := 6 // <2>
+    print(a)
+    g()
+}
 
-    func g() {
-            print(a)
-    }
-
+func g() {
+    print(a)
+}
+~~~
 
 Here <1>, we declare `a` to be a global variable of type `int`. Then in the
 `main` function we give the *global* `a` the value of 5, after printing it we
@@ -125,11 +130,13 @@ defined, then we can *call* it, <3>.
 Functions--as--values may be used in other places, for example maps. Here we
 convert from integers to functions:
 
-    var xs = map[int]func() int{
-        1: func() int { return 10 },
-        2: func() int { return 20 },
-        3: func() int { return 30 },
-    }
+~~~go
+var xs = map[int]func() int{
+    1: func() int { return 10 },
+    2: func() int { return 20 },
+    3: func() int { return 30 },
+}
+~~~
 
 Note that the final comma on second to last line is *mandatory*.
 
@@ -144,18 +151,22 @@ Because functions are values they are easy to pass to functions, from where they
 can be used as callbacks. First define a function that does "something" with an
 integer value:
 
-    func printit(x int) {
-        fmt.Printf("%v\n", x)
-    }
+~~~go
+func printit(x int) {
+    fmt.Printf("%v\n", x)
+}
+~~~
 
 This function does not return a value and just prints its argument. The
 *signature* (((functions, signature))) of this function is: `func printit(int)`,
 or without the function name: `func(int)`. To create a new function that uses
 this one as a callback we need to use this signature:
 
-    func callback(y int, f func(int)) {
-        f(y)
-    }
+~~~go
+func callback(y int, f func(int)) {
+    f(y)
+}
+~~~
 
 Here we create a new function that takes two parameters: `y int`, i.e. just an
 `int` and `f func(int)`, i.e. a function that takes an int and returns nothing.
@@ -172,21 +183,23 @@ return early. If you do that, you will need to close the file descriptor you are
 working on. This often leads to the following code:
 
 {callout="//"}
-    func ReadWrite() bool {
-        file.Open("file")
-        // Do your thing
-        if failureX {
-            file.Close() //<1>
-            return false
-        }
-
-        if failureY {
-            file.Close() //<1>
-            return false
-        }
+~~~go
+func ReadWrite() bool {
+    file.Open("file")
+    // Do your thing
+    if failureX {
         file.Close() //<1>
-        return true  //<2>
+        return false
     }
+
+    if failureY {
+        file.Close() //<1>
+        return false
+    }
+    file.Close() //<1>
+    return true  //<2>
+}
+~~~
 
 Note that we repeat a lot of code here; you can see the that `file.Close()` is
 called at <1>. To overcome this, Go has the `defer` (((keywords, defer)))
@@ -197,18 +210,20 @@ With `defer` we can rewrite the above code as follows. It makes the function
 more readable and it puts the `Close` *right next* to the `Open`.
 
 {callout="//"}
-    func ReadWrite() bool {
-        file.Open("filename")
-        defer file.Close() //<1>
-        // Do your thing
-        if failureX {
-            return false //<2>
-        }
-        if failureY {
-            return false //<2>
-        }
-        return true //<2>
+~~~go
+func ReadWrite() bool {
+    file.Open("filename")
+    defer file.Close() //<1>
+    // Do your thing
+    if failureX {
+        return false //<2>
     }
+    if failureY {
+        return false //<2>
+    }
+    return true //<2>
+}
+~~~
 
 At <1> `file.Close()` is added to the defer list. (((keywords, defer list)))
 `Close` is now done automatically at <2>. This makes the function shorter and
@@ -217,9 +232,11 @@ more readable. It puts the `Close` right next to the `Open`.
 You can put multiple functions on the "defer list", like this example from
 [@effective_go]:
 
-    for i := 0; i < 5; i++ {
-        defer fmt.Printf("%d ", i)
-    }
+~~~go
+for i := 0; i < 5; i++ {
+    defer fmt.Printf("%d ", i)
+}
+~~~
 
 Deferred functions are executed in LIFO order, so the above code prints: `4
 3 2 1 0`.
@@ -228,7 +245,9 @@ With `defer` you can even change return values, provided that you are using
 named result parameters and a function literal (((functions, literal)))^[A
 function literal is sometimes called a closure (((closure))).], i.e:
 
-    defer func() {/* ... */}()
+~~~go
+defer func() {/* ... */}()
+~~~
 
 Here we use a function without a name and specify the body of the function
 inline, basically we're creating a nameless function on the spot. The final
@@ -236,17 +255,21 @@ braces are needed because `defer` needs a function call, not a function value.
 If our anonymous function would take an parameter it would be easier to see why
 we need the braces:
 
-    defer func(x int) {/* ... */}(5)
+~~~go
+defer func(x int) {/* ... */}(5)
+~~~
 
 In this (unnamed) function you can access any named return parameter:
 
 {callout="//"}
-    func f() (ret int)
-        defer func() { //<1>
-            ret++
-        }()
-        return 0
-    }
+~~~go
+func f() (ret int)
+    defer func() { //<1>
+        ret++
+    }()
+    return 0
+}
+~~~
 
 Here <1> we specify our function, the named return value `ret` is initialized
 with zero. The nameless function in the defer increments the value of `ret` 
@@ -260,15 +283,19 @@ Functions that take a variable number of parameters are known as variadic
 functions. (((functions, variadic))) To declare a function as variadic, do
 something like this:
 
-    func myfunc(arg ...int) {}
+~~~go
+func myfunc(arg ...int) {}
+~~~
 
 The `arg ...int` instructs Go to see this as a function that takes a variable
 number of arguments. Note that these arguments all have to have the type `int`.
 In the body of your function the variable `arg` is a slice of ints:
 
-    for _, n := range arg {
-        fmt.Printf("And the number is: %d\n", n)
-    }
+~~~go
+for _, n := range arg {
+    fmt.Printf("And the number is: %d\n", n)
+}
+~~~
 
 We range over the arguments on the first line. We are not interested in the
 index as returned by `range`, hence the use of the underscore there. In the body
@@ -280,10 +307,12 @@ interface `interface{}` (see Chapter (#interfaces)).
 Suppose we have another variadic function called `myfunc2`, the following
 example shows how to pass variadic arguments to it:
 
-    func myfunc(arg ...int) {
-        myfunc2(arg...)
-        myfunc2(arg[:2]...)
-    }
+~~~go
+func myfunc(arg ...int) {
+    myfunc2(arg...)
+    myfunc2(arg[:2]...)
+}
+~~~
 
 With `myfunc2(arg...)` we pass all the parameters to `myfunc2`, but because the
 variadic parameters is just a slice, we can use some slice tricks as well.
@@ -318,15 +347,17 @@ This function checks if the function it gets as argument will panic when it is
 executed^[Modified from a presentation of Eleanor McHugh.]:
 
 {callout="//"}
-    func Panic(f func()) (b bool) { //<1>
-        defer func() { //<2>
-            if x := recover(); x != nil {
-                b = true
-            }
-        }()
-        f() //<3>
-        return //<4>
-    }
+~~~go
+func Panic(f func()) (b bool) { //<1>
+    defer func() { //<2>
+        if x := recover(); x != nil {
+            b = true
+        }
+    }()
+    f() //<3>
+    return //<4>
+}
+~~~
 
 We define a new function `Panic` <1> that takes a function as an argument (see
 (#functions-as-values)). It returns true if `f` panics when run, else false. We
@@ -338,14 +369,16 @@ return parameter.
 
 The following code fragment, shows how we can use this function:
 
-    func panicy() {
-        var a []int
-        a[3] = 5
-    }
+~~~go
+func panicy() {
+    var a []int
+    a[3] = 5
+}
 
-    func main() {
-        fmt.Println(Panic(panicy))
-    }
+func main() {
+    fmt.Println(Panic(panicy))
+}
+~~~
 
 On line 3 the `a[3] = 5` triggers a *runtime* out of bounds error which results
 in a panic. Thus this program will print `true`. If we change line 2: `var

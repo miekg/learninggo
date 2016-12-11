@@ -20,13 +20,15 @@ a pointer point to something you can use the address-of operator
 (((operators, address-of))) (`&`), which we demonstrate here:
 
 {callout="//"}
-    var p *int
-    fmt.Printf("%v", p) //<1>
+~~~go
+var p *int
+fmt.Printf("%v", p) //<1>
 
-    var i int	    //<2>
-    p = &i		    //<3>
+var i int	    //<2>
+p = &i		    //<3>
 
-    fmt.Printf("%v", p) //<4>
+fmt.Printf("%v", p) //<4>
+~~~
 
 This <1> Prints `nil`. Declare <2> an integer variable `i`. Make `p` point <3>
 to `i`, i.e. take the address of `i`. And this <4> will print something like
@@ -83,13 +85,15 @@ a newly allocated, zeroed slice structure, that is, a pointer to a `nil` slice
 value. These examples illustrate the difference between `new` and `make`.
 
 {callout="//"}
-    var p *[]int = new([]int)       //<1>
-    var v  []int = make([]int, 100) //<2>
+~~~go
+var p *[]int = new([]int)       //<1>
+var v  []int = make([]int, 100) //<2>
 
-    var p *[]int = new([]int)       //<3>
-    *p = make([]int, 100, 100)
+var p *[]int = new([]int)       //<3>
+*p = make([]int, 100, 100)
 
-    v := make([]int, 100)           //<4>
+v := make([]int, 100)           //<4>
+~~~
 
 Allocates <1> slice structure; rarely useful. `v` <2> refers to a new array of
 100 ints. At <3> we make it unnecessarily complex, <4> is more idiomatic.
@@ -111,30 +115,34 @@ A> And of course `make` is only used for slices, maps and channels.
 Sometimes the zero value isn't good enough and an initializing constructor is
 necessary, as in this example taken from the package `os`.
 
-    func NewFile(fd int, name string) *File {
-        if fd < 0 {
-            return nil
-        }
-        f := new(File)
-        f.fd = fd
-        f.name = name
-        f.dirinfo = nil
-        f.nepipe = 0
-        return f
+~~~go
+func NewFile(fd int, name string) *File {
+    if fd < 0 {
+        return nil
     }
+    f := new(File)
+    f.fd = fd
+    f.name = name
+    f.dirinfo = nil
+    f.nepipe = 0
+    return f
+}
+~~~
 
 There's a lot of boiler plate in there. We can simplify it using a
 *composite literal* (((literal, composite))), which is an expression that
  creates a new instance each time it is evaluated.
 
 {callout="//"}
-    func NewFile(fd int, name string) *File {
-        if fd < 0 {
-            return nil
-        }
-        f := File{fd, name, nil, 0}
-        return &f	//<1>
+~~~go
+func NewFile(fd int, name string) *File {
+    if fd < 0 {
+        return nil
     }
+    f := File{fd, name, nil, 0}
+    return &f	//<1>
+}
+~~~
 
 It is OK to return the address of a local variable <1> the storage associated
 with the variable survives after the function returns.
@@ -144,14 +152,18 @@ each time it is evaluated, so we can combine these last two lines.^[Taking the
 address of a composite literal tells the compiler to allocate it on the heap,
 not the stack.]
 
-    return &File{fd, name, nil, 0}
+~~~go
+return &File{fd, name, nil, 0}
+~~~
 
 The items (called fields) of a composite literal are laid out in order and must
 all be present. However, by labeling the elements explicitly as field:value
 pairs, the initializers can appear in any order, with the missing ones left as
 their respective zero values. Thus we could say
 
-    return &File{fd: fd, name: name}
+~~~go
+return &File{fd: fd, name: name}
+~~~
 
 As a limiting case, if a composite literal contains no fields at all, it creates
 a zero value for the type. The expressions `new(File)` and `&File{}` are
@@ -162,9 +174,11 @@ field labels being indices or map keys as appropriate. In these examples, the
 initializations work regardless of the values of `Enone`, and `Einval`, as long
 as they are distinct:
 
-    ar := [...]string{Enone: "no error", Einval: "invalid argument"}
-    sl := []string{Enone: "no error", Einval: "invalid argument"}
-    ma := map[int]string {Enone: "no error", Einval: "invalid argument"}
+~~~go
+ar := [...]string{Enone: "no error", Einval: "invalid argument"}
+sl := []string{Enone: "no error", Einval: "invalid argument"}
+ma := map[int]string {Enone: "no error", Einval: "invalid argument"}
+~~~
 
 
 ## Defining your own types
@@ -184,7 +198,9 @@ That is nice! Go knows how to print your structure. If you only want to print
 one, or a few, fields of the structure you'll need to use `.<field name>`. For
 example to only print the name:
 
-    fmt.Printf("%s", a.name)
+~~~go
+fmt.Printf("%s", a.name)
+~~~
 
 
 
@@ -192,21 +208,25 @@ example to only print the name:
 As said each item in a structure is called a field(((field))). A struct with no
 fields: `struct {}`. Or one with four fields:
 
-    struct {
-            x, y int
-            A *[]int
-            F func()
-    }
+~~~go
+struct {
+    x, y int
+    A *[]int
+    F func()
+}
+~~~
 
 If you omit the name for a field, you create an anonymous field (((field,
 anonymous))), for instance:
 
-    struct {
-        T1        // Field name is T1.
-        *T2       // Field name is T2.
-        P.T3      // Field name is T3.
-        x, y int  // Field names are x and y.
-    }
+~~~go
+struct {
+    T1        // Field name is T1.
+    *T2       // Field name is T2.
+    P.T3      // Field name is T3.
+    x, y int  // Field names are x and y.
+}
+~~~
 
 Note that field names that start with a capital letter are exported, i.e. can be
 set or read from other packages. Field names that start with a lowercase are
@@ -220,16 +240,22 @@ routes:
 
 1. Create a function that takes the type as an argument.
 
-        func doSomething(n1 *NameAge, n2 int) { /* */ }
+~~~go
+func doSomething(n1 *NameAge, n2 int) { /* */ }
+~~~
 
 2. Create a function that works on the type (see *receiver* in (#functions)):
 
-        func (n1 *NameAge) doSomething(n2 int) { /* */ }
+~~~go
+func (n1 *NameAge) doSomething(n2 int) { /* */ }
+~~~
 
    This is a method call, which can be used as:
 
-        var n *NameAge
-        n.doSomething(2)
+~~~go
+var n *NameAge
+n.doSomething(2)
+~~~
 
 Whether to use a function or method is entirely up to the programmer, but if you
 want to satisfy an interface (see the next chapter) you must use methods. If no
@@ -244,8 +270,10 @@ But keep the following in mind, this is quoted from [@go_spec]:
 
 In the above case this means that the following is *not* an error:
 
-    var n NameAge	    // Not a pointer
-    n.doSomething(2)
+~~~go
+var n NameAge	    // Not a pointer
+n.doSomething(2)
+~~~
 
 Here Go will search the method list for `n` of type `NameAge`, come up empty and
 will then *also* search the method list for the type `*NameAge` and will
@@ -254,10 +282,12 @@ translate this call to `(&n).doSomething(2)`.
 There is a subtle but major difference between the following type declarations.
 Also see the Section "Type Declarations" [@go_spec]. Suppose we have:
 
-    // A Mutex is a data type with two methods, Lock and Unlock.
-    type Mutex struct         { /* Mutex fields */ }
-    func (m *Mutex) Lock()    { /* Lock impl. */ }
-    func (m *Mutex) Unlock()  { /* Unlock impl. */ }
+~~~go
+// A Mutex is a data type with two methods, Lock and Unlock.
+type Mutex struct         { /* Mutex fields */ }
+func (m *Mutex) Lock()    { /* Lock impl. */ }
+func (m *Mutex) Unlock()  { /* Unlock impl. */ }
+~~~
 
 We now create two types in two different manners:
 
@@ -284,24 +314,30 @@ are allowed.
 
 * From a `string` to a slice of bytes or runes.
 
-        mystring := "hello this is string"
-        byteslice := []byte(mystring)
+    ~~~go
+    mystring := "hello this is string"
+    byteslice := []byte(mystring)
+    ~~~
 
     Converts to a `byte` slice, each `byte` contains the integer value of the
     corresponding byte in the string. Note that as strings in Go are encoded in
     UTF-8 some characters in the string may end up in 1, 2, 3 or 4 bytes.
 
-        runeslice  := []rune(mystring)
+    ~~~go
+    runeslice  := []rune(mystring)
+    ~~~
 
     Converts to an `rune` slice, each `rune` contains a Unicode code point.
     Every character from the string corresponds to one rune.
 
 * From a slice of bytes or runes to a `string`.
 
-        b := []byte{'h','e','l','l','o'} // Composite literal.
-        s := string(b)
-        i := []rune{257,1024,65}
-        r := string(i)
+    ~~~go
+    b := []byte{'h','e','l','l','o'} // Composite literal.
+    s := string(b)
+    i := []rune{257,1024,65}
+    r := string(i)
+    ~~~
 
 For numeric values the following conversions are defined:
 
@@ -315,13 +351,17 @@ For numeric values the following conversions are defined:
 How can you convert between the types you have defined yourself? We create two
 types here `Foo` and `Bar`, where `Bar` is an alias for `Foo`:
 
-    type foo struct { int }  // Anonymous struct field.
-    type bar foo             // bar is an alias for foo.
+~~~go
+type foo struct { int }  // Anonymous struct field.
+type bar foo             // bar is an alias for foo.
+~~~
 
 Then we:
 
-    var b bar = bar{1} // Declare `b` to be a `bar`.
-    var f foo = b	   // Assign `b` to `f`.
+~~~go
+var b bar = bar{1} // Declare `b` to be a `bar`.
+var f foo = b	   // Assign `b` to `f`.
+~~~
 
 Which fails on the last line with:
 `cannot use b (type bar) as type foo in assignment`

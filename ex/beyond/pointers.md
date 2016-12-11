@@ -3,28 +3,35 @@
 
 1.  Suppose we have defined the following structure:
 
-        type Person struct {
-            name string
-            age	 int
-        }
+    ~~~go
+    type Person struct {
+        name string
+        age	 int
+    }
+    ~~~
 
     What is the difference between the following two lines?
 
-        var p1 Person
-        p2 := new(Person)
-
+    ~~~go
+    var p1 Person
+    p2 := new(Person)
+    ~~~
 
 2.  What is the difference between the following two allocations?
 
-        func Set(t *T) {
-            x = t
-        }
+    ~~~go
+    func Set(t *T) {
+        x = t
+    }
+    ~~~
 
     and
 
-        func Set(t T) {
-            x= &t
-        }
+    ~~~go
+    func Set(t T) {
+        x= &t
+    }
+    ~~~
 
 
 {.answer}

@@ -4,8 +4,10 @@
 1. Write a function that returns a function that performs a $$+2$$ on integers. Name the function `plusTwo`.
     You should then be able do the following:
 
-        p := plusTwo()
-        fmt.Printf("%v\n", p(2))
+    ~~~go
+    p := plusTwo()
+    fmt.Printf("%v\n", p(2))
+    ~~~
 
     Which should print 4. See (#callbacks).
 
@@ -18,21 +20,25 @@
 Function literals at work, we define the +2--function right there in the return statement.
 
 	{callout="//"}
-		func main() {
-				p2 := plusTwo()
-				fmt.Printf("%v\n",p2(2))
-		}
+	~~~go
+	func main() {
+	   p2 := plusTwo()
+	   fmt.Printf("%v\n",p2(2))
+	}
 
-		func plusTwo() func(int) int { //<1>
-				return func(x int) int { return x + 2 } //<2>
-		}
+	func plusTwo() func(int) int { //<1>
+	    return func(x int) int { return x + 2 } //<2>
+	}
+	~~~
 
 2. Here we use a closure:
 
 	{callout="//"}
-		func plusX(x int) func(int) int { //<1>
-				return func(y int) int { return x + y } //<2>
-		}
+	~~~go
+	func plusX(x int) func(int) int { //<1>
+	   return func(y int) int { return x + y } //<2>
+	}
+	~~~
 
 	Here <1>, we again define a function that returns a function.
 	We use the *local* variable `x` in the function literal at <2>.

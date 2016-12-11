@@ -8,20 +8,22 @@ different things. Every type has an interface, which is the *set of methods
 defined* for (((interface, set of methods))) that type. This bit of code defines
 a struct type `S` with one field, and defines two methods for `S`. ^[The following text is partly from [@go_interfaces].]
 
-
-    type S struct { i int }
-    func (p *S) Get() int  { return p.i }
-    func (p *S) Put(v int) { p.i = v }
+~~~go
+type S struct { i int }
+func (p *S) Get() int  { return p.i }
+func (p *S) Put(v int) { p.i = v }
+~~~
 Figure: Defining a struct and methods on it.
 
 You can also define an (((interface, type)))interface type, which is simply
 a set of methods. This defines an interface `I` with two methods:
 
-    type I interface {
-      Get() int
-      Put(int)
-    }
-
+~~~go
+type I interface {
+    Get() int
+    Put(int)
+}
+~~~
 
 `S` is a valid *implementation* for interface `I`, because it defines the two
 methods which `I` requires. Note that this is true even though there is no
@@ -31,10 +33,12 @@ A Go program can use this fact via yet another meaning of interface, which is an
 interface value: (((interface, value)))
 
 {callout="//"}
-    func f(p I) { //<1>
-        fmt.Println(p.Get()) //<2>
-        p.Put(1) //<3>
-    }
+~~~go
+func f(p I) { //<1>
+    fmt.Println(p.Get()) //<2>
+    p.Put(1) //<3>
+}
+~~~
 
 At <1> we declare a function that takes an interface type as the argument.
 Because `p` implements `I`, it *must* have the `Get()` method, which we call at
@@ -70,9 +74,11 @@ powerful, flexible, efficient, and easy to write.
 
 Let's define another type `R` that also implements the interface `I`:
 
-    type R struct { i int }
-    func (p *R) Get() int  { return p.i }
-    func (p *R) Put(v int) { p.i = v }
+~~~go
+type R struct { i int }
+func (p *R) Get() int  { return p.i }
+func (p *R) Put(v int) { p.i = v }
+~~~
 
 The function `f` can now accept variables of type `R` and `S`.
 
@@ -80,13 +86,15 @@ Suppose you need to know the actual type in the function `f`. In Go you can
 figure that out by using a type switch(((type switch))).
 
 {callout="//"}
-    func f(p I) {
-        switch t := p.(type) { //<1>
-            case *S: //<2>
-            case *R: //<2>
-            default: //<3>
-        }
+~~~go
+func f(p I) {
+    switch t := p.(type) { //<1>
+        case *S: //<2>
+        case *R: //<2>
+        default: //<3>
     }
+}
+~~~
 
 At <1> we use the type switch, note that the `.(type)` syntax is *only* valid
 within a `switch` statement. We store the value in the variable `t`. The
@@ -98,9 +106,11 @@ have a `default` <3> clause. It is worth pointing out that both `case R` and
 A type switch isn't the only way to discover the type at *run-time*.
 
 {callout="//"}
-    if t, ok := something.(I); ok { //<1>
-        // ...
-    }
+~~~go
+if t, ok := something.(I); ok { //<1>
+    // ...
+}
+~~~
 
 You can also use a "comma, ok" form <1> to see if an interface type implements
 a specific interface. If `ok` is true, `t` will hold the type of `something`.
@@ -112,9 +122,11 @@ When you are sure a variable implements an interface you can use: `t := somethin
 Since every type satisfies the empty interface: `interface{}` we can create
 a generic function which has an empty interface as its argument:
 
-    func g(something interface{}) int {
-        return something.(I).Get()
-    }
+~~~go
+func g(something interface{}) int {
+    return something.(I).Get()
+}
+~~~
 
 The `return something.(I).Get()` is the tricky bit in this function. The value
 `something` has type `interface{}`, meaning no guarantee of any methods at all:
@@ -123,14 +135,18 @@ which converts `something` to an interface of type `I`. If we have that type we
 can invoke the `Get()` function. So if we create a new variable of the type
 `*S`, we can just call `g()`, because `*S` also implements the empty interface.
 
-    s = new(S)
-    fmt.Println(g(s));
+~~~go
+s = new(S)
+fmt.Println(g(s));
+~~~
 
 The call to `g` will work fine and will print 0. If we however invoke `g()` with
 a value that does not implement `I` we have a problem:
 
-    i :=
-    fmt.Println(g(i))
+~~~go
+var i int
+fmt.Println(g(i))
+~~~
 
 This compiles, but when we run this we get slammed with: "panic: interface
 conversion: int is not main.I: missing method Get".
@@ -146,15 +162,17 @@ You can define methods on any type (except on non-local types, this includes
 built-in types: the type `int` can not have methods).
 You can however make a new integer type with its own methods. For example:
 
-    type Foo int
+~~~go
+type Foo int
 
-    func (self Foo) Emit() {
-      fmt.Printf("%v", self)
-    }
+func (self Foo) Emit() {
+    fmt.Printf("%v", self)
+}
 
-    type Emitter interface {
-      Emit()
-    }
+type Emitter interface {
+    Emit()
+}
+~~~
 
 Doing this on non-local (types defined in other packages) types yields an error
 "cannot define new methods on non-local type int".
@@ -202,15 +220,17 @@ string-converter method `String` not `ToString`. ^[Text copied from
 
 Recall the Bubblesort exercise, where we sorted an array of integers:
 
-    func bubblesort(n []int) {
-        for i := 0; i < len(n)-1; i++ {
-            for j := i + 1; j < len(n); j++ {
-                if n[j] < n[i] {
-                    n[i], n[j] = n[j], n[i]
-                }
+~~~go
+func bubblesort(n []int) {
+    for i := 0; i < len(n)-1; i++ {
+        for j := i + 1; j < len(n); j++ {
+            if n[j] < n[i] {
+                n[i], n[j] = n[j], n[i]
             }
         }
     }
+}
+~~~
 
 A version that sorts strings is identical except for the signature of the
 function: `func bubblesortString(n []string) { /* ... */ }` . Using this
@@ -220,15 +240,17 @@ sort both strings and integers, something along the lines of this non-working
 example:
 
 {callout="//"}
-    func sort(i []interface{}) {  //<1>
-        switch i.(type) {         //<2>
-        case string:              //<3>
-            // ...
-        case int:
-            // ...
-        }
-        return /* ... */          //<4>
+~~~go
+func sort(i []interface{}) {  //<1>
+    switch i.(type) {         //<2>
+    case string:              //<3>
+        // ...
+    case int:
+        // ...
     }
+    return /* ... */          //<4>
+}
+~~~
 
 Our function will receive a slice of empty interfaces at <1>. We then <2> use a
 type switch to find out what the actual type of the input is. And then <3>
@@ -251,56 +273,67 @@ The following steps are required:
   needed for sorting. We will at least need a function to get the length of the
   slice, a function to compare two values and a swap function.
 
-        type Sorter interface {
-            Len() int           // len() as a method.
-            Less(i, j int) bool // p[j] < p[i] as a method.
-            Swap(i, j int)      // p[i], p[j] = p[j], p[i] as a method.
-        }
+    ~~~go
+    type Sorter interface {
+        Len() int           // len() as a method.
+        Less(i, j int) bool // p[j] < p[i] as a method.
+        Swap(i, j int)      // p[i], p[j] = p[j], p[i] as a method.
+    }
+    ~~~
 
 * Define new types for the slices we want to sort. Note that we declare slice types:
 
-        type Xi []int
-        type Xs []string
+    ~~~go
+    type Xi []int
+    type Xs []string
+    ~~~
 
 * Implementation of the methods of the `Sorter` interface.
   For integers:
 
-        func (p Xi) Len() int               {return len(p)}
-        func (p Xi) Less(i int, j int) bool {return p[j] < p[i]}
-        func (p Xi) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
+    ~~~go
+    func (p Xi) Len() int               {return len(p)}
+    func (p Xi) Less(i int, j int) bool {return p[j] < p[i]}
+    func (p Xi) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
+    ~~~
 
     And for strings:
 
-        func (p Xs) Len() int               {return len(p)}
-        func (p Xs) Less(i int, j int) bool {return p[j] < p[i]}
-        func (p Xs) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
+    ~~~go
+    func (p Xs) Len() int               {return len(p)}
+    func (p Xs) Less(i int, j int) bool {return p[j] < p[i]}
+    func (p Xs) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
+    ~~~
 
 * Write a *generic* Sort function that works on the `Sorter` interface.
 
-
-	{callout="//"}
-		func Sort(x Sorter) {
-			for i := 0; i < x.Len() - 1; i++ { // <1>
-				for j := i + 1; j < x.Len(); j++ { //<2>
-					if x.Less(i, j) {
-						x.Swap(i, j)
-					}
-				}
-			}
-		}
+    {callout="//"}
+    ~~~go
+    func Sort(x Sorter) { //<1>
+        for i := 0; i < x.Len() - 1; i++ { //<2>
+            for j := i + 1; j < x.Len(); j++ {
+                if x.Less(i, j) {
+                    x.Swap(i, j)
+                }
+            }
+        }
+    }
+    ~~~
 
 	At <1> `x` is now of the `Sorter` type and using the defined methods for this interface we implement
 	Bubblesort at <2>.
 
 	Now we can use our *generic* `Sort` function as follows:
 
-		ints := Xi{44, 67, 3, 17, 89, 10, 73, 9, 14, 8}
-		strings := Xs{"nut", "ape", "elephant", "zoo", "go"}
+~~~go
+ints := Xi{44, 67, 3, 17, 89, 10, 73, 9, 14, 8}
+strings := Xs{"nut", "ape", "elephant", "zoo", "go"}
 
-		Sort(ints)
-		fmt.Printf("%v\n", ints)
-		Sort(strings)
-		fmt.Printf("%v\n", strings)
+Sort(ints)
+fmt.Printf("%v\n", ints)
+Sort(strings)
+fmt.Printf("%v\n", strings)
+~~~
 
 
 ## Listing interfaces in interfaces
@@ -308,11 +341,13 @@ The following steps are required:
 Take a look at the following example of an interface definition, this one is
 from the package `container/heap`:
 
-    type Interface interface {
-        sort.Interface
-        Push(x interface{})
-        Pop() interface{}
-    }
+~~~go
+type Interface interface {
+    sort.Interface
+    Push(x interface{})
+    Pop() interface{}
+}
+~~~
 
 Here another interface is listed inside the definition of `heap.Interface`, this
 may look odd, but is perfectly valid, remember that on the surface an interface is nothing
@@ -330,16 +365,18 @@ the `reflect` package to figure out the type of the variable and *then* access
 the tag.
 
 {callout="//"}
-    type Person struct {
-        name string "namestr"
-        age  int
-    }
+~~~go
+type Person struct {
+    name string "namestr"
+    age  int
+}
 
-    func ShowTag(i interface{}) { //<1>
-     switch t := reflect.TypeOf(i); t.Kind() {
-     case reflect.Ptr: //<2>
+func ShowTag(i interface{}) { //<1>
+    switch t := reflect.TypeOf(i); t.Kind() {
+    case reflect.Ptr: //<2>
         tag := t.Elem().Field(0).Tag
-     //         <3>         <4>      <5>
+    //             <3>     <4>       <5>
+~~~
 Figure: Introspection using reflection.
 
 We are calling `ShowTag` at <1> with a `*Person`, so at <2> we're expecting
@@ -361,15 +398,17 @@ To make the difference between types and values more clear, take a look at the
 following code:
 
 {callout="//"}
-    func show(i interface{}) {
-        switch t := i.(type) {
-          case *Person:
-            t := reflect.TypeOf(i)  //<1>
-            v := reflect.ValueOf(i) //<2>
-            tag := t.Elem().Field(0).Tag //<3>
-            name := v.Elem().Field(0).String() //<4>
-        }
+~~~go
+func show(i interface{}) {
+    switch t := i.(type) {
+    case *Person:
+        t := reflect.TypeOf(i)  //<1>
+        v := reflect.ValueOf(i) //<2>
+        tag := t.Elem().Field(0).Tag //<3>
+        name := v.Elem().Field(0).String() //<4>
     }
+}
+~~~
 Figure: Reflection and the type and value.
 
 At <1> we create `t` the type data of `i`, and `v` gets the actual values at
@@ -386,32 +425,36 @@ Going from a `*Person` via `Elem` using the methods described in `go doc reflect
 Setting a value works similarly as getting a value, but only works on
 *exported* members. Again some code:
 
-    type Person struct {
-        name string
-        age  int
-    }
+~~~go
+type Person struct {
+    name string
+    age  int
+}
 
-    func Set(i interface{}) {
-        switch i.(type) {
-        case *Person:
-            r := reflect.ValueOf(i)
-            r.Elem(0).Field(0).SetString("Albert Einstein")
-        }
+func Set(i interface{}) {
+    switch i.(type) {
+    case *Person:
+        r := reflect.ValueOf(i)
+        r.Elem(0).Field(0).SetString("Albert Einstein")
     }
+}
+~~~
 Figure: Reflect with *private* member.
 
-    type Person struct {
-        Name string
-        age  int
-    }
+~~~go
+type Person struct {
+    Name string
+    age  int
+}
 
-    func Set(i interface{}) {
-        switch i.(type) {
-        case *Person:
-            r := reflect.ValueOf(i)
-            r.Elem().Field(0).SetString("Albert Einstein")
-        }
+func Set(i interface{}) {
+    switch i.(type) {
+    case *Person:
+        r := reflect.ValueOf(i)
+        r.Elem().Field(0).SetString("Albert Einstein")
     }
+}
+~~~
 Figure: Reflect with *public* member.
 
 The first program compiles and runs, but when you run it, you are greeted with a

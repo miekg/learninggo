@@ -23,8 +23,12 @@ When started you should see the following:
 To make the connection handling concurrent we *only need to change one line* in our
 echo server, the line:
 
-    if c, err := l.Accept(); err == nil { Echo(c) }
+~~~go
+if c, err := l.Accept(); err == nil { Echo(c) }
+~~~
 
 becomes:
 
-    if c, err := l.Accept(); err == nil { go Echo(c) }
+~~~go
+if c, err := l.Accept(); err == nil { go Echo(c) }
+~~~

@@ -53,9 +53,11 @@ to do just that (we're discarding the error returned from `os.Open` here to keep
 the examples smaller -- don't ever do this in real life code).
 
 {callout="//"}
-    f, _ := os.Open("/etc/passwd"); defer f.Close()
-    r := bufio.NewReader(f) //<1>
-    s, ok := r.ReadString('\n') //<2>
+~~~go
+f, _ := os.Open("/etc/passwd"); defer f.Close()
+r := bufio.NewReader(f) //<1>
+s, ok := r.ReadString('\n') //<2>
+~~~
 
 At <1> make `f` a `bufio` to have access to the `ReadString` method. Then at <2> we read
 a line from the input, `s`  now holds a string which we can manipulate with, for instance,
@@ -67,11 +69,13 @@ of the `bufio` package.
 A common scenario in shell scripting is that you want to check if a directory
 exists and if not, create one.
 
-    if [ ! -e name ]; then          if f, e := os.Stat("name"); e != nil {
-        mkdir name                      os.Mkdir("name", 0755)
-    else                            } else {
-        # error                         // error
-    fi                              }
+~~~go
+if [ ! -e name ]; then          if f, e := os.Stat("name"); e != nil {
+    mkdir name                      os.Mkdir("name", 0755)
+else                            } else {
+    # error                         // error
+fi                              }
+~~~
 
 The similarity between these two examples (and with other scripting languages)
 have prompted comments that Go has a "script"-like feel to it, i.e. programming
@@ -88,13 +92,15 @@ has a more sophisticated interface, and also provides a way to parse flags. Take
 this example from a DNS query tool:
 
 {callout="//"}
-    dnssec := flag.Bool("dnssec", false, "Request DNSSEC records") //<1>
-    port := flag.String("port", "53", "Set the query port") //<2>
-    flag.Usage = func() {   //<3>
-        fmt.Fprintf(os.Stderr, "Usage: %s [OPTIONS] [name ...]\n", os.Args[0])
-        flag.PrintDefaults() //<4>
-    }
-    flag.Parse() //<4>
+~~~go
+dnssec := flag.Bool("dnssec", false, "Request DNSSEC records") //<1>
+port := flag.String("port", "53", "Set the query port") //<2>
+flag.Usage = func() {   //<3>
+    fmt.Fprintf(os.Stderr, "Usage: %s [OPTIONS] [name ...]\n", os.Args[0])
+    flag.PrintDefaults() //<4>
+}
+flag.Parse() //<4>
+~~~
 
 At <1> we define a `bool` flag `-dnssec`. Note that this function returns
 a *pointer* to the value, the `dnssec` is now a pointer to a `bool`. At <2> we
@@ -115,16 +121,20 @@ commands, and is the premier way to execute commands from within a Go program.
 It works by defining a `*exec.Cmd` structure for which it defines a number of
 methods. Let's execute `ls -l`:
 
-    import "os/exec"
+~~~go
+import "os/exec"
 
-    cmd := exec.Command("/bin/ls", "-l")
-    err := cmd.Run()
+cmd := exec.Command("/bin/ls", "-l")
+err := cmd.Run()
+~~~
 
 The above example just runs "ls -l" without doing anything with the returned
 data, capturing the standard output from a command is done as follows:
 
-    cmd := exec.Command("/bin/ls", "-l")
-    buf, err := cmd.Output()
+~~~go
+cmd := exec.Command("/bin/ls", "-l")
+buf, err := cmd.Output()
+~~~
 
 And `buf` is byte slice, that you can further use in your program.
 
@@ -142,9 +152,11 @@ Dialing a remote system (port 80) over TCP, then UDP and lastly TCP over IPv6
 looks like this^[In case you are wondering, 192.0.32.10 and 2620:0:2d0:200::10
 are <http://www.example.org>.]:
 
-    conn, e := Dial("tcp", "192.0.32.10:80")
-    conn, e := Dial("udp", "192.0.32.10:80")
-    conn, e := Dial("tcp", "[2620:0:2d0:200::10]:80")
+~~~go
+conn, e := Dial("tcp", "192.0.32.10:80")
+conn, e := Dial("udp", "192.0.32.10:80")
+conn, e := Dial("tcp", "[2620:0:2d0:200::10]:80")
+~~~
 
 If there were no errors (returned in `e`), you can use `conn` to read and write.
 And `conn` implements the `io.Reader` and `io.Writer` interface. ^[The variable
@@ -155,26 +167,28 @@ But these are the low level nooks and crannies, you will almost always use
 higher level packages, such as the `http` package. For instance a simple Get for
 http:
 
-    package main
+~~~go
+package main
 
-    import (
-        "fmt"
-        "http"
-        "io/ioutil"
-    )
+import (
+    "fmt"
+    "http"
+    "io/ioutil"
+)
 
-    func main() {
-        r, err := http.Get("http://www.google.com/robots.txt")
-        if err != nil {
-            fmt.Printf("%s\n", err.String())
-            return
-        }
-        b, err := ioutil.ReadAll(r.Body)
-        r.Body.Close()
-        if err == nil {
-            fmt.Printf("%s", string(b))
-        }
+func main() {
+    r, err := http.Get("http://www.google.com/robots.txt")
+    if err != nil {
+        fmt.Printf("%s\n", err.String())
+        return
     }
+    b, err := ioutil.ReadAll(r.Body)
+    r.Body.Close()
+    if err == nil {
+        fmt.Printf("%s", string(b))
+    }
+}
+~~~
 
 
 ## Exercises

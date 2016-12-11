@@ -18,18 +18,20 @@ $$ \mathrm{map}(f(), (a_1,a_2,\ldots,a_{n-1},a_n)) =  (f(a_1), f(a_2),\ldots,f(a
 
 1. A possible answer:
 
-        func Map(f func(int) int, l []int) []int {
-                j := make([]int, len(l))
-                for k, v := range l {
-                        j[k] = f(v)
-                }
-                return j
+    ~~~go
+    func Map(f func(int) int, l []int) []int {
+        j := make([]int, len(l))
+        for k, v := range l {
+            j[k] = f(v)
         }
+        return j
+    }
 
-        func main() {
-                m := []int{1, 3, 4}
-                f := func(i int) int {
-                        return i * i
-                }
-                fmt.Printf("%v", (Map(f, m)))
+    func main() {
+        m := []int{1, 3, 4}
+        f := func(i int) int {
+            return i * i
         }
+        fmt.Printf("%v", (Map(f, m)))
+    }
+    ~~~
