@@ -97,7 +97,7 @@ Allocates <1> slice structure; rarely useful. `v` <2> refers to a new array of
 Remember that `make` applies only to maps, slices and channels and does not
 return a pointer. To obtain an explicit pointer allocate with `new`.
 
-A> New allocates; make initializes.
+A> **new** allocates; **make** initializes.
 A>
 A> The above two paragraphs can be summarized as:
 A>
