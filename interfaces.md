@@ -325,15 +325,15 @@ The following steps are required:
 
 	Now we can use our *generic* `Sort` function as follows:
 
-~~~go
-ints := Xi{44, 67, 3, 17, 89, 10, 73, 9, 14, 8}
-strings := Xs{"nut", "ape", "elephant", "zoo", "go"}
+    ~~~go
+    ints := Xi{44, 67, 3, 17, 89, 10, 73, 9, 14, 8}
+    strings := Xs{"nut", "ape", "elephant", "zoo", "go"}
 
-Sort(ints)
-fmt.Printf("%v\n", ints)
-Sort(strings)
-fmt.Printf("%v\n", strings)
-~~~
+    Sort(ints)
+    fmt.Printf("%v\n", ints)
+    Sort(strings)
+    fmt.Printf("%v\n", strings)
+    ~~~
 
 
 ## Listing interfaces in interfaces
