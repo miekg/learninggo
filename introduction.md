@@ -132,10 +132,12 @@ To get the documentation of the `hash` package, just:
 To read the documentation of `fnv` contained in `hash`, you'll need
 to issue `godoc hash/fnv` as `fnv` is a subdirectory of `hash`.
 
-    PACKAGE DOCUMENTATION
+~~~go
+PACKAGE DOCUMENTATION
 
-    package fnv
-        import "hash/fnv"
+package fnv
+    import "hash/fnv"
 
-        Package fnv implements FNV-1 and FNV-1a, non-cryptographic hash
-        ...
+    Package fnv implements FNV-1 and FNV-1a, non-cryptographic hash
+    ...
+~~~

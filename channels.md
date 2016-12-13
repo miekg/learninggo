@@ -19,9 +19,10 @@ But what *is* a goroutine, from [@effective_go]:
 A goroutine (((goroutine))) is a normal function, except that you start
 it with the keyword `go`. (((keywords, go)))
 
-    ready("Tea", 2)	    // Normal function call.
-    go ready("Tea", 2)  // ... as goroutine.
-
+~~~go
+ready("Tea", 2)	    // Normal function call.
+go ready("Tea", 2)  // ... as goroutine.
+~~~
 
 {callout="//"}
 <{{src/channels/sleep.go}}[8,18]
@@ -34,9 +35,11 @@ function waits long enough at <2>, so that both goroutines will have printed
 their text. Right now we wait for 5 seconds, but in fact we have no idea how
 long we should wait until all goroutines have exited. This outputs:
 
-    I'm waiting         // Right away
-    Coffee is ready!    // After 1 second
-    Tea is ready!       // After 2 seconds
+~~~go
+I'm waiting         // Right away
+Coffee is ready!    // After 1 second
+Tea is ready!       // After 2 seconds
+~~~
 
 If we did not wait for the goroutines (i.e. remove the last line at <2>) the
 program would be terminated immediately and any running goroutines would
@@ -50,9 +53,11 @@ a specific type: the type of the channel. If we define a channel, we must also
 define the type of the values we can send on the channel. Note that we must use
 `make` to create a channel:
 
-    ci := make(chan int)
-    cs := make(chan string)
-    cf := make(chan interface{})
+~~~go
+ci := make(chan int)
+cs := make(chan string)
+cf := make(chan interface{})
+~~~
 
 Makes `ci` a channel on which we can send and receive integers,
 makes `cs` a channel for strings and `cf` a channel for types
@@ -62,29 +67,33 @@ Sending on a channel and receiving from it, is done with the same operator:
 
 Depending on the operands it figures out what to do:
 
-    ci <- 1   // *Send* the integer 1 to the channel ci.
-    <-ci      // *Receive* an integer from the channel ci.
-    i := <-ci // *Receive* from the channel ci and store it in i.
+~~~go
+ci <- 1   // *Send* the integer 1 to the channel ci.
+<-ci      // *Receive* an integer from the channel ci.
+i := <-ci // *Receive* from the channel ci and store it in i.
+~~~
 
 Let's put this to use.
 
 {callout="//"}
-    var c chan int //<1>
+~~~go
+var c chan int //<1>
 
-    func ready(w string, sec int) {
-        time.Sleep(time.Duration(sec) * time.Second)
-        fmt.Println(w, "is ready!")
-        c <- 1	//<2>
-    }
+func ready(w string, sec int) {
+    time.Sleep(time.Duration(sec) * time.Second)
+    fmt.Println(w, "is ready!")
+    c <- 1	//<2>
+}
 
-    func main() {
-        c = make(chan int) //<3>
-        go ready("Tea", 2) //<4>
-        go ready("Coffee", 1) //<4>
-        fmt.Println("I'm waiting, but not too long")
-        <-c //<5>
-        <-c //<5>
-    }
+func main() {
+    c = make(chan int) //<3>
+    go ready("Tea", 2) //<4>
+    go ready("Coffee", 1) //<4>
+    fmt.Println("I'm waiting, but not too long")
+    <-c //<5>
+    <-c //<5>
+}
+~~~
 
 At <1> we declare `c` to be a variable that is a channel of ints. That is: this
 channel can move integers. Note that this variable is global so that the
@@ -103,15 +112,17 @@ on a channel.
 Using `select` in our program does not really make it shorter, because we run
 too few go-routines. We remove last lines and replace them with the following:
 
-    L: for {
-        select {
-        case <-c:
-            i++
-            if i > 1 {
-                break L
-            }
+~~~go
+L: for {
+    select {
+    case <-c:
+        i++
+        if i > 1 {
+            break L
         }
     }
+}
+~~~
 
 We will now wait as long as it takes. Only when we have received more than one
 reply on the channel `c` will we exit the loop `L`.
@@ -169,7 +180,9 @@ $$
 When a channel is closed the reading side needs to know this. The following code
 will check if a channel is closed.
 
-    x, ok = <-ch
+~~~go
+x, ok = <-ch
+~~~
 
 Where `ok` is set to `true` the channel is not closed
 *and* we've read something. Otherwise `ok` is set to `false`. In that case the

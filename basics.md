@@ -59,10 +59,12 @@ assigned the zero string, which is `""`. Declaring and assigning in Go is a two
 step process, but they may be combined. Compare the following pieces of code
 which have the same effect. (((variables,declaring))) (((variables,assigning)))
 
-    var a int                           a := 15
-    var b bool                          b := false
-    a = 15
-    b = false
+~~~go
+var a int                           a := 15
+var b bool                          b := false
+a = 15
+b = false
+~~~
 
 On the left we use the `var` keyword to declare a variable and *then* assign
 a value to it. The code on the right uses `:=` to do this in one step (this form
@@ -72,10 +74,12 @@ tells Go that the type should be `bool`. Multiple `var` declarations may also
 be grouped; `const` (see (#constants)) and `import` also allow this. Note the
 use of parentheses instead of braces:
 
-    var (
-        x int
-        b bool
-    )
+~~~go
+var (
+    x int
+    b bool
+)
+~~~
 
 Multiple variables of the same type can also be declared on a single line: `var
 x, y int` makes `x` and `y` both `int` variables. You can also make use of
@@ -129,10 +133,12 @@ a constant. You can use
 a phrase in the New Testament: "*until heaven and earth pass away, not an iota,
 not a dot, will pass from the Law*." [@iota]] to enumerate values.
 
-    const (
-        a = iota
-        b
-    )
+~~~go
+const (
+    a = iota
+    b
+)
+~~~
 
 The first use of `iota` will yield 0, so `a` is equal to 0. Whenever `iota` is
 used again on a new line its value is incremented with 1, so `b` has a value of 1.
@@ -144,7 +150,9 @@ constant.
 ### Strings
 Another important built-in type is `string`. Assigning a string is as simple as:
 
-    s := "Hello World!"
+~~~go
+s := "Hello World!"
+~~~
 
 Strings in Go are a sequence of UTF-8 characters enclosed in double quotes (").
 If you use the single quote (') you mean one character (encoded in UTF-8) ---
@@ -153,17 +161,21 @@ which is *not* a `string` in Go.
 Once assigned to a variable, the string cannot be changed: strings in Go are
 immutable. If you are coming from C, note that the following is not legal in Go:
 
-    var s string = "hello"
-    s[0] = 'c'
+~~~go
+var s string = "hello"
+s[0] = 'c'
+~~~
 
 To do this in Go you will need the following:
 
 {callout="//"}
-    s := "hello"
-    c := []rune(s)	    //<1>
-    c[0] = 'c'	        //<2>
-    s2 := string(c)     //<3>
-    fmt.Printf("%s\n", s2) //<4>
+~~~go
+s := "hello"
+c := []rune(s)	    //<1>
+c[0] = 'c'	        //<2>
+s2 := string(c)     //<3>
+fmt.Printf("%s\n", s2) //<4>
+~~~
 
 Here we convert `s` to an array of runes <1>. We change the first element of
 this array <2>. Then we create a *new* string `s2` with the alteration <3>.
@@ -247,30 +259,36 @@ required around the condition, and the body must *always* be brace-delimited.
 ### If-Else
 In Go an `if` (((keywords, if))) looks like this:
 
-    if x > 0 {
-        return y
-    } else {
-        return x
-    }
+~~~go
+if x > 0 {
+    return y
+} else {
+    return x
+}
+~~~
 
 (((keywords,return))) (((keywords,else))) Since `if` and `switch` accept an
 initialization statement, it's common to see one used to set up a (local)
 variable.
 
-    if err := SomeFunction(); err == nil {
-        // do something
-    } else {
-        return err
-    }
+~~~go
+if err := SomeFunction(); err == nil {
+    // do something
+} else {
+    return err
+}
+~~~
 
 It is idomatic in Go to omit the `else` when the `if` statement's body has
 a `break`, `continue`, `return` or, `goto`, so the above code would be better
 written as:
 
-    if err := SomeFunction(); err != nil {
-        return err
-    }
-    // do something
+~~~go
+if err := SomeFunction(); err != nil {
+    return err
+}
+// do something
+~~~
 
 The opening brace on the first line must be positioned on the same line as the
 `if` statement. There is no arguing about this, because this is what `gofmt`
@@ -282,13 +300,15 @@ Go has a `goto` (((keywords, goto))) statement - use it wisely. With `goto` you
 jump to a (((label))) label which must be defined within the current function.
 For instance, a loop in disguise:
 
-    func myfunc() {
-            i := 0
-    Here:
-            fmt.Println(i)
-            i++
-            goto Here
-    }
+~~~go
+func myfunc() {
+    i := 0
+Here:
+    fmt.Println(i)
+    i++
+    goto Here
+}
+~~~
 
 The string `Here:` indicates a label. A label does not need to start with
 a capital letter and is case sensitive.
@@ -304,10 +324,12 @@ semicolons:
 
 Short declarations make it easy to declare the index variable right in the loop.
 
-    sum := 0
-    for i := 0; i < 10; i++ {
-        sum = sum + i
-    }
+~~~go
+sum := 0
+for i := 0; i < 10; i++ {
+    sum = sum + i
+}
+~~~
 
 Note that the variable `i` ceases to exist after the loop.
 
@@ -317,12 +339,14 @@ With `break` (((keywords, break))) you can quit loops early.  By itself, `break`
 breaks the current loop.
 
 {callout="//"}
-    for i := 0; i < 10; i++ {
-        if i > 5 {
-        break //<1>
-        }
-        fmt.Println(i) //<2>
+~~~go
+for i := 0; i < 10; i++ {
+    if i > 5 {
+    break //<1>
     }
+    fmt.Println(i) //<2>
+}
+~~~
 
 Here we `break` the current loop <1>, and don't continue with the
 `fmt.Println(i)` statement <2>. So we only print 0 to 5. With loops within loop
@@ -330,14 +354,16 @@ you can specify a label after `break` to identify *which* loop to stop:
 
 
 {callout="//"}
-    J:  for j := 0; j < 5; j++ { //<1>
-            for i := 0; i < 10; i++ {
-                if i > 5 {
-                    break J //<2>
-                }
-                fmt.Println(i)
+~~~go
+J:  for j := 0; j < 5; j++ { //<1>
+        for i := 0; i < 10; i++ {
+            if i > 5 {
+                break J //<2>
             }
+            fmt.Println(i)
         }
+    }
+~~~
 
 Here we define a label "J" <1>, preceding the `for`-loop there. When we use
 `break J` <2>, we don't break the inner loop but the "J" loop.
@@ -356,10 +382,12 @@ loops over. Depending on what that is, `range` returns different things.
 When looping over a slice or array, `range` returns the index in the slice as
 the key and value belonging to that index. Consider this code: (((keywords, range)))
 
-    list := []string{"a", "b", "c", "d", "e", "f"}
-    for k, v := range list {
-        // do something with k and v
-    }
+~~~go
+list := []string{"a", "b", "c", "d", "e", "f"}
+for k, v := range list {
+    // do something with k and v
+}
+~~~
 
 First we create a slice of strings. Then we use `range` to loop over them. With
 each iteration, `range` will return the index as an `int` and the key as
@@ -373,9 +401,11 @@ mean 8 bit characters. As UTF-8 characters may be up to 32 bits the word rune is
 used. In this case the type of `char` is `rune`. and their start position, by
 parsing the UTF-8. The loop: (((keywords,range)))
 
-    for pos, char := range "Gő!" {
-        fmt.Printf("character '%c' starts at byte position %d\n", char, pos)
-    }
+~~~go
+for pos, char := range "Gő!" {
+    fmt.Printf("character '%c' starts at byte position %d\n", char, pos)
+}
+~~~
 
 prints
 
@@ -394,16 +424,18 @@ therefore possible -- and idiomatic -- to write an `if-else-if-else` chain as
 a `switch`.
 
 {callout="//"}
-    // Convert hexadecimal character to an int value
-    switch { //<1>
-    case '0' <= c && c <= '9': //<2>
-        return c - '0' //<3>
-    case 'a' <= c && c <= 'f': //<4>
-        return c - 'a' + 10
-    case 'A' <= c && c <= 'F': //<5>
-        return c - 'A' + 10
-    }
-    return 0
+~~~go
+// Convert hexadecimal character to an int value
+switch { //<1>
+case '0' <= c && c <= '9': //<2>
+    return c - '0' //<3>
+case 'a' <= c && c <= 'f': //<4>
+    return c - 'a' + 10
+case 'A' <= c && c <= 'F': //<5>
+    return c - 'A' + 10
+}
+return 0
+~~~
 
 A `switch` without a condition is the same as `switch true` <1>. We list the
 different cases. Each `case` statement has a condition that is either true of
@@ -416,23 +448,27 @@ There is no automatic fall through, you can use `fallthrough` (((keywords,
 fallthrough))) for that.
 
 {callout="//"}
-    switch i {
-        case 0:  fallthrough
-        case 1: //<1>
-            f()
-        default:
-            g() //<2>
+~~~go
+switch i {
+    case 0:  fallthrough
+    case 1: //<1>
+        f()
+    default:
+        g() //<2>
+~~~
 
 `f()` can be called when `i == 0` <1>. With `default` (((keywords, default))) you
 can specify an action when none of the other cases match. Here `g()` is called
 when `i` is not 0 or 1 <2>. We could rewrite the above example as:
 
 {callout="//"}
-    switch i {
-        case 0, 1: //<1>
-            f()
-        default:
-            g()
+~~~go
+switch i {
+    case 0, 1: //<1>
+        f()
+    default:
+        g()
+~~~
 
 You can list cases on one line <1>, separated by commas.
 
@@ -505,10 +541,12 @@ An array is defined by: `[n]<type>`, where $$n$$ is the length of the array and
 `<type>` is the stuff you want to store. To assign or index an element in the
 array, you use square brackets:
 
-    var arr [10]int
-    arr[0] = 42
-    arr[1] = 13
-    fmt.Printf("The first element is %d\n", arr[0])
+~~~go
+var arr [10]int
+arr[0] = 42
+arr[1] = 13
+fmt.Printf("The first element is %d\n", arr[0])
+~~~
 
 Array types like `var arr [10]int` have a fixed size. The size is *part* of the
 type. They can't grow, because then they would have a different type. Also
@@ -568,13 +606,15 @@ creates a new slice which refers to the variable `a`, starts at index `n`, and
 ends before index `m`. It has length `n - m`.
 
 {callout="yes"}
-    a := [...]int{1, 2, 3, 4, 5} <1>
-    s1 := a[2:4] <2>
-    s2 := a[1:5] <3>
-    s3 := a[:]   <4>
-    s4 := a[:4]  <5>
-    s5 := s2[:] <6>
-    s6 := a[2:4:5] <7>
+~~~go
+a := [...]int{1, 2, 3, 4, 5} <1>
+s1 := a[2:4] <2>
+s2 := a[1:5] <3>
+s3 := a[:]   <4>
+s4 := a[:4]  <5>
+s5 := s2[:] <6>
+s6 := a[2:4:5] <7>
+~~~
 
 <!-- Double check this -->
 First we define <1> an array with five elements, from index 0 to 4.
@@ -607,10 +647,12 @@ may refer to a different underlying array than the original slice does. Here's
 an example: (((built-in,append)))
 
 {callout="//"}
-    s0 := []int{0, 0}
-    s1 := append(s0, 2) //<1>
-    s2 := append(s1, 3, 5, 7) //<2>
-    s3 := append(s2, s0...) //<3>
+~~~go
+s0 := []int{0, 0}
+s1 := append(s0, 2) //<1>
+s2 := append(s1, 3, 5, 7) //<2>
+s3 := append(s2, s0...) //<3>
+~~~
 
 At <1> we append a single element, making `s1` equal to `[]int{0, 0, 2}`. At <2>
 we append multiple elements, making `s2` equal to `[]int{0, 0, 2, 3, 5, 7}`. And
@@ -624,10 +666,12 @@ length of the source and the length of the destination. For example:
 (((built-in,copy)))
 
 {callout="//"}
-    var a = [...]int{0, 1, 2, 3, 4, 5, 6, 7}
-    var s = make([]int, 6)
-    n1 := copy(s, a[0:]) // <1>
-    n2 := copy(s, s[2:]) // <2>
+~~~go
+var a = [...]int{0, 1, 2, 3, 4, 5, 6, 7}
+var s = make([]int, 6)
+n1 := copy(s, a[0:]) // <1>
+n2 := copy(s, s[2:]) // <2>
+~~~
 
 After <1>, `n1` is 6, and `s` is `[]int{0, 1, 2, 3, 4, 5}`.
 And after <2>, `n2` is 4, and `s` is `[]int{2, 3, 4, 5, 4, 5}`.
@@ -641,12 +685,14 @@ thought of as an array indexed by strings (in its most simple form).
 
 
 {callout="//"}
-    monthdays := map[string]int{
-        "Jan": 31, "Feb": 28, "Mar": 31,
-        "Apr": 30, "May": 31, "Jun": 30,
-        "Jul": 31, "Aug": 31, "Sep": 30,
-        "Oct": 31, "Nov": 30, "Dec": 31, //<1>
-    }
+~~~go
+monthdays := map[string]int{
+    "Jan": 31, "Feb": 28, "Mar": 31,
+    "Apr": 30, "May": 31, "Jun": 30,
+    "Jul": 31, "Aug": 31, "Sep": 30,
+    "Oct": 31, "Nov": 30, "Dec": 31, //<1>
+}
+~~~
 
 The general syntax for defining a map is `map[<from type>]<to type>`. Here, we
 define a map that converts from a `string` (month abbreviation) to an `int`
@@ -665,11 +711,13 @@ range))) clause will help you again, it returns the key and corresponding value
 with each invocation.
 
 {callout="//"}
-    year := 0
-    for _, days := range monthdays //<1>
-        year += days
-    }
-    fmt.Printf("Numbers of days in a year: %d\n", year)
+~~~go
+year := 0
+for _, days := range monthdays //<1>
+    year += days
+}
+fmt.Printf("Numbers of days in a year: %d\n", year)
+~~~
 
 At <1> we use the underscore to ignore (assign to nothing) the key returned by
 `range`. We are only interested in the values from `monthdays`.

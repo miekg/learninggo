@@ -29,15 +29,17 @@
     like this (only showing the `main`-function):
 
     {callout="yes"}
-        func main() {
-                i := 0	<1>
-        Loop:		    <2>
-                if i < 10 {
-                    fmt.Printf("%d\n", i)
-                    i++
-                    goto Loop <3>
-                }
+    ~~~go
+    func main() {
+        i := 0	<1>
+    Loop:		    <2>
+        if i < 10 {
+            fmt.Printf("%d\n", i)
+            i++
+            goto Loop <3>
         }
+    }
+    ~~~
 
     At <1> we define our loop variable. And at <2> we define a label and at <3> we jump
    to this label.
@@ -50,4 +52,6 @@
     Which we then fill <2> one by one. And finally we print it <3> with `%v` which lets
     Go to print the value for us. You could even do this in one fell swoop by using a composite literal:
 
-        fmt.Printf("%v\n", [...]int{0,1,2,3,4,5,6,7,8,9})
+~~~go
+fmt.Printf("%v\n", [...]int{0,1,2,3,4,5,6,7,8,9})
+~~~
