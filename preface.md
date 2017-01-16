@@ -19,3 +19,9 @@ The following people made large or small contributions to earlier versions of th
 I hope this book is useful.
 
 Miek Gieben, London, 2015.
+
+This book still sees development, small incremental improvements trickle in from Github.
+
+Miek Gieben, London, 2017.
+
+
