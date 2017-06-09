@@ -85,8 +85,9 @@ func rpnstr(r []int) (ret string) { // Convert rpn to infix notation
 	for k, t := range r {
 		switch t {
 		case ADD, SUB, MUL, DIV:
-			a, s := s[len(s)-1], s[:len(s)-1]
-			b, s := s[len(s)-1], s[:len(s)-1]
+			var a, b string
+			a, s = s[len(s)-1], s[:len(s)-1]
+			b, s = s[len(s)-1], s[:len(s)-1]
 			if k == len(r)-1 {
 				s = append(s, b+mop[t]+a)
 			} else {
