@@ -89,27 +89,6 @@
         fork.load('/inc/forkme.html', function(){
             $(this).insertAfter("body");
         });
-        var nav = $('<div>');
-        nav.load('/inc/nav.html', function(){
-            $(this).insertBefore("h1#preface");
-            // call navtoc as we now have the thing loaded.
-            navtoc();
-        });
-    }
-
-    function navtoc(){
-      $("li#nav-toc-h0").append("<ul class=\"nav-toc-h0\"></ul>");
-
-      /* all works, this needs to fix the css to actual make a drop down menu
-       $("h1").each(function(){
-               $("ul.nav-toc-h0").append("<li><a href=\"#" + $(this).attr("id") + "\">" + $(this).text().substring(1)).append("</a></li>");
-               var ids = $(this).attr("id")
-               $("ul.nav-toc-h0").append("<ul id=\"nav-toc-h1" + ids + "\"></ul>");
-                $(this).nextUntil("h1", "h2").each(function() {
-                 $("#nav-toc-h1" + ids).append("<li><a href=\"#" + $(this).attr("id") + "\">" + $(this).text().substring(1)).append("</a></li>");
-               });
-        });
-       */
     }
 
     function links() {
