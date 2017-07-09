@@ -83,14 +83,6 @@
       $("blockquote.epigraph footer").prepend("<hr>");
     }
 
-    // include some html
-    function html() {
-        var fork = $('<div>');
-        fork.load('/inc/forkme.html', function(){
-            $(this).insertAfter("body");
-        });
-    }
-
     function links() {
         return $(":header[id]").each(function(i, el) {
             var $el, icon, id;
