@@ -202,7 +202,7 @@ is the real part, `im` is the imaginary part and $$i$$ is the literal '$$i$$'
 Any non-trivial program will have the need for error reporting sooner or later.
 Because of this Go has a builtin type specially for errors, called `error`. `var
 e error` creates a variable `e` of type `error` with the value `nil`. This error
-type is an interface -- we'll look more at interfaces in (#interfaces)). For
+type is an interface -- we'll look more at interfaces in (#interfaces). For
 now you can just assume that `error` is a type just like all other types.
 
 
