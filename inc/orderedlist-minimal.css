@@ -1,10 +1,13 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
+@import url(https://fonts.googleapis.com/css?family=Lato:400italic,700italic,400,700);
 
 body {
   padding:50px;
-  font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color:black;
-  font-weight:300;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color:#222;
+  font-weight:400;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -67,7 +70,7 @@ blockquote {
 code, pre {
   font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, monospace;
   color:#333;
-  font-size:12px;
+  font-size:14px;
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
@@ -82,6 +85,8 @@ pre {
 }
 
 table {
+  display: block;
+  overflow-x: auto;
   width:100%;
   border-collapse:collapse;
 }
@@ -253,9 +258,16 @@ footer {
   }
 }
 
+@media print, screen {
+  body {
+    font-size: 16px;
+  }
+}
+
 @media print, screen and (max-width: 720px) {
   body {
     word-wrap:break-word;
+    font-size: 15px;
   }
 
   header {
@@ -273,6 +285,7 @@ footer {
 
 @media print, screen and (max-width: 480px) {
   body {
+    font-size: 14px;
     padding:15px;
   }
 
