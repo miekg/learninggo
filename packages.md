@@ -22,7 +22,7 @@ our package (more on that later). The function `odd` <3> does not start with
 a capital letter, so it is a *private* function.
 
 Now we just need to build the package. We create a directory under `$GOPATH`,
-and copy `even.go` there (see (#compiling-and-running-code) in (#basics)).
+and copy `even.go` there (see [Compiling and Running Code](#compiling-and-running-code) in [Basics](#basics)).
 
     % mkdir $GOPATH/src/even
     % cp even.go $GOPATH/src/even
@@ -337,7 +337,7 @@ a mention: ^[The descriptions are copied from the packages' `go doc`.]
     manipulate objects with arbitrary types.  The typical use is to take a
     value with static type `interface{}` and extract its dynamic type
     information by calling `TypeOf`, which returns an object with interface
-    type `Type`. See (#interfaces), Section (#introspection-and-reflection).
+    type `Type`. See [Interfaces](#interfaces), Section [Introspection and reflection](#introspection-and-reflection).
 
 `os/exec`
 :   (((package, os/exec))) The `os/exec` package runs external commands.

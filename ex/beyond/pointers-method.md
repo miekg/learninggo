@@ -56,4 +56,4 @@ In other words because `k1` is addressable and
 `*vector.IntVector` *does* have the `Push` method, the
 call `k1.Push(2)` is translated by Go into
 `(&k1).Push(2)` which makes the type system happy again (and
-you too -- now you know this).^[Also see (#methods) in this chapter.]
+you too -- now you know this).^[Also see [Methods](#methods) in this chapter.]

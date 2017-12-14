@@ -9,7 +9,7 @@
     fmt.Printf("%v\n", p(2))
     ~~~
 
-    Which should print 4. See (#callbacks).
+    Which should print 4. See [Callbacks](#callbacks).
 
 2. Generalize the function from above and create a `plusX(x)` which returns functions that add `x` to an integer.
 

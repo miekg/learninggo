@@ -1,7 +1,7 @@
 {.exercise data-difficulty="2"}
 ### Fibonacci II
 
-This is the same exercise as an earlier one (#fibonacci) in
+This is the same exercise as an earlier one [Fibbonacci](#fibonacci) in
 exercise. For completeness the complete question:
 
 > The Fibonacci sequence starts as follows: $$1, 1, 2, 3, 5, 8, 13, \ldots$$
