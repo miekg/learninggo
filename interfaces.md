@@ -157,7 +157,7 @@ method.
 
 ## Methods
 
-Methods are functions that have a receiver (see (#functions)).
+Methods are functions that have a receiver (see [Functions](#functions)).
 You can define methods on any type (except on non-local types, this includes
 built-in types: the type `int` can not have methods).
 You can however make a new integer type with its own methods. For example:
