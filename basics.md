@@ -208,7 +208,7 @@ now you can just assume that `error` is a type just like all other types.
 
 ## Operators and Built-in Functions
 
-Go supports the normal set of numerical operators. See [Precedence](#tab-op-precedence)
+Go supports the normal set of numerical operators. See [Table: Precedence](#tab-op-precedence)
 for lists the current ones and their relative precedence. They all associate from
 left to right.
 
@@ -229,7 +229,7 @@ concatenating them).
 
 
 ## Go Keywords
-Let's start looking at keywords, [Keywords](#tab-keywords) lists all the keywords in
+Let's start looking at keywords, [Table: Keywords](#tab-keywords) lists all the keywords in
 Go.
 
 {#tab-keywords}
@@ -475,7 +475,7 @@ You can list cases on one line <1>, separated by commas.
 
 ## Built-in Functions
 A few functions are predefined, meaning you *don't* have to include any package
-to get access to them. [Functions](#tab-predef-functions) lists them all.^[You can
+to get access to them. [Table: Pre-defined functions](#tab-predef-functions) lists them all.^[You can
 use the command `godoc builtin` to read the online documentation about the
 built-in types and functions.]
 
@@ -588,7 +588,7 @@ passing a pointer to the underlying array. With: `slice := make([]int, 10)`, you
 create a slice which can hold ten elements. Note that the underlying array isn't
 specified. A slice is always coupled to an array that has a fixed size. For
 slices we define a capacity (((slice,capacity))) and a length
-(((slice,length))). [Array versus slice](#fig-array-vs-slice) shows the creation of an array,
+(((slice,length))). [Figure:Array versus slice](#fig-array-vs-slice) shows the creation of an array,
 then the creation of a slice. First we create an array of $$m$$ elements of the
 type `int`: `var array[m]int` .
 
