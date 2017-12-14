@@ -1,11 +1,8 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400italic,700italic,400,700);
-
 body {
   padding:50px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#222;
   font-weight:400;
 }
@@ -68,9 +65,9 @@ blockquote {
 }
 
 code, pre {
-  font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, monospace;
+  font-family: monospace;
   color:#333;
-  font-size:14px;
+  font-size:16px;
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
@@ -260,14 +257,14 @@ footer {
 
 @media print, screen {
   body {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
 @media print, screen and (max-width: 720px) {
   body {
     word-wrap:break-word;
-    font-size: 15px;
+    font-size: 17px;
   }
 
   header {
@@ -285,7 +282,7 @@ footer {
 
 @media print, screen and (max-width: 480px) {
   body {
-    font-size: 14px;
+    font-size: 16px;
     padding:15px;
   }
 

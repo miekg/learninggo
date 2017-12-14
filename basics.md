@@ -22,7 +22,7 @@ a standalone executable.
 
 `import "fmt"` says we need `fmt` in addition to `main` <2>. A package other
 than `main` is commonly called a library, a familiar concept in many programming
-languages (see (#packages)). The line ends with a comment that begins with `//`.
+languages (see [Packages](#packages)). The line ends with a comment that begins with `//`.
 
 Next we another comment, but this one is enclosed in `/*` `*/` <3>. When your Go
 program is executed, the first function called will be `main.main()`, which
@@ -71,7 +71,7 @@ a value to it. The code on the right uses `:=` to do this in one step (this form
 may only be used *inside* functions). In that case the variable type is
 *deduced* from the value. A value of 15 indicates an `int`. A value of `false`
 tells Go that the type should be `bool`. Multiple `var` declarations may also
-be grouped; `const` (see (#constants)) and `import` also allow this. Note the
+be grouped; `const` (see [Constants](#constants)) and `import` also allow this. Note the
 use of parentheses instead of braces:
 
 ~~~go
@@ -202,15 +202,15 @@ is the real part, `im` is the imaginary part and $$i$$ is the literal '$$i$$'
 Any non-trivial program will have the need for error reporting sooner or later.
 Because of this Go has a builtin type specially for errors, called `error`. `var
 e error` creates a variable `e` of type `error` with the value `nil`. This error
-type is an interface -- we'll look more at interfaces in (#interfaces). For
+type is an interface -- we'll look more at interfaces in [Interfaces](#interfaces). For
 now you can just assume that `error` is a type just like all other types.
 
 
 ## Operators and Built-in Functions
 
-Go supports the normal set of numerical operators. See (#tab-op-precedence)
-for lists the current ones and their relative precedence. They all associate from
-left to right.
+Go supports the normal set of numerical operators. See [Tab Op
+Precedence](#tab-op-precedence) for lists the current ones and their relative
+precedence. They all associate from left to right.
 
 {#tab-op-precedence}
 {{tab/precedence.md}}
@@ -229,30 +229,30 @@ concatenating them).
 
 
 ## Go Keywords
-Let's start looking at keywords, (#tab-keywords) lists all the keywords in
-Go.
+Let's start looking at keywords, [Tab Keywords](#tab-keywords) lists all the
+keywords in Go.
 
 {#tab-keywords}
 {{tab/keywords.md}}
 
-We've seen some of these already. We used `var` and `const` in the (#variables-types-and-keywords)
-section,  and we briefly looked at `package` and `import` in our "Hello World"
-program at the start of the chapter. Others need more attention and have their
-own chapter or section:
+We've seen some of these already. We used `var` and `const` in the [Variables
+Types and Keywords](#variables-types-and-keywords) section, and we briefly
+looked at `package` and `import` in our "Hello World" program at the start of
+the chapter. Others need more attention and have their own chapter or section:
 
 * `func` is used to declare functions and methods.
-* `return` is used to return from functions. We'll look at both `func` and `return` in detail in (#functions).
-* `go` is used for concurrency. We'll look at this in (#channels).
-* `select` used to choose from different types of communication, We'll work with `select` in (#channels).
-* `interface` is covered in (#interfaces).
-* `struct` is used for abstract data types. We'll work with `struct` in (#beyond-the-basics).
-* `type` is also covered in (#beyond-the-basics).
+* `return` is used to return from functions. We'll look at both `func` and `return` in detail in [Functions](#functions).
+* `go` is used for concurrency. We'll look at this in [Channels](#channels).
+* `select` used to choose from different types of communication, We'll work with `select` in [Channels](#channels).
+* `interface` is covered in [Interfaces](#interfaces).
+* `struct` is used for abstract data types. We'll work with `struct` in [Beyond the Basics](#beyond-the-basics).
+* `type` is also covered in [Beyond the Basics](#beyond-the-basics).
 
 
 ## Control Structures
 There are only a few control structures in Go. To write loops we use the `for`
 keyword, and there is a `switch` and of course an `if`. When working with
-channels `select` will be used (see (#channels)). Parentheses are are not
+channels `select` will be used (see [Channels](#channels)). Parentheses are are not
 required around the condition, and the body must *always* be brace-delimited.
 
 
@@ -375,7 +375,7 @@ accepts a label.
 
 ### Range
 The keyword `range` (((keywords, range))) can be used for loops. It can loop
-over slices, arrays, strings, maps and channels (see (#channels)). `range` is an
+over slices, arrays, strings, maps and channels (see [Channels](#channels)). `range` is an
 iterator that, when called, returns the next key-value pair from the "thing" it
 loops over. Depending on what that is, `range` returns different things.
 
@@ -475,9 +475,9 @@ You can list cases on one line <1>, separated by commas.
 
 ## Built-in Functions
 A few functions are predefined, meaning you *don't* have to include any package
-to get access to them. (#tab-predef-functions) lists them all.^[You can
-use the command `godoc builtin` to read the online documentation about the
-built-in types and functions.]
+to get access to them. [Tab Predef Functions](#tab-predef-functions) lists them
+all.^[You can use the command `godoc builtin` to read the online documentation
+about the built-in types and functions.]
 
 {#tab-predef-functions}
 {{tab/functions.md}}
@@ -487,7 +487,7 @@ pseudo package that is included in recent Go releases. Let's go over these
 functions briefly.
 
 `close`
-:   is used in channel communication. It closes a channel. We'll learn more about this in (#channels).
+:   is used in channel communication. It closes a channel. We'll learn more about this in [Channels](#channels).
     (((built-in,close)))
 
 `delete`
@@ -496,25 +496,25 @@ functions briefly.
 `len` and `cap`
 :   are used on a number of different types, `len` is
     used to return the lengths of strings, slices, and
-    arrays. In the next section (#arrays) we'll look at slices,
+    arrays. In the next section [Arrays](#arrays) we'll look at slices,
     arrays and the function `cap`.(((built-in,len)))(((built-in,cap)))
 
 `new`
 :   is used for allocating memory for user defined
-    data types. See (#allocation-with-new).
+    data types. See [Allocation with new](#allocation-with-new).
     (((built-in,new)))
 
 `make`
 :   is used for allocating memory for built-in
-    types (maps, slices, and channels). See (#allocation-with-make).
+    types (maps, slices, and channels). See [Allocation with make](#allocation-with-make).
     (((built-in,make)))
 
 `copy`, `append`
 :   `copy` is for copying slices. (((built-in,copy)))
-    And `append` is for concatenating slices. See (#slices) in this chapter. (((built-in,append)))
+    And `append` is for concatenating slices. See [Slices](#slices) in this chapter. (((built-in,append)))
 
 `panic`, `recover`
-:   are used for an *exception* mechanism. See (#panic-and-recovering) for more.
+:   are used for an *exception* mechanism. See [Panic And Recovering](#panic-and-recovering) for more.
     (((built-in,panic)))
     (((built-in,recover)))
 
@@ -562,7 +562,7 @@ a [3]int`. To initialize it to something other than zero, use a
 
 A> A composite literal allows you
 A> to assign a value directly to an array, slice, or map.
-A> See (#constructors-and-composite-literals) for more information.
+A> See [Constructors and Composite Literals](#constructors-and-composite-literals) for more information.
 
 When declaring arrays you *always* have to type something in between the square
 brackets, either a number or three dots (`...`), when using a composite literal.
@@ -579,7 +579,7 @@ arrays is that a slice is a pointer *to* an array; slices are reference
 types.(((reference types)))
 
 A> Reference types are created with `make`. We detail this further
-A> in (#beyond-the-basics).
+A> in [Beyond the Basics](#beyond-the-basics).
 
 That means that if you assign one slice to another, both refer to the *same*
 underlying array. For instance, if a function takes a slice argument, changes it

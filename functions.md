@@ -23,7 +23,7 @@ func (p mytype) funcname(q int) (r,s int) { return 0,0 }
 To declare a function, you use the `func` keyword <1>. You can optionally bind
 <2> to a specific type called receiver (((functions, receiver))) (a function
 with a receiver is usually called a method(((functions, method)))). This will
-be explored in (#interfaces). Next <3> you write the name of your
+be explored in [Interfaces](#interfaces). Next <3> you write the name of your
 function. Here <4> we define that the variable `q` of type `int` is the input
 parameter. Parameters are passed *pass-by-value*.(((functions, pass-by-value)))
 The variables `r` and `s` <5> are the *named return parameters* (((functions,
@@ -52,7 +52,7 @@ The names are not mandatory but they can make code shorter and clearer:
 Functions can be declared in any order you wish. The compiler scans the entire
 file before execution, so function prototyping is a thing of the past in Go. Go
 does not allow nested functions, but you can work around this with anonymous
-functions. See the Section (#functions-as-values) in this chapter. Recursive
+functions. See the Section [Functions as Values](#functions-as-values) in this chapter. Recursive
 functions work just as in other languages:
 
 {callout="//"}
@@ -142,7 +142,7 @@ Note that the final comma on second to last line is *mandatory*.
 
 Or you can write a function that takes a function as its parameter, for example
 a `Map` function that works on `int` slices. This is left as an exercise for the
-reader; see the exercise (#map-function).
+reader; see the exercise [Map Function](#map-function).
 
 
 ## Callbacks
@@ -302,7 +302,7 @@ index as returned by `range`, hence the use of the underscore there. In the body
 of the `range` we just print the parameters we were given.
 
 If you don't specify the type of the variadic argument it defaults to the empty
-interface `interface{}` (see Chapter (#interfaces)).
+interface `interface{}` (see Chapter [Interfaces](#interfaces)).
 
 Suppose we have another variadic function called `myfunc2`, the following
 example shows how to pass variadic arguments to it:
@@ -360,7 +360,7 @@ func Panic(f func()) (b bool) { //<1>
 ~~~
 
 We define a new function `Panic` <1> that takes a function as an argument (see
-(#functions-as-values)). It returns true if `f` panics when run, else false. We
+[Functions as Values](#functions-as-values)). It returns true if `f` panics when run, else false. We
 then <2> define a `defer` function that utilizes `recover`. If the current
 goroutine panics, this defer function will notice that. If `recover()` returns
 non-`nil` we set `b` to true. At <3> Execute the function we received as the

@@ -25,7 +25,7 @@ Concurrent
     run as *very* lightweight threads. These threads are called
     goroutines (((goroutine)))^[Yes, that sounds a lot like
     *co*routines, but goroutines are slightly different as we will
-    see in (#communication).] in Go.
+    see in [Communication](#communication).] in Go.
 
 Channels
 :   Communication with these goroutines is done, either via shared state or
@@ -80,29 +80,29 @@ these are marked with an asterisk.
 
 Here's what you can expect from each chapter:
 
-(#basics)
+[Basics](#basics)
 :   We'll look at the basic types, variables, and control structures available in the language.
 
-(#functions)
+[Functions](#functions)
 :   Here we look at functions, the basic building blocks of Go programs.
 
-(#packages)
+[Packages](#packages)
 :   We'll see that functions and data can be grouped together
     in packages. We'll also see how to document and test our packages.
 
-(#beyond-the-basics)
+[Beyond the Basics](#beyond-the-basics)
 :   We'll create our own types. We'll also look at memory allocations in Go.
 
-(#interfaces)
+[Interfaces](#interfaces)
 :   We'll learn how to use interfaces. Interfaces are the central concept in Go,
     as Go does not support object orientation in the traditional sense.
 
-(#concurrency)
+[Concurrency](#concurrency)
 :   We'll learn the `go` keyword, which can be used to start function in
     separate routines (called goroutines). Communication with those goroutines is
     done via channels.
 
-(#communication)
+[Communication](#communication)
 :   Finally we'll see how to interface with the rest of the world from within
     a Go program. We'll see how to create files and read and write to and from them.
     We'll also briefly look into networking.
