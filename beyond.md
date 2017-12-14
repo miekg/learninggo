@@ -231,7 +231,7 @@ struct {
 Note that field names that start with a capital letter are exported, i.e. can be
 set or read from other packages. Field names that start with a lowercase are
 private to the current package. The same goes for functions defined in packages,
-see (#packages) for the details.
+see [Packages](#packages) for the details.
 
 
 ### Methods
@@ -244,7 +244,7 @@ routes:
 func doSomething(n1 *NameAge, n2 int) { /* */ }
 ~~~
 
-2. Create a function that works on the type (see *receiver* in (#functions)):
+2. Create a function that works on the type (see *receiver* in [Functions](#functions)):
 
 ~~~go
 func (n1 *NameAge) doSomething(n2 int) { /* */ }

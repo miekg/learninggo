@@ -23,7 +23,7 @@ In addition, make it output the number of bytes in that string.
 position 4 with 'abc'.
 
 4. Write a Go program that reverses a string, so "foobar" is printed as "raboof".
-*Hint*: You will need to know about conversion; skip ahead to (#conversions).
+*Hint*: You will need to know about conversion; skip ahead to [Conversions](#conversions).
 
 
 {.answer}
