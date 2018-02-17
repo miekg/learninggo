@@ -24,7 +24,7 @@ a standalone executable.
 than `main` is commonly called a library, a familiar concept in many programming
 languages (see (#packages)). The line ends with a comment that begins with `//`.
 
-Next we another comment, but this one is enclosed in `/*` `*/` <3>. When your Go
+Next we have another comment, but this one is enclosed in `/*` `*/` <3>. When your Go
 program is executed, the first function called will be `main.main()`, which
 mimics the behavior from C. Here we declare that function <4>.
 
