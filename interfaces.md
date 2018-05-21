@@ -88,7 +88,7 @@ figure that out by using a type switch(((type switch))).
 {callout="//"}
 ~~~go
 func f(p I) {
-    switch t := p.(type) { //<1>
+    switch p.(type) { //<1>
         case *S: //<2>
         case *R: //<2>
         default: //<3>
@@ -97,11 +97,9 @@ func f(p I) {
 ~~~
 
 At <1> we use the type switch, note that the `.(type)` syntax is *only* valid
-within a `switch` statement. We store the value in the variable `t`. The
-subsequent cases <2> each check for a different *actual* type. And we can even
-have a `default` <3> clause. It is worth pointing out that both `case R` and
-`case s` aren't possible, because `p` needs to be a pointer in order to satisfy
-`i`.
+within a `switch` statement. The subsequent cases <2> each check for a different *actual* type.
+And we can even have a `default` <3> clause. It is worth pointing out that both `case R` and
+`case s` aren't possible, because `p` needs to be a pointer in order to satisfy `i`.
 
 A type switch isn't the only way to discover the type at *run-time*.
 
