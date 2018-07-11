@@ -495,7 +495,7 @@ functions briefly.
 
 `len` and `cap`
 :   are used on a number of different types, `len` is
-    used to return the lengths of strings, slices, and
+    used to return the lengths of strings, maps, slices, and
     arrays. In the next section (#arrays) we'll look at slices,
     arrays and the function `cap`.(((built-in,len)))(((built-in,cap)))
 
