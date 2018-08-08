@@ -713,7 +713,7 @@ with each invocation.
 {callout="//"}
 ~~~go
 year := 0
-for _, days := range monthdays //<1>
+for _, days := range monthdays { //<1>
     year += days
 }
 fmt.Printf("Numbers of days in a year: %d\n", year)
