@@ -192,7 +192,7 @@ A test file belongs to the current <1> package. This is not only convenient, but
 also allows tests of unexported functions and structures. We then <2> import the
 `testing` package. And finally the test we want to execute. The code here <3>
 should hold no surprises: we check if the `Even` function works OK. And now, the
-moment we have been waiting form executing the test.
+moment we have been waiting for executing the test.
 
     % go test
     ok      even    0.001s

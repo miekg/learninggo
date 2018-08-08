@@ -252,7 +252,7 @@ func sort(i []interface{}) {  //<1>
 
 Our function will receive a slice of empty interfaces at <1>. We then <2> use a
 type switch to find out what the actual type of the input is. And then <3>
-then sort accordingly. And, when done, return <4> the sorted slice.
+sort accordingly. And, when done, return <4> the sorted slice.
 
 But when we call this function with `sort([]int{1, 4, 5})`, it fails with:
 "cannot use i (type []int) as type []interface { } in function argument"

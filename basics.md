@@ -252,7 +252,7 @@ own chapter or section:
 ## Control Structures
 There are only a few control structures in Go. To write loops we use the `for`
 keyword, and there is a `switch` and of course an `if`. When working with
-channels `select` will be used (see (#channels)). Parentheses are are not
+channels `select` will be used (see (#channels)). Parentheses are not
 required around the condition, and the body must *always* be brace-delimited.
 
 
