@@ -3,7 +3,7 @@
 > variable to walk through the bytes of a string.
 Quote: Go For C++ Programmers -- Go Authors
 
-In this chapter we delve deeper in to the language.
+In this chapter we delve deeper into the language.
 
 Go has pointers. There is however no pointer arithmetic, so they act more like
 references than pointers that you may know from C. Pointers are useful. Remember

@@ -252,7 +252,7 @@ own chapter or section:
 ## Control Structures
 There are only a few control structures in Go. To write loops we use the `for`
 keyword, and there is a `switch` and of course an `if`. When working with
-channels `select` will be used (see (#channels)). Parentheses are are not
+channels `select` will be used (see (#channels)). Parentheses are not
 required around the condition, and the body must *always* be brace-delimited.
 
 
@@ -619,7 +619,7 @@ s6 := a[2:4:5] <7>
 <!-- Double check this -->
 First we define <1> an array with five elements, from index 0 to 4.
 From this we create <2> a slice with the elements from index 2 to 3, this slices contains: `3, 4`.
-Then we we create another slice <3> from `a`: with the elements from index 1 to 4,
+Then we create another slice <3> from `a`: with the elements from index 1 to 4,
 this contains: `2, 3, 4, 5`.
 With `a[:]` <4> we create a slice with all the elements in the array. This is a shorthand for: `a[0:len(a)]`.
 And with `a[:4]` <5> we create a slice with the elements from index
@@ -713,7 +713,7 @@ with each invocation.
 {callout="//"}
 ~~~go
 year := 0
-for _, days := range monthdays //<1>
+for _, days := range monthdays { //<1>
     year += days
 }
 fmt.Printf("Numbers of days in a year: %d\n", year)
