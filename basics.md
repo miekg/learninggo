@@ -33,13 +33,13 @@ screen. The string is enclosed with `"` and may contain non-ASCII characters
 <<5>>.
 
 ## Compiling and Running Code
-To build a Go program, use the `go` tool.(((tooling,go)))
+To build a Go program, use the `go` tool.(!tooling,go)
 To build `helloworld` we just enter:
 
     % go build helloworld.go
 
-(((tooling,go build)))
-This results in an executable called `helloworld`. (((tooling,go run)))
+(!tooling,go build)
+This results in an executable called `helloworld`. (!tooling,go run)
 
     % ./helloworld
     Hello, world.
@@ -57,7 +57,7 @@ declare a variable it is assigned the "natural" null value for the type. This
 means that after `var a int`, `a` has a value of 0. With `var s string`, `s` is
 assigned the zero string, which is `""`. Declaring and assigning in Go is a two
 step process, but they may be combined. Compare the following pieces of code
-which have the same effect. (((variables,declaring))) (((variables,assigning)))
+which have the same effect. (!variables,declaring) (!variables,assigning)
 
 ~~~go
 var a int                           a := 15
@@ -83,11 +83,11 @@ var (
 
 Multiple variables of the same type can also be declared on a single line: `var
 x, y int` makes `x` and `y` both `int` variables. You can also make use of
-*parallel assignment*(((variables, parallel assignment))): `a, b := 20, 16`.
+*parallel assignment*(!variables, parallel assignment) `a, b := 20, 16`.
 This makes `a` and `b` both integer variables and assigns
 20 to `a` and 16 to `b`.
 
-A special name for a variable is `_`. (((variables,underscore))) Any value
+A special name for a variable is `_`. (!variables,underscore) Any value
 assigned to it is discarded (it's similar to `/dev/null` on Unix). In this
 example we only assign the integer value of 35 to `b` and discard the value 34:
 `_, b := 34, 35`. Declared but otherwise *unused* variables are a compiler error
@@ -128,7 +128,7 @@ We declare two different integers, a and b where a is an `int` and b is an
 Constants in Go are just that --- constant. They are created at compile time,
 and can only be numbers, strings, or booleans; `const x = 42` makes `x`
 a constant. You can use
-*iota*(((keywords, iota))) ^[The word iota is used in a common English phrase,
+*iota*(!keywords, iota) ^[The word iota is used in a common English phrase,
 'not one iota', meaning 'not the slightest difference', in reference to
 a phrase in the New Testament: "*until heaven and earth pass away, not an iota,
 not a dot, will pass from the Law*." [@iota]] to enumerate values.
@@ -184,7 +184,7 @@ Finally, we print the string with `fmt.Printf` <<4>>.
 
 ### Runes
 `Rune` is an alias for `int32`. It is an UTF-8 encoded code point. When is this
-type useful? (((runes))) One example is when you're iterating over characters in
+type useful? (!runes) One example is when you're iterating over characters in
 a string. You could loop over each byte (which is only equivalent to a character
 when strings are encoded in 8-bit ASCII, which they are *not* in Go!). But to
 get the actual characters you should use the `rune` type.
@@ -216,11 +216,11 @@ left to right.
 {{tab/precedence.md}}
 
 `+ - * /` and `%` all do what you would expect, `& | ^` and `&^` are bit
-operators for bitwise *and*(((operators, bitwise and))), bitwise
-*or*(((operators, bitwise or))), bitwise *xor*(((operators, bit wise xor))), and
-bit clear (((operators, bitwise clear))) respectively. The `&&` and `||`
-operators are logical *and* (((operators, and))) and logical *or* (((operators,
-or))). Not listed in the table is the logical not (((operators, not))): `!`
+operators for bitwise *and*(!operators, bitwise and) bitwise
+*or*(!operators, bitwise or) bitwise *xor*(!operators, bit wise xor) and
+bit clear (!operators, bitwise clear) respectively. The `&&` and `||`
+operators are logical *and* (!operators, and) and logical *or* (!operators,
+or) Not listed in the table is the logical not (!operators, not) `!`
 
 Although Go does not support operator overloading (or method overloading for
 that matter), some of the built-in operators *are* overloaded. For instance, `+`
@@ -257,7 +257,7 @@ required around the condition, and the body must *always* be brace-delimited.
 
 
 ### If-Else
-In Go an `if` (((keywords, if))) looks like this:
+In Go an `if` (!keywords, if) looks like this:
 
 ~~~go
 if x > 0 {
@@ -267,7 +267,7 @@ if x > 0 {
 }
 ~~~
 
-(((keywords,return))) (((keywords,else))) Since `if` and `switch` accept an
+(!keywords,return) (!keywords,else) Since `if` and `switch` accept an
 initialization statement, it's common to see one used to set up a (local)
 variable.
 
@@ -296,8 +296,8 @@ outputs.
 
 
 ### Goto
-Go has a `goto` (((keywords, goto))) statement - use it wisely. With `goto` you
-jump to a (((label))) label which must be defined within the current function.
+Go has a `goto` (!keywords, goto) statement - use it wisely. With `goto` you
+jump to a (!label) label which must be defined within the current function.
 For instance, a loop in disguise:
 
 ~~~go
@@ -315,7 +315,7 @@ a capital letter and is case sensitive.
 
 
 ### For
-The Go `for` (((keywords, for))) loop has three forms, only one of which has
+The Go `for` (!keywords, for) loop has three forms, only one of which has
 semicolons:
 
 * `for init; condition; post { }` - a loop using the syntax borrowed from C;
@@ -335,7 +335,7 @@ Note that the variable `i` ceases to exist after the loop.
 
 
 ### Break and Continue
-With `break` (((keywords, break))) you can quit loops early.  By itself, `break`
+With `break` (!keywords, break) you can quit loops early.  By itself, `break`
 breaks the current loop.
 
 {callout="//"}
@@ -368,19 +368,19 @@ J:  for j := 0; j < 5; j++ { //<<1>>
 Here we define a label "J" <<1>>, preceding the `for`-loop there. When we use
 `break J` <<2>>, we don't break the inner loop but the "J" loop.
 
-With `continue` (((keywords, continue))) you begin the next iteration of the
+With `continue` (!keywords, continue) you begin the next iteration of the
 loop, skipping any remaining code. In the same way as `break`, `continue` also
 accepts a label.
 
 
 ### Range
-The keyword `range` (((keywords, range))) can be used for loops. It can loop
+The keyword `range` (!keywords, range) can be used for loops. It can loop
 over slices, arrays, strings, maps and channels (see (#channels)). `range` is an
 iterator that, when called, returns the next key-value pair from the "thing" it
 loops over. Depending on what that is, `range` returns different things.
 
 When looping over a slice or array, `range` returns the index in the slice as
-the key and value belonging to that index. Consider this code: (((keywords, range)))
+the key and value belonging to that index. Consider this code: (!keywords, range)
 
 ~~~go
 list := []string{"a", "b", "c", "d", "e", "f"}
@@ -396,10 +396,10 @@ be "a" through "f".
 
 You can also use `range` on strings directly. Then it will break out the
 individual Unicode characters ^[In the UTF-8 world characters are sometimes
-called *runes* (((runes))).] Mostly, when people talk about characters, they
+called *runes* (!runes) Mostly, when people talk about characters, they
 mean 8 bit characters. As UTF-8 characters may be up to 32 bits the word rune is
 used. In this case the type of `char` is `rune`. and their start position, by
-parsing the UTF-8. The loop: (((keywords,range)))
+parsing the UTF-8. The loop: (!keywords,range)
 
 ~~~go
 for pos, char := range "Gő!" {
@@ -417,7 +417,7 @@ Note that `ő` took 2 bytes, so '!' starts at byte 3.
 
 
 ### Switch
-Go's `switch` (((keywords, switch))) is very flexible; you can match on much
+Go's `switch` (!keywords, switch) is very flexible; you can match on much
 more than just integers. The cases are evaluated top to bottom until a match is
 found, and if the `switch` has no expression it switches on `true`. It's
 therefore possible -- and idiomatic -- to write an `if-else-if-else` chain as
@@ -443,8 +443,8 @@ value <3>. Check if `c` falls between "a" and "f" <4>. For an "a" we
 return 10, for "b" we return 11, etc. We also do the same <5> thing for "A"
 to "F".
 
-There is no automatic fall through, you can use `fallthrough` (((keywords,
-fallthrough))) for that.
+There is no automatic fall through, you can use `fallthrough` (!keywords,
+fallthrough) for that.
 
 {callout="//"}
 ~~~go
@@ -456,7 +456,7 @@ switch i {
         g() //<2>
 ~~~
 
-`f()` can be called when `i == 0` <1>. With `default` (((keywords, default))) you
+`f()` can be called when `i == 0` <1>. With `default` (!keywords, default) you
 can specify an action when none of the other cases match. Here `g()` is called
 when `i` is not 0 or 1 <2>. We could rewrite the above example as:
 
@@ -481,52 +481,52 @@ built-in types and functions.]
 {#tab-predef-functions}
 {{tab/functions.md}}
 
-These built-in functions are documented in the `builtin` (((package,builtin)))
+These built-in functions are documented in the `builtin` (!package,builtin)
 pseudo package that is included in recent Go releases. Let's go over these
 functions briefly.
 
 `close`
 :   is used in channel communication. It closes a channel. We'll learn more about this in (#channels).
-    (((built-in,close)))
+    (!built-in,close)
 
 `delete`
-:   is used for deleting entries in maps. (((built-in,delete)))
+:   is used for deleting entries in maps. (!built-in,delete)
 
 `len` and `cap`
 :   are used on a number of different types, `len` is
     used to return the lengths of strings, slices, and
     arrays. In the next section (#arrays) we'll look at slices,
-    arrays and the function `cap`.(((built-in,len)))(((built-in,cap)))
+    arrays and the function `cap`.(!built-in,len)(!built-in,cap)
 
 `new`
 :   is used for allocating memory for user defined
     data types. See (#allocation-with-new).
-    (((built-in,new)))
+    (!built-in,new)
 
 `make`
 :   is used for allocating memory for built-in
     types (maps, slices, and channels). See (#allocation-with-make).
-    (((built-in,make)))
+    (!built-in,make)
 
 `copy`, `append`
-:   `copy` is for copying slices. (((built-in,copy)))
-    And `append` is for concatenating slices. See (#slices) in this chapter. (((built-in,append)))
+:   `copy` is for copying slices. (!built-in,copy)
+    And `append` is for concatenating slices. See (#slices) in this chapter. (!built-in,append)
 
 `panic`, `recover`
 :   are used for an *exception* mechanism. See (#panic-and-recovering) for more.
-    (((built-in,panic)))
-    (((built-in,recover)))
+    (!built-in,panic)
+    (!built-in,recover)
 
 `print`, `println`
 :   are low level printing functions that can be used without reverting to the
-    `fmt` (((package,fmt))) package. These are mainly used for debugging.
-    (((built-in,print)))(((built-in,println)))
+    `fmt` (!package,fmt) package. These are mainly used for debugging.
+    (!built-in,print)built-in,println)
 
 `complex`, `real`, `imag`
-:   all deal with complex numbers. (((complex numbers))) We will not use complex numbers in this book.
-    (((built-in,complex)))
-    (((built-in,real)))
-    (((built-in,imag)))
+:   all deal with complex numbers. (!complex numbers) We will not use complex numbers in this book.
+    (!built-in,complex)
+    (!built-in,real)
+    (!built-in,imag)
 
 
 ## Arrays, Slices, and Maps
@@ -553,9 +553,9 @@ arrays are values: Assigning one array to another *copies* all the elements. In
 particular, if you pass an array to a function it will receive a copy of the
 array, not a pointer to it.
 
-(((array,multidimensional))) To declare an array you can use the following: `var
+(!array,multidimensional) To declare an array you can use the following: `var
 a [3]int`. To initialize it to something other than zero, use a
-*composite literal* (((literal, composite))): `a := [3]int{1, 2, 3}`. This can
+*composite literal* (!literal, composite) `a := [3]int{1, 2, 3}`. This can
  be shortened to `a := [...]int{1, 2, 3}`, where Go counts the elements
  automatically.
 
@@ -575,7 +575,7 @@ much more flexible: slices.
 A slice is similar to an array, but it can grow when new elements are added.
 A slice always refers to an underlying array. What makes slices different from
 arrays is that a slice is a pointer *to* an array; slices are reference
-types.(((reference types)))
+types.(!reference types)
 
 A> Reference types are created with `make`. We detail this further
 A> in (#beyond-the-basics).
@@ -586,8 +586,8 @@ makes to the elements of the slice will be visible to the caller, analogous to
 passing a pointer to the underlying array. With: `slice := make([]int, 10)`, you
 create a slice which can hold ten elements. Note that the underlying array isn't
 specified. A slice is always coupled to an array that has a fixed size. For
-slices we define a capacity (((slice,capacity))) and a length
-(((slice,length))). (#fig-array-vs-slice) shows the creation of an array,
+slices we define a capacity (!slice,capacity) and a length
+(!slice,length) (#fig-array-vs-slice) shows the creation of an array,
 then the creation of a slice. First we create an array of $$m$$ elements of the
 type `int`: `var array[m]int` .
 
@@ -643,7 +643,7 @@ values to a slice and returns the result: a slice with the same type as the
 original. If the original slice isn't big enough to fit the added values, append
 will allocate a new slice that is big enough. So the slice returned by append
 may refer to a different underlying array than the original slice does. Here's
-an example: (((built-in,append)))
+an example: (!built-in,append)
 
 {callout="//"}
 ~~~go
@@ -662,7 +662,7 @@ Note the three dots used after `s0...`! This is needed make it clear
 The copy function copies slice elements from a source to a destination, and
 returns the number of elements it copied. This number is the minimum of the
 length of the source and the length of the destination. For example:
-(((built-in,copy)))
+(!built-in,copy)
 
 {callout="//"}
 ~~~go
@@ -679,7 +679,7 @@ And after <2>, `n2` is 4, and `s` is `[]int{2, 3, 4, 5, 4, 5}`.
 ### Maps
 Many other languages have a type similar to maps built-in. For instance, Perl
 has hashes, Python has its dictionaries, and C++ also has maps (as part of the
-libraries). In Go we have the `map` (((keywords, map))) type. A `map` can be
+libraries). In Go we have the `map` (!keywords, map) type. A `map` can be
 thought of as an array indexed by strings (in its most simple form).
 
 
@@ -705,8 +705,8 @@ For indexing ("searching") the map, we use square brackets. For example, suppose
 we want to print the number of days in December: `fmt.Printf("%d\n",
 monthdays["Dec"])`
 
-If you are looping over an array, slice, string, or map a, `range` (((keywords,
-range))) clause will help you again, it returns the key and corresponding value
+If you are looping over an array, slice, string, or map a, `range` (!keywords,
+range) clause will help you again, it returns the key and corresponding value
 with each invocation.
 
 {callout="//"}
@@ -721,17 +721,17 @@ fmt.Printf("Numbers of days in a year: %d\n", year)
 At <1> we use the underscore to ignore (assign to nothing) the key returned by
 `range`. We are only interested in the values from `monthdays`.
 
-(((keywords, map adding elements)))
+(!keywords, map adding elements)
 
 To add elements to the map, you would add new month with: `monthdays["Undecim"]
 = 30`. If you use a key that already exists, the value will be silently
-overwritten: `monthdays["Feb"] = 29`. To test for existence (((keywords, map
-existence))), you would use the following: `value, present := monthdays["Jan"]`.
+overwritten: `monthdays["Feb"] = 29`. To test for existence (!keywords, map
+existence) you would use the following: `value, present := monthdays["Jan"]`.
 If the key "Jan" exists, `present` will be true. It's more Go like to name
 `present` "ok", and use: `v, ok := monthdays["Jan"]`. In Go we call this the
 "comma ok" form.
 
-You can remove elements (((keywords, map remove elements))) from the `map`:
+You can remove elements (!keywords, map remove elements) from the `map`:
 `delete(monthdays, "Mar")` ^[Always rainy in March anyway.]. In general the
 syntax `delete(m, x)` will delete the map entry retrieved by the expression
 `m[x]`.

@@ -21,11 +21,11 @@ lines of code.
 
 Concurrent
 :   Go makes it easy to "fire off" functions to be run as *very* lightweight threads. These threads
-are called goroutines (((goroutine)))^[Yes, that sounds a lot like *co*routines, but goroutines are
+are called goroutines (!goroutine)^[Yes, that sounds a lot like *co*routines, but goroutines are
 slightly different as we will see in (#communication).] in Go.
 
 Channels
-:   Communication with these goroutines is done, either via shared state or via (((channels)))
+:   Communication with these goroutines is done, either via shared state or via (!channels)
 channels [@csp].
 
 Fast
