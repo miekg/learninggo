@@ -1,7 +1,7 @@
 {.epigraph}
 > I am interested in this and hope to do something.
 
-Caption: On adding complex numbers to Go -- Ken Thompson
+Caption: On adding complex numbers to Go, Ken Thompson
 
 
 In this chapter we will look at the basic building blocks of the Go programming
