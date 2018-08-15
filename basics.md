@@ -171,15 +171,15 @@ To do this in Go you will need the following:
 {callout="//"}
 ~~~go
 s := "hello"
-c := []rune(s)	    //<1>
-c[0] = 'c'	        //<2>
-s2 := string(c)     //<3>
-fmt.Printf("%s\n", s2) //<4>
+c := []rune(s)	    //<<1>>
+c[0] = 'c'	        //<<2>>
+s2 := string(c)     //<<3>>
+fmt.Printf("%s\n", s2) //<<4>>
 ~~~
 
-Here we convert `s` to an array of runes <1>. We change the first element of
-this array <2>. Then we create a *new* string `s2` with the alteration <3>.
-Finally, we print the string with `fmt.Printf` <4>.
+Here we convert `s` to an array of runes <<1>>. We change the first element of
+this array <<2>>. Then we create a *new* string `s2` with the alteration <<3>>.
+Finally, we print the string with `fmt.Printf` <<4>>.
 
 
 ### Runes
@@ -342,31 +342,31 @@ breaks the current loop.
 ~~~go
 for i := 0; i < 10; i++ {
     if i > 5 {
-    break //<1>
+    break //<<1>>
     }
-    fmt.Println(i) //<2>
+    fmt.Println(i) //<<2>>
 }
 ~~~
 
-Here we `break` the current loop <1>, and don't continue with the
-`fmt.Println(i)` statement <2>. So we only print 0 to 5. With loops within loop
+Here we `break` the current loop <<1>>, and don't continue with the
+`fmt.Println(i)` statement <<2>>. So we only print 0 to 5. With loops within loop
 you can specify a label after `break` to identify *which* loop to stop:
 
 
 {callout="//"}
 ~~~go
-J:  for j := 0; j < 5; j++ { //<1>
+J:  for j := 0; j < 5; j++ { //<<1>>
         for i := 0; i < 10; i++ {
             if i > 5 {
-                break J //<2>
+                break J //<<2>>
             }
             fmt.Println(i)
         }
     }
 ~~~
 
-Here we define a label "J" <1>, preceding the `for`-loop there. When we use
-`break J` <2>, we don't break the inner loop but the "J" loop.
+Here we define a label "J" <<1>>, preceding the `for`-loop there. When we use
+`break J` <<2>>, we don't break the inner loop but the "J" loop.
 
 With `continue` (((keywords, continue))) you begin the next iteration of the
 loop, skipping any remaining code. In the same way as `break`, `continue` also
@@ -423,7 +423,6 @@ found, and if the `switch` has no expression it switches on `true`. It's
 therefore possible -- and idiomatic -- to write an `if-else-if-else` chain as
 a `switch`.
 
-{callout="//"}
 ~~~go
 // Convert hexadecimal character to an int value
 switch { //<1>
