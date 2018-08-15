@@ -31,10 +31,35 @@ fullname = "R. (Miek) Gieben"
 # Introduction
 {{introduction.md}}
 
-
 # Basics
 {{basics.md}}
 
+
+# Functions
+{{functions.md}}
+
+
+# Packages
+{{packages.md}}
+
+
+# Beyond the basics
+{{beyond.md}}
+
+
+# Interfaces
+{{interfaces.md}}
+
+
+# Concurrency
+{{channels.md}}
+
+
+# Communication
+{{communication.md}}
+
+
 {{inc/bib.xml}}
+
 
 {backmatter}
