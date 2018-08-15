@@ -1,7 +1,8 @@
 {.epigraph}
 > Good communication is as stimulating as black coffee, and just as hard
 > to sleep after.
-Quote: -- Anne Morrow Lindbergh
+
+Caption: -- Anne Morrow Lindbergh
 
 In this chapter we are going to look at the building blocks in Go for
 communicating with the outside world. We will look at files, directories,

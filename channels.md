@@ -1,7 +1,8 @@
 {.epigraph}
 > * Parallelism is about performance.
 > * Concurrency is about program design.
-Quote: Google I/O 2010 -- Rob Pike
+
+Caption: Google I/O 2010 -- Rob Pike
 
 In this chapter we will show off Go's ability for concurrent programming using
 channels and goroutines. Goroutines are the central entity in Go's ability for

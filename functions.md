@@ -6,7 +6,8 @@
 > studied mechanical colleague, not as a debate with a
 > compiler.  Who'd have guessed sophistication bought
 > such noise?
-Quote: -- Richard P. Gabriel
+
+Caption: -- Richard P. Gabriel
 
 Functions are the basic building blocks of Go programs; all interesting stuff
 happens in them.
