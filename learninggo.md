@@ -38,7 +38,7 @@ fullname = "R. (Miek) Gieben"
 # Functions
 {{functions.md}}
 
-
+<!--
 # Packages
 {{packages.md}}
 
@@ -58,6 +58,7 @@ fullname = "R. (Miek) Gieben"
 # Communication
 {{communication.md}}
 
+-->
 
 {{inc/bib.xml}}
 
