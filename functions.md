@@ -17,7 +17,7 @@ Here is an example of how you can declare a function:
 ~~~go
 type mytype int
 func (p mytype) funcname(q int) (r,s int) { return 0,0 }
-// <<1>>        <<2>>        <<3>>      <<4>>        <<5>>         <<6>>
+//<<1>>        //<<2>>        //<<3>>      //<<4>>        //<<5>>         //<<6>>
 ~~~
 
 To declare a function, you use the `func` keyword <<1>>. You can optionally bind
@@ -82,7 +82,7 @@ In the following example we call `g()` from `f()`:
 ~~~go
 package main
 
-var a int // <<1>>
+var a int //<<1>>
 
 func main() {
     a = 5
@@ -91,7 +91,7 @@ func main() {
 }
 
 func f() {
-    a := 6 // <<2>>
+    a := 6 //<<2>>
     print(a)
     g()
 }
@@ -113,16 +113,15 @@ use the same name for global and local variables.
 
 
 ## Functions as values
-(!functions, as values))) (((functions, literals) As with almost everything in
+(!functions, as values) (!functions, literals) As with almost everything in
 Go, functions are also *just* values. They can be assigned to variables as
 follows:
 
-{callout="//"}
 <{{src/functions/anon-func.go}}[3,]
 
 `a` is defined as an anonymous (nameless) function <<1>>.
 Note the lack of parentheses `()` after `a`. If there were, that would be to *call*
-some function with the name `a` before we have defined what `a` is. Once `a` is 
+some function with the name `a` before we have defined what `a` is. Once `a` is
 defined, then we can *call* it, <<3>>.
 
 Functions--as--values may be used in other places, for example maps. Here we
@@ -180,7 +179,6 @@ and reads on it. In such a function there are often spots where you want to
 return early. If you do that, you will need to close the file descriptor you are
 working on. This often leads to the following code:
 
-{callout="//"}
 ~~~go
 func ReadWrite() bool {
     file.Open("file")
@@ -207,7 +205,6 @@ the current function exits.
 With `defer` we can rewrite the above code as follows. It makes the function
 more readable and it puts the `Close` *right next* to the `Open`.
 
-{callout="//"}
 ~~~go
 func ReadWrite() bool {
     file.Open("filename")
@@ -259,7 +256,6 @@ defer func(x int) {/* ... */}(5)
 
 In this (unnamed) function you can access any named return parameter:
 
-{callout="//"}
 ~~~go
 func f() (ret int)
     defer func() { //<<1>>
@@ -270,7 +266,7 @@ func f() (ret int)
 ~~~
 
 Here <<1>> we specify our function, the named return value `ret` is initialized
-with zero. The nameless function in the defer increments the value of `ret` 
+with zero. The nameless function in the defer increments the value of `ret`
 with 1. The `return 0` on line
 5 *will not be the returned value*, because of `defer`. The function `f` will
 return 1!
