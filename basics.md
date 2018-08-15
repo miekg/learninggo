@@ -425,22 +425,22 @@ a `switch`.
 
 ~~~go
 // Convert hexadecimal character to an int value
-switch { //<1>
-case '0' <= c && c <= '9': //<2>
-    return c - '0' //<3>
-case 'a' <= c && c <= 'f': //<4>
+switch { //<<1>>
+case '0' <= c && c <= '9': //<<2>>
+    return c - '0' //<<3>>
+case 'a' <= c && c <= 'f': //<<4>>
     return c - 'a' + 10
-case 'A' <= c && c <= 'F': //<5>
+case 'A' <= c && c <= 'F': //<<5>>
     return c - 'A' + 10
 }
 return 0
 ~~~
 
-A `switch` without a condition is the same as `switch true` <1>. We list the
+A `switch` without a condition is the same as `switch true` <<1>>. We list the
 different cases. Each `case` statement has a condition that is either true of
-false. Here <2> we check if `c` is a number. If `c` is a number we return its
-value <3>. Check if `c` falls between "a" and "f" <4>. For an "a" we
-return 10, for "b" we return 11, etc. We also do the same <5> thing for "A"
+false. Here <<2>> we check if `c` is a number. If `c` is a number we return its
+value <<3>>. Check if `c` falls between "a" and "f" <<4>>. For an "a" we
+return 10, for "b" we return 11, etc. We also do the same <<5>> thing for "A"
 to "F".
 
 There is no automatic fall through, you can use `fallthrough` (!keywords,
@@ -450,26 +450,26 @@ fallthrough) for that.
 ~~~go
 switch i {
     case 0:  fallthrough
-    case 1: //<1>
+    case 1: //<<1>>
         f()
     default:
-        g() //<2>
+        g() //<<2>>
 ~~~
 
-`f()` can be called when `i == 0` <1>. With `default` (!keywords, default) you
+`f()` can be called when `i == 0` <<1>>. With `default` (!keywords, default) you
 can specify an action when none of the other cases match. Here `g()` is called
-when `i` is not 0 or 1 <2>. We could rewrite the above example as:
+when `i` is not 0 or 1 <<2>>. We could rewrite the above example as:
 
 {callout="//"}
 ~~~go
 switch i {
-    case 0, 1: //<1>
+    case 0, 1: //<<1>>
         f()
     default:
         g()
 ~~~
 
-You can list cases on one line <1>, separated by commas.
+You can list cases on one line <<1>>, separated by commas.
 
 
 ## Built-in Functions
@@ -604,36 +604,34 @@ Given an array, or another slice, a new slice is created via `a[n:m]`. This
 creates a new slice which refers to the variable `a`, starts at index `n`, and
 ends before index `m`. It has length `n - m`.
 
-{callout="yes"}
 ~~~go
-a := [...]int{1, 2, 3, 4, 5} <1>
-s1 := a[2:4] <2>
-s2 := a[1:5] <3>
-s3 := a[:]   <4>
-s4 := a[:4]  <5>
-s5 := s2[:] <6>
-s6 := a[2:4:5] <7>
+a := [...]int{1, 2, 3, 4, 5} //<<1>>
+s1 := a[2:4] //<<2>>
+s2 := a[1:5] //<<3>>
+s3 := a[:]   //<<4>>
+s4 := a[:4]  //<<5>>
+s5 := s2[:] //<<6>>
+s6 := a[2:4:5] //<<7>>
 ~~~
 
 <!-- Double check this -->
-First we define <1> an array with five elements, from index 0 to 4.
-From this we create <2> a slice with the elements from index 2 to 3, this slices contains: `3, 4`.
-Then we we create another slice <3> from `a`: with the elements from index 1 to 4,
+First we define <<1>> an array with five elements, from index 0 to 4.
+From this we create <<2>> a slice with the elements from index 2 to 3, this slices contains: `3, 4`.
+Then we we create another slice <<3>> from `a`: with the elements from index 1 to 4,
 this contains: `2, 3, 4, 5`.
-With `a[:]` <4> we create a slice with all the elements in the array. This is a shorthand for: `a[0:len(a)]`.
-And with `a[:4]` <5> we create a slice with the elements from index
+With `a[:]` <<4>> we create a slice with all the elements in the array. This is a shorthand for: `a[0:len(a)]`.
+And with `a[:4]` <<5>> we create a slice with the elements from index
 0 to 3, this is short for: `a[0:4]`, and gives us a slices that contains: `1, 2, 3, 4`.
-With `s2[:]` we create a slice from the slice `s2` <6>, note that `s5` still refers to the array `a`.
-Finally, we create a slice with the elements from index 3 to 3 *and* also set the cap to 4 <7>.
+With `s2[:]` we create a slice from the slice `s2` <<6>>, note that `s5` still refers to the array `a`.
+Finally, we create a slice with the elements from index 3 to 3 *and* also set the cap to 4 <<7>>.
 
 When working with slices you can overrun the bounds, consider this code.
 
-{callout="//"}
 <{{src/basics/array-and-slices.go}}
 
-At <1> we create an array with a 100 elements, indexed from 0 to 99. Then at <2>
-we create a slice that has index 0 to 98. We assign 1 to the 99th element <3> of
-the slice. This works as expected. But at <4> we dare to do the impossible, and
+At <<1>> we create an array with a 100 elements, indexed from 0 to 99. Then at <<2>>
+we create a slice that has index 0 to 98. We assign 1 to the 99th element <<3>> of
+the slice. This works as expected. But at <<4>> we dare to do the impossible, and
 and try to allocate something beyond the length of the slice and we are greeted
 with a *runtime* error: `Error: "throw: index out of range".`
 
@@ -645,17 +643,16 @@ will allocate a new slice that is big enough. So the slice returned by append
 may refer to a different underlying array than the original slice does. Here's
 an example: (!built-in,append)
 
-{callout="//"}
 ~~~go
 s0 := []int{0, 0}
-s1 := append(s0, 2) //<1>
-s2 := append(s1, 3, 5, 7) //<2>
-s3 := append(s2, s0...) //<3>
+s1 := append(s0, 2) //<<1>>
+s2 := append(s1, 3, 5, 7) //<<2>>
+s3 := append(s2, s0...) //<<3>>
 ~~~
 
-At <1> we append a single element, making `s1` equal to `[]int{0, 0, 2}`. At <2>
+At <<1>> we append a single element, making `s1` equal to `[]int{0, 0, 2}`. At <<2>>
 we append multiple elements, making `s2` equal to `[]int{0, 0, 2, 3, 5, 7}`. And
-at <3> we append a slice, giving us `s3` equal to `[]int{0, 0, 2, 3, 5, 7, 0, 0}`.
+at <<3>> we append a slice, giving us `s3` equal to `[]int{0, 0, 2, 3, 5, 7, 0, 0}`.
 Note the three dots used after `s0...`! This is needed make it clear
   explicit that you're appending another slice, instead of a single value.
 
@@ -664,16 +661,15 @@ returns the number of elements it copied. This number is the minimum of the
 length of the source and the length of the destination. For example:
 (!built-in,copy)
 
-{callout="//"}
 ~~~go
 var a = [...]int{0, 1, 2, 3, 4, 5, 6, 7}
 var s = make([]int, 6)
-n1 := copy(s, a[0:]) // <1>
-n2 := copy(s, s[2:]) // <2>
+n1 := copy(s, a[0:]) //<<1>>
+n2 := copy(s, s[2:]) //<<2>>
 ~~~
 
-After <1>, `n1` is 6, and `s` is `[]int{0, 1, 2, 3, 4, 5}`.
-And after <2>, `n2` is 4, and `s` is `[]int{2, 3, 4, 5, 4, 5}`.
+After <<1>>, `n1` is 6, and `s` is `[]int{0, 1, 2, 3, 4, 5}`.
+And after <<2>>, `n2` is 4, and `s` is `[]int{2, 3, 4, 5, 4, 5}`.
 
 
 ### Maps
@@ -682,20 +678,18 @@ has hashes, Python has its dictionaries, and C++ also has maps (as part of the
 libraries). In Go we have the `map` (!keywords, map) type. A `map` can be
 thought of as an array indexed by strings (in its most simple form).
 
-
-{callout="//"}
 ~~~go
 monthdays := map[string]int{
     "Jan": 31, "Feb": 28, "Mar": 31,
     "Apr": 30, "May": 31, "Jun": 30,
     "Jul": 31, "Aug": 31, "Sep": 30,
-    "Oct": 31, "Nov": 30, "Dec": 31, //<1>
+    "Oct": 31, "Nov": 30, "Dec": 31, //<<1>>
 }
 ~~~
 
 The general syntax for defining a map is `map[<from type>]<to type>`. Here, we
 define a map that converts from a `string` (month abbreviation) to an `int`
-(number of days in that month). Note that the trailing comma at <1> is
+(number of days in that month). Note that the trailing comma at <<1>> is
 *required*.
 
 Use `make` when only declaring a map: `monthdays := make(map[string]int)`. A map
@@ -709,16 +703,15 @@ If you are looping over an array, slice, string, or map a, `range` (!keywords,
 range) clause will help you again, it returns the key and corresponding value
 with each invocation.
 
-{callout="//"}
 ~~~go
 year := 0
-for _, days := range monthdays //<1>
+for _, days := range monthdays //<<1>>
     year += days
 }
 fmt.Printf("Numbers of days in a year: %d\n", year)
 ~~~
 
-At <1> we use the underscore to ignore (assign to nothing) the key returned by
+At <<1>> we use the underscore to ignore (assign to nothing) the key returned by
 `range`. We are only interested in the values from `monthdays`.
 
 (!keywords, map adding elements)

@@ -75,7 +75,7 @@ h1 {
     padding-top: 1em;
 }
 
-blockquote.epigraph {
+figure.epigraph > blockquote {
     text-align: right;
     border-left: none;
     padding-bottom: 2em;
@@ -86,8 +86,8 @@ blockquote.epigraph {
     text-align: right;
 }
 
-.epigraph footer {
-    font-style: italic;
+.epigraph figcaption {
+    font-variant: small-caps;
     text-align: right;
 }
 
@@ -97,25 +97,13 @@ blockquote.epigraph {
 }
 
 .epigraph > ul {
-    /* bullets are misplaced, remove them all together,
-     * looks nicer too
-     */
+    /* bullets are misplaced, remove them all together, looks nicer too */
     list-style-type: none;
     text-align: right;
 }
 
 .epigraph > ul > li {
     text-align: right;
-}
-
-.epigraph footer span.quote-who {
-    font-style: normal;
-    font-variant: small-caps;
-}
-
-.epigraph footer span.quote-who::before {
-    content: "\a";
-    white-space: pre;
 }
 
 span.index-ref-secondary::before {

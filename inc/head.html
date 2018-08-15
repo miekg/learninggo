@@ -40,7 +40,7 @@
     }
 
     function figures(){
-      $("figure:not(.title) > figcaption").each(function(index){
+      $("figure:not(.title):not(.epigraph) > figcaption").each(function(index){
         $(this).prepend("Figure " + (index+1) + ". ")
       })
     }
@@ -77,7 +77,7 @@
     }
 
     function epigraphs() {
-      $("blockquote.epigraph footer").prepend("<hr>");
+      $("figure.epigraph figcaption").prepend("<hr>");
     }
 
     function links() {
