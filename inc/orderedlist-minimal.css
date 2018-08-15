@@ -193,11 +193,13 @@ header ul a strong {
   color:#222;
 }
 
+/* Removed to keep some sanity; mmark2 outputs sectionsin the HTML5 output.
 section {
   width:500px;
   float:right;
   padding-bottom:50px;
 }
+*/
 
 small {
   font-size:11px;
