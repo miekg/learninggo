@@ -13,24 +13,23 @@ In the Go tutorial, you get started with Go in the typical manner: printing
 the C language in the 1970s). That's a great way to start, so here it is, "Hello
 World" in Go.
 
-{callout="//"}
 <{{src/basics/helloworld.go}}
 
-Lets look at the program line by line. This first line is just required <1>. All
+Lets look at the program line by line. This first line is just required <<1>>. All
 Go files start with `package <something>`, and `package main` is required for
 a standalone executable.
 
-`import "fmt"` says we need `fmt` in addition to `main` <2>. A package other
+`import "fmt"` says we need `fmt` in addition to `main` <<2>>. A package other
 than `main` is commonly called a library, a familiar concept in many programming
 languages (see (#packages)). The line ends with a comment that begins with `//`.
 
-Next we another comment, but this one is enclosed in `/*` `*/` <3>. When your Go
+Next we another comment, but this one is enclosed in `/*` `*/` <<3>>. When your Go
 program is executed, the first function called will be `main.main()`, which
-mimics the behavior from C. Here we declare that function <4>.
+mimics the behavior from C. Here we declare that function <<4>>.
 
 Finally we call a function from the package `fmt` to print a string to the
 screen. The string is enclosed with `"` and may contain non-ASCII characters
-<5>.
+<<5>>.
 
 ## Compiling and Running Code
 To build a Go program, use the `go` tool.(((tooling,go)))

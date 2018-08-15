@@ -35,7 +35,6 @@ fullname = "R. (Miek) Gieben"
 # Basics
 {{basics.md}}
 
-
 # Functions
 {{functions.md}}
 
@@ -61,6 +60,5 @@ fullname = "R. (Miek) Gieben"
 
 
 {{inc/bib.xml}}
-
 
 {backmatter}
