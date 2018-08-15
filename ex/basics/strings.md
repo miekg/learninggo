@@ -31,7 +31,7 @@ position 4 with 'abc'.
 
 1. This program is a solution:
 
-   <{{ex/basics/src/string1.go}}
+   <{{src/string1.go}}
 
 2. To answer this question we need some help from
 the `unicode/utf8` package. First we check the documentation
@@ -45,18 +45,18 @@ we can convert *string* to a `byte` slice with:
 On line 2, we use a conversion. Here we convert a `string`
 to a slice of `byte`s. Putting this together leads to the following program.
 
-<{{ex/basics/src/string2.go}}
+<{{src/string2.go}}
 
 3. Something along the lines of:
 
-<{{ex/basics/src/string3.go}}
+<{{src/string3.go}}
 
 4. Reversing a string can be done as follows. We start from the left (`i`) and
 the right (`j`) and swap the characters as we see them:
 
 {callout="//"}
-<{{ex/basics/src/stringrev.go}}
+<{{stringrev.go}}
 
-At <1> we have a conversion.
-At <2> we use parallel assignment.
-And at <3> we convert it back.
+At <<1>> we have a conversion.
+At <<2>> we use parallel assignment.
+And at <<3>> we convert it back.

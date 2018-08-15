@@ -738,4 +738,4 @@ syntax `delete(m, x)` will delete the map entry retrieved by the expression
 `m[x]`.
 
 ## Exercises
-{{ex/basics/ex.md}}
+{{ex.md}}
