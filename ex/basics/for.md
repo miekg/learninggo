@@ -30,12 +30,12 @@
 
     ~~~go
     func main() {
-        i := 0	<<1>>
-    Loop:		    <<2>>
+        i := 0	//<<1>>
+    Loop:		    //<<2>>
         if i < 10 {
             fmt.Printf("%d\n", i)
             i++
-            goto Loop <<3>>
+            goto Loop //<<3>>
         }
     }
     ~~~
@@ -44,7 +44,6 @@
    to this label.
 
 3. The following is one possible solution:
-    {callout="//"}
     <{{src/for-arr.go}}
 
     Here <<1>> we create an array with 10 elements.
