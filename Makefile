@@ -2,6 +2,7 @@ MMARK=~/g/src/github.com/mmarkdown/mmark/mmark
 
 all: learninggo.html
 
+.PHONY: learninggo.html
 learninggo.html:
 	$(MMARK) -html -head inc/head.html -css inc/learninggo.css learninggo.md > learninggo.html
 

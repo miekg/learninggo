@@ -1,5 +1,5 @@
 The [source of this book](https://github.com/miekg/learninggo) is written in
-[mmark](https://github.com/miekg/mmark) and is converted from the [original
+[mmark](https://github.com/mmarkdown/mmark) and is converted from the [original
 LaTeX source](https://github.com/miekg/gobook).
 
 *All example code used in this book is hereby licensed under the Apache License version 2.0.*

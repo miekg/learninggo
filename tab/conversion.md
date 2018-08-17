@@ -7,4 +7,4 @@
   `string` | `string(b)`    | `string(i)`    | `string(r)`    |       ·        |                |
  `float32` |                |                |                |                |        ·       | `float32(i)`
      `int` |                |                |                |                | `int(f)`       |     ·
-Table: Valid conversions, `float64` works the same as `float32`.
+Caption: Valid conversions, `float64` works the same as `float32`.
