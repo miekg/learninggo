@@ -42,11 +42,11 @@ fullname = "R. (Miek) Gieben"
 {{packages.md}}
 
 
-<!--
 # Beyond the basics
 {{beyond.md}}
 
 
+<!--
 # Interfaces
 {{interfaces.md}}
 

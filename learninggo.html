@@ -2634,11 +2634,849 @@ func main() {
 }
 </code></pre>
 
+<h1 id="beyond-the-basics">Beyond the basics</h1>
+<figure class="epigraph">
+<blockquote>
+<p>Go has pointers but not pointer arithmetic. You cannot use a pointer
+variable to walk through the bytes of a string.</p>
+</blockquote>
+<figcaption>Go For C++ Programmers &ndash; Go Authors
+</figcaption>
+</figure>
+
+<p>In this chapter we delve deeper in to the language.</p>
+
+<p>Go has pointers. There is however no pointer arithmetic, so they act more like
+references than pointers that you may know from C. Pointers are useful. Remember
+that when you call a function in Go, the variables are
+<em>pass-by-value</em>. So, for efficiency and the possibility to modify a passed value
+ <em>in</em> functions we have pointers.</p>
+
+<p>You declare a pointer by prefixing the type with an &lsquo;<code>*</code>&rsquo;: <code>var p *int</code>. Now <code>p</code>
+is a pointer to an integer value. All newly declared variables are assigned
+their zero value and pointers are no different. A newly declared pointer, or
+just a pointer that points to nothing, has a nil-value <span class="index" id="idxref:97"></span>. In other
+languages this is often called a NULL pointer in Go it is just <code>nil</code>. To make
+a pointer point to something you can use the address-of operator
+<span class="index" id="idxref:98"></span> (<code>&amp;</code>), which we demonstrate here:</p>
+
+<pre><code class="language-go">var p *int
+fmt.Printf(&quot;%v&quot;, p) <span class="callout">1</span>
+
+var i int	    <span class="callout">2</span>
+p = &amp;i		    <span class="callout">3</span>
+
+fmt.Printf(&quot;%v&quot;, p) <span class="callout">4</span>
+</code></pre>
+
+<p>This <span class="callout">1</span> Prints <code>nil</code>. Declare <span class="callout">2</span> an integer variable <code>i</code>. Make <code>p</code> point <span class="callout">3</span>
+to <code>i</code>, i.e. take the address of <code>i</code>. And this <span class="callout">4</span> will print something like
+<code>0x7ff96b81c000a</code>. De-referencing a pointer is done by prefixing the pointer
+variable with <code>*</code>.</p>
+
+<p>As said, there is no pointer arithmetic, so if you write: <code>*p++</code>, it is
+interpreted as <code>(*p)++</code>: first reference and then increment the
+value.<span class="index" id="idxref:99"></span></p>
+
+<h2 id="allocation">Allocation</h2>
+
+<p>Go also has garbage collection, meaning that you don&rsquo;t have to worry about
+memory deallocation.<sup class="footnote-ref" id="fnref:The-downside-is"><a href="#fn:The-downside-is">12</a></sup></p>
+
+<p>To allocate memory Go has two primitives, <code>new</code> and <code>make</code>. They do different
+things and apply to different types, which can be confusing, but the rules are
+simple. The following sections show how to handle allocation in Go and hopefully
+clarifies the somewhat artificial distinction between <code>new</code> <span class="index" id="idxref:100"></span>
+and <code>make</code> <span class="index" id="idxref:101"></span>.</p>
+
+<h3 id="allocation-with-new">Allocation with new</h3>
+
+<p>The built-in function <code>new</code> is essentially the same as its namesakes in other
+languages: <code>new(T)</code> allocates zeroed storage for a new item of type <code>T</code> and
+returns its address, a value of type <code>*T</code>. Or in other words, it returns
+a pointer to a newly allocated zero value of type <code>T</code>. This is important to
+remember.</p>
+
+<p>The documentation for <code>bytes.Buffer</code> states that &ldquo;the zero value for Buffer is
+an empty buffer ready to use.&rdquo;. Similarly, <code>sync.Mutex</code> does not have an
+explicit constructor or Init method. Instead, the zero value for a <code>sync.Mutex</code>
+is defined to be an unlocked mutex.</p>
+
+<h3 id="allocation-with-make">Allocation with make</h3>
+
+<p>The built-in function <code>make(T, args)</code> serves a purpose different from <code>new(T)</code>.
+It creates slices, maps, and channels <em>only</em>, and it returns an initialized (not
+zero!) value of type <code>T</code>, and not a pointer: <code>*T</code>. The reason for the
+distinction is that these three types are, under the covers, references to data
+structures that must be initialized before use. A slice, for example, is
+a three-item descriptor containing a pointer to the data (inside an array), the
+length, and the capacity; until those items are initialized, the slice is <code>nil</code>.
+For slices, maps, and channels, <code>make</code> initializes the internal data structure
+and prepares the value for use.</p>
+
+<p>For instance, <code>make([]int, 10, 100)</code> allocates an array of 100 ints and then
+creates a slice structure with length 10 and a capacity of 100 pointing at the
+first 10 elements of the array. In contrast, <code>new([]int)</code> returns a pointer to
+a newly allocated, zeroed slice structure, that is, a pointer to a <code>nil</code> slice
+value. These examples illustrate the difference between <code>new</code> and <code>make</code>.</p>
+
+<pre><code class="language-go">var p *[]int = new([]int)       <span class="callout">1</span>
+var v  []int = make([]int, 100) <span class="callout">2</span>
+
+var p *[]int = new([]int)       <span class="callout">3</span>
+*p = make([]int, 100, 100)
+
+v := make([]int, 100)           <span class="callout">4</span>
+</code></pre>
+
+<p>Allocates <span class="callout">1</span> slice structure; rarely useful. <code>v</code> <span class="callout">2</span> refers to a new array of
+100 ints. At <span class="callout">3</span> we make it unnecessarily complex, <span class="callout">4</span> is more idiomatic.</p>
+
+<p>Remember that <code>make</code> applies only to maps, slices and channels and does not
+return a pointer. To obtain an explicit pointer allocate with <code>new</code>.</p>
+
+<aside></aside>
+
+<p><strong>new</strong> allocates; <strong>make</strong> initializes.</p>
+
+<p>The above two paragraphs can be summarized as:</p>
+
+<ul>
+<li><code>new(T)</code> returns <code>*T</code> pointing to a zeroed <code>T</code></li>
+<li><code>make(T)</code> returns an initialized <code>T</code></li>
+</ul>
+
+<p>And of course <code>make</code> is only used for slices, maps and channels.</p>
+
+<h3 id="constructors-and-composite-literals">Constructors and composite literals</h3>
+
+<p>Sometimes the zero value isn&rsquo;t good enough and an initializing constructor is
+necessary, as in this example taken from the package <code>os</code>.</p>
+
+<pre><code class="language-go">func NewFile(fd int, name string) *File {
+    if fd &lt; 0 {
+        return nil
+    }
+    f := new(File)
+    f.fd = fd
+    f.name = name
+    f.dirinfo = nil
+    f.nepipe = 0
+    return f
+}
+</code></pre>
+
+<p>There&rsquo;s a lot of boiler plate in there. We can simplify it using a
+<em>composite literal</em> <span class="index" id="idxref:102"></span>, which is an expression that
+ creates a new instance each time it is evaluated.</p>
+
+<pre><code class="language-go">func NewFile(fd int, name string) *File {
+    if fd &lt; 0 {
+        return nil
+    }
+    f := File{fd, name, nil, 0}
+    return &amp;f	<span class="callout">1</span>
+}
+</code></pre>
+
+<p>It is OK to return the address of a local variable <span class="callout">1</span> the storage associated
+with the variable survives after the function returns.</p>
+
+<p>In fact, taking the address of a composite literal allocates a fresh instance
+each time it is evaluated, so we can combine these last two lines.<sup class="footnote-ref" id="fnref:Taking-the-addre"><a href="#fn:Taking-the-addre">13</a></sup></p>
+
+<pre><code class="language-go">return &amp;File{fd, name, nil, 0}
+</code></pre>
+
+<p>The items (called fields) of a composite literal are laid out in order and must
+all be present. However, by labeling the elements explicitly as field:value
+pairs, the initializers can appear in any order, with the missing ones left as
+their respective zero values. Thus we could say</p>
+
+<pre><code class="language-go">return &amp;File{fd: fd, name: name}
+</code></pre>
+
+<p>As a limiting case, if a composite literal contains no fields at all, it creates
+a zero value for the type. The expressions <code>new(File)</code> and <code>&amp;File{}</code> are
+equivalent. In fact the use of <code>new</code> is discouraged.</p>
+
+<p>Composite literals can also be created for arrays, slices, and maps, with the
+field labels being indices or map keys as appropriate. In these examples, the
+initializations work regardless of the values of <code>Enone</code>, and <code>Einval</code>, as long
+as they are distinct:</p>
+
+<pre><code class="language-go">ar := [...]string{Enone: &quot;no error&quot;, Einval: &quot;invalid argument&quot;}
+sl := []string{Enone: &quot;no error&quot;, Einval: &quot;invalid argument&quot;}
+ma := map[int]string {Enone: &quot;no error&quot;, Einval: &quot;invalid argument&quot;}
+</code></pre>
+
+<h2 id="defining-your-own-types">Defining your own types</h2>
+
+<p>Of course Go allows you to define new types, it does this with the
+<code>type</code><span class="index" id="idxref:103"></span> keyword: <code>type foo int</code></p>
+
+<p>This creates a new type <code>foo</code> which acts like an <code>int</code>. Creating more sophisticated
+types is done with the <code>struct</code> <span class="index" id="idxref:104"></span> keyword. An example would
+be when we want record somebody&rsquo;s name (<code>string</code>) and age (<code>int</code>) in a single
+structure and make it a new type:</p>
+
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+type NameAge struct {
+	name string // Both non exported fields.
+	age  int
+}
+
+func main() {
+	a := new(NameAge)
+	a.name = &quot;Pete&quot;
+	a.age = 42
+	fmt.Printf(&quot;%v\n&quot;, a)
+}
+</code></pre>
+
+<p>Apropos, the output of <code>fmt.Printf(&quot;%v\n&quot;, a)</code> is <code>&amp;{Pete 42}</code></p>
+
+<p>That is nice! Go knows how to print your structure. If you only want to print
+one, or a few, fields of the structure you&rsquo;ll need to use <code>.&lt;field name&gt;</code>. For
+example to only print the name:</p>
+
+<pre><code class="language-go">fmt.Printf(&quot;%s&quot;, a.name)
+</code></pre>
+
+<h3 id="more-on-structure-fields">More on structure fields</h3>
+
+<p>As said each item in a structure is called a field<span class="index" id="idxref:105"></span>. A struct with no
+fields: <code>struct {}</code>. Or one with four fields:</p>
+
+<pre><code class="language-go">struct {
+    x, y int
+    A *[]int
+    F func()
+}
+</code></pre>
+
+<p>If you omit the name for a field, you create an anonymous field (((field,
+anonymous))), for instance:</p>
+
+<pre><code class="language-go">struct {
+    T1        // Field name is T1.
+    *T2       // Field name is T2.
+    P.T3      // Field name is T3.
+    x, y int  // Field names are x and y.
+}
+</code></pre>
+
+<p>Note that field names that start with a capital letter are exported, i.e. can be
+set or read from other packages. Field names that start with a lowercase are
+private to the current package. The same goes for functions defined in packages,
+see <a href="#packages"></a> for the details.</p>
+
+<h3 id="methods">Methods</h3>
+
+<p>If you create functions that work on your newly defined type, you can take two
+routes:</p>
+
+<ol>
+<li>Create a function that takes the type as an argument.</li>
+</ol>
+
+<pre><code class="language-go">func doSomething(n1 *NameAge, n2 int) { /* */ }
+</code></pre>
+
+<ol start="2">
+<li>Create a function that works on the type (see <em>receiver</em> in <a href="#functions"></a>):</li>
+</ol>
+
+<pre><code class="language-go">func (n1 *NameAge) doSomething(n2 int) { /* */ }
+</code></pre>
+
+<p>This is a method call, which can be used as:</p>
+
+<pre><code class="language-go">var n *NameAge
+n.doSomething(2)
+</code></pre>
+
+<p>Whether to use a function or method is entirely up to the programmer, but if you
+want to satisfy an interface (see the next chapter) you must use methods. If no
+such requirement exists it is a matter of taste whether to use functions or
+methods.</p>
+
+<p>But keep the following in mind, this is quoted from <cite class="informative"><a href="#go_spec"></a></cite>:</p>
+
+<blockquote>
+<p>If <code>x</code> is
+addressable and <code>&amp;x</code>&rsquo;s method set contains <code>m</code>,
+<code>x.m()</code> is shorthand for <code>(&amp;x).m()</code>.</p>
+</blockquote>
+
+<p>In the above case this means that the following is <em>not</em> an error:</p>
+
+<pre><code class="language-go">var n NameAge	    // Not a pointer
+n.doSomething(2)
+</code></pre>
+
+<p>Here Go will search the method list for <code>n</code> of type <code>NameAge</code>, come up empty and
+will then <em>also</em> search the method list for the type <code>*NameAge</code> and will
+translate this call to <code>(&amp;n).doSomething(2)</code>.</p>
+
+<p>There is a subtle but major difference between the following type declarations.
+Also see the Section &ldquo;Type Declarations&rdquo; <cite class="informative"><a href="#go_spec"></a></cite>. Suppose we have:</p>
+
+<pre><code class="language-go">// A Mutex is a data type with two methods, Lock and Unlock.
+type Mutex struct         { /* Mutex fields */ }
+func (m *Mutex) Lock()    { /* Lock impl. */ }
+func (m *Mutex) Unlock()  { /* Unlock impl. */ }
+</code></pre>
+
+<p>We now create two types in two different manners:</p>
+
+<ul>
+<li><code>type NewMutex Mutex</code>.</li>
+<li><code>type PrintableMutex struct{Mutex}</code>.</li>
+</ul>
+
+<p><code>NewMutex</code> is equal to <code>Mutex</code>, but it <em>does not</em> have <em>any</em> of the methods of
+<code>Mutex</code>. In other words its method set is empty. But <code>PrintableMutex</code> <em>has</em>
+<em>inherited</em> <span class="index" id="idxref:106"></span> the method set from <code>Mutex</code>. The Go term
+ for this is <em>embedding</em> <span class="index" id="idxref:107"></span>. In the words of <cite class="informative"><a href="#go_spec"></a></cite>:</p>
+
+<blockquote>
+<p>The method set of <code>*PrintableMutex</code> contains the methods
+<code>Lock</code> and <code>Unlock</code> bound to its anonymous field <code>Mutex</code>.</p>
+</blockquote>
+
+<h2 id="conversions">Conversions</h2>
+
+<p>Sometimes you want to convert a type to another type. This is possible in Go,
+but there are some rules. For starters, converting from one value to another is
+done by operators (that look like functions: <code>byte()</code>) and not all conversions
+are allowed.</p>
+
+<table id="tab-conversion">
+<thead>
+<tr>
+<th>From</th>
+<th><code>b []byte</code></th>
+<th><code>i []int</code></th>
+<th><code>r []rune</code></th>
+<th><code>s string</code></th>
+<th><code>f float32</code></th>
+<th><code>i int</code></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong>To</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>[]byte</code></td>
+<td>·</td>
+<td></td>
+<td></td>
+<td><code>[]byte(s)</code></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>[]int</code></td>
+<td></td>
+<td>·</td>
+<td></td>
+<td><code>[]int(s)</code></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>[]rune</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td><code>[]rune(s)</code></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>string</code></td>
+<td><code>string(b)</code></td>
+<td><code>string(i)</code></td>
+<td><code>string(r)</code></td>
+<td>·</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>float32</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>·</td>
+<td><code>float32(i)</code></td>
+</tr>
+
+<tr>
+<td><code>int</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><code>int(f)</code></td>
+<td>·</td>
+</tr>
+</tbody>
+</table>
+<p>Caption: Valid conversions, <code>float64</code> works the same as <code>float32</code>.</p>
+
+<ul>
+<li><p>From a <code>string</code> to a slice of bytes or runes.</p>
+
+<pre><code class="language-go">mystring := &quot;hello this is string&quot;
+byteslice := []byte(mystring)
+</code></pre>
+<p>Converts to a <code>byte</code> slice, each <code>byte</code> contains the integer value of the
+corresponding byte in the string. Note that as strings in Go are encoded in
+UTF-8 some characters in the string may end up in 1, 2, 3 or 4 bytes.</p>
+
+<pre><code class="language-go">runeslice  := []rune(mystring)
+</code></pre>
+<p>Converts to an <code>rune</code> slice, each <code>rune</code> contains a Unicode code point.
+Every character from the string corresponds to one rune.</p></li>
+
+<li><p>From a slice of bytes or runes to a <code>string</code>.</p>
+
+<pre><code class="language-go">b := []byte{'h','e','l','l','o'} // Composite literal.
+s := string(b)
+i := []rune{257,1024,65}
+r := string(i)
+</code></pre></li>
+</ul>
+
+<p>For numeric values the following conversions are defined:</p>
+
+<ul>
+<li>Convert to an integer with a specific (bit) length: <code>uint8(int)</code></li>
+<li>From floating point to an integer value: <code>int(float32)</code>. This discards the
+fraction part from the floating point value.</li>
+<li>And the other way around: <code>float32(int)</code>.</li>
+</ul>
+
+<h3 id="user-defined-types-and-conversions">User defined types and conversions</h3>
+
+<p>How can you convert between the types you have defined yourself? We create two
+types here <code>Foo</code> and <code>Bar</code>, where <code>Bar</code> is an alias for <code>Foo</code>:</p>
+
+<pre><code class="language-go">type foo struct { int }  // Anonymous struct field.
+type bar foo             // bar is an alias for foo.
+</code></pre>
+
+<p>Then we:</p>
+
+<pre><code class="language-go">var b bar = bar{1} // Declare `b` to be a `bar`.
+var f foo = b	   // Assign `b` to `f`.
+</code></pre>
+
+<p>Which fails on the last line with:
+<code>cannot use b (type bar) as type foo in assignment</code></p>
+
+<p>This can be fixed with a conversion: <code>var f foo = foo(b)</code></p>
+
+<p>Note that converting structures that are not identical in their fields is more
+difficult. Also note that converting <code>b</code> to a plain <code>int</code> also fails; an integer
+is not the same as a structure containing an integer.</p>
+
+<h2 id="exercises-3">Exercises</h2>
+
+<h3 id="map-function-with-interfaces" class="exercise" data-difficulty="2">Map function with interfaces</h3>
+
+<ol>
+<li>Use the answer from the earlier map exercise but now
+make it generic using interfaces. Make it at least work for
+ints and strings.</li>
+</ol>
+
+<h3 id="answer-14" class="answer">Answer</h3>
+
+<ol>
+<li></li>
+</ol>
+
+<h3 id="pointers" class="exercise" data-difficulty="1">Pointers</h3>
+
+<ol>
+<li><p>Suppose we have defined the following structure:</p>
+
+<pre><code class="language-go">type Person struct {
+    name string
+    age	 int
+}
+</code></pre>
+<p>What is the difference between the following two lines?</p>
+
+<pre><code class="language-go">var p1 Person
+p2 := new(Person)
+</code></pre></li>
+
+<li><p>What is the difference between the following two allocations?</p>
+
+<pre><code class="language-go">func Set(t *T) {
+    x = t
+}
+</code></pre>
+<p>and</p>
+
+<pre><code class="language-go">func Set(t T) {
+    x= &amp;t
+}
+</code></pre></li>
+</ol>
+
+<h3 id="answer-15" class="answer">Answer</h3>
+
+<ol>
+<li><p>The expression, <code>var p1 Person</code> allocates a <code>Person</code>-<em>value</em> to <code>p1</code>. The type of <code>p1</code> is <code>Person</code>.
+The second line: <code>p2 := new(Person)</code> allocates memory and assigns a <em>pointer</em> to <code>p2</code>. The type of <code>p2</code> is
+<code>*Person</code>.</p></li>
+
+<li><p>In the first function, <code>x</code> points to the same thing that <code>t</code> does, which is the same thing that the
+actual argument points to. So in the second function, we have an &ldquo;extra&rdquo; variable containing a copy of the
+interesting value. In the second function, <code>x</code> points to a new (heap-allocated) variable <code>t</code> which contains
+a copy of whatever the actual argument value is.</p></li>
+</ol>
+
+<h3 id="linked-list" class="exercise" data-difficulty="1">Linked List</h3>
+
+<ol>
+<li><p>Make use of the package <code>container/list</code> to create
+a (doubly) linked list. Push the values 1, 2 and 4 to the list and then
+print it.</p></li>
+
+<li><p>Create your own linked list implementation. And perform the same actions
+as above.</p></li>
+</ol>
+
+<h3 id="answer-16" class="answer">Answer</h3>
+
+<ol>
+<li>The following is the implementation of a program using doubly
+linked lists from <code>container/list</code>.</li>
+</ol>
+
+<pre><code class="language-go">package main
+
+import (
+	&quot;container/list&quot;
+	&quot;fmt&quot;
+)
+
+func main() {
+	l := list.New()
+	l.PushBack(1)
+	l.PushBack(2)
+	l.PushBack(4)
+
+	for e := l.Front(); e != nil; e = e.Next() {
+		fmt.Printf(&quot;%v\n&quot;, e.Value)
+	}
+}
+</code></pre>
+
+<ol start="2">
+<li>The following is a program implementing a simple doubly
+linked list supporting <code>int</code> values.</li>
+</ol>
+
+<pre><code class="language-go">package main
+
+import (
+	&quot;errors&quot; <span class="callout">1</span>
+	&quot;fmt&quot;
+)
+
+type Value int <span class="callout">2</span>
+
+type Node struct { <span class="callout">3</span>
+	Value
+	prev, next *Node
+}
+
+type List struct {
+	head, tail *Node
+}
+
+func (l *List) Front() *Node { <span class="callout">4</span>
+	return l.head
+}
+
+func (n *Node) Next() *Node {
+	return n.next
+}
+
+func (l *List) Push(v Value) *List {
+	n := &amp;Node{Value: v} <span class="callout">5</span>
+
+	if l.head == nil { <span class="callout">6</span>
+		l.head = n
+	} else {
+		l.tail.next = n <span class="callout">7</span>
+		n.prev = l.tail <span class="callout">8</span>
+	}
+	l.tail = n <span class="callout">9</span>
+
+	return l
+}
+
+var errEmpty = errors.New(&quot;List is empty&quot;)
+
+func (l *List) Pop() (v Value, err error) {
+	if l.tail == nil { <span class="callout">10</span>
+		err = errEmpty
+	} else {
+		v = l.tail.Value     <span class="callout">11</span>
+		l.tail = l.tail.prev <span class="callout">12</span>
+		if l.tail == nil {
+			l.head = nil <span class="callout">13</span>
+		}
+	}
+
+	return v, err
+}
+
+func main() {
+	l := new(List)
+
+	l.Push(1)
+	l.Push(2)
+	l.Push(4)
+
+	for n := l.Front(); n != nil; n = n.Next() {
+		fmt.Printf(&quot;%v\n&quot;, n.Value)
+	}
+
+	fmt.Println()
+
+	for v, err := l.Pop(); err == nil; v, err = l.Pop() {
+		fmt.Printf(&quot;%v\n&quot;, v)
+	}
+}
+</code></pre>
+
+<p>Import &lt;<span class="callout">1</span>&gt; the packages we will need. At &lt;<span class="callout">2</span>&gt; we declare a type for the value our list will contain,
+this is not strictly neccesary. And at &lt;<span class="callout">3</span>&gt; we declare a type for the each node in our list.
+At &lt;<span class="callout">4</span>&gt; we define the <code>Front</code> method for our list.
+When pushing, create a new Node &lt;<span class="callout">5</span>&gt; with the provided value. If the list is empty &lt;<span class="callout">6</span>&gt;,
+put the new node at the head. Otherwise &lt;<span class="callout">7</span>&gt; put it at the tail and make sure &lt;<span class="callout">8</span>&gt;
+the new node points back to the previously existing one. At &lt;<span class="callout">9</span>&gt; we re-adjust tail
+to the newly inserted node.</p>
+
+<p>In the Pop <span class="callout">10</span> method, we return an error if the list is empty. If it is not empty <span class="callout">11</span>
+we save the last value. And then <span class="callout">12</span> discard the last node from the list. Finally at <span class="callout">13</span>
+we make sure the list is consistent if it becomes empty.</p>
+
+<h3 id="cat" class="exercise" data-difficulty="1">Cat</h3>
+
+<ol>
+<li><p>Write a program which mimics the Unix program <code>cat</code>.</p></li>
+
+<li><p>Make it support the <code>-n</code> flag, where each line is numbered.</p></li>
+
+<li><p>The solution to the above question given in contains a bug. Can you spot and fix it?</p></li>
+</ol>
+
+<h3 id="answer-17" class="answer">Answer</h3>
+
+<ol>
+<li>The following is implemention of <code>cat</code> which also supports a -n flag to number each line.</li>
+</ol>
+
+<pre><code class="language-go">package main
+
+import (
+	&quot;bufio&quot;
+	&quot;flag&quot;
+	&quot;fmt&quot;
+	&quot;io&quot; <span class="callout">1</span>
+	&quot;os&quot;
+)
+
+var numberFlag = flag.Bool(&quot;n&quot;, false, &quot;number each line&quot;) // &lt;&lt;2&gt;&gt;
+
+func cat(r *bufio.Reader) { <span class="callout">3</span>
+	i := 1
+	for {
+		buf, e := r.ReadBytes('\n') <span class="callout">4</span>
+		if e == io.EOF {            <span class="callout">5</span>
+			break
+		}
+		if *numberFlag { <span class="callout">6</span>
+			fmt.Fprintf(os.Stdout, &quot;%5d  %s&quot;, i, buf)
+			i++
+		} else { <span class="callout">7</span>
+			fmt.Fprintf(os.Stdout, &quot;%s&quot;, buf)
+		}
+	}
+	return
+}
+
+func main() {
+	flag.Parse()
+	if flag.NArg() == 0 {
+		cat(bufio.NewReader(os.Stdin))
+	}
+	for i := 0; i &lt; flag.NArg(); i++ {
+		f, e := os.Open(flag.Arg(i))
+		if e != nil {
+			fmt.Fprintf(os.Stderr, &quot;%s: error reading from %s: %s\n&quot;,
+				os.Args[0], flag.Arg(i), e.Error())
+			continue
+		}
+		cat(bufio.NewReader(f))
+	}
+}
+</code></pre>
+
+<p>At <span class="callout">1</span> we include all the packages we need.
+ Here <span class="callout">2</span> we define a new flag &ldquo;n&rdquo;, which defaults to off. Note that we get the help (-h) for free.
+ Start the function <span class="callout">3</span> that actually reads the file&rsquo;s contents and displays it;
+ Read one line at the time at <span class="callout">4</span>. And stop <span class="callout">5</span> if we hit the end.
+ If we should number each line, print the line number and then the line itself <span class="callout">6</span>.
+ Otherwise <span class="callout">7</span> we could just print the line.</p>
+
+<ol start="2">
+<li>The bug show itself when the last line of the input does not
+contain a newline. Or worse, when the input contains one line without a
+closing newline nothing is shown at all. A better solution is the following
+program.</li>
+</ol>
+
+<pre><code class="language-go">package main
+
+import (
+	&quot;bufio&quot;
+	&quot;flag&quot;
+	&quot;fmt&quot;
+	&quot;io&quot;
+	&quot;os&quot;
+)
+
+var numberFlag = flag.Bool(&quot;n&quot;, false, &quot;number each line&quot;)
+
+func cat(r *bufio.Reader) {
+	i := 1
+	for {
+		buf, e := r.ReadBytes('\n')
+		if e == io.EOF &amp;&amp; string(buf) == &quot;&quot; {
+			break
+		}
+		if *numberFlag {
+			fmt.Fprintf(os.Stdout, &quot;%5d  %s&quot;, i, buf)
+			i++
+		} else {
+			fmt.Fprintf(os.Stdout, &quot;%s&quot;, buf)
+		}
+	}
+	return
+}
+
+func main() {
+	flag.Parse()
+	if flag.NArg() == 0 {
+		cat(bufio.NewReader(os.Stdin))
+	}
+	for i := 0; i &lt; flag.NArg(); i++ {
+		f, e := os.Open(flag.Arg(i))
+		if e != nil {
+			fmt.Fprintf(os.Stderr, &quot;%s: error reading from %s: %s\n&quot;,
+				os.Args[0], flag.Arg(i), e.Error())
+			continue
+		}
+		cat(bufio.NewReader(f))
+	}
+}
+</code></pre>
+
+<h3 id="method-calls" class="exercise" data-difficulty="2">Method calls</h3>
+
+<ol>
+<li><p>Suppose we have the following
+program. Note the package <code>container/vector</code> was once part
+of Go, but was removed when the <code>append</code> built-in was introduced.
+However, for this question this isn&rsquo;t important. The package implemented
+a stack-like structure, with push and pop methods.</p>
+
+<pre><code class="language-go">package main
+
+
+import &quot;container/vector&quot;
+
+
+func main() {
+    k1 := vector.IntVector{}
+    k2 := &amp;vector.IntVector{}
+    k3 := new(vector.IntVector)
+    k1.Push(2)
+    k2.Push(3)
+    k3.Push(4)
+}
+</code></pre>
+<p>What are the types of <code>k1</code>, <code>k2</code> and <code>k3</code>?</p></li>
+
+<li><p>Now, this program compiles and runs OK. All the <code>Push</code>
+operations work even though the variables are of a different type. The
+documentation for <code>Push</code> says:</p>
+
+<blockquote>
+<p><code>func (p *IntVector) Push(x int)</code>
+Push appends x to the end of the vector.</p>
+</blockquote>
+
+<p>So the receiver has to be of type <code>*IntVector</code>, why does the code
+above (the Push statements) work correctly then?</p></li>
+</ol>
+
+<h3 id="answer-18" class="answer">Answer</h3>
+
+<ol>
+<li><p>The type of <code>k1</code> is <code>vector.IntVector</code>. Why? We use
+a composite literal (the <code>{}</code>), so we get a value of that type
+back. The variable <code>k2</code> is of <code>*vector.IntVector</code>, because we
+take the address (<code>&amp;</code>) of the composite literal. And finally
+<code>k3</code> has also the type <code>*vector.IntVector</code>, because <code>new</code>
+returns a pointer to the type.</p></li>
+
+<li><p>The answer is given in <cite class="informative"><a href="#go_spec"></a></cite> in the section &ldquo;Calls&rdquo;,
+where among other things it says:</p></li>
+</ol>
+
+<blockquote>
+<p>A method call <code>x.m()</code> is valid if the method set of (the type of)
+<code>x</code>
+contains <code>m</code> and the argument list can be assigned to the parameter list
+of <code>m</code>. If <code>x</code> is addressable and <code>&amp;x</code>&rsquo;s method set
+contains <code>m</code>, <code>x.m()</code> is shorthand for <code>(&amp;x).m()</code>.</p>
+</blockquote>
+
+<p>In other words because <code>k1</code> is addressable and
+<code>*vector.IntVector</code> <em>does</em> have the <code>Push</code> method, the
+call <code>k1.Push(2)</code> is translated by Go into
+<code>(&amp;k1).Push(2)</code> which makes the type system happy again (and
+you too &ndash; now you know this).<sup class="footnote-ref" id="fnref:Also-see-methods"><a href="#fn:Also-see-methods">14</a></sup></p>
+
 <!--
-# Beyond the basics
-{{beyond.md}}
-
-
 # Interfaces
 {{interfaces.md}}
 
@@ -2675,11 +3513,17 @@ func main() {
 
 <li id="fn:This-is-a-motto">This is a motto of Go; &ldquo;Do <em>more</em> with <em>less</em> code&rdquo;.</li>
 
-<li id="fn:A-function-liter">A function literal is sometimes called a closure <span class="index" id="idxref:97"></span>.</li>
+<li id="fn:A-function-liter">A function literal is sometimes called a closure <span class="index" id="idxref:108"></span>.</li>
 
 <li id="fn:Modified-from-a">Modified from a presentation of Eleanor McHugh.</li>
 
 <li id="fn:The-descriptions">The descriptions are copied from the packages&rsquo; <code>go doc</code>.</li>
+
+<li id="fn:The-downside-is">The downside is that you know have to worry about garbage collection. If you really need it garbage collection in a Go program can be disabled by running it with the environment variable <code>GOGC</code> set to <code>off</code>: <code>GOGC=off ./myprogram</code>.</li>
+
+<li id="fn:Taking-the-addre">Taking the address of a composite literal tells the compiler to allocate it on the heap, not the stack.</li>
+
+<li id="fn:Also-see-methods">Also see <a href="#methods"></a> in this chapter.</li>
 </ol>
 
 </div>
