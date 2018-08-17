@@ -145,22 +145,12 @@ span.callout {
     color: white;
 }
 
-a.cite {
+cite {
     font-size: 75%;
     line-height: 0;
     position: relative;
     vertical-align: baseline;
     top: -0.5em;
-}
-
-ol.bibliography {
-    counter-reset: cite;
-    list-style-type: none;
-}
-
-li.bibliography:before {
-    content: "[" counter(cite) "] ";
-    counter-increment: cite;
 }
 
 .closed:before {

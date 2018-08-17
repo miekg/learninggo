@@ -265,7 +265,7 @@
   <format type="HTML" target="http://en.wikipedia.org/wiki/Iota" />
 </reference>
 
-<reference anchor="fizzbuzz_cite">
+<reference anchor="fizzbuzz">
   <front>
     <title>Using fizzbuzz to find developers...</title>
     <author fullname="Imran On Tech" initials="I. O." surname="Tech" />
