@@ -12,9 +12,11 @@
 {.answer}
 ### Answer
 
-1. There are many possibilities. One solutions could be:
-<{{src/for.go}}
-    Let's compile this and look at the output.
+1. There are many possibilities. One solution could be:
+
+   <{{src/for.go}}
+
+   Let's compile this and look at the output.
 
         % go build for.go
         % ./for
