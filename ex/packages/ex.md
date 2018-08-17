@@ -1,2 +1,2 @@
-{{ex/packages/stack-package.md}}
-{{ex/packages/calc.md}}
+{{stack-package.md}}
+{{calc.md}}

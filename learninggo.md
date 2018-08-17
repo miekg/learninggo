@@ -38,11 +38,11 @@ fullname = "R. (Miek) Gieben"
 # Functions
 {{functions.md}}
 
-<!--
 # Packages
 {{packages.md}}
 
 
+<!--
 # Beyond the basics
 {{beyond.md}}
 
