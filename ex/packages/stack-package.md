@@ -16,7 +16,7 @@
  letter and so should `Stack`. The package file is named `stack-as-package.go`
  and contains:
 
-    <{{stack-as-package.go}}
+    <{{src/stack-as-package.go}}
 
 2. To make the unit testing work properly you need to do some
  preparations. We'll come to those in a minute. First the actual unit test.

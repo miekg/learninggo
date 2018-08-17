@@ -2497,7 +2497,29 @@ You should at least test that a <code>Pop</code> works after a <code>Push</code>
 <li><p>There are a few details that should be changed to make a proper package
 for our stack. First, the exported functions should begin with a capital
 letter and so should <code>Stack</code>. The package file is named <code>stack-as-package.go</code>
-and contains:</p></li>
+and contains:</p>
+
+<pre><code class="language-go">package stack
+
+// Stack holds the items.
+type Stack struct {
+	i    int
+	data [10]int
+}
+
+// Push pushes an item on the stack.
+func (s *Stack) Push(k int) {
+	s.data[s.i] = k
+	s.i++
+}
+
+// Pop pops an item from the stack.
+func (s *Stack) Pop() (ret int) {
+	s.i--
+	ret = s.data[s.i]
+	return
+}
+</code></pre></li>
 
 <li><p>To make the unit testing work properly you need to do some
 preparations. We&rsquo;ll come to those in a minute. First the actual unit test.
