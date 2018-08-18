@@ -206,12 +206,13 @@ other changes.</p>
 <p class="title"><img src="fig/bumper-inverse.png" alt="" /></p>
 
 <h1 id="introduction">Introduction</h1>
-
-<blockquote class="epigraph">
+<figure class="epigraph">
+<blockquote>
 <p>Is Go an object-oriented language? Yes and no.</p>
 </blockquote>
-
-<p>Quote: Frequently asked questions, Go Authors</p>
+<figcaption>Frequently asked questions, Go Authors
+</figcaption>
+</figure>
 
 <p>The Go programming language is an open source project language to make programmers more productive.</p>
 
@@ -331,12 +332,13 @@ package fnv
 </code></pre>
 
 <h1 id="basics">Basics</h1>
-
-<blockquote class="epigraph">
+<figure class="epigraph">
+<blockquote>
 <p>I am interested in this and hope to do something.</p>
 </blockquote>
-
-<p>Quote: On adding complex numbers to Go, Ken Thompson</p>
+<figcaption>On adding complex numbers to Go, Ken Thompson
+</figcaption>
+</figure>
 
 <p>In this chapter we will look at the basic building blocks of the Go programming
 language.</p>
@@ -552,8 +554,8 @@ now you can just assume that <code>error</code> is a type just like all other ty
 <p>Go supports the normal set of numerical operators. See <a href="#tab-op-precedence"></a>
 for lists the current ones and their relative precedence. They all associate from
 left to right.</p>
-
-<table id="tab-op-precedence">
+<figure>
+<table>
 <thead>
 <tr>
 <th>Precedence</th>
@@ -593,7 +595,8 @@ left to right.</p>
 </tr>
 </tbody>
 </table>
-<p>Table: Operator precedence.</p>
+<figcaption>Operator precedence.</figcaption>
+</figure>
 
 <p><code>+ - * /</code> and <code>%</code> all do what you would expect, <code>&amp; | ^</code> and <code>&amp;^</code> are bit
 operators for bitwise <em>and</em><span class="index" id="idxref:11"></span> bitwise
@@ -610,8 +613,8 @@ concatenating them).</p>
 
 <p>Let&rsquo;s start looking at keywords, <a href="#tab-keywords"></a> lists all the keywords in
 Go.</p>
-
-<table id="tab-keywords">
+<figure>
+<table>
 <thead>
 <tr>
 <th></th>
@@ -664,7 +667,8 @@ Go.</p>
 </tr>
 </tbody>
 </table>
-<p>Table: Keywords in Go.</p>
+<figcaption>Keywords in Go.</figcaption>
+</figure>
 
 <p>We&rsquo;ve seen some of these already. We used <code>var</code> and <code>const</code> in the <a href="#variables-types-and-keywords"></a>
 section,  and we briefly looked at <code>package</code> and <code>import</code> in our &ldquo;Hello World&rdquo;
@@ -893,8 +897,8 @@ when <code>i</code> is not 0 or 1 <span class="callout">2</span>. We could rewri
 
 <p>A few functions are predefined, meaning you <em>don&rsquo;t</em> have to include any package
 to get access to them. <a href="#tab-predef-functions"></a> lists them all.<sup class="footnote-ref" id="fnref:You-can-use-the"><a href="#fn:You-can-use-the">6</a></sup></p>
-
-<table id="tab-predef-functions">
+<figure>
+<table>
 <thead>
 <tr>
 <th></th>
@@ -934,7 +938,8 @@ to get access to them. <a href="#tab-predef-functions"></a> lists them all.<sup 
 </tr>
 </tbody>
 </table>
-<p>Table: Pre-defined functions in Go.</p>
+<figcaption>Pre-defined functions in Go.</figcaption>
+</figure>
 
 <p>These built-in functions are documented in the <code>builtin</code> <span class="index" id="idxref:33"></span>
 pseudo package that is included in recent Go releases. Let&rsquo;s go over these
@@ -1007,11 +1012,11 @@ a [3]int</code>. To initialize it to something other than zero, use a
  be shortened to <code>a := [...]int{1, 2, 3}</code>, where Go counts the elements
  automatically.</p>
 
-<aside></aside>
-
+<aside>
 <p>A composite literal allows you
 to assign a value directly to an array, slice, or map.
 See <a href="#constructors-and-composite-literals"></a> for more information.</p>
+</aside>
 
 <p>When declaring arrays you <em>always</em> have to type something in between the square
 brackets, either a number or three dots (<code>...</code>), when using a composite literal.
@@ -1027,10 +1032,10 @@ A slice always refers to an underlying array. What makes slices different from
 arrays is that a slice is a pointer <em>to</em> an array; slices are reference
 types.<span class="index" id="idxref:52"></span></p>
 
-<aside></aside>
-
+<aside>
 <p>Reference types are created with <code>make</code>. We detail this further
 in <a href="#beyond-the-basics"></a>.</p>
+</aside>
 
 <p>That means that if you assign one slice to another, both refer to the <em>same</em>
 underlying array. For instance, if a function takes a slice argument, changes it
@@ -1339,8 +1344,8 @@ And at <span class="callout">5</span> we check if the value is divisble by BUZZ 
 At <span class="callout">6</span>, if printed neither Fizz nor Buzz printed, we print the value.</p>
 
 <h1 id="functions">Functions</h1>
-
-<blockquote class="epigraph">
+<figure class="epigraph">
+<blockquote>
 <p>I&rsquo;m always delighted by the light touch and stillness of
 early programming languages.  Not much text; a lot gets
 done. Old programs read like quiet conversations
@@ -1349,8 +1354,9 @@ studied mechanical colleague, not as a debate with a
 compiler.  Who&rsquo;d have guessed sophistication bought
 such noise?</p>
 </blockquote>
-
-<p>Quote: Richard P. Gabriel</p>
+<figcaption>Richard P. Gabriel
+</figcaption>
+</figure>
 
 <p>Functions are the basic building blocks of Go programs; all interesting stuff
 happens in them.</p>
@@ -2111,12 +2117,13 @@ our type:</p>
 </ol>
 
 <h1 id="packages">Packages</h1>
-
-<blockquote class="epigraph">
+<figure class="epigraph">
+<blockquote>
 <p>&rdquo;^&rdquo;</p>
 </blockquote>
-
-<p>Quote: Answer to whether there is a bit wise negation operator &ndash; Ken Thompson</p>
+<figcaption>Answer to whether there is a bit wise negation operator &ndash; Ken Thompson
+</figcaption>
+</figure>
 
 <p>A package is a collection of functions and data.</p>
 
@@ -2631,13 +2638,14 @@ func main() {
 </code></pre>
 
 <h1 id="beyond-the-basics">Beyond the basics</h1>
-
-<blockquote class="epigraph">
+<figure class="epigraph">
+<blockquote>
 <p>Go has pointers but not pointer arithmetic. You cannot use a pointer
 variable to walk through the bytes of a string.</p>
 </blockquote>
-
-<p>Quote: Go For C++ Programmers &ndash; Go Authors</p>
+<figcaption>Go For C++ Programmers &ndash; Go Authors
+</figcaption>
+</figure>
 
 <p>In this chapter we delve deeper in to the language.</p>
 
@@ -2730,8 +2738,7 @@ v := make([]int, 100)           <span class="callout">4</span>
 <p>Remember that <code>make</code> applies only to maps, slices and channels and does not
 return a pointer. To obtain an explicit pointer allocate with <code>new</code>.</p>
 
-<aside></aside>
-
+<aside>
 <p><strong>new</strong> allocates; <strong>make</strong> initializes.</p>
 
 <p>The above two paragraphs can be summarized as:</p>
@@ -2742,6 +2749,7 @@ return a pointer. To obtain an explicit pointer allocate with <code>new</code>.<
 </ul>
 
 <p>And of course <code>make</code> is only used for slices, maps and channels.</p>
+</aside>
 
 <h3 id="constructors-and-composite-literals">Constructors and composite literals</h3>
 
@@ -2949,8 +2957,8 @@ func (m *Mutex) Unlock()  { /* Unlock impl. */ }
 but there are some rules. For starters, converting from one value to another is
 done by operators (that look like functions: <code>byte()</code>) and not all conversions
 are allowed.</p>
-
-<table id="tab-conversion">
+<figure>
+<table>
 <thead>
 <tr>
 <th>From</th>
@@ -3035,7 +3043,8 @@ are allowed.</p>
 </tr>
 </tbody>
 </table>
-<p>Table: Valid conversions, <code>float64</code> works the same as <code>float32</code>.</p>
+<figcaption>Valid conversions, <code>float64</code> works the same as <code>float32</code>.</figcaption>
+</figure>
 
 <ul>
 <li><p>From a <code>string</code> to a slice of bytes or runes.</p>
