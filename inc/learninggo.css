@@ -75,7 +75,7 @@ h1 {
     padding-top: 1em;
 }
 
-figure.epigraph > blockquote {
+figure > blockquote.epigraph {
     text-align: right;
     border-left: none;
     padding-bottom: 2em;

@@ -64,6 +64,14 @@ blockquote {
   font-style:italic;
 }
 
+aside {
+  border-top:1px solid #e5e5e5;
+  border-bottom:1px solid #e5e5e5;
+  margin:0 0 20px 0px;
+  padding:0 0 0 20px;
+  font-style:italic;
+}
+
 code, pre {
   font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, monospace;
   color:#333;
