@@ -1,7 +1,7 @@
 {.epigraph}
 > Is Go an object-oriented language? Yes and no.
 
-Caption: Frequently asked questions, Go Authors
+Quote: Frequently asked questions, Go Authors
 
 
 The Go programming language is an open source project language to make programmers more productive.

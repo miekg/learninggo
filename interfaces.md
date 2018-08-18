@@ -2,7 +2,7 @@
 > I have this phobia about having my body penetrated surgically. You know what
 > I mean?
 
-Caption: eXistenZ -- Ted Pikul
+Quote: eXistenZ -- Ted Pikul
 
 In Go, the word *interface*(((interface))) is overloaded to mean several
 different things. Every type has an interface, which is the *set of methods

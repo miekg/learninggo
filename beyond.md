@@ -2,7 +2,7 @@
 > Go has pointers but not pointer arithmetic. You cannot use a pointer
 > variable to walk through the bytes of a string.
 
-Caption: Go For C++ Programmers -- Go Authors
+Quote: Go For C++ Programmers -- Go Authors
 
 In this chapter we delve deeper in to the language.
 

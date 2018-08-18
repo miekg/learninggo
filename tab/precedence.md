@@ -6,4 +6,4 @@ Highest    |	`*  /  %  <<  >>  &  &^`
            |	`<-`
            |	`&&`
 Lowest     |	\|\|
-Caption: Operator precedence.
+Table: Operator precedence.

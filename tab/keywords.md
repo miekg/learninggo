@@ -5,4 +5,4 @@
 `chan`	    |`else`	        |`goto`	    |`package`   |`switch`
 `const`	    |`fallthrough`	|`if`	    |`range`     |`type`
 `continue`	|`for`	        |`import`	|`return`    |`var`
-Caption: Keywords in Go.
+Table: Keywords in Go.
