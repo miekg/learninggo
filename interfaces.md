@@ -4,9 +4,9 @@
 
 Quote: eXistenZ -- Ted Pikul
 
-In Go, the word *interface*(((interface))) is overloaded to mean several
+In Go, the word *interface*(!interface) is overloaded to mean several
 different things. Every type has an interface, which is the *set of methods
-defined* for (((interface, set of methods))) that type. This bit of code defines
+defined* for (!interface, set of methods) that type. This bit of code defines
 a struct type `S` with one field, and defines two methods for `S`. ^[The following text is partly from [@go_interfaces].]
 
 ~~~go
@@ -16,7 +16,7 @@ func (p *S) Put(v int) { p.i = v }
 ~~~
 Figure: Defining a struct and methods on it.
 
-You can also define an (((interface, type)))interface type, which is simply
+You can also define an (!interface, type)interface type, which is simply
 a set of methods. This defines an interface `I` with two methods:
 
 ~~~go
@@ -31,19 +31,18 @@ methods which `I` requires. Note that this is true even though there is no
 explicit declaration that `S` implements `I`.
 
 A Go program can use this fact via yet another meaning of interface, which is an
-interface value: (((interface, value)))
+interface value: (!interface, value)
 
-{callout="//"}
 ~~~go
-func f(p I) { //<1>
-    fmt.Println(p.Get()) //<2>
-    p.Put(1) //<3>
+func f(p I) { //<<1>>
+    fmt.Println(p.Get()) //<<2>>
+    p.Put(1) //<<3>>
 }
 ~~~
 
-At <1> we declare a function that takes an interface type as the argument.
+At <<1>> we declare a function that takes an interface type as the argument.
 Because `p` implements `I`, it *must* have the `Get()` method, which we call at
-<2>. And the same holds true for the `Put()` method at <3>. Because `S`
+<<2>>. And the same holds true for the `Put()` method at <<3>>. Because `S`
 implements `I`, we can call the function `f` passing in a pointer to a value of
 type `S`: `var s S; f(&s)`
 
@@ -54,7 +53,7 @@ the methods to take values -- but then the `Put` method would not work as
 expected.
 
 The fact that you do not need to declare whether or not a type implements an
-interface means that Go implements a form of duck typing (((duck, typing)))
+interface means that Go implements a form of duck typing (!duck, typing)
 [@duck_typing]. This is not pure duck typing, because when possible the
 Go compiler will statically check whether the type implements the interface.
 However, Go does have a purely dynamic aspect, in that you can convert from one
@@ -84,36 +83,34 @@ func (p *R) Put(v int) { p.i = v }
 The function `f` can now accept variables of type `R` and `S`.
 
 Suppose you need to know the actual type in the function `f`. In Go you can
-figure that out by using a type switch(((type switch))).
+figure that out by using a type switch(!type switch).
 
-{callout="//"}
 ~~~go
 func f(p I) {
-    switch t := p.(type) { //<1>
-        case *S: //<2>
-        case *R: //<2>
-        default: //<3>
+    switch t := p.(type) { //<<1>>
+        case *S: //<<2>>
+        case *R: //<<2>>
+        default: //<<3>>
     }
 }
 ~~~
 
-At <1> we use the type switch, note that the `.(type)` syntax is *only* valid
+At <<1>> we use the type switch, note that the `.(type)` syntax is *only* valid
 within a `switch` statement. We store the value in the variable `t`. The
-subsequent cases <2> each check for a different *actual* type. And we can even
-have a `default` <3> clause. It is worth pointing out that both `case R` and
+subsequent cases <<2>> each check for a different *actual* type. And we can even
+have a `default` <<3>> clause. It is worth pointing out that both `case R` and
 `case s` aren't possible, because `p` needs to be a pointer in order to satisfy
 `i`.
 
 A type switch isn't the only way to discover the type at *run-time*.
 
-{callout="//"}
 ~~~go
-if t, ok := something.(I); ok { //<1>
+if t, ok := something.(I); ok { //<<1>>
     // ...
 }
 ~~~
 
-You can also use a "comma, ok" form <1> to see if an interface type implements
+You can also use a "comma, ok" form <<1>> to see if an interface type implements
 a specific interface. If `ok` is true, `t` will hold the type of `something`.
 When you are sure a variable implements an interface you can use: `t := something.(I)` .
 
@@ -131,7 +128,7 @@ func g(something interface{}) int {
 
 The `return something.(I).Get()` is the tricky bit in this function. The value
 `something` has type `interface{}`, meaning no guarantee of any methods at all:
-it could contain any type. The `.(I)` is a type assertion (((type assertion)))
+it could contain any type. The `.(I)` is a type assertion (!type assertion)
 which converts `something` to an interface of type `I`. If we have that type we
 can invoke the `Get()` function. So if we create a new variable of the type
 `*S`, we can just call `g()`, because `*S` also implements the empty interface.
@@ -236,26 +233,25 @@ func bubblesort(n []int) {
 A version that sorts strings is identical except for the signature of the
 function: `func bubblesortString(n []string) { /* ... */ }` . Using this
 approach would lead to two functions, one for each type. By using interfaces we
-can make this more (((generic))) generic. Let's create a new function that will
+can make this more (!generic) generic. Let's create a new function that will
 sort both strings and integers, something along the lines of this non-working
 example:
 
-{callout="//"}
 ~~~go
-func sort(i []interface{}) {  //<1>
-    switch i.(type) {         //<2>
-    case string:              //<3>
+func sort(i []interface{}) {  //<<1>>
+    switch i.(type) {         //<<2>>
+    case string:              //<<3>>
         // ...
     case int:
         // ...
     }
-    return /* ... */          //<4>
+    return /* ... */          //<<4>>
 }
 ~~~
 
-Our function will receive a slice of empty interfaces at <1>. We then <2> use a
-type switch to find out what the actual type of the input is. And then <3>
-then sort accordingly. And, when done, return <4> the sorted slice.
+Our function will receive a slice of empty interfaces at <<1>>. We then <<2>> use a
+type switch to find out what the actual type of the input is. And then <<3>>
+then sort accordingly. And, when done, return <<4>> the sorted slice.
 
 But when we call this function with `sort([]int{1, 4, 5})`, it fails with:
 "cannot use i (type []int) as type []interface { } in function argument"
@@ -308,10 +304,9 @@ The following steps are required:
 
 * Write a *generic* Sort function that works on the `Sorter` interface.
 
-    {callout="//"}
     ~~~go
-    func Sort(x Sorter) { //<1>
-        for i := 0; i < x.Len() - 1; i++ { //<2>
+    func Sort(x Sorter) { //<<1>>
+        for i := 0; i < x.Len() - 1; i++ { //<<2>>
             for j := i + 1; j < x.Len(); j++ {
                 if x.Less(i, j) {
                     x.Swap(i, j)
@@ -321,8 +316,8 @@ The following steps are required:
     }
     ~~~
 
-	At <1> `x` is now of the `Sorter` type and using the defined methods for this interface we implement
-	Bubblesort at <2>.
+	At <<1>> `x` is now of the `Sorter` type and using the defined methods for this interface we implement
+	Bubblesort at <<2>>.
 
 	Now we can use our *generic* `Sort` function as follows:
 
@@ -360,62 +355,60 @@ perfectly legal to include it in the interface.
 
 In the following example we want to look at the "tag" (here named "namestr")
 defined in the type definition of `Person`. To do this we need the
-`reflect`(((package,reflect))) package (there is no other way in Go). Keep in
+`reflect`(!package,reflect) package (there is no other way in Go). Keep in
 mind that looking at a tag means going back to the *type* definition. So we use
 the `reflect` package to figure out the type of the variable and *then* access
 the tag.
 
-{callout="//"}
 ~~~go
 type Person struct {
     name string "namestr"
     age  int
 }
 
-func ShowTag(i interface{}) { //<1>
+func ShowTag(i interface{}) { //<<1>>
     switch t := reflect.TypeOf(i); t.Kind() {
-    case reflect.Ptr: //<2>
+    case reflect.Ptr: //<<2>>
         tag := t.Elem().Field(0).Tag
-    //             <3>     <4>       <5>
+    //             <<3>>     <<4>>       <<5>>
 ~~~
 Figure: Introspection using reflection.
 
-We are calling `ShowTag` at <1> with a `*Person`, so at <2> we're expecting
-a `reflect.Ptr`. We are dealing with a `Type` <3> and according to the
+We are calling `ShowTag` at <<1>> with a `*Person`, so at <<2>> we're expecting
+a `reflect.Ptr`. We are dealing with a `Type` <<3>> and according to the
 documentation ^[`go doc reflect`]:
 
 > Elem returns a type's element type.
 > It panics if the type's Kind is not Array, Chan, Map, Ptr, or Slice.
 
 So on `t` we use `Elem()` to get the value the pointer points to. We have now
-dereferenced the pointer and are "inside" our structure. We then <4> use
+dereferenced the pointer and are "inside" our structure. We then <<4>> use
 `Field(0)` to access the zeroth field.
 
 The struct `StructField` has a `Tag` member which returns the tag-name as
-a string. So on the $$0^{th}$$ field we can unleash `.Tag` <5> to access this
+a string. So on the $$0^{th}$$ field we can unleash `.Tag` <<5>> to access this
 name: `Field(0).Tag`. This gives us `namestr`.
 
 To make the difference between types and values more clear, take a look at the
 following code:
 
-{callout="//"}
 ~~~go
 func show(i interface{}) {
     switch t := i.(type) {
     case *Person:
-        t := reflect.TypeOf(i)  //<1>
-        v := reflect.ValueOf(i) //<2>
-        tag := t.Elem().Field(0).Tag //<3>
-        name := v.Elem().Field(0).String() //<4>
+        t := reflect.TypeOf(i)  //<<1>>
+        v := reflect.ValueOf(i) //<<2>>
+        tag := t.Elem().Field(0).Tag //<<3>>
+        name := v.Elem().Field(0).String() //<<4>>
     }
 }
 ~~~
 Figure: Reflection and the type and value.
 
-At <1> we create `t` the type data of `i`, and `v` gets the actual values at
-<2>. Here at <3> we want to get to the "tag". So we need `Elem()` to redirect
+At <<1>> we create `t` the type data of `i`, and `v` gets the actual values at
+<<2>>. Here at <<3>> we want to get to the "tag". So we need `Elem()` to redirect
 the pointer, access the first field and get the tag. Note that we operate on `t`
-a `reflect.Type`. Now <4> we want to get access to the *value* of one of the
+a `reflect.Type`. Now <<4>> we want to get access to the *value* of one of the
 members and we employ `Elem()` on `v` to do the redirection. we have "arrived"
 at the structure. Then we go to the first field `Field(0)` and invoke the
 `String()` method on it.

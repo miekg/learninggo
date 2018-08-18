@@ -3515,11 +3515,529 @@ call <code>k1.Push(2)</code> is translated by Go into
 <code>(&amp;k1).Push(2)</code> which makes the type system happy again (and
 you too &ndash; now you know this).<sup class="footnote-ref" id="fnref:Also-see-methods"><a href="#fn:Also-see-methods">14</a></sup></p>
 
+<h1 id="interfaces">Interfaces</h1>
+<figure>
+<blockquote class="epigraph">
+<p>I have this phobia about having my body penetrated surgically. You know what
+I mean?</p>
+</blockquote>
+<figcaption>eXistenZ &ndash; Ted Pikul
+</figcaption>
+</figure>
+
+<p>In Go, the word <em>interface</em><span class="index" id="idxref:108"></span> is overloaded to mean several
+different things. Every type has an interface, which is the <em>set of methods
+defined</em> for <span class="index" id="idxref:109"></span> that type. This bit of code defines
+a struct type <code>S</code> with one field, and defines two methods for <code>S</code>. <sup class="footnote-ref" id="fnref:The-following-te"><a href="#fn:The-following-te">15</a></sup></p>
+<figure>
+<pre><code class="language-go">type S struct { i int }
+func (p *S) Get() int  { return p.i }
+func (p *S) Put(v int) { p.i = v }
+</code></pre>
+<figcaption>Defining a struct and methods on it.
+</figcaption>
+</figure>
+
+<p>You can also define an <span class="index" id="idxref:110"></span>interface type, which is simply
+a set of methods. This defines an interface <code>I</code> with two methods:</p>
+
+<pre><code class="language-go">type I interface {
+    Get() int
+    Put(int)
+}
+</code></pre>
+
+<p><code>S</code> is a valid <em>implementation</em> for interface <code>I</code>, because it defines the two
+methods which <code>I</code> requires. Note that this is true even though there is no
+explicit declaration that <code>S</code> implements <code>I</code>.</p>
+
+<p>A Go program can use this fact via yet another meaning of interface, which is an
+interface value: <span class="index" id="idxref:111"></span></p>
+
+<pre><code class="language-go">func f(p I) { <span class="callout">1</span>
+    fmt.Println(p.Get()) <span class="callout">2</span>
+    p.Put(1) <span class="callout">3</span>
+}
+</code></pre>
+
+<p>At <span class="callout">1</span> we declare a function that takes an interface type as the argument.
+Because <code>p</code> implements <code>I</code>, it <em>must</em> have the <code>Get()</code> method, which we call at
+<span class="callout">2</span>. And the same holds true for the <code>Put()</code> method at <span class="callout">3</span>. Because <code>S</code>
+implements <code>I</code>, we can call the function <code>f</code> passing in a pointer to a value of
+type <code>S</code>: <code>var s S; f(&amp;s)</code></p>
+
+<p>The reason we need to take the address of <code>s</code>, rather than a value of type <code>S</code>,
+is because we defined the methods on <code>s</code> to operate on pointers, see the
+definition in the code above. This is not a requirement &ndash; we could have defined
+the methods to take values &ndash; but then the <code>Put</code> method would not work as
+expected.</p>
+
+<p>The fact that you do not need to declare whether or not a type implements an
+interface means that Go implements a form of duck typing <span class="index" id="idxref:112"></span>
+<cite class="informative"><a href="#duck_typing"></a></cite>. This is not pure duck typing, because when possible the
+Go compiler will statically check whether the type implements the interface.
+However, Go does have a purely dynamic aspect, in that you can convert from one
+interface type to another. In the general case, that conversion is checked at
+run time. If the conversion is invalid &ndash; if the type of the value stored in
+the existing interface value does not satisfy the interface to which it is being
+converted &ndash; the program will fail with a run time error.</p>
+
+<p>Interfaces in Go are similar to ideas in several other programming languages:
+pure abstract virtual base classes in C++, typeclasses in Haskell or duck typing
+in Python. However there is no other language which combines interface values,
+static type checking, dynamic run time conversion, and no requirement for
+explicitly declaring that a type satisfies an interface. The result in Go is
+powerful, flexible, efficient, and easy to write.</p>
+
+<h2 id="which-is-what">Which is what?</h2>
+
+<p>Let&rsquo;s define another type <code>R</code> that also implements the interface <code>I</code>:</p>
+
+<pre><code class="language-go">type R struct { i int }
+func (p *R) Get() int  { return p.i }
+func (p *R) Put(v int) { p.i = v }
+</code></pre>
+
+<p>The function <code>f</code> can now accept variables of type <code>R</code> and <code>S</code>.</p>
+
+<p>Suppose you need to know the actual type in the function <code>f</code>. In Go you can
+figure that out by using a type switch<span class="index" id="idxref:113"></span>.</p>
+
+<pre><code class="language-go">func f(p I) {
+    switch t := p.(type) { <span class="callout">1</span>
+        case *S: <span class="callout">2</span>
+        case *R: <span class="callout">2</span>
+        default: <span class="callout">3</span>
+    }
+}
+</code></pre>
+
+<p>At <span class="callout">1</span> we use the type switch, note that the <code>.(type)</code> syntax is <em>only</em> valid
+within a <code>switch</code> statement. We store the value in the variable <code>t</code>. The
+subsequent cases <span class="callout">2</span> each check for a different <em>actual</em> type. And we can even
+have a <code>default</code> <span class="callout">3</span> clause. It is worth pointing out that both <code>case R</code> and
+<code>case s</code> aren&rsquo;t possible, because <code>p</code> needs to be a pointer in order to satisfy
+<code>i</code>.</p>
+
+<p>A type switch isn&rsquo;t the only way to discover the type at <em>run-time</em>.</p>
+
+<pre><code class="language-go">if t, ok := something.(I); ok { <span class="callout">1</span>
+    // ...
+}
+</code></pre>
+
+<p>You can also use a &ldquo;comma, ok&rdquo; form <span class="callout">1</span> to see if an interface type implements
+a specific interface. If <code>ok</code> is true, <code>t</code> will hold the type of <code>something</code>.
+When you are sure a variable implements an interface you can use: <code>t := something.(I)</code> .</p>
+
+<h2 id="empty-interface">Empty interface</h2>
+
+<p>Since every type satisfies the empty interface: <code>interface{}</code> we can create
+a generic function which has an empty interface as its argument:</p>
+
+<pre><code class="language-go">func g(something interface{}) int {
+    return something.(I).Get()
+}
+</code></pre>
+
+<p>The <code>return something.(I).Get()</code> is the tricky bit in this function. The value
+<code>something</code> has type <code>interface{}</code>, meaning no guarantee of any methods at all:
+it could contain any type. The <code>.(I)</code> is a type assertion <span class="index" id="idxref:114"></span>
+which converts <code>something</code> to an interface of type <code>I</code>. If we have that type we
+can invoke the <code>Get()</code> function. So if we create a new variable of the type
+<code>*S</code>, we can just call <code>g()</code>, because <code>*S</code> also implements the empty interface.</p>
+
+<pre><code class="language-go">s = new(S)
+fmt.Println(g(s));
+</code></pre>
+
+<p>The call to <code>g</code> will work fine and will print 0. If we however invoke <code>g()</code> with
+a value that does not implement <code>I</code> we have a problem:</p>
+
+<pre><code class="language-go">var i int
+fmt.Println(g(i))
+</code></pre>
+
+<p>This compiles, but when we run this we get slammed with: &ldquo;panic: interface
+conversion: int is not main.I: missing method Get&rdquo;.</p>
+
+<p>Which is completely true, the built-in type <code>int</code> does not have a <code>Get()</code>
+method.</p>
+
+<h2 id="methods-1">Methods</h2>
+
+<p>Methods are functions that have a receiver (see <a href="#functions"></a>).
+You can define methods on any type (except on non-local types, this includes
+built-in types: the type <code>int</code> can not have methods).
+You can however make a new integer type with its own methods. For example:</p>
+
+<pre><code class="language-go">type Foo int
+
+func (self Foo) Emit() {
+    fmt.Printf(&quot;%v&quot;, self)
+}
+
+type Emitter interface {
+    Emit()
+}
+</code></pre>
+
+<p>Doing this on non-local (types defined in other packages) types yields an error
+&ldquo;cannot define new methods on non-local type int&rdquo;.</p>
+
+<h2 id="methods-on-interface-types">Methods on interface types</h2>
+
+<p>An interface defines a set of methods. A method contains the actual code. In
+other words, an interface is the definition and the methods are the
+implementation. So a receiver can not be an interface type, doing so results in
+a &ldquo;invalid receiver type &hellip;&rdquo; compiler error. The authoritative word from the
+language spec <cite class="informative"><a href="#go_spec"></a></cite>:</p>
+
+<blockquote>
+<p>The receiver type must be of the form <code>T</code> or <code>*T</code> where <code>T</code> is a type name. <code>T</code>
+is called the receiver base type or just base type. The base type must not be
+a pointer or interface type and must be declared in the same package as the
+method.</p>
+</blockquote>
+
+<aside>
+<p>Creating a pointer to an interface value is a useless action in Go. It is in
+fact illegal to create a pointer to an interface value. The release notes for an
+earlier Go release that made them illegal leave no room for doubt:</p>
+
+<blockquote>
+<p>The language change is that uses of pointers to interface values no longer
+automatically de-reference the pointer.  A pointer to an interface value is
+more often a beginner&rsquo;s bug than correct code.</p>
+</blockquote>
+</aside>
+
+<h2 id="interface-names">Interface names</h2>
+
+<p>By convention, one-method interfaces are named by the method name plus the <em>-er</em>
+suffix: Read<em>er</em>, Writ<em>er</em>, Formatt<em>er</em> etc.</p>
+
+<p>There are a number of such names and it&rsquo;s productive to honor them and the
+function names they capture. <code>Read</code>, <code>Write</code>, <code>Close</code>, <code>Flush</code>, <code>String</code> and so
+on have canonical signatures and meanings. To avoid confusion, don&rsquo;t give your
+method one of those names unless it has the same signature and meaning.
+Conversely, if your type implements a method with the same meaning as a method
+on a well-known type, give it the same name and signature; call your
+string-converter method <code>String</code> not <code>ToString</code>. <sup class="footnote-ref" id="fnref:Text-copied-from"><a href="#fn:Text-copied-from">16</a></sup></p>
+
+<h2 id="a-sorting-example">A sorting example</h2>
+
+<p>Recall the Bubblesort exercise, where we sorted an array of integers:</p>
+
+<pre><code class="language-go">func bubblesort(n []int) {
+    for i := 0; i &lt; len(n)-1; i++ {
+        for j := i + 1; j &lt; len(n); j++ {
+            if n[j] &lt; n[i] {
+                n[i], n[j] = n[j], n[i]
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>A version that sorts strings is identical except for the signature of the
+function: <code>func bubblesortString(n []string) { /* ... */ }</code> . Using this
+approach would lead to two functions, one for each type. By using interfaces we
+can make this more <span class="index" id="idxref:115"></span> generic. Let&rsquo;s create a new function that will
+sort both strings and integers, something along the lines of this non-working
+example:</p>
+
+<pre><code class="language-go">func sort(i []interface{}) {  <span class="callout">1</span>
+    switch i.(type) {         <span class="callout">2</span>
+    case string:              <span class="callout">3</span>
+        // ...
+    case int:
+        // ...
+    }
+    return /* ... */          <span class="callout">4</span>
+}
+</code></pre>
+
+<p>Our function will receive a slice of empty interfaces at <span class="callout">1</span>. We then <span class="callout">2</span> use a
+type switch to find out what the actual type of the input is. And then <span class="callout">3</span>
+then sort accordingly. And, when done, return <span class="callout">4</span> the sorted slice.</p>
+
+<p>But when we call this function with <code>sort([]int{1, 4, 5})</code>, it fails with:
+&ldquo;cannot use i (type []int) as type []interface { } in function argument&rdquo;</p>
+
+<p>This is because Go can not easily convert to a <em>slice</em> of interfaces.
+Just converting to an interface is easy, but to a slice is much more costly.
+The full mailing list discussion on this subject can be found at
+<cite class="informative"><a href="#go_nuts_interfaces"></a></cite>. To keep a long story short: Go does not (implicitly) convert slices for you.</p>
+
+<p>So what is the Go way of creating such a &ldquo;generic&rdquo; function?
+Instead of doing the type inference ourselves with a type switch, we let
+Go do it implicitly:
+The following steps are required:</p>
+
+<ul>
+<li><p>Define an interface type (called <code>Sorter</code> here) with a number of methods
+needed for sorting. We will at least need a function to get the length of the
+slice, a function to compare two values and a swap function.</p>
+
+<pre><code class="language-go">type Sorter interface {
+    Len() int           // len() as a method.
+    Less(i, j int) bool // p[j] &lt; p[i] as a method.
+    Swap(i, j int)      // p[i], p[j] = p[j], p[i] as a method.
+}
+</code></pre></li>
+
+<li><p>Define new types for the slices we want to sort. Note that we declare slice types:</p>
+
+<pre><code class="language-go">type Xi []int
+type Xs []string
+</code></pre></li>
+
+<li><p>Implementation of the methods of the <code>Sorter</code> interface.
+For integers:</p>
+
+<pre><code class="language-go">func (p Xi) Len() int               {return len(p)}
+func (p Xi) Less(i int, j int) bool {return p[j] &lt; p[i]}
+func (p Xi) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
+</code></pre>
+<p>And for strings:</p>
+
+<pre><code class="language-go">func (p Xs) Len() int               {return len(p)}
+func (p Xs) Less(i int, j int) bool {return p[j] &lt; p[i]}
+func (p Xs) Swap(i int, j int)      {p[i], p[j] = p[j], p[i]}
+</code></pre></li>
+
+<li><p>Write a <em>generic</em> Sort function that works on the <code>Sorter</code> interface.</p>
+
+<pre><code class="language-go">func Sort(x Sorter) { <span class="callout">1</span>
+    for i := 0; i &lt; x.Len() - 1; i++ { <span class="callout">2</span>
+        for j := i + 1; j &lt; x.Len(); j++ {
+            if x.Less(i, j) {
+                x.Swap(i, j)
+            }
+        }
+    }
+}
+</code></pre>
+<p>At <span class="callout">1</span> <code>x</code> is now of the <code>Sorter</code> type and using the defined methods for this interface we implement
+Bubblesort at <span class="callout">2</span>.</p>
+
+<p>Now we can use our <em>generic</em> <code>Sort</code> function as follows:</p>
+
+<pre><code class="language-go">ints := Xi{44, 67, 3, 17, 89, 10, 73, 9, 14, 8}
+strings := Xs{&quot;nut&quot;, &quot;ape&quot;, &quot;elephant&quot;, &quot;zoo&quot;, &quot;go&quot;}
+
+
+Sort(ints)
+fmt.Printf(&quot;%v\n&quot;, ints)
+Sort(strings)
+fmt.Printf(&quot;%v\n&quot;, strings)
+</code></pre></li>
+</ul>
+
+<h2 id="listing-interfaces-in-interfaces">Listing interfaces in interfaces</h2>
+
+<p>Take a look at the following example of an interface definition, this one is
+from the package <code>container/heap</code>:</p>
+
+<pre><code class="language-go">type Interface interface {
+    sort.Interface
+    Push(x interface{})
+    Pop() interface{}
+}
+</code></pre>
+
+<p>Here another interface is listed inside the definition of <code>heap.Interface</code>, this
+may look odd, but is perfectly valid, remember that on the surface an interface is nothing
+more than a listing of methods. <code>sort.Interface</code> is also such a listing, so it is
+perfectly legal to include it in the interface.</p>
+
+<h2 id="introspection-and-reflection">Introspection and reflection</h2>
+
+<p>In the following example we want to look at the &ldquo;tag&rdquo; (here named &ldquo;namestr&rdquo;)
+defined in the type definition of <code>Person</code>. To do this we need the
+<code>reflect</code><span class="index" id="idxref:116"></span> package (there is no other way in Go). Keep in
+mind that looking at a tag means going back to the <em>type</em> definition. So we use
+the <code>reflect</code> package to figure out the type of the variable and <em>then</em> access
+the tag.</p>
+<figure>
+<pre><code class="language-go">type Person struct {
+    name string &quot;namestr&quot;
+    age  int
+}
+
+func ShowTag(i interface{}) { <span class="callout">1</span>
+    switch t := reflect.TypeOf(i); t.Kind() {
+    case reflect.Ptr: <span class="callout">2</span>
+        tag := t.Elem().Field(0).Tag
+    //             &lt;&lt;3&gt;&gt;     &lt;&lt;4&gt;&gt;       &lt;&lt;5&gt;&gt;
+</code></pre>
+<figcaption>Introspection using reflection.
+</figcaption>
+</figure>
+
+<p>We are calling <code>ShowTag</code> at <span class="callout">1</span> with a <code>*Person</code>, so at <span class="callout">2</span> we&rsquo;re expecting
+a <code>reflect.Ptr</code>. We are dealing with a <code>Type</code> <span class="callout">3</span> and according to the
+documentation <sup class="footnote-ref" id="fnref:go-doc-reflect"><a href="#fn:go-doc-reflect">17</a></sup>:</p>
+
+<blockquote>
+<p>Elem returns a type&rsquo;s element type.
+It panics if the type&rsquo;s Kind is not Array, Chan, Map, Ptr, or Slice.</p>
+</blockquote>
+
+<p>So on <code>t</code> we use <code>Elem()</code> to get the value the pointer points to. We have now
+dereferenced the pointer and are &ldquo;inside&rdquo; our structure. We then <span class="callout">4</span> use
+<code>Field(0)</code> to access the zeroth field.</p>
+
+<p>The struct <code>StructField</code> has a <code>Tag</code> member which returns the tag-name as
+a string. So on the $<span class="math inline">\(0^{th}\)</span>$ field we can unleash <code>.Tag</code> <span class="callout">5</span> to access this
+name: <code>Field(0).Tag</code>. This gives us <code>namestr</code>.</p>
+
+<p>To make the difference between types and values more clear, take a look at the
+following code:</p>
+<figure>
+<pre><code class="language-go">func show(i interface{}) {
+    switch t := i.(type) {
+    case *Person:
+        t := reflect.TypeOf(i)  <span class="callout">1</span>
+        v := reflect.ValueOf(i) <span class="callout">2</span>
+        tag := t.Elem().Field(0).Tag <span class="callout">3</span>
+        name := v.Elem().Field(0).String() <span class="callout">4</span>
+    }
+}
+</code></pre>
+<figcaption>Reflection and the type and value.
+</figcaption>
+</figure>
+
+<p>At <span class="callout">1</span> we create <code>t</code> the type data of <code>i</code>, and <code>v</code> gets the actual values at
+<span class="callout">2</span>. Here at <span class="callout">3</span> we want to get to the &ldquo;tag&rdquo;. So we need <code>Elem()</code> to redirect
+the pointer, access the first field and get the tag. Note that we operate on <code>t</code>
+a <code>reflect.Type</code>. Now <span class="callout">4</span> we want to get access to the <em>value</em> of one of the
+members and we employ <code>Elem()</code> on <code>v</code> to do the redirection. we have &ldquo;arrived&rdquo;
+at the structure. Then we go to the first field <code>Field(0)</code> and invoke the
+<code>String()</code> method on it.</p>
+
+<p><img src="fig/reflection.png" alt="Peeling away the layers using reflection." title="Peeling away the layers using reflection.
+Going from a `*Person` via `Elem` using the methods described in `go doc reflect` to get the actual `string` contained within." /></p>
+
+<p>Setting a value works similarly as getting a value, but only works on
+<em>exported</em> members. Again some code:</p>
+<figure>
+<pre><code class="language-go">type Person struct {
+    name string
+    age  int
+}
+
+func Set(i interface{}) {
+    switch i.(type) {
+    case *Person:
+        r := reflect.ValueOf(i)
+        r.Elem(0).Field(0).SetString(&quot;Albert Einstein&quot;)
+    }
+}
+</code></pre>
+<figcaption>Reflect with <em>private</em> member.
+</figcaption>
+</figure>
+<figure>
+<pre><code class="language-go">type Person struct {
+    Name string
+    age  int
+}
+
+func Set(i interface{}) {
+    switch i.(type) {
+    case *Person:
+        r := reflect.ValueOf(i)
+        r.Elem().Field(0).SetString(&quot;Albert Einstein&quot;)
+    }
+}
+</code></pre>
+<figcaption>Reflect with <em>public</em> member.
+</figcaption>
+</figure>
+
+<p>The first program compiles and runs, but when you run it, you are greeted with a
+stack trace and a <em>run time</em> error:
+&ldquo;panic: reflect.Value.SetString using value obtained using unexported field&rdquo;.</p>
+
+<p>The second program works OK and sets the member <code>Name</code> to &ldquo;Albert Einstein&rdquo;.
+Of course this only works when you call <code>Set()</code> with a pointer argument.</p>
+
+<h2 id="exercises-4">Exercises</h2>
+
+<p class="exercise" data-dificulty="2">### Interfaces and max()</p>
+
+<p>In the maximum exercise we created a max function that works on a slice of
+integers.  The question now is to create a program that shows the maximum number
+and that works for both integers and floats.  Try to make your program as
+generic as possible, although that is quite difficult in this case.</p>
+
+<h3 id="answer-19">Answer</h3>
+
+<p>The following program calculates a maximum. It is as generic as you can get with
+Go.</p>
+
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+func Less(l, r interface{}) bool { <span class="callout">1</span>
+    switch l.(type) {
+    case int:
+        if _, ok := r.(int); ok {
+            return l.(int) &lt; r.(int) <span class="callout">2</span>
+        }
+    case float32:
+        if _, ok := r.(float32); ok {
+            return l.(float32) &lt; r.(float32) <span class="callout">3</span>
+        }
+    }
+    return false
+}
+
+func main() {
+    var a, b, c int = 5, 15, 0
+    var x, y, z float32 = 5.4, 29.3, 0.0
+
+    if c = a; Less(a, b) { <span class="callout">4</span>
+        c = b
+    }
+    if z = x; Less(x, y) { <span class="callout">4</span>
+        z = y
+    }
+    fmt.Println(c, z)
+}
+</code></pre>
+
+<p>We could have chosen to make the return type of this <span class="callout">1</span> function an
+<code>interface{}</code>, but that would mean that a caller would always have to do a type
+assertion to extract the actual type from the interface. At <span class="callout">2</span> we compare the
+parameters. All parameters are confirmed to be integers, so this is legit. And
+at <span class="callout">3</span> we do the some for floats. At <span class="callout">4</span> we get the maximum value for <code>a</code>, <code>b</code>
+and <code>x</code> and <code>y</code>.</p>
+
+<h3 id="pointers-and-reflection" class="exercise" data-difficulty="1">Pointers and reflection</h3>
+
+<p>One of the last paragraphs in section <a href="#introspection-and-reflection"></a>
+has the following words:</p>
+
+<blockquote>
+<p>The code on the right works OK and sets the member <code>Name</code>
+to &ldquo;Albert Einstein&rdquo;. Of course this only works when you call <code>Set()</code>
+with a pointer argument.</p>
+</blockquote>
+
+<p>Why is this the case?</p>
+
+<h3 id="answer-20">Answer</h3>
+
+<p>When called with a non-pointer argument the variable is a copy (call-by-value).
+So you are doing the reflection voodoo on a copy. And thus you are <em>not</em>
+changing the original value, but only this copy.</p>
+
 <!--
-# Interfaces
-{{interfaces.md}}
-
-
 # Concurrency
 {{channels.md}}
 
@@ -3552,7 +4070,7 @@ you too &ndash; now you know this).<sup class="footnote-ref" id="fnref:Also-see-
 
 <li id="fn:This-is-a-motto">This is a motto of Go; &ldquo;Do <em>more</em> with <em>less</em> code&rdquo;.</li>
 
-<li id="fn:A-function-liter">A function literal is sometimes called a closure <span class="index" id="idxref:108"></span>.</li>
+<li id="fn:A-function-liter">A function literal is sometimes called a closure <span class="index" id="idxref:117"></span>.</li>
 
 <li id="fn:Modified-from-a">Modified from a presentation of Eleanor McHugh.</li>
 
@@ -3563,6 +4081,12 @@ you too &ndash; now you know this).<sup class="footnote-ref" id="fnref:Also-see-
 <li id="fn:Taking-the-addre">Taking the address of a composite literal tells the compiler to allocate it on the heap, not the stack.</li>
 
 <li id="fn:Also-see-methods">Also see <a href="#methods"></a> in this chapter.</li>
+
+<li id="fn:The-following-te">The following text is partly from <cite class="informative"><a href="#go_interfaces"></a></cite>.</li>
+
+<li id="fn:Text-copied-from">Text copied from <cite class="informative"><a href="#effective_go"></a></cite>.</li>
+
+<li id="fn:go-doc-reflect"><code>go doc reflect</code></li>
 </ol>
 
 </div>

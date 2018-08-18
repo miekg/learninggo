@@ -46,11 +46,11 @@ fullname = "R. (Miek) Gieben"
 {{beyond.md}}
 
 
-<!--
 # Interfaces
 {{interfaces.md}}
 
 
+<!--
 # Concurrency
 {{channels.md}}
 
