@@ -114,7 +114,7 @@
 </head>
 <body>
 
-<h1 special="preface" id="preface">Preface</h1>
+<h1 class="special" id="preface">Preface</h1>
 
 <p>The <a href="https://github.com/miekg/learninggo">source of this book</a> is written in
 <a href="https://github.com/mmarkdown/mmark">mmark</a> and is converted from the <a href="https://github.com/miekg/gobook">original
@@ -206,8 +206,8 @@ other changes.</p>
 <p class="title"><img src="fig/bumper-inverse.png" alt="" /></p>
 
 <h1 id="introduction">Introduction</h1>
-<figure class="epigraph">
-<blockquote>
+<figure>
+<blockquote class="epigraph">
 <p>Is Go an object-oriented language? Yes and no.</p>
 </blockquote>
 <figcaption>Frequently asked questions, Go Authors
@@ -332,8 +332,8 @@ package fnv
 </code></pre>
 
 <h1 id="basics">Basics</h1>
-<figure class="epigraph">
-<blockquote>
+<figure>
+<blockquote class="epigraph">
 <p>I am interested in this and hope to do something.</p>
 </blockquote>
 <figcaption>On adding complex numbers to Go, Ken Thompson
@@ -555,7 +555,7 @@ now you can just assume that <code>error</code> is a type just like all other ty
 for lists the current ones and their relative precedence. They all associate from
 left to right.</p>
 <figure>
-<table>
+<table id="tab-op-precedence">
 <thead>
 <tr>
 <th>Precedence</th>
@@ -614,7 +614,7 @@ concatenating them).</p>
 <p>Let&rsquo;s start looking at keywords, <a href="#tab-keywords"></a> lists all the keywords in
 Go.</p>
 <figure>
-<table>
+<table id="tab-keywords">
 <thead>
 <tr>
 <th></th>
@@ -898,7 +898,7 @@ when <code>i</code> is not 0 or 1 <span class="callout">2</span>. We could rewri
 <p>A few functions are predefined, meaning you <em>don&rsquo;t</em> have to include any package
 to get access to them. <a href="#tab-predef-functions"></a> lists them all.<sup class="footnote-ref" id="fnref:You-can-use-the"><a href="#fn:You-can-use-the">6</a></sup></p>
 <figure>
-<table>
+<table id="tab-predef-functions">
 <thead>
 <tr>
 <th></th>
@@ -1344,8 +1344,8 @@ And at <span class="callout">5</span> we check if the value is divisble by BUZZ 
 At <span class="callout">6</span>, if printed neither Fizz nor Buzz printed, we print the value.</p>
 
 <h1 id="functions">Functions</h1>
-<figure class="epigraph">
-<blockquote>
+<figure>
+<blockquote class="epigraph">
 <p>I&rsquo;m always delighted by the light touch and stillness of
 early programming languages.  Not much text; a lot gets
 done. Old programs read like quiet conversations
@@ -2117,8 +2117,8 @@ our type:</p>
 </ol>
 
 <h1 id="packages">Packages</h1>
-<figure class="epigraph">
-<blockquote>
+<figure>
+<blockquote class="epigraph">
 <p>&rdquo;^&rdquo;</p>
 </blockquote>
 <figcaption>Answer to whether there is a bit wise negation operator &ndash; Ken Thompson
@@ -2638,8 +2638,8 @@ func main() {
 </code></pre>
 
 <h1 id="beyond-the-basics">Beyond the basics</h1>
-<figure class="epigraph">
-<blockquote>
+<figure>
+<blockquote class="epigraph">
 <p>Go has pointers but not pointer arithmetic. You cannot use a pointer
 variable to walk through the bytes of a string.</p>
 </blockquote>
@@ -2958,7 +2958,7 @@ but there are some rules. For starters, converting from one value to another is
 done by operators (that look like functions: <code>byte()</code>) and not all conversions
 are allowed.</p>
 <figure>
-<table>
+<table id="tab-conversion">
 <thead>
 <tr>
 <th>From</th>
