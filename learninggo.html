@@ -206,13 +206,12 @@ other changes.</p>
 <p class="title"><img src="fig/bumper-inverse.png" alt="" /></p>
 
 <h1 id="introduction">Introduction</h1>
-<figure class="epigraph">
-<blockquote>
+
+<blockquote class="epigraph">
 <p>Is Go an object-oriented language? Yes and no.</p>
 </blockquote>
-<figcaption>Frequently asked questions, Go Authors
-</figcaption>
-</figure>
+
+<p>Quote: Frequently asked questions, Go Authors</p>
 
 <p>The Go programming language is an open source project language to make programmers more productive.</p>
 
@@ -332,13 +331,12 @@ package fnv
 </code></pre>
 
 <h1 id="basics">Basics</h1>
-<figure class="epigraph">
-<blockquote>
+
+<blockquote class="epigraph">
 <p>I am interested in this and hope to do something.</p>
 </blockquote>
-<figcaption>On adding complex numbers to Go, Ken Thompson
-</figcaption>
-</figure>
+
+<p>Quote: On adding complex numbers to Go, Ken Thompson</p>
 
 <p>In this chapter we will look at the basic building blocks of the Go programming
 language.</p>
@@ -1341,8 +1339,8 @@ And at <span class="callout">5</span> we check if the value is divisble by BUZZ 
 At <span class="callout">6</span>, if printed neither Fizz nor Buzz printed, we print the value.</p>
 
 <h1 id="functions">Functions</h1>
-<figure class="epigraph">
-<blockquote>
+
+<blockquote class="epigraph">
 <p>I&rsquo;m always delighted by the light touch and stillness of
 early programming languages.  Not much text; a lot gets
 done. Old programs read like quiet conversations
@@ -1351,9 +1349,8 @@ studied mechanical colleague, not as a debate with a
 compiler.  Who&rsquo;d have guessed sophistication bought
 such noise?</p>
 </blockquote>
-<figcaption>Richard P. Gabriel
-</figcaption>
-</figure>
+
+<p>Quote: Richard P. Gabriel</p>
 
 <p>Functions are the basic building blocks of Go programs; all interesting stuff
 happens in them.</p>
@@ -2114,13 +2111,12 @@ our type:</p>
 </ol>
 
 <h1 id="packages">Packages</h1>
-<figure class="epigraph">
-<blockquote>
+
+<blockquote class="epigraph">
 <p>&rdquo;^&rdquo;</p>
 </blockquote>
-<figcaption>Answer to whether there is a bit wise negation operator &ndash; Ken Thompson
-</figcaption>
-</figure>
+
+<p>Quote: Answer to whether there is a bit wise negation operator &ndash; Ken Thompson</p>
 
 <p>A package is a collection of functions and data.</p>
 
@@ -2635,14 +2631,13 @@ func main() {
 </code></pre>
 
 <h1 id="beyond-the-basics">Beyond the basics</h1>
-<figure class="epigraph">
-<blockquote>
+
+<blockquote class="epigraph">
 <p>Go has pointers but not pointer arithmetic. You cannot use a pointer
 variable to walk through the bytes of a string.</p>
 </blockquote>
-<figcaption>Go For C++ Programmers &ndash; Go Authors
-</figcaption>
-</figure>
+
+<p>Quote: Go For C++ Programmers &ndash; Go Authors</p>
 
 <p>In this chapter we delve deeper in to the language.</p>
 
@@ -3114,6 +3109,41 @@ ints and strings.</li>
 <ol>
 <li></li>
 </ol>
+
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+// Define the empty interface as a type.
+type e interface{}
+
+func mult2(f e) e {
+	switch f.(type) {
+	case int:
+		return f.(int) * 2
+	case string:
+		return f.(string) + f.(string) + f.(string) + f.(string)
+	}
+	return f
+}
+
+func Map(n []e, f func(e) e) []e {
+	m := make([]e, len(n))
+	for k, v := range n {
+		m[k] = f(v)
+	}
+	return m
+}
+
+func main() {
+	m := []e{1, 2, 3, 4}
+	s := []e{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;}
+	mf := Map(m, mult2)
+	sf := Map(s, mult2)
+	fmt.Printf(&quot;%v\n&quot;, mf)
+	fmt.Printf(&quot;%v\n&quot;, sf)
+}
+</code></pre>
 
 <h3 id="pointers" class="exercise" data-difficulty="1">Pointers</h3>
 
