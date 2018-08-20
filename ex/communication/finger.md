@@ -1,7 +1,7 @@
 {.exercise data-difficulty="1"}
 ### Finger daemon
 
-Write a finger daemon that works with the finger(1) command. 
+Write a finger daemon that works with the finger(1) command.
 
 From the [Debian](https://www.debian.org) package description:
 
@@ -20,4 +20,4 @@ show the contents of that file. So your program needs to be able to figure out:
 ### Answer
 A> This solution is from Fabian Becker.
 
-<{{ex/communication/src/finger.go}}
+<{{src/finger.go}}

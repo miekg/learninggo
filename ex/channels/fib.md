@@ -17,4 +17,4 @@ exercise. For completeness the complete question:
 
 The following program calculates the Fibonacci numbers using channels.
 
-<{{ex/channels/src/fib.go}}
+<{{src/fib.go}}

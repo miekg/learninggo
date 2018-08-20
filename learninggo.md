@@ -28,8 +28,10 @@ fullname = "R. (Miek) Gieben"
 {.title}
 ![](fig/bumper-inverse.png)
 
+
 # Introduction
 {{introduction.md}}
+
 
 # Basics
 {{basics.md}}
@@ -37,6 +39,7 @@ fullname = "R. (Miek) Gieben"
 
 # Functions
 {{functions.md}}
+
 
 # Packages
 {{packages.md}}
@@ -50,7 +53,6 @@ fullname = "R. (Miek) Gieben"
 {{interfaces.md}}
 
 
-<!--
 # Concurrency
 {{channels.md}}
 
@@ -58,9 +60,6 @@ fullname = "R. (Miek) Gieben"
 # Communication
 {{communication.md}}
 
--->
 
 {{inc/bib.xml}}
-
-
 {backmatter}

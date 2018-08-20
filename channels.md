@@ -17,22 +17,21 @@ But what *is* a goroutine, from [@effective_go]:
 > stack space. And the stacks start small, so they are cheap, and grow by
 > allocating (and freeing) heap storage as required.
 
-A goroutine (((goroutine))) is a normal function, except that you start
-it with the keyword `go`. (((keywords, go)))
+A goroutine (!goroutine) is a normal function, except that you start
+it with the keyword `go`. (!keywords, go)
 
 ~~~go
 ready("Tea", 2)	    // Normal function call.
 go ready("Tea", 2)  // ... as goroutine.
 ~~~
 
-{callout="//"}
 <{{src/channels/sleep.go}}[8,18]
 Figure: Go routines in action.
 
 The following idea for a program was taken from [@go_course_day3]. We run
 a function as two goroutines, the goroutines wait for an amount of time and then
-print something to the screen. At <1> we start the goroutines. The `main`
-function waits long enough at <2>, so that both goroutines will have printed
+print something to the screen. At <<1>> we start the goroutines. The `main`
+function waits long enough at <<2>>, so that both goroutines will have printed
 their text. Right now we wait for 5 seconds, but in fact we have no idea how
 long we should wait until all goroutines have exited. This outputs:
 
@@ -42,13 +41,13 @@ Coffee is ready!    // After 1 second
 Tea is ready!       // After 2 seconds
 ~~~
 
-If we did not wait for the goroutines (i.e. remove the last line at <2>) the
+If we did not wait for the goroutines (i.e. remove the last line at <<2>>) the
 program would be terminated immediately and any running goroutines would
 *die with it*.
 
 To fix this we need some kind of mechanism which allows us to
 communicate with the goroutines. This mechanism is available to us in the form
-of channels (((channels))). A channel can be compared to a two-way pipe in Unix
+of channels (!channels). A channel can be compared to a two-way pipe in Unix
 shells: you can send to and receive values from it. Those values can only be of
 a specific type: the type of the channel. If we define a channel, we must also
 define the type of the values we can send on the channel. Note that we must use
@@ -64,7 +63,7 @@ Makes `ci` a channel on which we can send and receive integers,
 makes `cs` a channel for strings and `cf` a channel for types
 that satisfy the empty interface.
 Sending on a channel and receiving from it, is done with the same operator:
-`<-`. (((operators, channel)))
+`<-`. (!operators, channel)
 
 Depending on the operands it figures out what to do:
 
@@ -78,34 +77,34 @@ Let's put this to use.
 
 {callout="//"}
 ~~~go
-var c chan int //<1>
+var c chan int //<<1>>
 
 func ready(w string, sec int) {
     time.Sleep(time.Duration(sec) * time.Second)
     fmt.Println(w, "is ready!")
-    c <- 1	//<2>
+    c <- 1	//<<2>>
 }
 
 func main() {
-    c = make(chan int) //<3>
-    go ready("Tea", 2) //<4>
-    go ready("Coffee", 1) //<4>
+    c = make(chan int) //<<3>>
+    go ready("Tea", 2) //<<4>>
+    go ready("Coffee", 1) //<<4>>
     fmt.Println("I'm waiting, but not too long")
-    <-c //<5>
-    <-c //<5>
+    <-c //<<5>>
+    <-c //<<5>>
 }
 ~~~
 
-At <1> we declare `c` to be a variable that is a channel of ints. That is: this
+At <<1>> we declare `c` to be a variable that is a channel of ints. That is: this
 channel can move integers. Note that this variable is global so that the
-goroutines have access to it. At <2> in the `ready` function we send the integer
-1 on the channel. In our `main` function we initialize `c` at <3> and start our
-goroutines <4>. At <5> we Wait until we receive a value from the channel, the
+goroutines have access to it. At <<2>> in the `ready` function we send the integer
+1 on the channel. In our `main` function we initialize `c` at <<3>> and start our
+goroutines <<4>>. At <<5>> we Wait until we receive a value from the channel, the
 value we receive is discarded. We have started two goroutines, so we expect two
 values to receive.
 
 There is still some remaining ugliness; we have to read twice from the channel
-<5>). This is OK in this case, but what if we don't know how many goroutines we
+<<5>>). This is OK in this case, but what if we don't know how many goroutines we
 started? This is where another Go built-in comes in: `select` (((keywords,
 select))). With `select` you can (among other things) listen for incoming data
 on a channel.
@@ -151,20 +150,18 @@ cores[@go_1_5_release_notes].
 ## More on channels
 
 When you create a channel in Go with `ch := make(chan bool)`, an unbuffered
-channel (((channel, unbuffered))) for bools is created. What does this mean for
+channel (!channel, unbuffered) for bools is created. What does this mean for
 your program? For one, if you read (`value := <-ch`) it will block until there
 is data to receive. Secondly anything sending (`ch <- true`) will block until there
 is somebody to read it. Unbuffered channels make a perfect tool for
-synchronizing multiple goroutines. (((channel, blocking read))) (((channel,
-blocking write)))
+synchronizing multiple goroutines. (!channel, blocking read) (!channel, blocking write)
 
 But Go allows you to specify the buffer size of a channel, which is quite simply
 how many elements a channel can hold. `ch := make(chan bool, 4)`, creates
 a buffered channel of bools that can hold 4 elements. The first 4 elements in
 this channel are written without any blocking. When you write the 5^th^ element,
 your code *will* block, until another goroutine reads some elements from the
-channel to make room. (((channel, non-blocking read))) (((channel, non-blocking
-write)))
+channel to make room. (!channel, non-blocking read) (!channel, non-blocking write)
 
 In conclusion, the following is true in Go:
 

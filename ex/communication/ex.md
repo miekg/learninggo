@@ -1,7 +1,7 @@
-{{ex/communication/finger.md}}
-{{ex/communication/echo.md}}
-{{ex/communication/wordcount.md}}
-{{ex/communication/uniq.md}}
-{{ex/communication/quine.md}}
-{{ex/communication/processes.md}}
-{{ex/communication/numbercruncher.md}}
+{{finger.md}}
+{{echo.md}}
+{{wordcount.md}}
+{{uniq.md}}
+{{quine.md}}
+{{processes.md}}
+{{numbercruncher.md}}

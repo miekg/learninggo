@@ -461,4 +461,4 @@ Of course this only works when you call `Set()` with a pointer argument.
 
 ## Exercises
 
-{{ex/interfaces//ex.md}}
+{{ex/interfaces/ex.md}}

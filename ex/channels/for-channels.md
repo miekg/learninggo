@@ -16,7 +16,7 @@
 ### Answer
 1. A possible program is:
 
-   <{{ex/channels/src/for-chan.go}}
+   <{{src/for-chan.go}}
 
    We start in the usual way, then at line 6 we create a new channel of
    ints. In the next line we fire off the function `shower` with
@@ -30,7 +30,7 @@
 
 2. An answer is
 
-   <{{ex/channels/src/for-quit-chan.go}}
+   <{{src/for-quit-chan.go}}
 
    On line 20 we read from the quit channel and we discard the value we read. We
    could have used `q := <-quit`, but then we would have used the variable only

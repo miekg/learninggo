@@ -35,4 +35,4 @@ an answer. When starting `permrec` we give 977 as the first argument:
     (((75+(8*6))*8)-7)/1 = 977  #544
 
 
-<{{ex/communication/src/permrec.go}}
+<{{src/permrec.go}}
