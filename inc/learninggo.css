@@ -86,14 +86,9 @@ figure > blockquote.epigraph {
     text-align: right;
 }
 
-.epigraph figcaption {
+figure > blockquote.epigraph + figcaption {
     font-variant: small-caps;
     text-align: right;
-}
-
-.epigraph hr {
-    margin-left: 50%;
-    width: 50%;
 }
 
 .epigraph > ul {
@@ -104,32 +99,6 @@ figure > blockquote.epigraph {
 
 .epigraph > ul > li {
     text-align: right;
-}
-
-span.index-ref-secondary::before {
-    content: "\a    ";
-    white-space: pre;
-}
-
-span.index-ref-secondary {
-    padding-left: 2em;
-}
-
-span.index-ref-primary {
-    position: relative;
-    left: -0.5em;
-    font-style: italic;
-}
-
-span.index-ref-primary::before {
-    content: "\a    ";
-    white-space: pre;
-}
-
-h3.index-ref-char {
-    padding-top: 1em;
-    padding-bottom: 0;
-    margin-bottom: 0;
 }
 
 span.callout {

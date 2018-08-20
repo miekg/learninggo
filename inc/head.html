@@ -9,9 +9,8 @@
       $("body").wrapInner("<div class=\"book\"></div>")
 
       answers();
-      appendices
+      appendices();
       chapters();
-      epigraphs();
       figures();
       tables();
 
@@ -20,27 +19,25 @@
     });
 
     function chapters(){
-        // This is the only spot where I used knowledge of the doc, i.e.
-        // Preface is the first chapter.
-      $("h1:not(.appendix):not(.preface):not(.title)").each(function(index){
+        $("section[data-matter='main'] > h1:not(.special):not(.title)").each(function(index){
         $(this).prepend("Chapter " + (index+1) + ". ")
       })
     }
 
     function appendices(){
-     $("h1.appendix").each(function(index){
+        $("section[data-matter='back'] > h1").each(function(index){
         $(this).prepend("Appendix " + String.fromCharCode(65 + index) + ". ")
       })
     }
 
     function tables(){
-      $("table > caption").each(function(index){
+        $("figure > table > figcaption").each(function(index){
         $(this).prepend("Table " + (index+1) + ". ")
       })
     }
 
     function figures(){
-      $("figure:not(.title):not(.epigraph) > figcaption").each(function(index){
+        $("figure > pre > figcaption").each(function(index){
         $(this).prepend("Figure " + (index+1) + ". ")
       })
     }
@@ -74,10 +71,6 @@
           $(this).append(val);
         }
       );
-    }
-
-    function epigraphs() {
-      $("figure.epigraph figcaption").prepend("<hr>");
     }
 
     function links() {
