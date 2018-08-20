@@ -6,6 +6,10 @@ all: learninggo.html
 learninggo.html:
 	$(MMARK) -html -head inc/head.html -css inc/learninggo.css learninggo.md > learninggo.html
 
+.PHONY: learninggo.xml
+learninggo.xml:
+	$(MMARK) learninggo.md > learninggo.xml
+
 .PHONY: ast
 ast:
 	$(MMARK) -ast learninggo.md
