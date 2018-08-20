@@ -54,7 +54,6 @@ to a slice of `byte`s. Putting this together leads to the following program.
 4. Reversing a string can be done as follows. We start from the left (`i`) and
 the right (`j`) and swap the characters as we see them:
 
-{callout="//"}
 <{{stringrev.go}}
 
 At <<1>> we have a conversion.

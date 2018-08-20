@@ -168,7 +168,6 @@ s[0] = 'c'
 
 To do this in Go you will need the following:
 
-{callout="//"}
 ~~~go
 s := "hello"
 c := []rune(s)	    //<<1>>
@@ -338,7 +337,6 @@ Note that the variable `i` ceases to exist after the loop.
 With `break` (!keywords, break) you can quit loops early.  By itself, `break`
 breaks the current loop.
 
-{callout="//"}
 ~~~go
 for i := 0; i < 10; i++ {
     if i > 5 {
@@ -353,7 +351,6 @@ Here we `break` the current loop <<1>>, and don't continue with the
 you can specify a label after `break` to identify *which* loop to stop:
 
 
-{callout="//"}
 ~~~go
 J:  for j := 0; j < 5; j++ { //<<1>>
         for i := 0; i < 10; i++ {
@@ -446,7 +443,6 @@ to "F".
 There is no automatic fall through, you can use `fallthrough` (!keywords,
 fallthrough) for that.
 
-{callout="//"}
 ~~~go
 switch i {
     case 0:  fallthrough
@@ -460,7 +456,6 @@ switch i {
 can specify an action when none of the other cases match. Here `g()` is called
 when `i` is not 0 or 1 <<2>>. We could rewrite the above example as:
 
-{callout="//"}
 ~~~go
 switch i {
     case 0, 1: //<<1>>

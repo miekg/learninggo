@@ -340,7 +340,6 @@ Recover
 This function checks if the function it gets as argument will panic when it is
 executed^[Modified from a presentation of Eleanor McHugh.]:
 
-{callout="//"}
 ~~~go
 func Panic(f func()) (b bool) { //<<1>>
     defer func() { //<<2>>

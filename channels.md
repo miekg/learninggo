@@ -75,7 +75,6 @@ i := <-ci // *Receive* from the channel ci and store it in i.
 
 Let's put this to use.
 
-{callout="//"}
 ~~~go
 var c chan int //<<1>>
 

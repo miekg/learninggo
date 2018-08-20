@@ -19,7 +19,6 @@
 1. Define a new function that returns a function: `return func(x int) int { return x + 2 }`
 Function literals at work, we define the +2--function right there in the return statement.
 
-	{callout="//"}
 	~~~go
 	func main() {
 	   p2 := plusTwo()

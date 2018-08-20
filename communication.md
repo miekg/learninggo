@@ -51,7 +51,6 @@ you want to read a file on a line-by-line basis. The following snippet shows a w
 to do just that (we're discarding the error returned from `os.Open` here to keep
 the examples smaller -- don't ever do this in real life code).
 
-{callout="//"}
 ~~~go
 f, _ := os.Open("/etc/passwd"); defer f.Close()
 r := bufio.NewReader(f) //<<1>>
@@ -90,7 +89,6 @@ slice `os.Args`, provided you have imported the package `os`. The `flag` package
 has a more sophisticated interface, and also provides a way to parse flags. Take
 this example from a DNS query tool:
 
-{callout="//"}
 ~~~go
 dnssec := flag.Bool("dnssec", false, "Request DNSSEC records") //<<1>>
 port := flag.String("port", "53", "Set the query port") //<<2>>
