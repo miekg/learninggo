@@ -46,6 +46,7 @@
    to this label.
 
 3. The following is one possible solution:
+
     <{{src/for-arr.go}}
 
     Here <<1>> we create an array with 10 elements.

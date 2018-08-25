@@ -1,13 +1,18 @@
 %%%
 Title = "Learning Go"
 abbrev = "Learning Go"
-category = "std"
-docName = ""
-ipr= "trust200902"
-date = 2015-01-07T00:00:00Z
+ipr= "*trust200902"
 area = "Application"
-workgroup = "Go"
+workgroup = "Go Working Group"
 keyword = ["Go", "Language", "Computer"]
+
+date = 2018-08-25T00:00:00Z
+
+[seriesInfo]
+name = "Internet-Draft"
+value = "draft-learning-go-00"
+stream = "IETF"
+status = "informational"
 
 [[author]]
 initials = "R."
@@ -17,14 +22,16 @@ fullname = "R. (Miek) Gieben"
   email = "miek@miek.nl"
 %%%
 
-.# Preface
+{mainmatter}
+
+
+# Preface
 {{preface.md}}
 
-{mainmatter}
 
 {.title}
 # Learning Go
-<!-- this .title does not work -->
+<!-- this .title does not work, sets attribute on <p> -->
 {.title}
 ![](fig/bumper-inverse.png)
 

@@ -22,6 +22,7 @@ child processes each parent has spawned. The output should look like:
   your way up.
 
 Here is a Perl version to help you on your way (or to create complete and utter confusion).
+
 <{{src/proc.pl}}
 
 ### Answer
@@ -39,4 +40,5 @@ indexed with integers, pointing to a slice of ints -- which holds the PIDs. The
 builtin `append` is used to grow the integer slice.
 
 A possible program is:
+
 <{{src/proc.go}}
