@@ -50,8 +50,8 @@ because we are trying to use a
 
     myeven.go: cannot refer to unexported name even.odd
 
-Note that the "starts with capital $$\rightarrow$$ exported", "starts with
-lower\-case $$\rightarrow$$ private" rule also extends to other names (new
+Note that the "starts with capital $\rightarrow$ exported", "starts with
+lower\-case $\rightarrow$ private" rule also extends to other names (new
 types, global variables) defined in the package. Note that the term "capital" is
 not limited to US-ASCII -- it extends to all bicameral alphabets (Latin, Greek,
 Cyrillic, Armenian and Coptic).
@@ -252,15 +252,9 @@ a mention: ^[The descriptions are copied from the packages' `go doc`.]
     to C's `printf` and `scanf`. The format verbs are derived
     from C's but are simpler. Some verbs (%-sequences) that can be used:
 
-
-    %v
-    :   The value in a default format. when printing structs, the plus flag (%+v) adds field names.
-
-    %#v
-    :   a Go-syntax representation of the value.
-
-    %T
-    :   a Go-syntax representation of the type of the value.
+    * *%v*, the value in a default format. when printing structs, the plus flag (%+v) adds field names.
+    * *%#v*, a Go-syntax representation of the value.
+    * *%T*, a Go-syntax representation of the type of the value.
 
 `io`
 :   (!package, io)

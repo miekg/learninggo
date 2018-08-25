@@ -192,9 +192,9 @@ get the actual characters you should use the `rune` type.
 ### Complex Numbers
 Go has native support for complex numbers. To use them you need a variable of
 type `complex128` (64 bit real and imaginary parts) or `complex64` (32 bit real
-and imaginary parts). Complex numbers are written as `re + im`$$i$$, where `re`
-is the real part, `im` is the imaginary part and $$i$$ is the literal '$$i$$'
-($$\sqrt{-1}$$).
+and imaginary parts). Complex numbers are written as `re + im`$i$, where `re`
+is the real part, `im` is the imaginary part and $i$ is the literal '$i$'
+($\sqrt{-1}$).
 
 
 ### Errors
@@ -531,7 +531,7 @@ a `map` in Go.
 
 
 ### Arrays
-An array is defined by: `[n]<type>`, where $$n$$ is the length of the array and
+An array is defined by: `[n]<type>`, where $n$ is the length of the array and
 `<type>` is the stuff you want to store. To assign or index an element in the
 array, you use square brackets:
 
@@ -583,7 +583,7 @@ create a slice which can hold ten elements. Note that the underlying array isn't
 specified. A slice is always coupled to an array that has a fixed size. For
 slices we define a capacity (!slice,capacity) and a length
 (!slice,length) (#fig-array-vs-slice) shows the creation of an array,
-then the creation of a slice. First we create an array of $$m$$ elements of the
+then the creation of a slice. First we create an array of $m$ elements of the
 type `int`: `var array[m]int` .
 
 Next, we create a slice from this array: `slice := array[:n]` . And now we have:

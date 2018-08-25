@@ -386,7 +386,7 @@ dereferenced the pointer and are "inside" our structure. We then <<4>> use
 `Field(0)` to access the zeroth field.
 
 The struct `StructField` has a `Tag` member which returns the tag-name as
-a string. So on the $$0^{th}$$ field we can unleash `.Tag` <<5>> to access this
+a string. So on the $0^{th}$ field we can unleash `.Tag` <<5>> to access this
 name: `Field(0).Tag`. This gives us `namestr`.
 
 To make the difference between types and values more clear, take a look at the
