@@ -12,7 +12,7 @@ learninggo.xml:
 
 .PHONY: learninggo.txt
 learninggo.txt: learninggo.xml
-	xml2rfc -n --v3 learninggo.xml
+	xml2rfc --v3 learninggo.xml
 
 .PHONY: ast
 ast:
