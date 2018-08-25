@@ -14,6 +14,14 @@ learninggo.xml:
 learninggo.txt: learninggo.xml
 	xml2rfc --v3 learninggo.xml
 
+.PHONY: learninggo-2.xml
+learninggo-2.xml:
+	$(MMARK) -2 learninggo.md > learninggo-2.xml
+
+.PHONY: learninggo-2.txt
+learninggo-2.txt: learninggo-2.xml
+	xml2rfc learninggo-2.xml
+
 .PHONY: ast
 ast:
 	$(MMARK) -ast learninggo.md

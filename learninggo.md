@@ -1,7 +1,7 @@
 %%%
 Title = "Learning Go"
 abbrev = "Learning Go"
-ipr= "*trust200902"
+ipr= "trust200902"
 area = "Application"
 workgroup = "Go Working Group"
 keyword = ["Go", "Language", "Computer"]

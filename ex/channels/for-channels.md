@@ -1,7 +1,7 @@
 {.exercise data-difficulty="1"}
 ### Channels
 
-1. Modify the program you created in exercise (#forloop) to use
+1. Modify the program you created in exercise (#for-loop) to use
    channels, in other words, the function called in the body should now be
    a goroutine and communication should happen via channels. You should not
    worry yourself on how the goroutine terminates.
