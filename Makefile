@@ -10,6 +10,10 @@ learninggo.html:
 learninggo.xml:
 	$(MMARK) learninggo.md > learninggo.xml
 
+.PHONY: learninggo.txt
+learninggo.txt: learninggo.xml
+	xml2rfc --v3 learninggo.xml
+
 .PHONY: ast
 ast:
 	$(MMARK) -ast learninggo.md
