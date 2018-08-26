@@ -7,7 +7,7 @@ each member in the list and a new list containing
 these calculated values is returned.
 Thus:
 
-$$ \mathrm{map}(f(), (a_1,a_2,\ldots,a_{n-1},a_n)) =  (f(a_1), f(a_2),\ldots,f(a_{n-1}), f(a_n)) $$
+$ \mathrm{map}(f(), (a_1,a_2,\ldots,a_{n-1},a_n)) =  (f(a_1), f(a_2),\ldots,f(a_{n-1}), f(a_n)) $
 
 1.  Write a simple
 `map()`-function in Go. It is sufficient for this function only to work for ints.

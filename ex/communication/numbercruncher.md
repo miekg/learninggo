@@ -2,17 +2,17 @@
 ### Number cruncher
 
 
-* Pick six (6) random numbers from this list: $$1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-  25, 50, 75, 100$$ Numbers may be picked multiple times.
-* Pick one (1) random number ($$i$$) in the range: $$1 \ldots 1000$$.
+* Pick six (6) random numbers from this list: $1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+  25, 50, 75, 100$ Numbers may be picked multiple times.
+* Pick one (1) random number ($i$) in the range: $1 \ldots 1000$.
 * Tell how, by combining the first 6 numbers (or a subset thereof)
-with the operators `+,-,*` and `/`, you can make $$i$$.
+with the operators `+,-,*` and `/`, you can make $i$.
 
-An example. We have picked the numbers: 1, 6, 7, 8, 8 and 75. And $$i$$ is
+An example. We have picked the numbers: 1, 6, 7, 8, 8 and 75. And $i$ is
 977. This can be done in many different ways, one way is:
-$$ ((((1 * 6) * 8) + 75) * 8) - 7 = 977$$
+$ ((((1 * 6) * 8) + 75) * 8) - 7 = 977$
 or
-$$ (8*(75+(8*6)))-(7/1) = 977$$
+$ (8*(75+(8*6)))-(7/1) = 977$
 
 Implement a number cruncher that works like that. Make it print the solution in
 a similar format (i.e. output should be infix with parenthesis) as used above.

@@ -24,7 +24,7 @@ It also gives an example in pseudo code:
 
 ### Answer
 
-1.  Bubble sort isn't terribly efficient. For $$n$$ elements it scales $$O(n^2)$$.
+1.  Bubble sort isn't terribly efficient. For $n$ elements it scales $O(n^2)$.
     But bubble sort is easy to implement:
 
     <{{src/bubblesort.go}}[4,18]
