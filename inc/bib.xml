@@ -265,7 +265,7 @@
   <format type="HTML" target="http://en.wikipedia.org/wiki/Iota" />
 </reference>
 
-<reference anchor="cite_fizzbuzz">
+<reference anchor="fizzbuzz">
   <front>
     <title>Using fizzbuzz to find developers...</title>
     <author fullname="Imran On Tech" initials="I. O." surname="Tech" />
@@ -341,33 +341,6 @@
     <date year="2011" />
   </front>
   <format type="HTML" target="http://blog.golang.org/2011/06/profiling-go-programs.html" />
-</reference>
-
-<reference anchor="RFC1196">
-  <front>
-    <title>The finger user information protocol</title>
-    <author fullname="D. Zimmerman" initials="D." surname="Zimmerman" />
-    <date year="1990" />
-  </front>
-  <format type="TXT" target="http://www.ietf.org/rfc/rfc1196.txt" />
-</reference>
-
-<reference anchor="RFC4627">
-  <front>
-    <title>The application/json media type for javascript object notation (json)</title>
-    <author fullname="D. Crockford" initials="D." surname="Crockford" />
-    <date year="2006" />
-  </front>
-  <format type="TXT" target="http://www.ietf.org/rfc/rfc4627.txt" />
-</reference>
-
-<reference anchor="RFC4641">
-  <front>
-    <title>Dnssec operational practices</title>
-    <author fullname="Kolkman &amp; Gieben" initials="K. &amp;." surname="Gieben" />
-    <date year="2006" />
-  </front>
-  <format type="TXT" target="http://www.ietf.org/rfc/rfc4641.txt" />
 </reference>
 
 <reference anchor="go_1_5_release_notes">
