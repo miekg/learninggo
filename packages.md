@@ -3,7 +3,7 @@
 
 Quote: Answer to whether there is a bit wise negation operator -- Ken Thompson
 
-A package is a collection of functions and data.
+A package (!package) is a collection of functions and data.
 
 You declare a package with the `package`(!keywords, package) keyword. The
 filename does not have to match the package name. The convention for package
