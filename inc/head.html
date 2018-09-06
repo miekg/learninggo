@@ -44,10 +44,6 @@
     function references(){
       $("a:empty, [href^='#']").each(
         function(){
-          // Skip <cite>
-          if $(this).parent().is("cite") {
-              return
-          }
           var xid = $(this).attr("href");
           // Split out the different things we can reference.
           if ($(xid).is("table")) {
@@ -56,6 +52,9 @@
           }
           if ($(xid).is("figure")) {
               $(this).append("Figure " + ($("figure").index($(xid)) + 1));
+              return;
+          }
+          if ($(xid).is(".bibliography-item")) {
               return;
           }
           var val = $(xid).text();

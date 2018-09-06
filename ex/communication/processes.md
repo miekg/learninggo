@@ -30,7 +30,7 @@ Here is a Perl version to help you on your way (or to create complete and utter 
  There is lots of stuff to do here. We can divide our program
 up in the following sections:
 
-* Starting \verb|ps| and capturing the output.
+* Starting `ps` and capturing the output.
 * Parsing the output and saving the child PIDs for each PPID.
 * Sorting the PPID list.
 * Printing the sorted list to the screen.
