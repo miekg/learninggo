@@ -124,7 +124,7 @@ cite {
 
 .closed:before {
     content: "▷ ";
-    color: #0000EE;
+    color: #000000;
     margin-right: 6px;
 }
 
