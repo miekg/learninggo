@@ -582,7 +582,7 @@ passing a pointer to the underlying array. With: `slice := make([]int, 10)`, you
 create a slice which can hold ten elements. Note that the underlying array isn't
 specified. A slice is always coupled to an array that has a fixed size. For
 slices we define a capacity (!slice,capacity) and a length
-(!slice,length) (#fig-array-vs-slice) shows the creation of an array,
+(!slice,length) The image below shows the creation of an array,
 then the creation of a slice. First we create an array of $m$ elements of the
 type `int`: `var array[m]int` .
 
@@ -592,7 +592,6 @@ Next, we create a slice from this array: `slice := array[:n]` . And now we have:
 * `cap(slice) == m`
 * `len(array) == cap(array) == m`
 
-{#fig-array-vs-slice}
 ![Array versus slice](fig/array-vs-slice.png "An array versus a slice.")
 
 Given an array, or another slice, a new slice is created via `a[n:m]`. This
