@@ -413,8 +413,11 @@ members and we employ `Elem()` on `v` to do the redirection. we have "arrived"
 at the structure. Then we go to the first field `Field(0)` and invoke the
 `String()` method on it.
 
-![Peeling away the layers using reflection.](fig/reflection.png "Peeling away the layers using reflection.
-Going from a `*Person` via `Elem` using the methods described in `go doc reflect` to get the actual `string` contained within.")
+!---
+![Peeling away the layers using reflection.](fig/reflection.png)
+!---
+Figure: Peeling away the layers using reflection. Going from a `*Person` via `Elem` using the
+methods described in `go doc reflect` to get the actual `string` contained within.")
 
 Setting a value works similarly as getting a value, but only works on
 *exported* members. Again some code:
