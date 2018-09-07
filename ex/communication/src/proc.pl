@@ -6,7 +6,7 @@ foreach (@ps[1..$#ps]) {	  # discard the header line
   push @{$child{$parent}}, $pid;  # save the child PIDs on a list
 }
 # Walk through the sorted PPIDs
-foreach (sort { $a <=> $b } keys %child) {  
+foreach (sort { $a <=> $b } keys %child) {
   print "Pid ", $_, " has ", @{$child{$_}}+0, " child",
     @{$child{$_}} == 1 ? ": " : "ren: ", "[@{$child{$_}}]";
 }

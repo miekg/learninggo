@@ -1,9 +1,8 @@
 {.exercise data-difficulty="1"}
 ### Pointers and reflection
 
-One of the last paragraphs in section "\titleref{sec:introspection and reflection}"
-on page \pageref{sec:introspection and reflection}, has
-the following words:
+One of the last paragraphs in section (#introspection-and-reflection)
+has the following words:
 
 > The code on the right works OK and sets the member `Name`
 > to "Albert Einstein". Of course this only works when you call `Set()`

@@ -1,24 +1,25 @@
 {.epigraph}
 > "^"
+
 Quote: Answer to whether there is a bit wise negation operator -- Ken Thompson
 
-A package is a collection of functions and data.
+A package (!package) is a collection of functions and data.
 
-You declare a package with the `package`(((keywords, package))) keyword. The
+You declare a package with the `package`(!keywords, package) keyword. The
 filename does not have to match the package name. The convention for package
 names is to use lowercase characters. Go packages may consist of multiple files,
 but they share the `package <name>` line. Let's define a package `even` in the
 file `even.go`.
 
-(((functions, exported)))
-(((functions, private)))
-(((functions, public)))
-{callout="//"}
+(!functions, exported)
+(!functions, private)
+(!functions, public)
+
 <{{src/packages/even.go}}
 
-Here <1> we start a new namespace: "even". The function `Even` <2> starts with
+Here <<1>> we start a new namespace: "even". The function `Even` <<2>> starts with
 a capital letter. This means the function is *exported*, and may be used outside
-our package (more on that later). The function `odd` <3> does not start with
+our package (more on that later). The function `odd` <<3>> does not start with
 a capital letter, so it is a *private* function.
 
 Now we just need to build the package. We create a directory under `$GOPATH`,
@@ -31,11 +32,10 @@ and copy `even.go` there (see (#compiling-and-running-code) in (#basics)).
 
 Now we can use the package in our own program `myeven.go`:
 
-{callout="//"}
 <{{src/packages/myeven.go}}
 
-Import <1> the following packages. The *local* package `even` is imported here
-<2>. This <3> imports the official `fmt` package. And now we use <4> the
+Import <<1>> the following packages. The *local* package `even` is imported here
+<<2>>. This <<3>> imports the official `fmt` package. And now we use <<4>> the
 function from the `even` package. The syntax for accessing a function from
 a package is `<package>.FunctionName()`. And finally we can build our program.
 
@@ -43,15 +43,15 @@ a package is `<package>.FunctionName()`. And finally we can build our program.
     % ./myeven
     Is 5 even? false
 
-If we change our `myeven.go` at <4> to use the unexported function `even.odd`:
+If we change our `myeven.go` at <<4>> to use the unexported function `even.odd`:
 `fmt.Printf("Is %d even? %v\n", i, even.odd(i))` We get an error when compiling,
 because we are trying to use a
 *private* function:
 
     myeven.go: cannot refer to unexported name even.odd
 
-Note that the "starts with capital $$\rightarrow$$ exported", "starts with
-lower\-case $$\rightarrow$$ private" rule also extends to other names (new
+Note that the "starts with capital $\rightarrow$ exported", "starts with
+lower\-case $\rightarrow$ private" rule also extends to other names (new
 types, global variables) defined in the package. Note that the term "capital" is
 not limited to US-ASCII -- it extends to all bicameral alphabets (Latin, Greek,
 Cyrillic, Armenian and Coptic).
@@ -66,8 +66,8 @@ to work with: `ReadFile`, `NewWriter`, `MakeSlice`. The convention in Go is to
 use CamelCase rather than underscores to write multi-word names.
 
 As we did above in our `myeven` program, accessing content from an imported
-(with `import` (((keywords, import)))) package is done with using the package's
-name and then a dot.  After (((package, bytes))) `import "bytes"` the importing
+(with `import` (!keywords, import)) package is done with using the package's
+name and then a dot.  After (!package, bytes) `import "bytes"` the importing
 program can talk about `bytes.Buffer`. A package name should be good, short,
 concise and evocative. The convention in Go is that package names are lowercase,
 single word names.
@@ -82,14 +82,14 @@ directory; the package in `src/compress/gzip` is imported as `compress/gzip` but
 has name `gzip`, not `compress/gzip`.
 
 It is important to avoid stuttering when naming things. For instance, the
-buffered reader type in the `bufio` (((package, bufio))) package is called
+buffered reader type in the `bufio` (!package, bufio) package is called
 `Reader`, not `BufReader`, because users see it as `bufio.Reader`, which is
 a clear, concise name.
 
 Similarly, the function to make new instances of `ring.Ring` (package
 `container/ring`), would normally be called `NewRing`, but since `Ring` is the
 only type exported by the package, and since the package is called
-`ring`(((package, ring))), it's called just `New`. Clients of the package see
+`ring`(!package, ring), it's called just `New`. Clients of the package see
 that as `ring.New`. Use the package structure to help you choose good names.
 
 Another short example is `once.Do` (see package `sync`); `once.Do(setup)` reads
@@ -147,7 +147,7 @@ func odd(i int) bool {
 
 ## Testing packages
 In Go it is customary to write (unit) tests for your package. Writing tests
-involves the `testing` package and the program `go test`(((tooling, go test))).
+involves the `testing` package and the program `go test`(!tooling, go test).
 Both have excellent documentation.
 
 The `go test` program runs all the test functions. Without any defined tests for
@@ -185,12 +185,11 @@ functions. These are the most important ones (see `go doc testing` or `go help t
 Putting all this together we can write our test. First we pick a name:
 `even_test.go`. Then we add the following contents:
 
-{callout="//"}
 <{{src/packages/even_test.go}}
 
-A test file belongs to the current <1> package. This is not only convenient, but
-also allows tests of unexported functions and structures. We then <2> import the
-`testing` package. And finally the test we want to execute. The code here <3>
+A test file belongs to the current <<1>> package. This is not only convenient, but
+also allows tests of unexported functions and structures. We then <<2>> import the
+`testing` package. And finally the test we want to execute. The code here <<3>>
 should hold no surprises: we check if the `Even` function works OK. And now, the
 moment we have been waiting for executing the test.
 
@@ -226,18 +225,17 @@ shows that you really put in the effort.
 The Go test suite also allows you to incorporate example functions which serve
 as documentation *and* as tests. These functions need to start with `Example`.
 
-{callout="//"}
 ~~~go
 func ExampleEven() {
     if Even(2) {
         fmt.Printf("Is even\n")
     }
-    // Output: //<1>
+    // Output: //<<1>>
     // Is even
 }
 ~~~
 
-Those last two comments lines <1> are part of the example, `go test` uses those
+Those last two comments lines <<1>> are part of the example, `go test` uses those
 to check the *generated* output with the text in the comments. If there is
 a mismatch the test fails.
 
@@ -249,30 +247,24 @@ packages. We cannot comment on each package, but the following are worth
 a mention: ^[The descriptions are copied from the packages' `go doc`.]
 
 `fmt`
-:   (((package, fmt)))
+:   (!package, fmt)
     Package `fmt` implements formatted I/O with functions analogous
     to C's `printf` and `scanf`. The format verbs are derived
     from C's but are simpler. Some verbs (%-sequences) that can be used:
 
-
-    %v
-    :   The value in a default format. when printing structs, the plus flag (%+v) adds field names.
-
-    %#v
-    :   a Go-syntax representation of the value.
-
-    %T
-    :   a Go-syntax representation of the type of the value.
+    * *%v*, the value in a default format. when printing structs, the plus flag (%+v) adds field names.
+    * *%#v*, a Go-syntax representation of the value.
+    * *%T*, a Go-syntax representation of the type of the value.
 
 `io`
-:   (((package, io)))
+:   (!package, io)
     This package provides basic interfaces to I/O primitives.
     Its primary job is to wrap existing implementations of such primitives,
     such as those in package os, into shared public interfaces that
     abstract the functionality, plus some other related primitives.
 
 `bufio`
-:   (((package, bufio)))
+:   (!package, bufio)
     This package implements buffered I/O.  It wraps an
     `io.Reader`
     or
@@ -281,36 +273,36 @@ a mention: ^[The descriptions are copied from the packages' `go doc`.]
     the interface but provides buffering and some help for textual I/O.
 
 `sort`
-:   (((package, sort)))
+:   (!package, sort)
     The `sort` package provides primitives for sorting arrays
     and user-defined collections.
 
 `strconv`
-:   (((package, strconv)))
+:   (!package, strconv)
     The `strconv` package implements conversions to and from
     string representations of basic data types.
 
 `os`
-:   (((package, os)))
+:   (!package, os)
     The `os` package provides a platform-independent interface to operating
     system functionality.  The design is Unix-like.
 
 `sync`
-:   (((package, sync)))
+:   (!package, sync)
     The package `sync` provides basic synchronization primitives such as mutual
     exclusion locks.
 
 `flag`
-:   (((package, flag)))
+:   (!package, flag)
     The `flag` package implements command-line flag parsing.
 
 `encoding/json`
-:   (((package, encoding/json)))
+:   (!package, encoding/json)
     The `encoding/json` package implements encoding and decoding of JSON objects as
     defined in RFC 4627 [@RFC4627].
 
 `html/template`
-:   (((package, html/template)))
+:   (!package, html/template)
     Data-driven templates for generating textual output such as HTML.
 
     Templates are executed by applying them to a data structure.  Annotations in
@@ -320,19 +312,19 @@ a mention: ^[The descriptions are copied from the packages' `go doc`.]
     @ represents the value at the current location in the structure.
 
 `net/http`
-:   (((package, net/http)))
+:   (!package, net/http)
     The `net/http` package implements parsing of HTTP requests, replies,
     and URLs and provides an extensible HTTP server and a basic
     HTTP client.
 
 `unsafe`
-:   (((package, unsafe)))
+:   (!package, unsafe)
     The `unsafe` package contains operations that step around the type safety of Go programs.
     Normally you don't need this package, but it is worth mentioning that *unsafe* Go programs
     are possible.
 
 `reflect`
-:   (((package, reflect)))
+:   (!package, reflect)
     The `reflect` package implements run-time reflection, allowing a program to
     manipulate objects with arbitrary types.  The typical use is to take a
     value with static type `interface{}` and extract its dynamic type
@@ -340,7 +332,7 @@ a mention: ^[The descriptions are copied from the packages' `go doc`.]
     type `Type`. See (#interfaces), Section (#introspection-and-reflection).
 
 `os/exec`
-:   (((package, os/exec))) The `os/exec` package runs external commands.
+:   (!package, os/exec) The `os/exec` package runs external commands.
 
 
 ## Exercises

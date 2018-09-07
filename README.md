@@ -1,15 +1,17 @@
 # Learning Go
 
 This is the "Learning Go" book in mmark markdown. It is translated
-to HTML with [mmark](https://github.com/miekg/mmark).
+to HTML with [mmark](https://github.com/mmarkdown/mmark).
 
-After some post processing [the end result, can be found here](http://miek.nl/go/learninggo.html).
+After some post processing (with some javascript) [the end result, can be found
+here](http://miek.nl/go/learninggo.html).
 
-## To Build YourSelf
+## To Build
 
-* Download or `go get` [mmark](https://github.com/miekg/mmark).
-* `cd mmark/mmark`
-* `go install`
+* Download or `go get` [mmark](https://github.com/mmarkdown/mmark).
+* `cd <repo-of-mmark>`
+* `go build`
+* `go install` - optional
 
 And then just `make` in this repository.
 

@@ -1,4 +1,4 @@
-&nbsp;   | &nbsp;   | &nbsp;    | &nbsp;
+ \       | \        | \         | \     
 ---------|----------|-----------|-------
 `close`  | `new`    | `panic`   | `complex`
 `delete` | `make`   | `recover` | `real`

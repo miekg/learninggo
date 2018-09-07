@@ -7,4 +7,5 @@
 {.answer}
 ### Answer
 1. 
-  <{{ex/beyond/src/map.go}}
+
+  <{{src/map.go}}

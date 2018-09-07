@@ -6,6 +6,6 @@
 
 ### Answer
 1.  For this we need the `{...}`-syntax to signal we define a
-    function that takes an arbitrary number of arguments. 
+    function that takes an arbitrary number of arguments.
 
-    <{{ex/functions/src/var-arg.go}}
+    <{{src/var-arg.go}}

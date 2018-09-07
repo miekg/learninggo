@@ -75,7 +75,7 @@ h1 {
     padding-top: 1em;
 }
 
-blockquote.epigraph {
+figure > blockquote.epigraph {
     text-align: right;
     border-left: none;
     padding-bottom: 2em;
@@ -86,62 +86,19 @@ blockquote.epigraph {
     text-align: right;
 }
 
-.epigraph footer {
-    font-style: italic;
+figure > blockquote.epigraph + figcaption {
+    font-variant: small-caps;
     text-align: right;
 }
 
-.epigraph hr {
-    margin-left: 50%;
-    width: 50%;
-}
-
 .epigraph > ul {
-    /* bullets are misplaced, remove them all together,
-     * looks nicer too
-     */
+    /* bullets are misplaced, remove them all together, looks nicer too */
     list-style-type: none;
     text-align: right;
 }
 
 .epigraph > ul > li {
     text-align: right;
-}
-
-.epigraph footer span.quote-who {
-    font-style: normal;
-    font-variant: small-caps;
-}
-
-.epigraph footer span.quote-who::before {
-    content: "\a";
-    white-space: pre;
-}
-
-span.index-ref-secondary::before {
-    content: "\a    ";
-    white-space: pre;
-}
-
-span.index-ref-secondary {
-    padding-left: 2em;
-}
-
-span.index-ref-primary {
-    position: relative;
-    left: -0.5em;
-    font-style: italic;
-}
-
-span.index-ref-primary::before {
-    content: "\a    ";
-    white-space: pre;
-}
-
-h3.index-ref-char {
-    padding-top: 1em;
-    padding-bottom: 0;
-    margin-bottom: 0;
 }
 
 span.callout {
@@ -157,7 +114,7 @@ span.callout {
     color: white;
 }
 
-a.cite {
+cite {
     font-size: 75%;
     line-height: 0;
     position: relative;
@@ -165,19 +122,9 @@ a.cite {
     top: -0.5em;
 }
 
-ol.bibliography {
-    counter-reset: cite;
-    list-style-type: none;
-}
-
-li.bibliography:before {
-    content: "[" counter(cite) "] ";
-    counter-increment: cite;
-}
-
 .closed:before {
     content: "▷ ";
-    color: #0000EE;
+    color: #000000;
     margin-right: 6px;
 }
 

@@ -4,23 +4,23 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"io" //<1>
+	"io" //<<1>>
 	"os"
 )
 
-var numberFlag = flag.Bool("n", false, "number each line") // <2>
+var numberFlag = flag.Bool("n", false, "number each line") // <<2>>
 
-func cat(r *bufio.Reader) { //<3>
+func cat(r *bufio.Reader) { //<<3>>
 	i := 1
 	for {
-		buf, e := r.ReadBytes('\n') //<4>
-		if e == io.EOF {            //<5>
+		buf, e := r.ReadBytes('\n') //<<4>>
+		if e == io.EOF {            //<<5>>
 			break
 		}
-		if *numberFlag { //<6>
+		if *numberFlag { //<<6>>
 			fmt.Fprintf(os.Stdout, "%5d  %s", i, buf)
 			i++
-		} else { //<7>
+		} else { //<<7>>
 			fmt.Fprintf(os.Stdout, "%s", buf)
 		}
 	}

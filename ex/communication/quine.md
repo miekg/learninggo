@@ -1,4 +1,4 @@
-{.exercise difficulty="2"}
+{.exercise data-difficulty="2"}
 ### Quine
 A *Quine* is a program that prints itself. Write a Quine in Go.
 

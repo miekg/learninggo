@@ -3,7 +3,7 @@
 
 Write a simple echo server. Make it listen to TCP port number 8053 on localhost.
 It should be able to read a line (up to the newline), echo back that line and
-then close the connection. 
+then close the connection.
 
 Make the server concurrent so that every request is taken care of in a separate
 goroutine.
@@ -11,7 +11,8 @@ goroutine.
 ### Answer
 
 A simple echo server might be:
-<{{ex/communication/src/echo.go}}
+
+<{{src/echo.go}}
 
 When started you should see the following:
 

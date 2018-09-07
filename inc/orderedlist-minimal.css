@@ -1,13 +1,8 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400italic,700italic,400,700);
-
 body {
   padding:50px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color:#222;
-  font-weight:400;
+  font:14px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color:black;
+  font-weight:300;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -64,6 +59,14 @@ blockquote {
   border-left:1px solid #e5e5e5;
   margin:0;
   padding:0 0 0 20px;
+  font-style:italic;
+}
+
+aside {
+  border-top:1px solid #e5e5e5;
+  border-bottom:1px solid #e5e5e5;
+  margin:20px 0 20px 0px;
+  padding:20px 0 0 20px;
   font-style:italic;
 }
 
@@ -198,11 +201,13 @@ header ul a strong {
   color:#222;
 }
 
+/* Removed to keep some sanity; mmark2 outputs sectionsin the HTML5 output.
 section {
   width:500px;
   float:right;
   padding-bottom:50px;
 }
+*/
 
 small {
   font-size:11px;

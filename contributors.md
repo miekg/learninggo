@@ -44,6 +44,6 @@ Sonia Keys,
 Stefan Schroeder,
 Thomas Kapplet,
 T.J. Yang,
-Uriel$$\dagger$$,
+Uriel$\dagger$,
 Vrai Stacey,
 Xing Xing.

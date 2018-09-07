@@ -6,7 +6,10 @@ Define `push` -- put something on the stack -- and `pop`
 -- retrieve something from the stack -- functions. The stack should be
 a LIFO (last in, first out) stack.
 
-![A stack](fig/stack.png "A stack.")
+!---
+![A stack](fig/stack.png)
+!---
+Figure: A stack.
 
 2. Write a `String` method which
 converts the stack to a string representation. 

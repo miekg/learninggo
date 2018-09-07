@@ -1,13 +1,13 @@
 package main
 
 import (
-	"errors" //<1>
+	"errors" //<<1>>
 	"fmt"
 )
 
-type Value int //<2>
+type Value int //<<2>>
 
-type Node struct { //<3>
+type Node struct { //<<3>>
 	Value
 	prev, next *Node
 }
@@ -16,7 +16,7 @@ type List struct {
 	head, tail *Node
 }
 
-func (l *List) Front() *Node { //<4>
+func (l *List) Front() *Node { //<<4>>
 	return l.head
 }
 
@@ -25,15 +25,15 @@ func (n *Node) Next() *Node {
 }
 
 func (l *List) Push(v Value) *List {
-	n := &Node{Value: v} //<5>
+	n := &Node{Value: v} //<<5>>
 
-	if l.head == nil { //<6>
+	if l.head == nil { //<<6>>
 		l.head = n
 	} else {
-		l.tail.next = n //<7>
-		n.prev = l.tail //<8>
+		l.tail.next = n //<<7>>
+		n.prev = l.tail //<<8>>
 	}
-	l.tail = n //<9>
+	l.tail = n //<<9>>
 
 	return l
 }
@@ -41,13 +41,13 @@ func (l *List) Push(v Value) *List {
 var errEmpty = errors.New("List is empty")
 
 func (l *List) Pop() (v Value, err error) {
-	if l.tail == nil { //<10>
+	if l.tail == nil { //<<10>>
 		err = errEmpty
 	} else {
-		v = l.tail.Value     //<11>
-		l.tail = l.tail.prev //<12>
+		v = l.tail.Value     //<<11>>
+		l.tail = l.tail.prev //<<12>>
 		if l.tail == nil {
-			l.head = nil //<13>
+			l.head = nil //<<13>>
 		}
 	}
 

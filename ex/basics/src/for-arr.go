@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 func main() {
-	var arr [10]int //<1>
+	var arr [10]int //<<1>>
 	for i := 0; i < 10; i++ {
-		arr[i] = i //<2>
+		arr[i] = i //<<2>>
 	}
-	fmt.Printf("%v", arr) //<3>
+	fmt.Printf("%v", arr) //<<3>>
 }

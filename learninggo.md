@@ -1,34 +1,40 @@
-% Title = "Learning Go"
-% abbrev = "Learning Go"
-% category = "std"
-% docName = ""
-% ipr= "trust200902"
-% date = 2015-01-07T00:00:00Z
-% area = "Application"
-% workgroup = "Go"
-% keyword = ["Go", "Language", "Computer"]
-%
-% [pi]
-% private = "yes"
-% footer = "" # Don't have the Expires ...
-% header = "Golang"
-%
-% [[author]]
-% initials = "R."
-% surname  = "Gieben"
-% fullname = "R. (Miek) Gieben"
-%   [author.address]
-%   email = "miek@miek.nl"
+%%%
+Title = "Learning Go"
+abbrev = "Learning Go"
+ipr= "trust200902"
+area = "Application"
+workgroup = "Go Working Group"
+keyword = ["Go", "Language", "Computer"]
 
-.# Preface
-{{preface.md}}
+date = 2018-08-25T00:00:00Z
+
+[seriesInfo]
+name = "Internet-Draft"
+value = "draft-learning-go-00"
+stream = "IETF"
+status = "informational"
+
+[[author]]
+initials = "R."
+surname  = "Gieben"
+fullname = "R. (Miek) Gieben"
+  [author.address]
+  email = "miek@miek.nl"
+%%%
 
 {mainmatter}
+
+
+# Preface
+{{preface.md}}
+
 
 {.title}
 # Learning Go
 {.title}
+!---
 ![](fig/bumper-inverse.png)
+!---
 
 
 # Introduction
@@ -64,6 +70,4 @@
 
 
 {{inc/bib.xml}}
-
-
 {backmatter}

@@ -1,6 +1,7 @@
 {.epigraph}
 > Go has pointers but not pointer arithmetic. You cannot use a pointer
 > variable to walk through the bytes of a string.
+
 Quote: Go For C++ Programmers -- Go Authors
 
 In this chapter we delve deeper into the language.
@@ -14,30 +15,29 @@ that when you call a function in Go, the variables are
 You declare a pointer by prefixing the type with an '`*`': `var p *int`. Now `p`
 is a pointer to an integer value. All newly declared variables are assigned
 their zero value and pointers are no different. A newly declared pointer, or
-just a pointer that points to nothing, has a nil-value (((nil))). In other
+just a pointer that points to nothing, has a nil-value (!nil). In other
 languages this is often called a NULL pointer in Go it is just `nil`. To make
 a pointer point to something you can use the address-of operator
-(((operators, address-of))) (`&`), which we demonstrate here:
+(!operators, address-of) (`&`), which we demonstrate here:
 
-{callout="//"}
 ~~~go
 var p *int
-fmt.Printf("%v", p) //<1>
+fmt.Printf("%v", p) //<<1>>
 
-var i int	    //<2>
-p = &i		    //<3>
+var i int	    //<<2>>
+p = &i		    //<<3>>
 
-fmt.Printf("%v", p) //<4>
+fmt.Printf("%v", p) //<<4>>
 ~~~
 
-This <1> Prints `nil`. Declare <2> an integer variable `i`. Make `p` point <3>
-to `i`, i.e. take the address of `i`. And this <4> will print something like
+This <<1>> Prints `nil`. Declare <<2>> an integer variable `i`. Make `p` point <<3>>
+to `i`, i.e. take the address of `i`. And this <<4>> will print something like
 `0x7ff96b81c000a`. De-referencing a pointer is done by prefixing the pointer
 variable with `*`.
 
 As said, there is no pointer arithmetic, so if you write: `*p++`, it is
 interpreted as `(*p)++`: first reference and then increment the
-value.(((operators, increment)))
+value.(!operators, increment)
 
 
 ## Allocation
@@ -50,8 +50,8 @@ disabled by running it with the environment variable `GOGC` set to `off`:
 To allocate memory Go has two primitives, `new` and `make`. They do different
 things and apply to different types, which can be confusing, but the rules are
 simple. The following sections show how to handle allocation in Go and hopefully
-clarifies the somewhat artificial distinction between `new` (((built-in, new)))
-and `make` (((built-in,make))).
+clarifies the somewhat artificial distinction between `new` (!built-in, new)
+and `make` (!built-in,make).
 
 
 ### Allocation with new
@@ -84,19 +84,18 @@ first 10 elements of the array. In contrast, `new([]int)` returns a pointer to
 a newly allocated, zeroed slice structure, that is, a pointer to a `nil` slice
 value. These examples illustrate the difference between `new` and `make`.
 
-{callout="//"}
 ~~~go
-var p *[]int = new([]int)       //<1>
-var v  []int = make([]int, 100) //<2>
+var p *[]int = new([]int)       //<<1>>
+var v  []int = make([]int, 100) //<<2>>
 
-var p *[]int = new([]int)       //<3>
+var p *[]int = new([]int)       //<<3>>
 *p = make([]int, 100, 100)
 
-v := make([]int, 100)           //<4>
+v := make([]int, 100)           //<<4>>
 ~~~
 
-Allocates <1> slice structure; rarely useful. `v` <2> refers to a new array of
-100 ints. At <3> we make it unnecessarily complex, <4> is more idiomatic.
+Allocates <<1>> slice structure; rarely useful. `v` <<2>> refers to a new array of
+100 ints. At <<3>> we make it unnecessarily complex, <<4>> is more idiomatic.
 
 Remember that `make` applies only to maps, slices and channels and does not
 return a pointer. To obtain an explicit pointer allocate with `new`.
@@ -130,21 +129,20 @@ func NewFile(fd int, name string) *File {
 ~~~
 
 There's a lot of boiler plate in there. We can simplify it using a
-*composite literal* (((literal, composite))), which is an expression that
+*composite literal* (!literal, composite), which is an expression that
  creates a new instance each time it is evaluated.
 
-{callout="//"}
 ~~~go
 func NewFile(fd int, name string) *File {
     if fd < 0 {
         return nil
     }
     f := File{fd, name, nil, 0}
-    return &f	//<1>
+    return &f	//<<1>>
 }
 ~~~
 
-It is OK to return the address of a local variable <1> the storage associated
+It is OK to return the address of a local variable <<1>> the storage associated
 with the variable survives after the function returns.
 
 In fact, taking the address of a composite literal allocates a fresh instance
@@ -183,10 +181,10 @@ ma := map[int]string {Enone: "no error", Einval: "invalid argument"}
 
 ## Defining your own types
 Of course Go allows you to define new types, it does this with the
-`type`(((keywords, type))) keyword: `type foo int`
+`type`(!keywords, type) keyword: `type foo int`
 
 This creates a new type `foo` which acts like an `int`. Creating more sophisticated
-types is done with the `struct` (((keywords, struct))) keyword. An example would
+types is done with the `struct` (!keywords, struct) keyword. An example would
 be when we want record somebody's name (`string`) and age (`int`) in a single
 structure and make it a new type:
 
@@ -205,7 +203,7 @@ fmt.Printf("%s", a.name)
 
 
 ### More on structure fields
-As said each item in a structure is called a field(((field))). A struct with no
+As said each item in a structure is called a field(!field). A struct with no
 fields: `struct {}`. Or one with four fields:
 
 ~~~go
@@ -296,8 +294,8 @@ We now create two types in two different manners:
 
 `NewMutex` is equal to `Mutex`, but it *does not* have *any* of the methods of
 `Mutex`. In other words its method set is empty. But `PrintableMutex` *has*
-*inherited* (((methods, inherited))) the method set from `Mutex`. The Go term
- for this is *embedding* (((structures, embed))). In the words of [@go_spec]:
+*inherited* (!methods, inherited) the method set from `Mutex`. The Go term
+ for this is *embedding* (!structures, embed). In the words of [@go_spec]:
 
 > The method set of `*PrintableMutex` contains the methods
 > `Lock` and `Unlock` bound to its anonymous field `Mutex`.

@@ -12,9 +12,11 @@
 {.answer}
 ### Answer
 
-1. There are many possibilities. One solutions could be:
-<{{ex/basics/src/for.go}}
-    Let's compile this and look at the output.
+1. There are many possibilities. One solution could be:
+
+   <{{src/for.go}}
+
+   Let's compile this and look at the output.
 
         % go build for.go
         % ./for
@@ -28,28 +30,27 @@
 2. Rewriting the loop results in code that should look something
     like this (only showing the `main`-function):
 
-    {callout="yes"}
     ~~~go
     func main() {
-        i := 0	<1>
-    Loop:		    <2>
+        i := 0	//<<1>>
+    Loop:		    //<<2>>
         if i < 10 {
             fmt.Printf("%d\n", i)
             i++
-            goto Loop <3>
+            goto Loop //<<3>>
         }
     }
     ~~~
 
-    At <1> we define our loop variable. And at <2> we define a label and at <3> we jump
+    At <<1>> we define our loop variable. And at <<2>> we define a label and at <<3>> we jump
    to this label.
 
 3. The following is one possible solution:
-    {callout="//"}
-    <{{ex/basics/src/for-arr.go}}
 
-    Here <1> we create an array with 10 elements.
-    Which we then fill <2> one by one. And finally we print it <3> with `%v` which lets
+    <{{src/for-arr.go}}
+
+    Here <<1>> we create an array with 10 elements.
+    Which we then fill <<2>> one by one. And finally we print it <<3>> with `%v` which lets
     Go to print the value for us. You could even do this in one fell swoop by using a composite literal:
 
 ~~~go
