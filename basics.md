@@ -592,7 +592,10 @@ Next, we create a slice from this array: `slice := array[:n]` . And now we have:
 * `cap(slice) == m`
 * `len(array) == cap(array) == m`
 
-![Array versus slice](fig/array-vs-slice.png "An array versus a slice.")
+!---
+![Array versus slice](fig/array-vs-slice.png)
+!---
+Figure: An array versus a slice.
 
 Given an array, or another slice, a new slice is created via `a[n:m]`. This
 creates a new slice which refers to the variable `a`, starts at index `n`, and

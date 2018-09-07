@@ -31,9 +31,10 @@ fullname = "R. (Miek) Gieben"
 
 {.title}
 # Learning Go
-<!-- this .title does not work, sets attribute on <p> -->
 {.title}
+!---
 ![](fig/bumper-inverse.png)
+!---
 
 
 # Introduction
