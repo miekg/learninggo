@@ -23,12 +23,6 @@
       })
     }
 
-    function appendices(){
-        $("section[data-matter='back'] > h1").each(function(index){
-        $(this).prepend("Appendix " + String.fromCharCode(65 + index) + ". ")
-      })
-    }
-
     function tables(){
         $("figure > table > figcaption").each(function(index){
         $(this).prepend("Table " + (index+1) + ". ")
