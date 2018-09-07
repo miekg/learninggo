@@ -25,7 +25,6 @@ This book still sees development, small incremental improvements trickle in from
 Miek Gieben, London, 2017.
 
 Learning Go's source has been rewritten in [mmark2](https://github.com/mmarkdown/mmark), but did not see any
-other changes. This books translates cleanly into an RFC, of which the result is
-[here](learninggo-2.txt).
+other changes. This books translates cleanly into an [RFC-like document](learninggo-2.txt).
 
 Miek Gieben, London, 2018.
