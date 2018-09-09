@@ -23,13 +23,13 @@
     }
 
     function tables(){
-        $("figure > table > figcaption").each(function(index){
+        $("table + figcaption").each(function(index){
         $(this).prepend("Table " + (index+1) + ". ")
       })
     }
 
     function figures(){
-        $("figure > pre > figcaption").each(function(index){
+        $("pre + figcaption").each(function(index){
         $(this).prepend("Figure " + (index+1) + ". ")
       })
     }
