@@ -90,21 +90,21 @@ Table of Contents
        4.8.1.  Arrays  . . . . . . . . . . . . . . . . . . . . . . .  20
        4.8.2.  Slices  . . . . . . . . . . . . . . . . . . . . . . .  21
        4.8.3.  Maps  . . . . . . . . . . . . . . . . . . . . . . . .  23
-     4.9.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  24
-       4.9.1.  For-loop  . . . . . . . . . . . . . . . . . . . . . .  24
+     4.9.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  25
+       4.9.1.  For-loop  . . . . . . . . . . . . . . . . . . . . . .  25
        4.9.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  25
        4.9.3.  Average . . . . . . . . . . . . . . . . . . . . . . .  26
        4.9.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  26
-       4.9.5.  FizzBuzz  . . . . . . . . . . . . . . . . . . . . . .  26
+       4.9.5.  FizzBuzz  . . . . . . . . . . . . . . . . . . . . . .  27
        4.9.6.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  27
    5.  Functions . . . . . . . . . . . . . . . . . . . . . . . . . .  28
-     5.1.  Scope . . . . . . . . . . . . . . . . . . . . . . . . . .  29
-     5.2.  Functions as values . . . . . . . . . . . . . . . . . . .  30
+     5.1.  Scope . . . . . . . . . . . . . . . . . . . . . . . . . .  30
+     5.2.  Functions as values . . . . . . . . . . . . . . . . . . .  31
      5.3.  Callbacks . . . . . . . . . . . . . . . . . . . . . . . .  31
-     5.4.  Deferred Code . . . . . . . . . . . . . . . . . . . . . .  31
-     5.5.  Variadic Parameter  . . . . . . . . . . . . . . . . . . .  33
+     5.4.  Deferred Code . . . . . . . . . . . . . . . . . . . . . .  32
+     5.5.  Variadic Parameter  . . . . . . . . . . . . . . . . . . .  34
      5.6.  Panic and recovering  . . . . . . . . . . . . . . . . . .  34
-     5.7.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  35
+     5.7.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  36
        5.7.1.  Average . . . . . . . . . . . . . . . . . . . . . . .  36
 
 
@@ -115,20 +115,20 @@ Internet-Draft                 Learning Go                   August 2018
 
 
        5.7.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  36
-       5.7.3.  Bubble sort . . . . . . . . . . . . . . . . . . . . .  36
+       5.7.3.  Bubble sort . . . . . . . . . . . . . . . . . . . . .  37
        5.7.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  37
-       5.7.5.  For-loop II . . . . . . . . . . . . . . . . . . . . .  37
-       5.7.6.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  37
-       5.7.7.  Fibonacci . . . . . . . . . . . . . . . . . . . . . .  37
+       5.7.5.  For-loop II . . . . . . . . . . . . . . . . . . . . .  38
+       5.7.6.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  38
+       5.7.7.  Fibonacci . . . . . . . . . . . . . . . . . . . . . .  38
        5.7.8.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  38
-       5.7.9.  Var args  . . . . . . . . . . . . . . . . . . . . . .  38
-       5.7.10. Answer  . . . . . . . . . . . . . . . . . . . . . . .  38
+       5.7.9.  Var args  . . . . . . . . . . . . . . . . . . . . . .  39
+       5.7.10. Answer  . . . . . . . . . . . . . . . . . . . . . . .  39
        5.7.11. Functions that return functions . . . . . . . . . . .  39
        5.7.12. Answer  . . . . . . . . . . . . . . . . . . . . . . .  39
        5.7.13. Maximum . . . . . . . . . . . . . . . . . . . . . . .  40
        5.7.14. Answer  . . . . . . . . . . . . . . . . . . . . . . .  40
        5.7.15. Map function  . . . . . . . . . . . . . . . . . . . .  40
-       5.7.16. Answer  . . . . . . . . . . . . . . . . . . . . . . .  40
+       5.7.16. Answer  . . . . . . . . . . . . . . . . . . . . . . .  41
        5.7.17. Stack . . . . . . . . . . . . . . . . . . . . . . . .  41
        5.7.18. Answer  . . . . . . . . . . . . . . . . . . . . . . .  41
    6.  Packages  . . . . . . . . . . . . . . . . . . . . . . . . . .  43
@@ -182,41 +182,41 @@ Internet-Draft                 Learning Go                   August 2018
      8.9.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  80
        8.9.1.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  80
        8.9.2.  Pointers and reflection . . . . . . . . . . . . . . .  81
-       8.9.3.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  81
-   9.  Concurrency . . . . . . . . . . . . . . . . . . . . . . . . .  81
-     9.1.  Make it run in parallel . . . . . . . . . . . . . . . . .  84
-     9.2.  More on channels  . . . . . . . . . . . . . . . . . . . .  84
-     9.3.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  85
-       9.3.1.  Channels  . . . . . . . . . . . . . . . . . . . . . .  85
+       8.9.3.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  82
+   9.  Concurrency . . . . . . . . . . . . . . . . . . . . . . . . .  82
+     9.1.  Make it run in parallel . . . . . . . . . . . . . . . . .  85
+     9.2.  More on channels  . . . . . . . . . . . . . . . . . . . .  85
+     9.3.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  86
+       9.3.1.  Channels  . . . . . . . . . . . . . . . . . . . . . .  86
        9.3.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  86
-       9.3.3.  Fibonacci II  . . . . . . . . . . . . . . . . . . . .  87
-       9.3.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  88
-   10. Communication . . . . . . . . . . . . . . . . . . . . . . . .  89
-     10.1.  io.Reader  . . . . . . . . . . . . . . . . . . . . . . .  90
-     10.2.  Some examples  . . . . . . . . . . . . . . . . . . . . .  91
-     10.3.  Command line arguments . . . . . . . . . . . . . . . . .  91
-     10.4.  Executing commands . . . . . . . . . . . . . . . . . . .  92
-     10.5.  Networking . . . . . . . . . . . . . . . . . . . . . . .  92
-     10.6.  Exercises  . . . . . . . . . . . . . . . . . . . . . . .  93
-       10.6.1.  Finger daemon  . . . . . . . . . . . . . . . . . . .  93
-       10.6.2.  Answer . . . . . . . . . . . . . . . . . . . . . . .  94
-       10.6.3.  Echo server  . . . . . . . . . . . . . . . . . . . .  95
-       10.6.4.  Answer . . . . . . . . . . . . . . . . . . . . . . .  95
-       10.6.5.  Word and Letter Count  . . . . . . . . . . . . . . .  97
-       10.6.6.  Answer . . . . . . . . . . . . . . . . . . . . . . .  97
-       10.6.7.  Uniq . . . . . . . . . . . . . . . . . . . . . . . .  98
-       10.6.8.  Answer . . . . . . . . . . . . . . . . . . . . . . .  98
-       10.6.9.  Quine  . . . . . . . . . . . . . . . . . . . . . . .  98
-       10.6.10. Answer . . . . . . . . . . . . . . . . . . . . . . .  99
-       10.6.11. Processes  . . . . . . . . . . . . . . . . . . . . .  99
-       10.6.12. Answer . . . . . . . . . . . . . . . . . . . . . . . 100
-       10.6.13. Number cruncher  . . . . . . . . . . . . . . . . . . 101
-       10.6.14. Answer . . . . . . . . . . . . . . . . . . . . . . . 102
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . . 105
-     11.1.  Informative References . . . . . . . . . . . . . . . . . 105
-     11.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . . 106
-   Index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 107
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . . 110
+       9.3.3.  Fibonacci II  . . . . . . . . . . . . . . . . . . . .  88
+       9.3.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  89
+   10. Communication . . . . . . . . . . . . . . . . . . . . . . . .  90
+     10.1.  io.Reader  . . . . . . . . . . . . . . . . . . . . . . .  91
+     10.2.  Some examples  . . . . . . . . . . . . . . . . . . . . .  92
+     10.3.  Command line arguments . . . . . . . . . . . . . . . . .  92
+     10.4.  Executing commands . . . . . . . . . . . . . . . . . . .  93
+     10.5.  Networking . . . . . . . . . . . . . . . . . . . . . . .  93
+     10.6.  Exercises  . . . . . . . . . . . . . . . . . . . . . . .  94
+       10.6.1.  Finger daemon  . . . . . . . . . . . . . . . . . . .  94
+       10.6.2.  Answer . . . . . . . . . . . . . . . . . . . . . . .  95
+       10.6.3.  Echo server  . . . . . . . . . . . . . . . . . . . .  96
+       10.6.4.  Answer . . . . . . . . . . . . . . . . . . . . . . .  96
+       10.6.5.  Word and Letter Count  . . . . . . . . . . . . . . .  98
+       10.6.6.  Answer . . . . . . . . . . . . . . . . . . . . . . .  98
+       10.6.7.  Uniq . . . . . . . . . . . . . . . . . . . . . . . .  99
+       10.6.8.  Answer . . . . . . . . . . . . . . . . . . . . . . .  99
+       10.6.9.  Quine  . . . . . . . . . . . . . . . . . . . . . . .  99
+       10.6.10. Answer . . . . . . . . . . . . . . . . . . . . . . . 100
+       10.6.11. Processes  . . . . . . . . . . . . . . . . . . . . . 100
+       10.6.12. Answer . . . . . . . . . . . . . . . . . . . . . . . 101
+       10.6.13. Number cruncher  . . . . . . . . . . . . . . . . . . 102
+       10.6.14. Answer . . . . . . . . . . . . . . . . . . . . . . . 103
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . . 106
+     11.1.  Informative References . . . . . . . . . . . . . . . . . 106
+     11.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . . 107
+   Index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 108
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . . 111
 
 
 
@@ -272,8 +272,8 @@ Internet-Draft                 Learning Go                   August 2018
    Miek Gieben, London, 2017.
 
    Learning Go's source has been rewritten in mmark2 [6], but did not
-   see any other changes.
-
+   see any other changes.  This books translates cleanly into an RFC-
+   like document [7].
 
 
 
@@ -285,6 +285,8 @@ Internet-Draft                 Learning Go                   August 2018
    Miek Gieben, London, 2018.
 
 2.  Learning Go
+
+   fig/bumper-inverse.png "
 
 3.  Introduction
 
@@ -328,8 +330,6 @@ Internet-Draft                 Learning Go                   August 2018
       language takes care of this.
 
    Standard format
-
-
 
 
 
@@ -422,7 +422,7 @@ Internet-Draft                 Learning Go                   August 2018
    There is a substantial amount of documentation written about Go.  The
    Go Tutorial [go_tutorial], the Go Tour (with lots of exercises) and
    the Effective Go [effective_go] are helpful resources.  The website
-   http://golang.org/doc/ [7] is a very good starting point for reading
+   http://golang.org/doc/ [8] is a very good starting point for reading
    up on Go.  Reading these documents is certainly not required, but it
    is recommended.
 
@@ -804,8 +804,8 @@ Internet-Draft                 Learning Go                   August 2018
    There are only a few control structures in Go.  To write loops we use
    the "for" keyword, and there is a "switch" and of course an "if".
    When working with channels "select" will be used (see Section 9.3.1).
-   Parentheses are are not required around the condition, and the body
-   must _always_ be brace-delimited.
+   Parentheses are not required around the condition, and the body must
+   _always_ be brace-delimited.
 
 4.6.1.  If-Else
 
@@ -1067,8 +1067,9 @@ Internet-Draft                 Learning Go                   August 2018
 
 
       are used on a number of different types, "len" is used to return
-      the lengths of strings, slices, and arrays.  In the next section
-      Section 4.8.1 we'll look at slices, arrays and the function "cap".
+      the lengths of strings, maps, slices, and arrays.  In the next
+      section Section 4.8.1 we'll look at slices, arrays and the
+      function "cap".
 
    new
       is used for allocating memory for user defined data types.  See
@@ -1113,7 +1114,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    Array types like "var arr [10]int" have a fixed size.  The size is
    _part_ of the type.  They can't grow, because then they would have a
-   different type.  Also arrays are values: Assigning one array to
 
 
 
@@ -1122,6 +1122,7 @@ Gieben                  Expires February 26, 2019              [Page 20]
 Internet-Draft                 Learning Go                   August 2018
 
 
+   different type.  Also arrays are values: Assigning one array to
    another _copies_ all the elements.  In particular, if you pass an
    array to a function it will receive a copy of the array, not a
    pointer to it.
@@ -1169,7 +1170,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    o  "len(slice) == n"
 
-   o  "cap(slice) == m"
 
 
 
@@ -1178,7 +1178,13 @@ Gieben                  Expires February 26, 2019              [Page 21]
 Internet-Draft                 Learning Go                   August 2018
 
 
+   o  "cap(slice) == m"
+
    o  "len(array) == cap(array) == m"
+
+   fig/array-vs-slice.png Array versus slice"
+
+                         An array versus a slice.
 
    Given an array, or another slice, a new slice is created via
    "a[n:m]".  This creates a new slice which refers to the variable "a",
@@ -1220,12 +1226,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    At _1_ we create an array with a 100 elements, indexed from 0 to 99.
    Then at _2_ we create a slice that has index 0 to 98.  We assign 1 to
-   the 99th element _3_ of the slice.  This works as expected.  But at
-   _4_ we dare to do the impossible, and and try to allocate something
-   beyond the length of the slice and we are greeted with a _runtime_
-   error: "Error: "throw: index out of range"."
-
-
 
 
 
@@ -1233,6 +1233,11 @@ Gieben                  Expires February 26, 2019              [Page 22]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   the 99th element _3_ of the slice.  This works as expected.  But at
+   _4_ we dare to do the impossible, and and try to allocate something
+   beyond the length of the slice and we are greeted with a _runtime_
+   error: "Error: "throw: index out of range"."
 
    If you want to extend a slice, there are a couple of built-in
    functions that make life easier: "append" and "copy".  The append
@@ -1276,12 +1281,7 @@ Internet-Draft                 Learning Go                   August 2018
    A "map" can be thought of as an array indexed by strings (in its most
    simple form).
 
-   monthdays := map[string]int{
-       "Jan": 31, "Feb": 28, "Mar": 31,
-       "Apr": 30, "May": 31, "Jun": 30,
-       "Jul": 31, "Aug": 31, "Sep": 30,
-       "Oct": 31, "Nov": 30, "Dec": 31, <1>
-   }
+
 
 
 
@@ -1289,6 +1289,13 @@ Gieben                  Expires February 26, 2019              [Page 23]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   monthdays := map[string]int{
+       "Jan": 31, "Feb": 28, "Mar": 31,
+       "Apr": 30, "May": 31, "Jun": 30,
+       "Jul": 31, "Aug": 31, "Sep": 30,
+       "Oct": 31, "Nov": 30, "Dec": 31, <1>
+   }
 
    The general syntax for defining a map is "map[<from type>]<to type>".
    Here, we define a map that converts from a "string" (month
@@ -1328,6 +1335,17 @@ Internet-Draft                 Learning Go                   August 2018
    In general the syntax "delete(m, x)" will delete the map entry
    retrieved by the expression "m[x]".
 
+
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 24]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
 4.9.  Exercises
 
 4.9.1.  For-loop
@@ -1337,14 +1355,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    2.  Rewrite the loop from 1 to use "goto".  The keyword "for" may not
        be used.
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 24]
-
-Internet-Draft                 Learning Go                   August 2018
-
 
    3.  Rewrite the loop again so that it fills an array and then prints
        that array to the screen.
@@ -1377,6 +1387,21 @@ Internet-Draft                 Learning Go                   August 2018
    1.  Rewriting the loop results in code that should look something
        like this (only showing the "main"-function):
 
+
+
+
+
+
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 25]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
    func main() {
        i := 0      <1>
    Loop:               <2>
@@ -1390,17 +1415,6 @@ Internet-Draft                 Learning Go                   August 2018
        and at _3_ we jump to this label.
 
    2.  The following is one possible solution:
-
-
-
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 25]
-
-Internet-Draft                 Learning Go                   August 2018
-
 
    package main
 
@@ -1429,6 +1443,21 @@ Internet-Draft                 Learning Go                   August 2018
 
    1.  The following code calculates the average.
 
+
+
+
+
+
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 26]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
    sum := 0.0
    switch len(xs) {
    case 0: <1>
@@ -1449,15 +1478,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    1.  Solve this problem, called the Fizz-Buzz [fizzbuzz] problem:
 
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 26]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
    Write a program that prints the numbers from 1 to 100.  But for
    multiples of three print, "Fizz" instead of the number, and for
    multiples of five, print "Buzz".  For numbers which are multiples of
@@ -1466,6 +1486,33 @@ Internet-Draft                 Learning Go                   August 2018
 4.9.6.  Answer
 
    1.  A possible solution to this problem is the following program.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 27]
+
+Internet-Draft                 Learning Go                   August 2018
+
 
    package main
 
@@ -1503,17 +1550,6 @@ Internet-Draft                 Learning Go                   August 2018
    taken care of the FizzBuzz case.  At _6_, if printed neither Fizz nor
    Buzz printed, we print the value.
 
-
-
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 27]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
 5.  Functions
 
       I'm always delighted by the light touch and stillness of early
@@ -1524,6 +1560,15 @@ Internet-Draft                 Learning Go                   August 2018
       such noise?
 
       Richard P.  Gabriel
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 28]
+
+Internet-Draft                 Learning Go                   August 2018
+
 
    Functions are the basic building blocks of Go programs; all
    interesting stuff happens in them.
@@ -1562,14 +1607,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    The names are not mandatory but they can make code shorter and
    clearer: _they are documentation_. However don't overuse this
-
-
-
-Gieben                  Expires February 26, 2019              [Page 28]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
    feature, especially in longer functions where it might not be
    immediately apparent what is returned.
 
@@ -1579,6 +1616,15 @@ Internet-Draft                 Learning Go                   August 2018
    work around this with anonymous functions.  See the
    Section Section 5.2 in this chapter.  Recursive functions work just
    as in other languages:
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 29]
+
+Internet-Draft                 Learning Go                   August 2018
+
 
    func rec(i int) {
        if i == 10 { <1>
@@ -1601,30 +1647,6 @@ Internet-Draft                 Learning Go                   August 2018
    function is executed.
 
    In the following example we call "g()" from "f()":
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 29]
-
-Internet-Draft                 Learning Go                   August 2018
-
 
    package main
 
@@ -1652,6 +1674,14 @@ Internet-Draft                 Learning Go                   August 2018
    create a _new, local_ variable also called "a".  This new "a" gets
    the value of 6, which we then print.  Then we call "g", which uses
    the _global_ "a" again and prints "a"'s value set in "main".  Thus
+
+
+
+Gieben                  Expires February 26, 2019              [Page 30]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
    the output will be: "565".  A _local_ variable is _only_ valid when
    we are executing the function in which it is defined.  Note that the
    ":=" used in line 12 is sometimes hard to spot so it is generally
@@ -1673,15 +1703,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    "a" is defined as an anonymous (nameless) function _1_.  Note the
    lack of parentheses "()" after "a".  If there were, that would be to
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 30]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
    _call_ some function with the name "a" before we have defined what
    "a" is.  Once "a" is defined, then we can _call_ it, _3_.
 
@@ -1710,6 +1731,13 @@ Internet-Draft                 Learning Go                   August 2018
        fmt.Printf("%v\n", x)
    }
 
+
+
+Gieben                  Expires February 26, 2019              [Page 31]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
    This function does not return a value and just prints its argument.
    The _signature_ of this function is: "func printit(int)", or without
    the function name: "func(int)".  To create a new function that uses
@@ -1730,14 +1758,6 @@ Internet-Draft                 Learning Go                   August 2018
    Suppose you have a function in which you open a file and perform
    various writes and reads on it.  In such a function there are often
    spots where you want to return early.  If you do that, you will need
-
-
-
-Gieben                  Expires February 26, 2019              [Page 31]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
    to close the file descriptor you are working on.  This often leads to
    the following code:
 
@@ -1766,6 +1786,14 @@ Internet-Draft                 Learning Go                   August 2018
    function more readable and it puts the "Close" _right next_ to the
    "Open".
 
+
+
+
+Gieben                  Expires February 26, 2019              [Page 32]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
    func ReadWrite() bool {
        file.Open("filename")
        defer file.Close() <1>
@@ -1785,14 +1813,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    You can put multiple functions on the "defer list", like this example
    from
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 32]
-
-Internet-Draft                 Learning Go                   August 2018
-
 
    for i := 0; i < 5; i++ {
        defer fmt.Printf("%d ", i)
@@ -1823,6 +1843,13 @@ Internet-Draft                 Learning Go                   August 2018
        return 0
    }
 
+
+
+Gieben                  Expires February 26, 2019              [Page 33]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
    Here _1_ we specify our function, the named return value "ret" is
    initialized with zero.  The nameless function in the defer increments
    the value of "ret" with 1.  The "return 0" on line 5 _will not be the
@@ -1840,15 +1867,6 @@ Internet-Draft                 Learning Go                   August 2018
    variable number of arguments.  Note that these arguments all have to
    have the type "int".  In the body of your function the variable "arg"
    is a slice of ints:
-
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 33]
-
-Internet-Draft                 Learning Go                   August 2018
-
 
    for _, n := range arg {
        fmt.Printf("And the number is: %d\n", n)
@@ -1880,6 +1898,14 @@ Internet-Draft                 Learning Go                   August 2018
    Instead it uses a panic-and-recover mechanism.  It is worth
    remembering that you should use this as a last resort, your code will
    not look, or be, better if it is littered with panics.  It's a
+
+
+
+Gieben                  Expires February 26, 2019              [Page 34]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
    powerful tool: use it wisely.  So, how do you use it?  In the words
    of the Go Authors [go_blog_panic]:
 
@@ -1898,14 +1924,6 @@ Internet-Draft                 Learning Go                   August 2018
       is a built-in function that regains control of a panicking
       goroutine.  Recover is _only_ useful inside _deferred_ functions.
       During normal execution, a call to "recover" will return "nil" and
-
-
-
-Gieben                  Expires February 26, 2019              [Page 34]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
       have no other effect.  If the current goroutine is panicking, a
       call to "recover" will capture the value given to "panic" and
       resume normal execution.
@@ -1934,6 +1952,16 @@ Internet-Draft                 Learning Go                   August 2018
 
    The following code fragment, shows how we can use this function:
 
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 35]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
    func panicy() {
        var a []int
        a[3] = 5
@@ -1949,18 +1977,6 @@ Internet-Draft                 Learning Go                   August 2018
    "panicy" does not panic anymore.  Why?
 
 5.7.  Exercises
-
-
-
-
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 35]
-
-Internet-Draft                 Learning Go                   August 2018
-
 
 5.7.1.  Average
 
@@ -1992,6 +2008,16 @@ Internet-Draft                 Learning Go                   August 2018
    _4_ we convert the value to a "float64" to make the division work as
    "len" returns an "int".  Finally, at _5_ we reutrn our avarage.
 
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 36]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
 5.7.3.  Bubble sort
 
    1.  Write a function that performs a bubble sort on a slice of ints.
@@ -2005,18 +2031,6 @@ Internet-Draft                 Learning Go                   August 2018
       "bubble" to the top of the list.
 
    It also gives an example in pseudo code:
-
-
-
-
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 36]
-
-Internet-Draft                 Learning Go                   August 2018
-
 
    procedure bubbleSort( A : list of sortable items )
      do
@@ -2051,6 +2065,15 @@ Internet-Draft                 Learning Go                   August 2018
        Because a slice is a reference type, the "bubblesort" function
        works and does not need to return a sorted slice.
 
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 37]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
 5.7.5.  For-loop II
 
    1.  Take what you did in exercise to write the for loop and extend it
@@ -2066,14 +2089,6 @@ Internet-Draft                 Learning Go                   August 2018
    1.  The Fibonacci sequence starts as follows: "1, 1, 2, 3, 5, 8, 13,
        \ldots" Or in mathematical terms: "x_1 = 1; x_2 = 1; x_n =
        x_{n-1} + x_{n-2}\quad\forall n > 2".
-
-
-
-Gieben                  Expires February 26, 2019              [Page 37]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
        Write a function that takes an "int" value and gives that many
        terms of the Fibonacci sequence.
 
@@ -2107,6 +2122,14 @@ Internet-Draft                 Learning Go                   August 2018
    returned by the Fibonacci function.  Here up to 10.  Finally, we
    print the numbers.
 
+
+
+
+Gieben                  Expires February 26, 2019              [Page 38]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
 5.7.9.  Var args
 
    1.  Write a function that takes a variable number of ints and print
@@ -2116,19 +2139,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    1.  For this we need the "{...}"-syntax to signal we define a
        function that takes an arbitrary number of arguments.
-
-
-
-
-
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 38]
-
-Internet-Draft                 Learning Go                   August 2018
-
 
    package main
 
@@ -2164,6 +2174,18 @@ Internet-Draft                 Learning Go                   August 2018
        int) int { return x + 2 }" Function literals at work, we define
        the +2--function right there in the return statement.
 
+
+
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 39]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
    func main() {
       p2 := plusTwo()
       fmt.Printf("%v\n",p2(2))
@@ -2175,16 +2197,6 @@ Internet-Draft                 Learning Go                   August 2018
    }
 
    2.  Here we use a closure:
-
-
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 39]
-
-Internet-Draft                 Learning Go                   August 2018
-
 
    func plusX(x int) func(int) int { <1>
       return func(y int) int { return x + y } <2>
@@ -2221,6 +2233,15 @@ Internet-Draft                 Learning Go                   August 2018
    The function is applied to each member in the list and a new list
    containing these calculated values is returned.  Thus:
 
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 40]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
    "\mathrm{map}(f(), (a_1,a_2,\ldots,a_{n-1},a_n)) = (f(a_1),
    f(a_2),\ldots,f(a_{n-1}), f(a_n)) "
 
@@ -2230,17 +2251,6 @@ Internet-Draft                 Learning Go                   August 2018
 5.7.16.  Answer
 
    1.  A possible answer:
-
-
-
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 40]
-
-Internet-Draft                 Learning Go                   August 2018
-
 
    func Map(f func(int) int, l []int) []int {
        j := make([]int, len(l))
@@ -2267,6 +2277,10 @@ Internet-Draft                 Learning Go                   August 2018
        the stack -- functions.  The stack should be a LIFO (last in,
        first out) stack.
 
+   fig/stack.png A stack"
+
+                                 A stack.
+
    1.  Write a "String" method which converts the stack to a string
        representation.  The stack in the figure could be represented as:
        "[0:m] [1:l] [2:k]" .
@@ -2276,6 +2290,13 @@ Internet-Draft                 Learning Go                   August 2018
    1.  First we define a new type that represents a stack; we need an
        array (to hold the keys) and an index, which points to the last
        element.  Our small stack can only hold 10 elements.
+
+
+
+Gieben                  Expires February 26, 2019              [Page 41]
+
+Internet-Draft                 Learning Go                   August 2018
+
 
    type stack struct {
        i    int
@@ -2288,15 +2309,6 @@ Internet-Draft                 Learning Go                   August 2018
    In Go, data passed to functions is _passed-by-value_ meaning a copy
    is created and given to the function.  The first stab for the
    function "push" could be:
-
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 41]
-
-Internet-Draft                 Learning Go                   August 2018
-
 
    func (s stack) push(k int) {
        if s.i+1 > 9 {
@@ -2332,18 +2344,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    func (s *stack) push(k int).
 
-   We should now use "new()" (see Section 7.1.1).  in Section 7 to
-   create a _pointer_ to a newly allocated "stack", so line 1 from the
-   example above needs to be "s := new(stack)" .
-
-   And our two functions become:
-
-
-
-
-
-
-
 
 
 
@@ -2353,6 +2353,12 @@ Gieben                  Expires February 26, 2019              [Page 42]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   We should now use "new()" (see Section 7.1.1).  in Section 7 to
+   create a _pointer_ to a newly allocated "stack", so line 1 from the
+   example above needs to be "s := new(stack)" .
+
+   And our two functions become:
 
    func (s *stack) push(k int) {
        s.data[s.i] = k
@@ -2397,18 +2403,18 @@ Internet-Draft                 Learning Go                   August 2018
 
    A package is a collection of functions and data.
 
-   You declare a package with the "package" keyword.  The filename does
-   not have to match the package name.  The convention for package names
-   is to use lowercase characters.  Go packages may consist of multiple
-   files, but they share the "package <name>" line.  Let's define a
-   package "even" in the file "even.go".
-
 
 
 Gieben                  Expires February 26, 2019              [Page 43]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   You declare a package with the "package" keyword.  The filename does
+   not have to match the package name.  The convention for package names
+   is to use lowercase characters.  Go packages may consist of multiple
+   files, but they share the "package <name>" line.  Let's define a
+   package "even" in the file "even.go".
 
    package even <1>
 
@@ -2451,12 +2457,6 @@ Internet-Draft                 Learning Go                   August 2018
    Import _1_ the following packages.  The _local_ package "even" is
    imported here _2_. This _3_ imports the official "fmt" package.  And
    now we use _4_ the function from the "even" package.  The syntax for
-   accessing a function from a package is "<package>.FunctionName()".
-   And finally we can build our program.
-
-   % go build myeven.go
-   % ./myeven
-   Is 5 even? false
 
 
 
@@ -2465,6 +2465,13 @@ Gieben                  Expires February 26, 2019              [Page 44]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   accessing a function from a package is "<package>.FunctionName()".
+   And finally we can build our program.
+
+   % go build myeven.go
+   % ./myeven
+   Is 5 even? false
 
    If we change our "myeven.go" at _4_ to use the unexported function
    "even.odd": "fmt.Printf("Is %d even? %v\n", i, even.odd(i))" We get
@@ -2506,14 +2513,7 @@ Internet-Draft                 Learning Go                   August 2018
    source directory; the package in "src/compress/gzip" is imported as
    "compress/gzip" but has name "gzip", not "compress/gzip".
 
-   It is important to avoid stuttering when naming things.  For
-   instance, the buffered reader type in the "bufio" package is called
-   "Reader", not "BufReader", because users see it as "bufio.Reader",
-   which is a clear, concise name.
 
-   Similarly, the function to make new instances of "ring.Ring" (package
-   "container/ring"), would normally be called "NewRing", but since
-   "Ring" is the only type exported by the package, and since the
 
 
 
@@ -2522,6 +2522,14 @@ Gieben                  Expires February 26, 2019              [Page 45]
 Internet-Draft                 Learning Go                   August 2018
 
 
+   It is important to avoid stuttering when naming things.  For
+   instance, the buffered reader type in the "bufio" package is called
+   "Reader", not "BufReader", because users see it as "bufio.Reader",
+   which is a clear, concise name.
+
+   Similarly, the function to make new instances of "ring.Ring" (package
+   "container/ring"), would normally be called "NewRing", but since
+   "Ring" is the only type exported by the package, and since the
    package is called "ring", it's called just "New".  Clients of the
    package see that as "ring.New".  Use the package structure to help
    you choose good names.
@@ -2563,20 +2571,18 @@ package even
    documenting the behavior of the function.  Again to extend our "even"
    package:
 
-   // Even returns true of i is even. Otherwise false is returned.
-   func Even(i int) bool {
-
-   And even though "odd" is not exported, it's good form to document it
-   as well.
-
-
-
 
 
 Gieben                  Expires February 26, 2019              [Page 46]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   // Even returns true of i is even. Otherwise false is returned.
+   func Even(i int) bool {
+
+   And even though "odd" is not exported, it's good form to document it
+   as well.
 
    // odd is the opposite of Even.
    func odd(i int) bool {
@@ -2619,12 +2625,6 @@ Internet-Draft                 Learning Go                   August 2018
    o  "func (t *T) Fatal(args ...interface{})", "Fatal" is equivalent to
       "Log()" followed by "FailNow()".
 
-   Putting all this together we can write our test.  First we pick a
-   name: "even_test.go".  Then we add the following contents:
-
-
-
-
 
 
 
@@ -2633,6 +2633,9 @@ Gieben                  Expires February 26, 2019              [Page 47]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   Putting all this together we can write our test.  First we pick a
+   name: "even_test.go".  Then we add the following contents:
 
    package even <1>
 
@@ -2650,7 +2653,7 @@ Internet-Draft                 Learning Go                   August 2018
    structures.  We then _2_ import the "testing" package.  And finally
    the test we want to execute.  The code here _3_ should hold no
    surprises: we check if the "Even" function works OK.  And now, the
-   moment we have been waiting form executing the test.
+   moment we have been waiting for executing the test.
 
    % go test
    ok      even    0.001s
@@ -2679,9 +2682,6 @@ Internet-Draft                 Learning Go                   August 2018
    documentation and test functions.  It will make your code better and
    it shows that you really put in the effort.
 
-   The Go test suite also allows you to incorporate example functions
-   which serve as documentation _and_ as tests.  These functions need to
-   start with "Example".
 
 
 
@@ -2689,6 +2689,10 @@ Gieben                  Expires February 26, 2019              [Page 48]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   The Go test suite also allows you to incorporate example functions
+   which serve as documentation _and_ as tests.  These functions need to
+   start with "Example".
 
    func ExampleEven() {
        if Even(2) {
@@ -2705,9 +2709,9 @@ Internet-Draft                 Learning Go                   August 2018
 6.4.  Useful packages
 
    The standard libary of Go includes a huge number of packages.  It is
-   very enlightening to browse the "$GOROOT/src/pkg" directory and look
-   at the packages.  We cannot comment on each package, but the
-   following are worth a mention:
+   very enlightening to browse the "$GOROOT/src" directory and look at
+   the packages.  We cannot comment on each package, but the following
+   are worth a mention:
 
    fmt
       Package "fmt" implements formatted I/O with functions analogous to
@@ -2734,10 +2738,6 @@ Internet-Draft                 Learning Go                   August 2018
       that also implements the interface but provides buffering and some
       help for textual I/O.
 
-   sort
-      The "sort" package provides primitives for sorting arrays and
-      user-defined collections.
-
 
 
 
@@ -2745,6 +2745,10 @@ Gieben                  Expires February 26, 2019              [Page 49]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   sort
+      The "sort" package provides primitives for sorting arrays and
+      user-defined collections.
 
    strconv
       The "strconv" package implements conversions to and from string
@@ -2789,11 +2793,7 @@ Internet-Draft                 Learning Go                   August 2018
       program to manipulate objects with arbitrary types.  The typical
       use is to take a value with static type "interface{}" and extract
       its dynamic type information by calling "TypeOf", which returns an
-      object with interface type "Type".  See Section 8,
-      Section Section 8.8.
 
-   os/exec
-      The "os/exec" package runs external commands.
 
 
 
@@ -2801,6 +2801,12 @@ Gieben                  Expires February 26, 2019              [Page 50]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+      object with interface type "Type".  See Section 8,
+      Section Section 8.8.
+
+   os/exec
+      The "os/exec" package runs external commands.
 
 6.5.  Exercises
 
@@ -2844,12 +2850,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    2.  To make the unit testing work properly you need to do some
        preparations.  We'll come to those in a minute.  First the actual
-       unit test.  Create a file with the name "pushpop_test.go", with
-       the following contents:
-
-
-
-
 
 
 
@@ -2857,6 +2857,9 @@ Gieben                  Expires February 26, 2019              [Page 51]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+       unit test.  Create a file with the name "pushpop_test.go", with
+       the following contents:
 
    package stack
 
@@ -2903,9 +2906,6 @@ Internet-Draft                 Learning Go                   August 2018
    var reader *bufio.Reader = bufio.NewReader(os.Stdin)
    var st = new(Stack)
 
-   type Stack struct {
-           i    int
-           data [10]int
 
 
 
@@ -2914,6 +2914,9 @@ Gieben                  Expires February 26, 2019              [Page 52]
 Internet-Draft                 Learning Go                   August 2018
 
 
+   type Stack struct {
+           i    int
+           data [10]int
    }
 
    func (s *Stack) push(k int) {
@@ -2959,9 +2962,6 @@ Internet-Draft                 Learning Go                   August 2018
                                    fmt.Printf("%d\n", q-p)
                            case c == 'q':
                                    return
-                           default:
-                                   //error
-                           }
 
 
 
@@ -2970,6 +2970,9 @@ Gieben                  Expires February 26, 2019              [Page 53]
 Internet-Draft                 Learning Go                   August 2018
 
 
+                           default:
+                                   //error
+                           }
                    }
            }
    }
@@ -2981,7 +2984,7 @@ Internet-Draft                 Learning Go                   August 2018
 
       Go For C++ Programmers -- Go Authors
 
-   In this chapter we delve deeper in to the language.
+   In this chapter we delve deeper into the language.
 
    Go has pointers.  There is however no pointer arithmetic, so they act
    more like references than pointers that you may know from C.
@@ -3014,9 +3017,6 @@ Internet-Draft                 Learning Go                   August 2018
    As said, there is no pointer arithmetic, so if you write: "*p++", it
    is interpreted as "(*p)++": first reference and then increment the
    value.
-
-
-
 
 
 
@@ -4374,6 +4374,12 @@ Internet-Draft                 Learning Go                   August 2018
    structure.  Then we go to the first field "Field(0)" and invoke the
    "String()" method on it.
 
+   fig/reflection.png Peeling away the layers using reflection."
+
+    Peeling away the layers using reflection.  Going from a *Person via
+   Elem using the methods described in go doc reflect to get the actual
+                        string contained within.")
+
    Setting a value works similarly as getting a value, but only works on
    _exported_ members.  Again some code:
 
@@ -4411,12 +4417,6 @@ Internet-Draft                 Learning Go                   August 2018
    greeted with a stack trace and a _run time_ error: "panic:
    reflect.Value.SetString using value obtained using unexported field".
 
-   The second program works OK and sets the member "Name" to "Albert
-   Einstein".  Of course this only works when you call "Set()" with a
-   pointer argument.
-
-
-
 
 
 
@@ -4425,6 +4425,10 @@ Gieben                  Expires February 26, 2019              [Page 79]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   The second program works OK and sets the member "Name" to "Albert
+   Einstein".  Of course this only works when you call "Set()" with a
+   pointer argument.
 
 8.9.  Exercises
 
@@ -4440,6 +4444,43 @@ Internet-Draft                 Learning Go                   August 2018
 
    The following program calculates a maximum.  It is as generic as you
    can get with Go.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 80]
+
+Internet-Draft                 Learning Go                   August 2018
+
 
    package main
 
@@ -4474,14 +4515,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    We could have chosen to make the return type of this _1_ function an
    "interface{}", but that would mean that a caller would always have to
-
-
-
-Gieben                  Expires February 26, 2019              [Page 80]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
    do a type assertion to extract the actual type from the interface.
    At _2_ we compare the parameters.  All parameters are confirmed to be
    integers, so this is legit.  And at _3_ we do the some for floats.
@@ -4497,6 +4530,13 @@ Internet-Draft                 Learning Go                   August 2018
       "Set()" with a pointer argument.
 
    Why is this the case?
+
+
+
+Gieben                  Expires February 26, 2019              [Page 81]
+
+Internet-Draft                 Learning Go                   August 2018
+
 
 8.9.3.  Answer
 
@@ -4531,13 +4571,6 @@ Internet-Draft                 Learning Go                   August 2018
    A goroutine is a normal function, except that you start it with the
    keyword "go".
 
-
-
-Gieben                  Expires February 26, 2019              [Page 81]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
    ready("Tea", 2)     // Normal function call.
    go ready("Tea", 2)  // ... as goroutine.
 
@@ -4553,6 +4586,13 @@ Internet-Draft                 Learning Go                   August 2018
            time.Sleep(5 * time.Second) //<2>
 
    Figure: Go routines in action.
+
+
+
+Gieben                  Expires February 26, 2019              [Page 82]
+
+Internet-Draft                 Learning Go                   August 2018
+
 
    The following idea for a program was taken from [go_course_day3].  We
    run a function as two goroutines, the goroutines wait for an amount
@@ -4585,15 +4625,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    Makes "ci" a channel on which we can send and receive integers, makes
    "cs" a channel for strings and "cf" a channel for types that satisfy
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 82]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
    the empty interface.  Sending on a channel and receiving from it, is
    done with the same operator: "<-".
 
@@ -4604,6 +4635,20 @@ Internet-Draft                 Learning Go                   August 2018
    i := <-ci // *Receive* from the channel ci and store it in i.
 
    Let's put this to use.
+
+
+
+
+
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 83]
+
+Internet-Draft                 Learning Go                   August 2018
+
 
    var c chan int <1>
 
@@ -4641,15 +4686,6 @@ Internet-Draft                 Learning Go                   August 2018
    because we run too few go-routines.  We remove last lines and replace
    them with the following:
 
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 83]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
    L: for {
        select {
        case <-c:
@@ -4662,6 +4698,13 @@ Internet-Draft                 Learning Go                   August 2018
 
    We will now wait as long as it takes.  Only when we have received
    more than one reply on the channel "c" will we exit the loop "L".
+
+
+
+Gieben                  Expires February 26, 2019              [Page 84]
+
+Internet-Draft                 Learning Go                   August 2018
+
 
 9.1.  Make it run in parallel
 
@@ -4698,14 +4741,6 @@ Internet-Draft                 Learning Go                   August 2018
    elements.  The first 4 elements in this channel are written without
    any blocking.  When you write the 5^(th)
 
-
-
-
-Gieben                  Expires February 26, 2019              [Page 84]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
    In conclusion, the following is true in Go:
 
 
@@ -4716,6 +4751,15 @@ Internet-Draft                 Learning Go                   August 2018
   value >  0 & \rightarrow \textsf{buffer }{} value{} \textsf{ elements}
   \end{array}
   \right.
+
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 85]
+
+Internet-Draft                 Learning Go                   August 2018
 
 
   \textsf{ch := make(chan type, value)}
@@ -4753,18 +4797,26 @@ Internet-Draft                 Learning Go                   August 2018
        sometimes it prints only to 8.  Adding a second quit-channel you
        can remedy both issues.  Do this.
 
-
-
-
-
-Gieben                  Expires February 26, 2019              [Page 85]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
 9.3.2.  Answer
 
    1.  A possible program is:
+
+
+
+
+
+
+
+
+
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 86]
+
+Internet-Draft                 Learning Go                   August 2018
+
 
    package main
 
@@ -4813,7 +4865,11 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-Gieben                  Expires February 26, 2019              [Page 86]
+
+
+
+
+Gieben                  Expires February 26, 2019              [Page 87]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -4869,7 +4925,7 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-Gieben                  Expires February 26, 2019              [Page 87]
+Gieben                  Expires February 26, 2019              [Page 88]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -4925,7 +4981,7 @@ func main() {
 
 
 
-Gieben                  Expires February 26, 2019              [Page 88]
+Gieben                  Expires February 26, 2019              [Page 89]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -4981,7 +5037,7 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-Gieben                  Expires February 26, 2019              [Page 89]
+Gieben                  Expires February 26, 2019              [Page 90]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5037,7 +5093,7 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-Gieben                  Expires February 26, 2019              [Page 90]
+Gieben                  Expires February 26, 2019              [Page 91]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5093,7 +5149,7 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-Gieben                  Expires February 26, 2019              [Page 91]
+Gieben                  Expires February 26, 2019              [Page 92]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5149,7 +5205,7 @@ flag.Parse() <4>
 
 
 
-Gieben                  Expires February 26, 2019              [Page 92]
+Gieben                  Expires February 26, 2019              [Page 93]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5200,12 +5256,12 @@ Internet-Draft                 Learning Go                   August 2018
 
    Write a finger daemon that works with the finger(1) command.
 
-   From the Debian [8] package description:
+   From the Debian [9] package description:
 
 
 
 
-Gieben                  Expires February 26, 2019              [Page 93]
+Gieben                  Expires February 26, 2019              [Page 94]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5261,7 +5317,7 @@ func handleConnection(conn net.Conn) {
 
 
 
-Gieben                  Expires February 26, 2019              [Page 94]
+Gieben                  Expires February 26, 2019              [Page 95]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5317,7 +5373,7 @@ func getUserInfo(usr string) ([]byte, error) {
 
 
 
-Gieben                  Expires February 26, 2019              [Page 95]
+Gieben                  Expires February 26, 2019              [Page 96]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5373,7 +5429,7 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-Gieben                  Expires February 26, 2019              [Page 96]
+Gieben                  Expires February 26, 2019              [Page 97]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5429,7 +5485,7 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-Gieben                  Expires February 26, 2019              [Page 97]
+Gieben                  Expires February 26, 2019              [Page 98]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5485,7 +5541,7 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-Gieben                  Expires February 26, 2019              [Page 98]
+Gieben                  Expires February 26, 2019              [Page 99]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5541,7 +5597,7 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-Gieben                  Expires February 26, 2019              [Page 99]
+Gieben                  Expires February 26, 2019             [Page 100]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5597,7 +5653,7 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-Gieben                  Expires February 26, 2019             [Page 100]
+Gieben                  Expires February 26, 2019             [Page 101]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5653,7 +5709,7 @@ func main() {
 
 
 
-Gieben                  Expires February 26, 2019             [Page 101]
+Gieben                  Expires February 26, 2019             [Page 102]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5709,7 +5765,7 @@ var mop = map[int]string{ADD: "+", SUB: "-", MUL: "*", DIV: "/"}
 
 
 
-Gieben                  Expires February 26, 2019             [Page 102]
+Gieben                  Expires February 26, 2019             [Page 103]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5765,7 +5821,7 @@ func solve(form, numberop []int, index, magic int) {
 
 
 
-Gieben                  Expires February 26, 2019             [Page 103]
+Gieben                  Expires February 26, 2019             [Page 104]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5821,7 +5877,7 @@ func rpncalc(r []int) (int, bool) {
 
 
 
-Gieben                  Expires February 26, 2019             [Page 104]
+Gieben                  Expires February 26, 2019             [Page 105]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5877,7 +5933,7 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-Gieben                  Expires February 26, 2019             [Page 105]
+Gieben                  Expires February 26, 2019             [Page 106]
 
 Internet-Draft                 Learning Go                   August 2018
 
@@ -5933,14 +5989,16 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-Gieben                  Expires February 26, 2019             [Page 106]
+Gieben                  Expires February 26, 2019             [Page 107]
 
 Internet-Draft                 Learning Go                   August 2018
 
 
-   [7] http://golang.org/doc/
+   [7] learninggo-2.txt
 
-   [8] https://www.debian.org
+   [8] http://golang.org/doc/
+
+   [9] https://www.debian.org
 
 Index
 
@@ -5967,10 +6025,10 @@ Index
 
    C
       channel
-         blocking read  84
-         blocking write  84
-         unbuffered  84
-      channels  6, 82
+         blocking read  85
+         blocking write  85
+         unbuffered  85
+      channels  6, 83
       complex numbers  20
 
    D
@@ -5980,68 +6038,10 @@ Index
    F
       field  58
       functions
-         as values  30
+         as values  31
          exported  44
          literal  33
-         literals  30
-         method  28
-         pass-by-value  28
-
-
-
-Gieben                  Expires February 26, 2019             [Page 107]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
-         private  44
-         public  44
-         receiver  28
-         signature  31
-         variadic  33
-
-   G
-      generic  75
-      goroutine  6, 81
-
-   I
-      interface  71
-         set of methods  71
-         type  71
-         value  71
-      io
-         buffered  90
-      io.Reader  90
-
-   K
-      keywords
-         break  16
-         continue  17
-         default  19
-         defer  32
-         defer list  32
-         else  15
-         fallthrough  19
-         for  16
-         go  81
-         goto  16
-         if  15
-         import  45
-         iota  12
-         map  23
-         map adding elements  24
-         map existence  24
-         map remove elements  24
-         package  43
-         range  17-18, 24
-         return  15
-         struct  57
-         switch  18
-         type  57
-
-   L
-      label  16
-      literal
+         literals  31
 
 
 
@@ -6050,6 +6050,64 @@ Gieben                  Expires February 26, 2019             [Page 108]
 Internet-Draft                 Learning Go                   August 2018
 
 
+         method  29
+         pass-by-value  29
+         private  44
+         public  44
+         receiver  29
+         signature  32
+         variadic  34
+
+   G
+      generic  75
+      goroutine  6, 82
+
+   I
+      interface  71
+         set of methods  71
+         type  71
+         value  71
+      io
+         buffered  91
+      io.Reader  91
+
+   K
+      keywords
+         break  16
+         continue  17
+         default  19
+         defer  32
+         defer list  33
+         else  15
+         fallthrough  19
+         for  16
+         go  82
+         goto  16
+         if  15
+         import  45
+         iota  12
+         map  23
+         map adding elements  24
+         map existence  24
+         map remove elements  24
+         package  44
+         range  17-18, 24
+         return  15
+         struct  57
+         switch  18
+         type  57
+
+   L
+
+
+
+Gieben                  Expires February 26, 2019             [Page 109]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
+      label  16
+      literal
          composite  21, 56
 
    M
@@ -6058,7 +6116,7 @@ Internet-Draft                 Learning Go                   August 2018
 
    N
       networking
-         Dial  92
+         Dial  93
       nil  54
 
    O
@@ -6069,46 +6127,46 @@ Internet-Draft                 Learning Go                   August 2018
          bitwise and  14
          bitwise clear  14
          bitwise or  14
-         channel  82
+         channel  83
          increment  54
          not  14
          or  14
 
    P
       package  43
-         bufio  45, 49, 90
+         bufio  46, 49, 91
          builtin  19
          bytes  45
          encoding/json  50
-         flag  50, 91
+         flag  50, 92
          fmt  20, 49
          html/template  50
-         io  49, 90
+         io  49, 91
          net/http  50
          os  50
-         os/exec  50, 92
+         os/exec  51, 93
          reflect  50, 77
-         ring  45
-         sort  49
+         ring  46
+         sort  50
          strconv  50
          sync  50
          unsafe  50
 
    R
       reference types  21
-      runes  13, 18
 
 
 
-
-Gieben                  Expires February 26, 2019             [Page 109]
+Gieben                  Expires February 26, 2019             [Page 110]
 
 Internet-Draft                 Learning Go                   August 2018
 
 
+      runes  13, 18
+
    S
       scope
-         local  29
+         local  30
       slice
          capacity  21
          length  21
@@ -6155,6 +6213,4 @@ Author's Address
 
 
 
-
-
-Gieben                  Expires February 26, 2019             [Page 110]
+Gieben                  Expires February 26, 2019             [Page 111]
