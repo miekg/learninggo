@@ -285,6 +285,8 @@ Internet-Draft                 Learning Go                   August 2018
 1.  Introduction
 
       Is Go an object-oriented language?  Yes and no.
+      ------------------------------------------------------------
+
 
       Frequently asked questions, Go Authors
 
@@ -328,8 +330,6 @@ Internet-Draft                 Learning Go                   August 2018
       want, but an official format exists.  The rule is very simple: The
       output of the filter "gofmt" _is the officially endorsed format_.
 
-   Postfix types
-
 
 
 
@@ -338,6 +338,7 @@ Gieben                  Expires February 26, 2019               [Page 6]
 Internet-Draft                 Learning Go                   August 2018
 
 
+   Postfix types
       Types are given _after_ the variable name, thus "var a int",
       instead of "int a".
 
@@ -385,7 +386,6 @@ Internet-Draft                 Learning Go                   August 2018
       We'll see that functions and data can be grouped together in
       packages.  We'll also see how to document and test our packages.
 
-   beyond-the-basics
 
 
 
@@ -394,6 +394,7 @@ Gieben                  Expires February 26, 2019               [Page 7]
 Internet-Draft                 Learning Go                   August 2018
 
 
+   beyond-the-basics
       We'll create our own types.  We'll also look at memory allocations
       in Go.
 
@@ -444,7 +445,6 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
-
 Gieben                  Expires February 26, 2019               [Page 8]
 
 Internet-Draft                 Learning Go                   August 2018
@@ -461,6 +461,8 @@ Internet-Draft                 Learning Go                   August 2018
 2.  Basics
 
       I am interested in this and hope to do something.
+      ------------------------------------------------------------
+
 
       On adding complex numbers to Go, Ken Thompson
 
@@ -496,8 +498,6 @@ Internet-Draft                 Learning Go                   August 2018
    When your Go program is executed, the first function called will be
    "main.main()", which mimics the behavior from C.  Here we declare
    that function _4_.
-
-
 
 
 
@@ -1182,7 +1182,7 @@ Internet-Draft                 Learning Go                   August 2018
 
    o  "len(array) == cap(array) == m"
 
-   fig/array-vs-slice.png Array versus slice"
+   fig/array-vs-slice.png Array versus slice
 
                          An array versus a slice.
 
@@ -1558,10 +1558,10 @@ Internet-Draft                 Learning Go                   August 2018
       research worker and a well- studied mechanical colleague, not as a
       debate with a compiler.  Who'd have guessed sophistication bought
       such noise?
+      ------------------------------------------------------------
+
 
       Richard P.  Gabriel
-
-
 
 
 
@@ -2277,7 +2277,7 @@ Internet-Draft                 Learning Go                   August 2018
        the stack -- functions.  The stack should be a LIFO (last in,
        first out) stack.
 
-   fig/stack.png A stack"
+   fig/stack.png A stack
 
                                  A stack.
 
@@ -2397,11 +2397,11 @@ Internet-Draft                 Learning Go                   August 2018
 4.  Packages
 
       "^(")
+      ------------------------------------------------------------
+
 
       Answer to whether there is a bit wise negation operator -- Ken
       Thompson
-
-   A package is a collection of functions and data.
 
 
 
@@ -2409,6 +2409,8 @@ Gieben                  Expires February 26, 2019              [Page 43]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   A package is a collection of functions and data.
 
    You declare a package with the "package" keyword.  The filename does
    not have to match the package name.  The convention for package names
@@ -2456,8 +2458,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    Import _1_ the following packages.  The _local_ package "even" is
    imported here _2_. This _3_ imports the official "fmt" package.  And
-   now we use _4_ the function from the "even" package.  The syntax for
-
 
 
 
@@ -2466,6 +2466,7 @@ Gieben                  Expires February 26, 2019              [Page 44]
 Internet-Draft                 Learning Go                   August 2018
 
 
+   now we use _4_ the function from the "even" package.  The syntax for
    accessing a function from a package is "<package>.FunctionName()".
    And finally we can build our program.
 
@@ -2512,7 +2513,6 @@ Internet-Draft                 Learning Go                   August 2018
    Another convention is that the package name is the base name of its
    source directory; the package in "src/compress/gzip" is imported as
    "compress/gzip" but has name "gzip", not "compress/gzip".
-
 
 
 
@@ -2981,6 +2981,8 @@ Internet-Draft                 Learning Go                   August 2018
 
       Go has pointers but not pointer arithmetic.  You cannot use a
       pointer variable to walk through the bytes of a string.
+      ------------------------------------------------------------
+
 
       Go For C++ Programmers -- Go Authors
 
@@ -3014,9 +3016,7 @@ Internet-Draft                 Learning Go                   August 2018
    will print something like "0x7ff96b81c000a".  De-referencing a
    pointer is done by prefixing the pointer variable with "*".
 
-   As said, there is no pointer arithmetic, so if you write: "*p++", it
-   is interpreted as "(*p)++": first reference and then increment the
-   value.
+
 
 
 
@@ -3025,6 +3025,10 @@ Gieben                  Expires February 26, 2019              [Page 54]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   As said, there is no pointer arithmetic, so if you write: "*p++", it
+   is interpreted as "(*p)++": first reference and then increment the
+   value.
 
 5.1.  Allocation
 
@@ -3069,10 +3073,6 @@ Internet-Draft                 Learning Go                   August 2018
    "new([]int)" returns a pointer to a newly allocated, zeroed slice
    structure, that is, a pointer to a "nil" slice value.  These examples
    illustrate the difference between "new" and "make".
-
-
-
-
 
 
 
@@ -3931,6 +3931,8 @@ Internet-Draft                 Learning Go                   August 2018
 
       I have this phobia about having my body penetrated surgically.
       You know what I mean?
+      ------------------------------------------------------------
+
 
       eXistenZ -- Ted Pikul
 
@@ -3968,8 +3970,6 @@ Internet-Draft                 Learning Go                   August 2018
    At _1_ we declare a function that takes an interface type as the
    argument.  Because "p" implements "I", it _must_ have the "Get()"
    method, which we call at _2_. And the same holds true for the "Put()"
-   method at _3_. Because "S" implements "I", we can call the function
-   "f" passing in a pointer to a value of type "S": "var s S; f(&s)"
 
 
 
@@ -3977,6 +3977,9 @@ Gieben                  Expires February 26, 2019              [Page 71]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   method at _3_. Because "S" implements "I", we can call the function
+   "f" passing in a pointer to a value of type "S": "var s S; f(&s)"
 
    The reason we need to take the address of "s", rather than a value of
    type "S", is because we defined the methods on "s" to operate on
@@ -4024,9 +4027,6 @@ Internet-Draft                 Learning Go                   August 2018
        }
    }
 
-   At _1_ we use the type switch, note that the ".(type)" syntax is
-   _only_ valid within a "switch" statement.  We store the value in the
-
 
 
 Gieben                  Expires February 26, 2019              [Page 72]
@@ -4034,6 +4034,8 @@ Gieben                  Expires February 26, 2019              [Page 72]
 Internet-Draft                 Learning Go                   August 2018
 
 
+   At _1_ we use the type switch, note that the ".(type)" syntax is
+   _only_ valid within a "switch" statement.  We store the value in the
    variable "t".  The subsequent cases _2_ each check for a different
    _actual_ type.  And we can even have a "default" _3_ clause.  It is
    worth pointing out that both "case R" and "case s" aren't possible,
@@ -4080,8 +4082,6 @@ Internet-Draft                 Learning Go                   August 2018
 
    This compiles, but when we run this we get slammed with: "panic:
    interface conversion: int is not main.I: missing method Get".
-
-
 
 
 
@@ -4374,7 +4374,7 @@ Internet-Draft                 Learning Go                   August 2018
    structure.  Then we go to the first field "Field(0)" and invoke the
    "String()" method on it.
 
-   fig/reflection.png Peeling away the layers using reflection."
+   fig/reflection.png Peeling away the layers using reflection.
 
     Peeling away the layers using reflection.  Going from a *Person via
    Elem using the methods described in go doc reflect to get the actual
@@ -4550,7 +4550,7 @@ Internet-Draft                 Learning Go                   August 2018
 
       *  Parallelism is about performance.
 
-      *  Concurrency is about program design.
+      *  Concurrency is about program design.  ****
 
       Google I/O 2010 -- Rob Pike
 
@@ -4990,6 +4990,8 @@ Internet-Draft                 Learning Go                   August 2018
 
       Good communication is as stimulating as black coffee, and just as
       hard to sleep after.
+      ------------------------------------------------------------
+
 
       -- Anne Morrow Lindbergh
 
@@ -5032,8 +5034,6 @@ Internet-Draft                 Learning Go                   August 2018
    We open the file at _1_ with "os.Open" that returns a "*os.File"
    "*os.File" implements "io.Reader" and "io.Writer" interface.  After
    the "Open" we directly put the "f.Close()" which we defer until the
-   function return.  At _3_ we call "Read" on "f" and read up to 1024
-   bytes at the time.  If anything fails we bail out at _4_. If the
 
 
 
@@ -5042,6 +5042,8 @@ Gieben                  Expires February 26, 2019              [Page 90]
 Internet-Draft                 Learning Go                   August 2018
 
 
+   function return.  At _3_ we call "Read" on "f" and read up to 1024
+   bytes at the time.  If anything fails we bail out at _4_. If the
    number of bytes read is 0 we've read the end of the file _5_. And at
    _6_ we output the buffer to standard output.
 
@@ -5088,8 +5090,6 @@ Internet-Draft                 Learning Go                   August 2018
    As mentioned above the "io.Reader" is an important interface in the
    language Go.  A lot (if not all) functions that need to read from
    something take an "io.Reader" as input.  To fulfill the interface a
-   type needs to implement that one method.  The writing side
-   "io.Writer", has the "Write" method.
 
 
 
@@ -5097,6 +5097,9 @@ Gieben                  Expires February 26, 2019              [Page 91]
 
 Internet-Draft                 Learning Go                   August 2018
 
+
+   type needs to implement that one method.  The writing side
+   "io.Writer", has the "Write" method.
 
    If you think of a new type in your program or package and you make it
    fulfill the "io.Reader" or "io.Writer" interface, _the whole standard
@@ -5142,9 +5145,6 @@ Internet-Draft                 Learning Go                   August 2018
    "os".  The "flag" package has a more sophisticated interface, and
    also provides a way to parse flags.  Take this example from a DNS
    query tool:
-
-
-
 
 
 
@@ -6128,12 +6128,12 @@ Internet-Draft                 Learning Go                   August 2018
          bitwise clear  14
          bitwise or  14
          channel  83
-         increment  54
+         increment  55
          not  14
          or  14
 
    P
-      package  43
+      package  44
          bufio  46, 49, 91
          builtin  19
          bytes  45
