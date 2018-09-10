@@ -1,5 +1,6 @@
 {.epigraph}
 > Is Go an object-oriented language? Yes and no.
+****
 
 Quote: Frequently asked questions, Go Authors
 

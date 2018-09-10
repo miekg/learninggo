@@ -1,6 +1,7 @@
 {.epigraph}
 > Good communication is as stimulating as black coffee, and just as hard
 > to sleep after.
+****
 
 Quote: -- Anne Morrow Lindbergh
 

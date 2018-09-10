@@ -6,6 +6,7 @@
 > studied mechanical colleague, not as a debate with a
 > compiler.  Who'd have guessed sophistication bought
 > such noise?
+****
 
 Quote: Richard P. Gabriel
 
