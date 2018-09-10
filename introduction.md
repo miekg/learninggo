@@ -60,6 +60,7 @@ a virtual machine, while Go is compiled.
 
 
 ## How to Read this Book
+
 I've written this book for people who already know some programming languages and how to program. In
 order to use this book, you (of course) need Go installed on your system, but you can easily try
 examples online in the Go playground^[<http://play.golang.org>.]. All exercises in this book work
@@ -100,6 +101,7 @@ networking.
 
 
 ## Official Documentation
+
 There is a substantial amount of documentation written about Go. The Go Tutorial [@go_tutorial], the
 Go Tour (with lots of exercises) and the Effective Go [@effective_go] are helpful resources. The
 website <http://golang.org/doc/> is a very good starting point for reading up on

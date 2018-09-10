@@ -22,10 +22,7 @@ fullname = "R. (Miek) Gieben"
   email = "miek@miek.nl"
 %%%
 
-{mainmatter}
-
-
-# Preface
+.# Preface
 {{preface.md}}
 
 
@@ -35,6 +32,8 @@ fullname = "R. (Miek) Gieben"
 !---
 ![](fig/bumper-inverse.png)
 !---
+
+{mainmatter}
 
 
 # Introduction

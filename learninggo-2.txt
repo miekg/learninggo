@@ -11,6 +11,64 @@ Expires: February 26, 2019
                               Learning Go
                           draft-learning-go-00
 
+Preface
+
+   The source of this book [1] is written in mmark [2] and is converted
+   from the original LaTeX source [3].
+
+   _All example code used in this book is hereby licensed under the
+   Apache License version 2.0._
+
+      This work is licensed under the Attribution-NonCommercial-
+      ShareAlike 3.0 Unported License.  To view a copy of this license,
+      visit http://creativecommons.org/licenses/by-nc-sa/3.0/ [4] or
+      send a letter to Creative Commons, 171 Second Street, Suite 300,
+      San Francisco, California, 94105, USA.
+
+   The following people made large or small contributions to earlier
+   versions of this book:
+
+   Adam J.  Gray, Alexander Katasonov, Alexey Chernenkov, Alex Sychev,
+   Andrea Spadaccini, Andrey Mirtchovski, Anthony Magro, Babu Sreekanth,
+   Ben Bullock, Bob Cunningham, Brian Fallik, Cecil New, Cobold, Damian
+   Gryski, Daniele Pala, Dan Kortschak, David Otton, Fabian Becker,
+   Filip Zaludek, Hadi Amiri, Haiping Fan, Iaroslav Tymchenko, Jaap
+   Akkerhuis, JC van Winkel, Jeroen Bulten, Jinpu Hu, John Shahid,
+   Jonathan Kans, Joshua Stein, Makoto Inoue, Marco Ynema, Mayuresh
+   Kathe, Mem, Michael Stapelberg, Nicolas Kaiser, Olexandr Shalakhin,
+   Paulo Pinto, Peter Kleiweg, Philipp Schmidt, Robert Johnson, Russel
+   Winder, Simoc, Sonia Keys, Stefan Schroeder, Thomas Kapplet, T.J.
+   Yang, Uriel"\dagger", Vrai Stacey, Xing Xing.
+
+   "Learning Go" has been translated into (note that this used the
+   original LaTeX source).
+
+   o  Chinese, by Xing Xing,
+      &#36825;&#37324;&#26159;&#20013;&#25991;&#35793;&#26412;:
+      http://www.mikespook.com/learning-go/ [5]
+
+   I hope this book is useful.
+
+   Miek Gieben, London, 2015.
+
+
+
+Gieben                  Expires February 26, 2019               [Page 1]
+
+Internet-Draft                 Learning Go                   August 2018
+
+
+   This book still sees development, small incremental improvements
+   trickle in from Github.
+
+   Miek Gieben, London, 2017.
+
+   Learning Go's source has been rewritten in mmark2 [6], but did not
+   see any other changes.  This books translates cleanly into an RFC-
+   like document [7].
+
+   Miek Gieben, London, 2018.
+
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
@@ -51,117 +109,59 @@ Copyright Notice
 
 
 
-
-
-Gieben                  Expires February 26, 2019               [Page 1]
+Gieben                  Expires February 26, 2019               [Page 2]
 
 Internet-Draft                 Learning Go                   August 2018
 
 
 Table of Contents
 
-   1.  Preface . . . . . . . . . . . . . . . . . . . . . . . . . . .   5
-   2.  Learning Go . . . . . . . . . . . . . . . . . . . . . . . . .   6
-   3.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   6
-     3.1.  How to Read this Book . . . . . . . . . . . . . . . . . .   7
-     3.2.  Official Documentation  . . . . . . . . . . . . . . . . .   8
-   4.  Basics  . . . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     4.1.  Hello World . . . . . . . . . . . . . . . . . . . . . . .   9
-     4.2.  Compiling and Running Code  . . . . . . . . . . . . . . .  10
-     4.3.  Variables, Types and Keywords . . . . . . . . . . . . . .  10
-       4.3.1.  Boolean Types . . . . . . . . . . . . . . . . . . . .  11
-       4.3.2.  Numerical Types . . . . . . . . . . . . . . . . . . .  11
-       4.3.3.  Constants . . . . . . . . . . . . . . . . . . . . . .  12
-       4.3.4.  Strings . . . . . . . . . . . . . . . . . . . . . . .  12
-       4.3.5.  Runes . . . . . . . . . . . . . . . . . . . . . . . .  13
-       4.3.6.  Complex Numbers . . . . . . . . . . . . . . . . . . .  13
-       4.3.7.  Errors  . . . . . . . . . . . . . . . . . . . . . . .  13
-     4.4.  Operators and Built-in Functions  . . . . . . . . . . . .  13
-     4.5.  Go Keywords . . . . . . . . . . . . . . . . . . . . . . .  14
-     4.6.  Control Structures  . . . . . . . . . . . . . . . . . . .  15
-       4.6.1.  If-Else . . . . . . . . . . . . . . . . . . . . . . .  15
-       4.6.2.  Goto  . . . . . . . . . . . . . . . . . . . . . . . .  16
-       4.6.3.  For . . . . . . . . . . . . . . . . . . . . . . . . .  16
-       4.6.4.  Break and Continue  . . . . . . . . . . . . . . . . .  16
-       4.6.5.  Range . . . . . . . . . . . . . . . . . . . . . . . .  17
-       4.6.6.  Switch  . . . . . . . . . . . . . . . . . . . . . . .  18
-     4.7.  Built-in Functions  . . . . . . . . . . . . . . . . . . .  19
-     4.8.  Arrays, Slices, and Maps  . . . . . . . . . . . . . . . .  20
-       4.8.1.  Arrays  . . . . . . . . . . . . . . . . . . . . . . .  20
-       4.8.2.  Slices  . . . . . . . . . . . . . . . . . . . . . . .  21
-       4.8.3.  Maps  . . . . . . . . . . . . . . . . . . . . . . . .  23
-     4.9.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  25
-       4.9.1.  For-loop  . . . . . . . . . . . . . . . . . . . . . .  25
-       4.9.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  25
-       4.9.3.  Average . . . . . . . . . . . . . . . . . . . . . . .  26
-       4.9.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  26
-       4.9.5.  FizzBuzz  . . . . . . . . . . . . . . . . . . . . . .  27
-       4.9.6.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  27
-   5.  Functions . . . . . . . . . . . . . . . . . . . . . . . . . .  28
-     5.1.  Scope . . . . . . . . . . . . . . . . . . . . . . . . . .  30
-     5.2.  Functions as values . . . . . . . . . . . . . . . . . . .  31
-     5.3.  Callbacks . . . . . . . . . . . . . . . . . . . . . . . .  31
-     5.4.  Deferred Code . . . . . . . . . . . . . . . . . . . . . .  32
-     5.5.  Variadic Parameter  . . . . . . . . . . . . . . . . . . .  34
-     5.6.  Panic and recovering  . . . . . . . . . . . . . . . . . .  34
-     5.7.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  36
-       5.7.1.  Average . . . . . . . . . . . . . . . . . . . . . . .  36
-
-
-
-Gieben                  Expires February 26, 2019               [Page 2]
-
-Internet-Draft                 Learning Go                   August 2018
-
-
-       5.7.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  36
-       5.7.3.  Bubble sort . . . . . . . . . . . . . . . . . . . . .  37
-       5.7.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  37
-       5.7.5.  For-loop II . . . . . . . . . . . . . . . . . . . . .  38
-       5.7.6.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  38
-       5.7.7.  Fibonacci . . . . . . . . . . . . . . . . . . . . . .  38
-       5.7.8.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  38
-       5.7.9.  Var args  . . . . . . . . . . . . . . . . . . . . . .  39
-       5.7.10. Answer  . . . . . . . . . . . . . . . . . . . . . . .  39
-       5.7.11. Functions that return functions . . . . . . . . . . .  39
-       5.7.12. Answer  . . . . . . . . . . . . . . . . . . . . . . .  39
-       5.7.13. Maximum . . . . . . . . . . . . . . . . . . . . . . .  40
-       5.7.14. Answer  . . . . . . . . . . . . . . . . . . . . . . .  40
-       5.7.15. Map function  . . . . . . . . . . . . . . . . . . . .  40
-       5.7.16. Answer  . . . . . . . . . . . . . . . . . . . . . . .  41
-       5.7.17. Stack . . . . . . . . . . . . . . . . . . . . . . . .  41
-       5.7.18. Answer  . . . . . . . . . . . . . . . . . . . . . . .  41
-   6.  Packages  . . . . . . . . . . . . . . . . . . . . . . . . . .  43
-     6.1.  Identifiers . . . . . . . . . . . . . . . . . . . . . . .  45
-     6.2.  Documenting packages  . . . . . . . . . . . . . . . . . .  46
-     6.3.  Testing packages  . . . . . . . . . . . . . . . . . . . .  47
-     6.4.  Useful packages . . . . . . . . . . . . . . . . . . . . .  49
-     6.5.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  51
-       6.5.1.  Stack as package  . . . . . . . . . . . . . . . . . .  51
-       6.5.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  51
-       6.5.3.  Calculator  . . . . . . . . . . . . . . . . . . . . .  52
-       6.5.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  52
-   7.  Beyond the basics . . . . . . . . . . . . . . . . . . . . . .  54
-     7.1.  Allocation  . . . . . . . . . . . . . . . . . . . . . . .  55
-       7.1.1.  Allocation with new . . . . . . . . . . . . . . . . .  55
-       7.1.2.  Allocation with make  . . . . . . . . . . . . . . . .  55
-       7.1.3.  Constructors and composite literals . . . . . . . . .  56
-     7.2.  Defining your own types . . . . . . . . . . . . . . . . .  57
-       7.2.1.  More on structure fields  . . . . . . . . . . . . . .  58
-       7.2.2.  Methods . . . . . . . . . . . . . . . . . . . . . . .  59
-     7.3.  Conversions . . . . . . . . . . . . . . . . . . . . . . .  60
-       7.3.1.  User defined types and conversions  . . . . . . . . .  61
-     7.4.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  62
-       7.4.1.  Map function with interfaces  . . . . . . . . . . . .  62
-       7.4.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  62
-       7.4.3.  Pointers  . . . . . . . . . . . . . . . . . . . . . .  63
-       7.4.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  63
-       7.4.5.  Linked List . . . . . . . . . . . . . . . . . . . . .  63
-       7.4.6.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  64
-       7.4.7.  Cat . . . . . . . . . . . . . . . . . . . . . . . . .  66
-       7.4.8.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  66
-       7.4.9.  Method calls  . . . . . . . . . . . . . . . . . . . .  70
-       7.4.10. Answer  . . . . . . . . . . . . . . . . . . . . . . .  70
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   6
+     1.1.  How to Read this Book . . . . . . . . . . . . . . . . . .   7
+     1.2.  Official Documentation  . . . . . . . . . . . . . . . . .   8
+   2.  Basics  . . . . . . . . . . . . . . . . . . . . . . . . . . .   9
+     2.1.  Hello World . . . . . . . . . . . . . . . . . . . . . . .   9
+     2.2.  Compiling and Running Code  . . . . . . . . . . . . . . .  10
+     2.3.  Variables, Types and Keywords . . . . . . . . . . . . . .  10
+       2.3.1.  Boolean Types . . . . . . . . . . . . . . . . . . . .  11
+       2.3.2.  Numerical Types . . . . . . . . . . . . . . . . . . .  11
+       2.3.3.  Constants . . . . . . . . . . . . . . . . . . . . . .  12
+       2.3.4.  Strings . . . . . . . . . . . . . . . . . . . . . . .  12
+       2.3.5.  Runes . . . . . . . . . . . . . . . . . . . . . . . .  13
+       2.3.6.  Complex Numbers . . . . . . . . . . . . . . . . . . .  13
+       2.3.7.  Errors  . . . . . . . . . . . . . . . . . . . . . . .  13
+     2.4.  Operators and Built-in Functions  . . . . . . . . . . . .  13
+     2.5.  Go Keywords . . . . . . . . . . . . . . . . . . . . . . .  14
+     2.6.  Control Structures  . . . . . . . . . . . . . . . . . . .  15
+       2.6.1.  If-Else . . . . . . . . . . . . . . . . . . . . . . .  15
+       2.6.2.  Goto  . . . . . . . . . . . . . . . . . . . . . . . .  16
+       2.6.3.  For . . . . . . . . . . . . . . . . . . . . . . . . .  16
+       2.6.4.  Break and Continue  . . . . . . . . . . . . . . . . .  16
+       2.6.5.  Range . . . . . . . . . . . . . . . . . . . . . . . .  17
+       2.6.6.  Switch  . . . . . . . . . . . . . . . . . . . . . . .  18
+     2.7.  Built-in Functions  . . . . . . . . . . . . . . . . . . .  19
+     2.8.  Arrays, Slices, and Maps  . . . . . . . . . . . . . . . .  20
+       2.8.1.  Arrays  . . . . . . . . . . . . . . . . . . . . . . .  20
+       2.8.2.  Slices  . . . . . . . . . . . . . . . . . . . . . . .  21
+       2.8.3.  Maps  . . . . . . . . . . . . . . . . . . . . . . . .  23
+     2.9.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  25
+       2.9.1.  For-loop  . . . . . . . . . . . . . . . . . . . . . .  25
+       2.9.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  25
+       2.9.3.  Average . . . . . . . . . . . . . . . . . . . . . . .  26
+       2.9.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  26
+       2.9.5.  FizzBuzz  . . . . . . . . . . . . . . . . . . . . . .  27
+       2.9.6.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  27
+   3.  Functions . . . . . . . . . . . . . . . . . . . . . . . . . .  28
+     3.1.  Scope . . . . . . . . . . . . . . . . . . . . . . . . . .  30
+     3.2.  Functions as values . . . . . . . . . . . . . . . . . . .  31
+     3.3.  Callbacks . . . . . . . . . . . . . . . . . . . . . . . .  31
+     3.4.  Deferred Code . . . . . . . . . . . . . . . . . . . . . .  32
+     3.5.  Variadic Parameter  . . . . . . . . . . . . . . . . . . .  34
+     3.6.  Panic and recovering  . . . . . . . . . . . . . . . . . .  34
+     3.7.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  36
+       3.7.1.  Average . . . . . . . . . . . . . . . . . . . . . . .  36
+       3.7.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  36
+       3.7.3.  Bubble sort . . . . . . . . . . . . . . . . . . . . .  37
 
 
 
@@ -170,54 +170,54 @@ Gieben                  Expires February 26, 2019               [Page 3]
 Internet-Draft                 Learning Go                   August 2018
 
 
-   8.  Interfaces  . . . . . . . . . . . . . . . . . . . . . . . . .  71
-     8.1.  Which is what?  . . . . . . . . . . . . . . . . . . . . .  72
-     8.2.  Empty interface . . . . . . . . . . . . . . . . . . . . .  73
-     8.3.  Methods . . . . . . . . . . . . . . . . . . . . . . . . .  74
-     8.4.  Methods on interface types  . . . . . . . . . . . . . . .  74
-     8.5.  Interface names . . . . . . . . . . . . . . . . . . . . .  75
-     8.6.  A sorting example . . . . . . . . . . . . . . . . . . . .  75
-     8.7.  Listing interfaces in interfaces  . . . . . . . . . . . .  77
-     8.8.  Introspection and reflection  . . . . . . . . . . . . . .  77
-     8.9.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  80
-       8.9.1.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  80
-       8.9.2.  Pointers and reflection . . . . . . . . . . . . . . .  81
-       8.9.3.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  82
-   9.  Concurrency . . . . . . . . . . . . . . . . . . . . . . . . .  82
-     9.1.  Make it run in parallel . . . . . . . . . . . . . . . . .  85
-     9.2.  More on channels  . . . . . . . . . . . . . . . . . . . .  85
-     9.3.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  86
-       9.3.1.  Channels  . . . . . . . . . . . . . . . . . . . . . .  86
-       9.3.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  86
-       9.3.3.  Fibonacci II  . . . . . . . . . . . . . . . . . . . .  88
-       9.3.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  89
-   10. Communication . . . . . . . . . . . . . . . . . . . . . . . .  90
-     10.1.  io.Reader  . . . . . . . . . . . . . . . . . . . . . . .  91
-     10.2.  Some examples  . . . . . . . . . . . . . . . . . . . . .  92
-     10.3.  Command line arguments . . . . . . . . . . . . . . . . .  92
-     10.4.  Executing commands . . . . . . . . . . . . . . . . . . .  93
-     10.5.  Networking . . . . . . . . . . . . . . . . . . . . . . .  93
-     10.6.  Exercises  . . . . . . . . . . . . . . . . . . . . . . .  94
-       10.6.1.  Finger daemon  . . . . . . . . . . . . . . . . . . .  94
-       10.6.2.  Answer . . . . . . . . . . . . . . . . . . . . . . .  95
-       10.6.3.  Echo server  . . . . . . . . . . . . . . . . . . . .  96
-       10.6.4.  Answer . . . . . . . . . . . . . . . . . . . . . . .  96
-       10.6.5.  Word and Letter Count  . . . . . . . . . . . . . . .  98
-       10.6.6.  Answer . . . . . . . . . . . . . . . . . . . . . . .  98
-       10.6.7.  Uniq . . . . . . . . . . . . . . . . . . . . . . . .  99
-       10.6.8.  Answer . . . . . . . . . . . . . . . . . . . . . . .  99
-       10.6.9.  Quine  . . . . . . . . . . . . . . . . . . . . . . .  99
-       10.6.10. Answer . . . . . . . . . . . . . . . . . . . . . . . 100
-       10.6.11. Processes  . . . . . . . . . . . . . . . . . . . . . 100
-       10.6.12. Answer . . . . . . . . . . . . . . . . . . . . . . . 101
-       10.6.13. Number cruncher  . . . . . . . . . . . . . . . . . . 102
-       10.6.14. Answer . . . . . . . . . . . . . . . . . . . . . . . 103
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . . 106
-     11.1.  Informative References . . . . . . . . . . . . . . . . . 106
-     11.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . . 107
-   Index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 108
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . . 111
-
+       3.7.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  37
+       3.7.5.  For-loop II . . . . . . . . . . . . . . . . . . . . .  38
+       3.7.6.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  38
+       3.7.7.  Fibonacci . . . . . . . . . . . . . . . . . . . . . .  38
+       3.7.8.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  38
+       3.7.9.  Var args  . . . . . . . . . . . . . . . . . . . . . .  39
+       3.7.10. Answer  . . . . . . . . . . . . . . . . . . . . . . .  39
+       3.7.11. Functions that return functions . . . . . . . . . . .  39
+       3.7.12. Answer  . . . . . . . . . . . . . . . . . . . . . . .  39
+       3.7.13. Maximum . . . . . . . . . . . . . . . . . . . . . . .  40
+       3.7.14. Answer  . . . . . . . . . . . . . . . . . . . . . . .  40
+       3.7.15. Map function  . . . . . . . . . . . . . . . . . . . .  40
+       3.7.16. Answer  . . . . . . . . . . . . . . . . . . . . . . .  41
+       3.7.17. Stack . . . . . . . . . . . . . . . . . . . . . . . .  41
+       3.7.18. Answer  . . . . . . . . . . . . . . . . . . . . . . .  41
+   4.  Packages  . . . . . . . . . . . . . . . . . . . . . . . . . .  43
+     4.1.  Identifiers . . . . . . . . . . . . . . . . . . . . . . .  45
+     4.2.  Documenting packages  . . . . . . . . . . . . . . . . . .  46
+     4.3.  Testing packages  . . . . . . . . . . . . . . . . . . . .  47
+     4.4.  Useful packages . . . . . . . . . . . . . . . . . . . . .  49
+     4.5.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  51
+       4.5.1.  Stack as package  . . . . . . . . . . . . . . . . . .  51
+       4.5.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  51
+       4.5.3.  Calculator  . . . . . . . . . . . . . . . . . . . . .  52
+       4.5.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  52
+   5.  Beyond the basics . . . . . . . . . . . . . . . . . . . . . .  54
+     5.1.  Allocation  . . . . . . . . . . . . . . . . . . . . . . .  55
+       5.1.1.  Allocation with new . . . . . . . . . . . . . . . . .  55
+       5.1.2.  Allocation with make  . . . . . . . . . . . . . . . .  55
+       5.1.3.  Constructors and composite literals . . . . . . . . .  56
+     5.2.  Defining your own types . . . . . . . . . . . . . . . . .  57
+       5.2.1.  More on structure fields  . . . . . . . . . . . . . .  58
+       5.2.2.  Methods . . . . . . . . . . . . . . . . . . . . . . .  59
+     5.3.  Conversions . . . . . . . . . . . . . . . . . . . . . . .  60
+       5.3.1.  User defined types and conversions  . . . . . . . . .  61
+     5.4.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  62
+       5.4.1.  Map function with interfaces  . . . . . . . . . . . .  62
+       5.4.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  62
+       5.4.3.  Pointers  . . . . . . . . . . . . . . . . . . . . . .  63
+       5.4.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  63
+       5.4.5.  Linked List . . . . . . . . . . . . . . . . . . . . .  63
+       5.4.6.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  64
+       5.4.7.  Cat . . . . . . . . . . . . . . . . . . . . . . . . .  66
+       5.4.8.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  66
+       5.4.9.  Method calls  . . . . . . . . . . . . . . . . . . . .  70
+       5.4.10. Answer  . . . . . . . . . . . . . . . . . . . . . . .  70
+   6.  Interfaces  . . . . . . . . . . . . . . . . . . . . . . . . .  71
+     6.1.  Which is what?  . . . . . . . . . . . . . . . . . . . . .  72
 
 
 
@@ -226,54 +226,54 @@ Gieben                  Expires February 26, 2019               [Page 4]
 Internet-Draft                 Learning Go                   August 2018
 
 
-1.  Preface
+     6.2.  Empty interface . . . . . . . . . . . . . . . . . . . . .  73
+     6.3.  Methods . . . . . . . . . . . . . . . . . . . . . . . . .  74
+     6.4.  Methods on interface types  . . . . . . . . . . . . . . .  74
+     6.5.  Interface names . . . . . . . . . . . . . . . . . . . . .  75
+     6.6.  A sorting example . . . . . . . . . . . . . . . . . . . .  75
+     6.7.  Listing interfaces in interfaces  . . . . . . . . . . . .  77
+     6.8.  Introspection and reflection  . . . . . . . . . . . . . .  77
+     6.9.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  80
+       6.9.1.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  80
+       6.9.2.  Pointers and reflection . . . . . . . . . . . . . . .  81
+       6.9.3.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  82
+   7.  Concurrency . . . . . . . . . . . . . . . . . . . . . . . . .  82
+     7.1.  Make it run in parallel . . . . . . . . . . . . . . . . .  85
+     7.2.  More on channels  . . . . . . . . . . . . . . . . . . . .  85
+     7.3.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  86
+       7.3.1.  Channels  . . . . . . . . . . . . . . . . . . . . . .  86
+       7.3.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  86
+       7.3.3.  Fibonacci II  . . . . . . . . . . . . . . . . . . . .  88
+       7.3.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  89
+   8.  Communication . . . . . . . . . . . . . . . . . . . . . . . .  90
+     8.1.  io.Reader . . . . . . . . . . . . . . . . . . . . . . . .  91
+     8.2.  Some examples . . . . . . . . . . . . . . . . . . . . . .  92
+     8.3.  Command line arguments  . . . . . . . . . . . . . . . . .  92
+     8.4.  Executing commands  . . . . . . . . . . . . . . . . . . .  93
+     8.5.  Networking  . . . . . . . . . . . . . . . . . . . . . . .  93
+     8.6.  Exercises . . . . . . . . . . . . . . . . . . . . . . . .  94
+       8.6.1.  Finger daemon . . . . . . . . . . . . . . . . . . . .  94
+       8.6.2.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  95
+       8.6.3.  Echo server . . . . . . . . . . . . . . . . . . . . .  96
+       8.6.4.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  96
+       8.6.5.  Word and Letter Count . . . . . . . . . . . . . . . .  98
+       8.6.6.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  98
+       8.6.7.  Uniq  . . . . . . . . . . . . . . . . . . . . . . . .  99
+       8.6.8.  Answer  . . . . . . . . . . . . . . . . . . . . . . .  99
+       8.6.9.  Quine . . . . . . . . . . . . . . . . . . . . . . . .  99
+       8.6.10. Answer  . . . . . . . . . . . . . . . . . . . . . . . 100
+       8.6.11. Processes . . . . . . . . . . . . . . . . . . . . . . 100
+       8.6.12. Answer  . . . . . . . . . . . . . . . . . . . . . . . 101
+       8.6.13. Number cruncher . . . . . . . . . . . . . . . . . . . 102
+       8.6.14. Answer  . . . . . . . . . . . . . . . . . . . . . . . 103
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . . 106
+     9.1.  Informative References  . . . . . . . . . . . . . . . . . 106
+     9.2.  URIs  . . . . . . . . . . . . . . . . . . . . . . . . . . 107
+   Index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 108
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . . 111
 
-   The source of this book [1] is written in mmark [2] and is converted
-   from the original LaTeX source [3].
 
-   _All example code used in this book is hereby licensed under the
-   Apache License version 2.0._
 
-      This work is licensed under the Attribution-NonCommercial-
-      ShareAlike 3.0 Unported License.  To view a copy of this license,
-      visit http://creativecommons.org/licenses/by-nc-sa/3.0/ [4] or
-      send a letter to Creative Commons, 171 Second Street, Suite 300,
-      San Francisco, California, 94105, USA.
-
-   The following people made large or small contributions to earlier
-   versions of this book:
-
-   Adam J.  Gray, Alexander Katasonov, Alexey Chernenkov, Alex Sychev,
-   Andrea Spadaccini, Andrey Mirtchovski, Anthony Magro, Babu Sreekanth,
-   Ben Bullock, Bob Cunningham, Brian Fallik, Cecil New, Cobold, Damian
-   Gryski, Daniele Pala, Dan Kortschak, David Otton, Fabian Becker,
-   Filip Zaludek, Hadi Amiri, Haiping Fan, Iaroslav Tymchenko, Jaap
-   Akkerhuis, JC van Winkel, Jeroen Bulten, Jinpu Hu, John Shahid,
-   Jonathan Kans, Joshua Stein, Makoto Inoue, Marco Ynema, Mayuresh
-   Kathe, Mem, Michael Stapelberg, Nicolas Kaiser, Olexandr Shalakhin,
-   Paulo Pinto, Peter Kleiweg, Philipp Schmidt, Robert Johnson, Russel
-   Winder, Simoc, Sonia Keys, Stefan Schroeder, Thomas Kapplet, T.J.
-   Yang, Uriel"\dagger", Vrai Stacey, Xing Xing.
-
-   "Learning Go" has been translated into (note that this used the
-   original LaTeX source).
-
-   o  Chinese, by Xing Xing,
-      &#36825;&#37324;&#26159;&#20013;&#25991;&#35793;&#26412;:
-      http://www.mikespook.com/learning-go/ [5]
-
-   I hope this book is useful.
-
-   Miek Gieben, London, 2015.
-
-   This book still sees development, small incremental improvements
-   trickle in from Github.
-
-   Miek Gieben, London, 2017.
-
-   Learning Go's source has been rewritten in mmark2 [6], but did not
-   see any other changes.  This books translates cleanly into an RFC-
-   like document [7].
 
 
 
@@ -282,13 +282,7 @@ Gieben                  Expires February 26, 2019               [Page 5]
 Internet-Draft                 Learning Go                   August 2018
 
 
-   Miek Gieben, London, 2018.
-
-2.  Learning Go
-
-   fig/bumper-inverse.png "
-
-3.  Introduction
+1.  Introduction
 
       Is Go an object-oriented language?  Yes and no.
 
@@ -330,6 +324,12 @@ Internet-Draft                 Learning Go                   August 2018
       language takes care of this.
 
    Standard format
+      A Go program can be formatted in (almost) any way the programmers
+      want, but an official format exists.  The rule is very simple: The
+      output of the filter "gofmt" _is the officially endorsed format_.
+
+   Postfix types
+
 
 
 
@@ -338,11 +338,6 @@ Gieben                  Expires February 26, 2019               [Page 6]
 Internet-Draft                 Learning Go                   August 2018
 
 
-      A Go program can be formatted in (almost) any way the programmers
-      want, but an official format exists.  The rule is very simple: The
-      output of the filter "gofmt" _is the officially endorsed format_.
-
-   Postfix types
       Types are given _after_ the variable name, thus "var a int",
       instead of "int a".
 
@@ -361,7 +356,7 @@ Internet-Draft                 Learning Go                   August 2018
    functional language, while Go is imperative.  And Erlang runs in a
    virtual machine, while Go is compiled.
 
-3.1.  How to Read this Book
+1.1.  How to Read this Book
 
    I've written this book for people who already know some programming
    languages and how to program.  In order to use this book, you (of
@@ -386,6 +381,11 @@ Internet-Draft                 Learning Go                   August 2018
       Here we look at functions, the basic building blocks of Go
       programs.
 
+   packages
+      We'll see that functions and data can be grouped together in
+      packages.  We'll also see how to document and test our packages.
+
+   beyond-the-basics
 
 
 
@@ -394,11 +394,6 @@ Gieben                  Expires February 26, 2019               [Page 7]
 Internet-Draft                 Learning Go                   August 2018
 
 
-   packages
-      We'll see that functions and data can be grouped together in
-      packages.  We'll also see how to document and test our packages.
-
-   beyond-the-basics
       We'll create our own types.  We'll also look at memory allocations
       in Go.
 
@@ -417,7 +412,7 @@ Internet-Draft                 Learning Go                   August 2018
       within a Go program.  We'll see how to create files and read and
       write to and from them.  We'll also briefly look into networking.
 
-3.2.  Official Documentation
+1.2.  Official Documentation
 
    There is a substantial amount of documentation written about Go.  The
    Go Tutorial [go_tutorial], the Go Tour (with lots of exercises) and
@@ -445,6 +440,11 @@ Internet-Draft                 Learning Go                   August 2018
 
 
 
+
+
+
+
+
 Gieben                  Expires February 26, 2019               [Page 8]
 
 Internet-Draft                 Learning Go                   August 2018
@@ -458,7 +458,7 @@ Internet-Draft                 Learning Go                   August 2018
        Package fnv implements FNV-1 and FNV-1a, non-cryptographic hash
        ...
 
-4.  Basics
+2.  Basics
 
       I am interested in this and hope to do something.
 
@@ -467,7 +467,7 @@ Internet-Draft                 Learning Go                   August 2018
    In this chapter we will look at the basic building blocks of the Go
    programming language.
 
-4.1.  Hello World
+2.1.  Hello World
 
    In the Go tutorial, you get started with Go in the typical manner:
    printing "Hello World" (Ken Thompson and Dennis Ritchie started this
@@ -489,7 +489,7 @@ Internet-Draft                 Learning Go                   August 2018
 
    "import "fmt"" says we need "fmt" in addition to "main" _2_. A
    package other than "main" is commonly called a library, a familiar
-   concept in many programming languages (see Section 6).  The line ends
+   concept in many programming languages (see Section 4).  The line ends
    with a comment that begins with "//".
 
    Next we another comment, but this one is enclosed in "/*" "*/" _3_.
@@ -510,7 +510,7 @@ Internet-Draft                 Learning Go                   August 2018
    to the screen.  The string is enclosed with """ and may contain non-
    ASCII characters _5_.
 
-4.2.  Compiling and Running Code
+2.2.  Compiling and Running Code
 
    To build a Go program, use the "go" tool.  To build "helloworld" we
    just enter:
@@ -524,7 +524,7 @@ Internet-Draft                 Learning Go                   August 2018
 
    You can combine the above and just call "go run helloworld.go".
 
-4.3.  Variables, Types and Keywords
+2.3.  Variables, Types and Keywords
 
    In the next few sections we will look at the variables, basic types,
    keywords, and control structures of our new language.
@@ -549,7 +549,7 @@ Internet-Draft                 Learning Go                   August 2018
    case the variable type is _deduced_ from the value.  A value of 15
    indicates an "int".  A value of "false" tells Go that the type should
    be "bool".  Multiple "var" declarations may also be grouped; "const"
-   (see Section 4.3.3) and "import" also allow this.  Note the use of
+   (see Section 2.3.3) and "import" also allow this.  Note the use of
    parentheses instead of braces:
 
 
@@ -579,13 +579,13 @@ Internet-Draft                 Learning Go                   August 2018
    "_, b := 34, 35".  Declared but otherwise _unused_ variables are a
    compiler error in Go.
 
-4.3.1.  Boolean Types
+2.3.1.  Boolean Types
 
    A boolean type represents the set of boolean truth values denoted by
    the predeclared constants _true_ and _false_. The boolean type is
    "bool".
 
-4.3.2.  Numerical Types
+2.3.2.  Numerical Types
 
    Go has most of the well-known types such as "int".  The "int" type
    has the appropriate length for your machine, meaning that on a 32-bit
@@ -633,7 +633,7 @@ Internet-Draft                 Learning Go                   August 2018
    assignment".  Adding the constant 5 to b _does_ succeed, because
    constants are not typed.
 
-4.3.3.  Constants
+2.3.3.  Constants
 
    Constants in Go are just that --- constant.  They are created at
    compile time, and can only be numbers, strings, or booleans; "const x
@@ -650,7 +650,7 @@ Internet-Draft                 Learning Go                   August 2018
    repeat the use of "iota".  You may also explicitly type a constant:
    "const b string = "0"".  Now "b" is a "string" type constant.
 
-4.3.4.  Strings
+2.3.4.  Strings
 
    Another important built-in type is "string".  Assigning a string is
    as simple as:
@@ -690,7 +690,7 @@ Internet-Draft                 Learning Go                   August 2018
    the alteration _3_.  Finally, we print the string with "fmt.Printf"
    _4_.
 
-4.3.5.  Runes
+2.3.5.  Runes
 
    "Rune" is an alias for "int32".  It is an UTF-8 encoded code point.
    When is this type useful?  One example is when you're iterating over
@@ -699,7 +699,7 @@ Internet-Draft                 Learning Go                   August 2018
    which they are _not_ in Go!).  But to get the actual characters you
    should use the "rune" type.
 
-4.3.6.  Complex Numbers
+2.3.6.  Complex Numbers
 
    Go has native support for complex numbers.  To use them you need a
    variable of type "complex128" (64 bit real and imaginary parts) or
@@ -707,16 +707,16 @@ Internet-Draft                 Learning Go                   August 2018
    written as "re + im""i", where "re" is the real part, "im" is the
    imaginary part and "i" is the literal '"i"' ("\sqrt{-1}").
 
-4.3.7.  Errors
+2.3.7.  Errors
 
    Any non-trivial program will have the need for error reporting sooner
    or later.  Because of this Go has a builtin type specially for
    errors, called "error". "var e error" creates a variable "e" of type
    "error" with the value "nil".  This error type is an interface --
-   we'll look more at interfaces in Section 8.  For now you can just
+   we'll look more at interfaces in Section 6.  For now you can just
    assume that "error" is a type just like all other types.
 
-4.4.  Operators and Built-in Functions
+2.4.  Operators and Built-in Functions
 
    Go supports the normal set of numerical operators.  See Table 1 for
    lists the current ones and their relative precedence.  They all
@@ -753,7 +753,7 @@ Internet-Draft                 Learning Go                   August 2018
    overloaded.  For instance, "+" can be used for integers, floats,
    complex numbers and strings (adding strings is concatenating them).
 
-4.5.  Go Keywords
+2.5.  Go Keywords
 
    Let's start looking at keywords, Table 2 lists all the keywords in
    Go.
@@ -769,14 +769,14 @@ Internet-Draft                 Learning Go                   August 2018
                          Table 2: Keywords in Go.
 
    We've seen some of these already.  We used "var" and "const" in the
-   Section 4.3 section, and we briefly looked at "package" and "import"
+   Section 2.3 section, and we briefly looked at "package" and "import"
    in our "Hello World" program at the start of the chapter.  Others
    need more attention and have their own chapter or section:
 
    o  "func" is used to declare functions and methods.
 
    o  "return" is used to return from functions.  We'll look at both
-      "func" and "return" in detail in Section 5.
+      "func" and "return" in detail in Section 3.
 
 
 
@@ -787,27 +787,27 @@ Internet-Draft                 Learning Go                   August 2018
 
 
    o  "go" is used for concurrency.  We'll look at this in
-      Section 9.3.1.
+      Section 7.3.1.
 
    o  "select" used to choose from different types of communication,
-      We'll work with "select" in Section 9.3.1.
+      We'll work with "select" in Section 7.3.1.
 
-   o  "interface" is covered in Section 8.
+   o  "interface" is covered in Section 6.
 
    o  "struct" is used for abstract data types.  We'll work with
-      "struct" in Section 7.
+      "struct" in Section 5.
 
-   o  "type" is also covered in Section 7.
+   o  "type" is also covered in Section 5.
 
-4.6.  Control Structures
+2.6.  Control Structures
 
    There are only a few control structures in Go.  To write loops we use
    the "for" keyword, and there is a "switch" and of course an "if".
-   When working with channels "select" will be used (see Section 9.3.1).
+   When working with channels "select" will be used (see Section 7.3.1).
    Parentheses are not required around the condition, and the body must
    _always_ be brace-delimited.
 
-4.6.1.  If-Else
+2.6.1.  If-Else
 
    In Go an "if" looks like this:
 
@@ -846,7 +846,7 @@ Internet-Draft                 Learning Go                   August 2018
    line as the "if" statement.  There is no arguing about this, because
    this is what "gofmt" outputs.
 
-4.6.2.  Goto
+2.6.2.  Goto
 
    Go has a "goto" statement - use it wisely.  With "goto" you jump to a
    label which must be defined within the current function.  For
@@ -863,7 +863,7 @@ Internet-Draft                 Learning Go                   August 2018
    The string "Here:" indicates a label.  A label does not need to start
    with a capital letter and is case sensitive.
 
-4.6.3.  For
+2.6.3.  For
 
    The Go "for" loop has three forms, only one of which has semicolons:
 
@@ -884,7 +884,7 @@ Internet-Draft                 Learning Go                   August 2018
 
    Note that the variable "i" ceases to exist after the loop.
 
-4.6.4.  Break and Continue
+2.6.4.  Break and Continue
 
    With "break" you can quit loops early.  By itself, "break" breaks the
    current loop.
@@ -926,10 +926,10 @@ Internet-Draft                 Learning Go                   August 2018
    any remaining code.  In the same way as "break", "continue" also
    accepts a label.
 
-4.6.5.  Range
+2.6.5.  Range
 
    The keyword "range" can be used for loops.  It can loop over slices,
-   arrays, strings, maps and channels (see Section 9.3.1). "range" is an
+   arrays, strings, maps and channels (see Section 7.3.1). "range" is an
    iterator that, when called, returns the next key-value pair from the
    "thing" it loops over.  Depending on what that is, "range" returns
    different things.
@@ -976,7 +976,7 @@ for pos, char := range "G&#337;!" {
 
    Note that "&#337;" took 2 bytes, so '!' starts at byte 3.
 
-4.6.6.  Switch
+2.6.6.  Switch
 
    Go's "switch" is very flexible; you can match on much more than just
    integers.  The cases are evaluated top to bottom until a match is
@@ -1032,7 +1032,7 @@ Internet-Draft                 Learning Go                   August 2018
 
    You can list cases on one line _1_, separated by commas.
 
-4.7.  Built-in Functions
+2.7.  Built-in Functions
 
    A few functions are predefined, meaning you _don't_ have to include
    any package to get access to them.  Table 3 lists them all.
@@ -1052,7 +1052,7 @@ Internet-Draft                 Learning Go                   August 2018
 
    close
       is used in channel communication.  It closes a channel.  We'll
-      learn more about this in Section 9.3.1.
+      learn more about this in Section 7.3.1.
 
    delete
       is used for deleting entries in maps.
@@ -1068,23 +1068,23 @@ Internet-Draft                 Learning Go                   August 2018
 
       are used on a number of different types, "len" is used to return
       the lengths of strings, maps, slices, and arrays.  In the next
-      section Section 4.8.1 we'll look at slices, arrays and the
+      section Section 2.8.1 we'll look at slices, arrays and the
       function "cap".
 
    new
       is used for allocating memory for user defined data types.  See
-      Section 7.1.1.
+      Section 5.1.1.
 
    make
       is used for allocating memory for built-in types (maps, slices,
-      and channels).  See Section 7.1.2.
+      and channels).  See Section 5.1.2.
 
    copy, append
       "copy" is for copying slices.  And "append" is for concatenating
-      slices.  See Section 4.8.2 in this chapter.
+      slices.  See Section 2.8.2 in this chapter.
 
    panic, recover
-      are used for an _exception_ mechanism.  See Section 5.6 for more.
+      are used for an _exception_ mechanism.  See Section 3.6 for more.
 
    print, println
       are low level printing functions that can be used without
@@ -1095,13 +1095,13 @@ Internet-Draft                 Learning Go                   August 2018
       all deal with complex numbers.  We will not use complex numbers in
       this book.
 
-4.8.  Arrays, Slices, and Maps
+2.8.  Arrays, Slices, and Maps
 
    To store multiple values in a list, you can use arrays, or their more
    flexible cousin: slices.  A dictionary or hash type is also
    available.  It is called a "map" in Go.
 
-4.8.1.  Arrays
+2.8.1.  Arrays
 
    An array is defined by: "[n]<type>", where "n" is the length of the
    array and "<type>" is the stuff you want to store.  To assign or
@@ -1133,7 +1133,7 @@ Internet-Draft                 Learning Go                   August 2018
    2, 3}", where Go counts the elements automatically.
 
    A composite literal allows you to assign a value directly to an
-   array, slice, or map.  See Section 7.1.3 for more information.
+   array, slice, or map.  See Section 5.1.3 for more information.
 
    When declaring arrays you _always_ have to type something in between
    the square brackets, either a number or three dots ("..."), when
@@ -1143,7 +1143,7 @@ Internet-Draft                 Learning Go                   August 2018
    will almost never use them in Go, because there is something much
    more flexible: slices.
 
-4.8.2.  Slices
+2.8.2.  Slices
 
    A slice is similar to an array, but it can grow when new elements are
    added.  A slice always refers to an underlying array.  What makes
@@ -1151,7 +1151,7 @@ Internet-Draft                 Learning Go                   August 2018
    array; slices are reference types.
 
    Reference types are created with "make".  We detail this further in
-   Section 7.
+   Section 5.
 
    That means that if you assign one slice to another, both refer to the
    _same_ underlying array.  For instance, if a function takes a slice
@@ -1273,7 +1273,7 @@ Internet-Draft                 Learning Go                   August 2018
    After _1_, "n1" is 6, and "s" is "[]int{0, 1, 2, 3, 4, 5}".  And
    after _2_, "n2" is 4, and "s" is "[]int{2, 3, 4, 5, 4, 5}".
 
-4.8.3.  Maps
+2.8.3.  Maps
 
    Many other languages have a type similar to maps built-in.  For
    instance, Perl has hashes, Python has its dictionaries, and C++ also
@@ -1346,9 +1346,9 @@ Gieben                  Expires February 26, 2019              [Page 24]
 Internet-Draft                 Learning Go                   August 2018
 
 
-4.9.  Exercises
+2.9.  Exercises
 
-4.9.1.  For-loop
+2.9.1.  For-loop
 
    1.  Create a loop with the "for" construct.  Make it loop 10 times
        and print out the loop counter with the "fmt" package.
@@ -1359,7 +1359,7 @@ Internet-Draft                 Learning Go                   August 2018
    3.  Rewrite the loop again so that it fills an array and then prints
        that array to the screen.
 
-4.9.2.  Answer
+2.9.2.  Answer
 
    1.  There are many possibilities.  One solution could be:
 
@@ -1434,12 +1434,12 @@ Internet-Draft                 Learning Go                   August 2018
 
    fmt.Printf("%v\n", [...]int{0,1,2,3,4,5,6,7,8,9})
 
-4.9.3.  Average
+2.9.3.  Average
 
    1.  Write code to calculate the average of a "float64" slice.  In a
        later exercise you will make it into a function.
 
-4.9.4.  Answer
+2.9.4.  Answer
 
    1.  The following code calculates the average.
 
@@ -1474,7 +1474,7 @@ Internet-Draft                 Learning Go                   August 2018
    value return from "len" to a "float64" to make the division work at
    _3_.
 
-4.9.5.  FizzBuzz
+2.9.5.  FizzBuzz
 
    1.  Solve this problem, called the Fizz-Buzz [fizzbuzz] problem:
 
@@ -1483,7 +1483,7 @@ Internet-Draft                 Learning Go                   August 2018
    multiples of five, print "Buzz".  For numbers which are multiples of
    both three and five, print "FizzBuzz".
 
-4.9.6.  Answer
+2.9.6.  Answer
 
    1.  A possible solution to this problem is the following program.
 
@@ -1542,15 +1542,15 @@ Internet-Draft                 Learning Go                   August 2018
    }
 
    Here _1_ we define two constants to make our code more readable, see
-   Section 4.3.3.  At _2_ we define a boolean that keeps track if we
+   Section 2.3.3.  At _2_ we define a boolean that keeps track if we
    already printed something.  At _3_ we start our for-loop, see
-   Section 4.6.3.  If the value is divisible by FIZZ - that is, 3 - , we
+   Section 2.6.3.  If the value is divisible by FIZZ - that is, 3 - , we
    print "Fizz" _4_.  And at _5_ we check if the value is divisble by
    BUZZ -- that is, 5 -- if so print "Buzz".  Note that we have also
    taken care of the FizzBuzz case.  At _6_, if printed neither Fizz nor
    Buzz printed, we print the value.
 
-5.  Functions
+3.  Functions
 
       I'm always delighted by the light touch and stillness of early
       programming languages.  Not much text; a lot gets done.  Old
@@ -1582,7 +1582,7 @@ Internet-Draft                 Learning Go                   August 2018
    To declare a function, you use the "func" keyword _1_. You can
    optionally bind _2_ to a specific type called receiver (a function
    with a receiver is usually called a method).  This will be explored
-   in Section 8.  Next _3_ you write the name of your function.  Here
+   in Section 6.  Next _3_ you write the name of your function.  Here
    _4_ we define that the variable "q" of type "int" is the input
    parameter.  Parameters are passed _pass-by-value_. The variables "r"
    and "s" _5_ are the _named return parameters_ (((functions, named
@@ -1614,7 +1614,7 @@ Internet-Draft                 Learning Go                   August 2018
    the entire file before execution, so function prototyping is a thing
    of the past in Go.  Go does not allow nested functions, but you can
    work around this with anonymous functions.  See the
-   Section Section 5.2 in this chapter.  Recursive functions work just
+   Section Section 3.2 in this chapter.  Recursive functions work just
    as in other languages:
 
 
@@ -1638,7 +1638,7 @@ Internet-Draft                 Learning Go                   August 2018
    the value 10, this is checked on the second line _1_. This function
    prints: "9 8 7 6 5 4 3 2 1 0", when called as "rec(0)".
 
-5.1.  Scope
+3.1.  Scope
 
    Variables declared outside any functions are _global_ in Go, those
    defined in functions are _local_ to those functions.  If names
@@ -1687,7 +1687,7 @@ Internet-Draft                 Learning Go                   August 2018
    ":=" used in line 12 is sometimes hard to spot so it is generally
    advised _not_ to use the same name for global and local variables.
 
-5.2.  Functions as values
+3.2.  Functions as values
 
    As with almost everything in Go, functions are also _just_ values.
    They can be assigned to variables as follows:
@@ -1719,9 +1719,9 @@ Internet-Draft                 Learning Go                   August 2018
 
    Or you can write a function that takes a function as its parameter,
    for example a "Map" function that works on "int" slices.  This is
-   left as an exercise for the reader; see the exercise Section 5.7.15.
+   left as an exercise for the reader; see the exercise Section 3.7.15.
 
-5.3.  Callbacks
+3.3.  Callbacks
 
    Because functions are values they are easy to pass to functions, from
    where they can be used as callbacks.  First define a function that
@@ -1753,7 +1753,7 @@ Internet-Draft                 Learning Go                   August 2018
    that function.  It can be used as any other function, and we execute
    the function on line 2 with the parameter "y": "f(y)"
 
-5.4.  Deferred Code
+3.4.  Deferred Code
 
    Suppose you have a function in which you open a file and perform
    various writes and reads on it.  In such a function there are often
@@ -1855,7 +1855,7 @@ Internet-Draft                 Learning Go                   August 2018
    the value of "ret" with 1.  The "return 0" on line 5 _will not be the
    returned value_, because of "defer".  The function "f" will return 1!
 
-5.5.  Variadic Parameter
+3.5.  Variadic Parameter
 
    Functions that take a variable number of parameters are known as
    variadic functions.  To declare a function as variadic, do something
@@ -1878,7 +1878,7 @@ Internet-Draft                 Learning Go                   August 2018
    were given.
 
    If you don't specify the type of the variadic argument it defaults to
-   the empty interface "interface{}" (see Chapter Section 8).
+   the empty interface "interface{}" (see Chapter Section 6).
 
    Suppose we have another variadic function called "myfunc2", the
    following example shows how to pass variadic arguments to it:
@@ -1892,7 +1892,7 @@ Internet-Draft                 Learning Go                   August 2018
    because the variadic parameters is just a slice, we can use some
    slice tricks as well.
 
-5.6.  Panic and recovering
+3.6.  Panic and recovering
 
    Go does not have an exception mechanism: you cannot throw exceptions.
    Instead it uses a panic-and-recover mechanism.  It is worth
@@ -1942,7 +1942,7 @@ Internet-Draft                 Learning Go                   August 2018
    }
 
    We define a new function "Panic" _1_ that takes a function as an
-   argument (see Section 5.2).  It returns true if "f" panics when run,
+   argument (see Section 3.2).  It returns true if "f" panics when run,
    else false.  We then _2_ define a "defer" function that utilizes
    "recover".  If the current goroutine panics, this defer function will
    notice that.  If "recover()" returns non-"nil" we set "b" to true.
@@ -1976,14 +1976,14 @@ Internet-Draft                 Learning Go                   August 2018
    we change line 2: "var a []int" to "var a [4]int" the function
    "panicy" does not panic anymore.  Why?
 
-5.7.  Exercises
+3.7.  Exercises
 
-5.7.1.  Average
+3.7.1.  Average
 
    1.  Write a function that calculates the average of a "float64"
        slice.
 
-5.7.2.  Answer
+3.7.2.  Answer
 
    1.  The following function calculates the average:
 
@@ -2018,7 +2018,7 @@ Gieben                  Expires February 26, 2019              [Page 36]
 Internet-Draft                 Learning Go                   August 2018
 
 
-5.7.3.  Bubble sort
+3.7.3.  Bubble sort
 
    1.  Write a function that performs a bubble sort on a slice of ints.
        From [bubblesort]:
@@ -2044,7 +2044,7 @@ Internet-Draft                 Learning Go                   August 2018
      while swapped
    end procedure
 
-5.7.4.  Answer
+3.7.4.  Answer
 
    1.  Bubble sort isn't terribly efficient.  For "n" elements it scales
        "O(n^2)".  But bubble sort is easy to implement:
@@ -2074,17 +2074,17 @@ Gieben                  Expires February 26, 2019              [Page 37]
 Internet-Draft                 Learning Go                   August 2018
 
 
-5.7.5.  For-loop II
+3.7.5.  For-loop II
 
    1.  Take what you did in exercise to write the for loop and extend it
        a bit.  Put the body of the for loop - the "fmt.Printf" - in a
        separate function.
 
-5.7.6.  Answer
+3.7.6.  Answer
 
    1.  <{{src/for-func.go}}
 
-5.7.7.  Fibonacci
+3.7.7.  Fibonacci
 
    1.  The Fibonacci sequence starts as follows: "1, 1, 2, 3, 5, 8, 13,
        \ldots" Or in mathematical terms: "x_1 = 1; x_2 = 1; x_n =
@@ -2092,7 +2092,7 @@ Internet-Draft                 Learning Go                   August 2018
        Write a function that takes an "int" value and gives that many
        terms of the Fibonacci sequence.
 
-5.7.8.  Answer
+3.7.8.  Answer
 
    1.  The following program calculates Fibonacci numbers:
 
@@ -2130,12 +2130,12 @@ Gieben                  Expires February 26, 2019              [Page 38]
 Internet-Draft                 Learning Go                   August 2018
 
 
-5.7.9.  Var args
+3.7.9.  Var args
 
    1.  Write a function that takes a variable number of ints and print
        each integer on a separate line.
 
-5.7.10.  Answer
+3.7.10.  Answer
 
    1.  For this we need the "{...}"-syntax to signal we define a
        function that takes an arbitrary number of arguments.
@@ -2155,7 +2155,7 @@ Internet-Draft                 Learning Go                   August 2018
            }
    }
 
-5.7.11.  Functions that return functions
+3.7.11.  Functions that return functions
 
    1.  Write a function that returns a function that performs a "+2" on
        integers.  Name the function "plusTwo".  You should then be able
@@ -2163,12 +2163,12 @@ Internet-Draft                 Learning Go                   August 2018
 
    p := plusTwo()
    fmt.Printf("%v\n", p(2))
-       Which should print 4.  See Section 5.3.
+       Which should print 4.  See Section 3.3.
 
    2.  Generalize the function from above and create a "plusX(x)" which
        returns functions that add "x" to an integer.
 
-5.7.12.  Answer
+3.7.12.  Answer
 
    1.  Define a new function that returns a function: "return func(x
        int) int { return x + 2 }" Function literals at work, we define
@@ -2204,12 +2204,12 @@ Internet-Draft                 Learning Go                   August 2018
        Here _1_, we again define a function that returns a function.  We
        use the _local_ variable "x" in the function literal at _2_.
 
-5.7.13.  Maximum
+3.7.13.  Maximum
 
    1.  Write a function that finds the maximum value in an "int" slice
        ("[]int").
 
-5.7.14.  Answer
+3.7.14.  Answer
 
    1.  This function returns the largest int in the slice \var{l}:
 
@@ -2227,7 +2227,7 @@ Internet-Draft                 Learning Go                   August 2018
        new maximum, we remember it.  And at _4_ we have a "lone" return;
        the current value of "max" is now returned.
 
-5.7.15.  Map function
+3.7.15.  Map function
 
    A "map()"-function is a function that takes a function and a list.
    The function is applied to each member in the list and a new list
@@ -2248,7 +2248,7 @@ Internet-Draft                 Learning Go                   August 2018
    1.  Write a simple "map()"-function in Go.  It is sufficient for this
        function only to work for ints.
 
-5.7.16.  Answer
+3.7.16.  Answer
 
    1.  A possible answer:
 
@@ -2269,7 +2269,7 @@ Internet-Draft                 Learning Go                   August 2018
        fmt.Printf("%v", (Map(f, m)))
    }
 
-5.7.17.  Stack
+3.7.17.  Stack
 
    1.  Create a simple stack which can hold a fixed number of ints.  It
        does not have to grow beyond this limit.  Define "push" -- put
@@ -2285,7 +2285,7 @@ Internet-Draft                 Learning Go                   August 2018
        representation.  The stack in the figure could be represented as:
        "[0:m] [1:l] [2:k]" .
 
-5.7.18.  Answer
+3.7.18.  Answer
 
    1.  First we define a new type that represents a stack; we need an
        array (to hold the keys) and an index, which points to the last
@@ -2354,7 +2354,7 @@ Gieben                  Expires February 26, 2019              [Page 42]
 Internet-Draft                 Learning Go                   August 2018
 
 
-   We should now use "new()" (see Section 7.1.1).  in Section 7 to
+   We should now use "new()" (see Section 5.1.1).  in Section 5 to
    create a _pointer_ to a newly allocated "stack", so line 1 from the
    example above needs to be "s := new(stack)" .
 
@@ -2382,7 +2382,7 @@ Internet-Draft                 Learning Go                   August 2018
    }
 
    1.  "fmt.Printf("%v")" can print any value ("%v") that satisfies the
-       "Stringer" interface (see Section 8).  For this to work we only
+       "Stringer" interface (see Section 6).  For this to work we only
        need to define a "String()" function for our type:
 
    func (s stack) String() string {
@@ -2394,7 +2394,7 @@ Internet-Draft                 Learning Go                   August 2018
        return str
    }
 
-6.  Packages
+4.  Packages
 
       "^(")
 
@@ -2433,7 +2433,7 @@ Internet-Draft                 Learning Go                   August 2018
    _private_ function.
 
    Now we just need to build the package.  We create a directory under
-   "$GOPATH", and copy "even.go" there (see Section 4.2 in Section 4).
+   "$GOPATH", and copy "even.go" there (see Section 2.2 in Section 2).
 
    % mkdir $GOPATH/src/even
    % cp even.go $GOPATH/src/even
@@ -2487,7 +2487,7 @@ Internet-Draft                 Learning Go                   August 2018
    all bicameral alphabets (Latin, Greek, Cyrillic, Armenian and
    Coptic).
 
-6.1.  Identifiers
+4.1.  Identifiers
 
    The Go standard library names some function with the old (Unix) names
    while others are in CamelCase.  The convention is to leave well-known
@@ -2539,7 +2539,7 @@ Internet-Draft                 Learning Go                   August 2018
    "once.DoOrWaitUntilDone(setup)".  Long names don't automatically make
    things more readable.
 
-6.2.  Documenting packages
+4.2.  Documenting packages
 
    When we created our "even" package, we skipped over an important
    item: documentation.  Each package should have a _package comment_, a
@@ -2587,7 +2587,7 @@ Internet-Draft                 Learning Go                   August 2018
    // odd is the opposite of Even.
    func odd(i int) bool {
 
-6.3.  Testing packages
+4.3.  Testing packages
 
    In Go it is customary to write (unit) tests for your package.
    Writing tests involves the "testing" package and the program "go
@@ -2706,7 +2706,7 @@ Internet-Draft                 Learning Go                   August 2018
    uses those to check the _generated_ output with the text in the
    comments.  If there is a mismatch the test fails.
 
-6.4.  Useful packages
+4.4.  Useful packages
 
    The standard libary of Go includes a huge number of packages.  It is
    very enlightening to browse the "$GOROOT/src" directory and look at
@@ -2802,15 +2802,15 @@ Gieben                  Expires February 26, 2019              [Page 50]
 Internet-Draft                 Learning Go                   August 2018
 
 
-      object with interface type "Type".  See Section 8,
-      Section Section 8.8.
+      object with interface type "Type".  See Section 6,
+      Section Section 6.8.
 
    os/exec
       The "os/exec" package runs external commands.
 
-6.5.  Exercises
+4.5.  Exercises
 
-6.5.1.  Stack as package
+4.5.1.  Stack as package
 
    1.  See the Stack exercise.  In this exercise we want to create a
        separate package for that code.  Create a proper package for your
@@ -2820,7 +2820,7 @@ Internet-Draft                 Learning Go                   August 2018
    2.  Write a simple unit test for this package.  You should at least
        test that a "Pop" works after a "Push".
 
-6.5.2.  Answer
+4.5.2.  Answer
 
    1.  There are a few details that should be changed to make a proper
        package for our stack.  First, the exported functions should
@@ -2886,11 +2886,11 @@ Internet-Draft                 Learning Go                   August 2018
    % go test stack
    ok stack 0.001s
 
-6.5.3.  Calculator
+4.5.3.  Calculator
 
    1.  Create a reverse polish calculator.  Use your stack package.
 
-6.5.4.  Answer
+4.5.4.  Answer
 
    1.  This is one answer:
 
@@ -2977,7 +2977,7 @@ Internet-Draft                 Learning Go                   August 2018
            }
    }
 
-7.  Beyond the basics
+5.  Beyond the basics
 
       Go has pointers but not pointer arithmetic.  You cannot use a
       pointer variable to walk through the bytes of a string.
@@ -3026,7 +3026,7 @@ Gieben                  Expires February 26, 2019              [Page 54]
 Internet-Draft                 Learning Go                   August 2018
 
 
-7.1.  Allocation
+5.1.  Allocation
 
    Go also has garbage collection, meaning that you don't have to worry
    about memory deallocation.
@@ -3037,7 +3037,7 @@ Internet-Draft                 Learning Go                   August 2018
    to handle allocation in Go and hopefully clarifies the somewhat
    artificial distinction between "new" and "make" .
 
-7.1.1.  Allocation with new
+5.1.1.  Allocation with new
 
    The built-in function "new" is essentially the same as its namesakes
    in other languages: "new(T)" allocates zeroed storage for a new item
@@ -3050,7 +3050,7 @@ Internet-Draft                 Learning Go                   August 2018
    does not have an explicit constructor or Init method.  Instead, the
    zero value for a "sync.Mutex" is defined to be an unlocked mutex.
 
-7.1.2.  Allocation with make
+5.1.2.  Allocation with make
 
    The built-in function "make(T, args)" serves a purpose different from
    "new(T)".  It creates slices, maps, and channels _only_, and it
@@ -3108,7 +3108,7 @@ Internet-Draft                 Learning Go                   August 2018
 
    And of course "make" is only used for slices, maps and channels.
 
-7.1.3.  Constructors and composite literals
+5.1.3.  Constructors and composite literals
 
    Sometimes the zero value isn't good enough and an initializing
    constructor is necessary, as in this example taken from the package
@@ -3177,7 +3177,7 @@ Internet-Draft                 Learning Go                   August 2018
    sl := []string{Enone: "no error", Einval: "invalid argument"}
    ma := map[int]string {Enone: "no error", Einval: "invalid argument"}
 
-7.2.  Defining your own types
+5.2.  Defining your own types
 
    Of course Go allows you to define new types, it does this with the
    "type" keyword: "type foo int"
@@ -3218,7 +3218,7 @@ Internet-Draft                 Learning Go                   August 2018
 
    fmt.Printf("%s", a.name)
 
-7.2.1.  More on structure fields
+5.2.1.  More on structure fields
 
    As said each item in a structure is called a field.  A struct with no
    fields: "struct {}".  Or one with four fields:
@@ -3251,9 +3251,9 @@ Internet-Draft                 Learning Go                   August 2018
 
 
    with a lowercase are private to the current package.  The same goes
-   for functions defined in packages, see Section 6 for the details.
+   for functions defined in packages, see Section 4 for the details.
 
-7.2.2.  Methods
+5.2.2.  Methods
 
    If you create functions that work on your newly defined type, you can
    take two routes:
@@ -3263,7 +3263,7 @@ Internet-Draft                 Learning Go                   August 2018
    func doSomething(n1 *NameAge, n2 int) { /* */ }
 
    1.  Create a function that works on the type (see _receiver_ in
-       Section 5):
+       Section 3):
 
    func (n1 *NameAge) doSomething(n2 int) { /* */ }
 
@@ -3325,7 +3325,7 @@ Internet-Draft                 Learning Go                   August 2018
       The method set of "*PrintableMutex" contains the methods "Lock"
       and "Unlock" bound to its anonymous field "Mutex".
 
-7.3.  Conversions
+5.3.  Conversions
 
    Sometimes you want to convert a type to another type.  This is
    possible in Go, but there are some rules.  For starters, converting
@@ -3389,7 +3389,7 @@ Internet-Draft                 Learning Go                   August 2018
 
    o  And the other way around: "float32(int)".
 
-7.3.1.  User defined types and conversions
+5.3.1.  User defined types and conversions
 
    How can you convert between the types you have defined yourself?  We
    create two types here "Foo" and "Bar", where "Bar" is an alias for
@@ -3421,15 +3421,15 @@ Internet-Draft                 Learning Go                   August 2018
    "int" also fails; an integer is not the same as a structure
    containing an integer.
 
-7.4.  Exercises
+5.4.  Exercises
 
-7.4.1.  Map function with interfaces
+5.4.1.  Map function with interfaces
 
    1.  Use the answer from the earlier map exercise but now make it
        generic using interfaces.  Make it at least work for ints and
        strings.
 
-7.4.2.  Answer
+5.4.2.  Answer
 
    1.
 
@@ -3474,7 +3474,7 @@ Gieben                  Expires February 26, 2019              [Page 62]
 Internet-Draft                 Learning Go                   August 2018
 
 
-7.4.3.  Pointers
+5.4.3.  Pointers
 
    1.  Suppose we have defined the following structure:
 
@@ -3498,7 +3498,7 @@ Internet-Draft                 Learning Go                   August 2018
        x= &t
    }
 
-7.4.4.  Answer
+5.4.4.  Answer
 
    1.  The expression, "var p1 Person" allocates a "Person"-_value_ to
        "p1".  The type of "p1" is "Person".  The second line: "p2 :=
@@ -3512,7 +3512,7 @@ Internet-Draft                 Learning Go                   August 2018
        points to a new (heap-allocated) variable "t" which contains a
        copy of whatever the actual argument value is.
 
-7.4.5.  Linked List
+5.4.5.  Linked List
 
    1.  Make use of the package "container/list" to create a (doubly)
        linked list.  Push the values 1, 2 and 4 to the list and then
@@ -3530,7 +3530,7 @@ Gieben                  Expires February 26, 2019              [Page 63]
 Internet-Draft                 Learning Go                   August 2018
 
 
-7.4.6.  Answer
+5.4.6.  Answer
 
    1.  The following is the implementation of a program using doubly
        linked lists from "container/list".
@@ -3661,7 +3661,7 @@ Internet-Draft                 Learning Go                   August 2018
    the last node from the list.  Finally at _13_ we make sure the list
    is consistent if it becomes empty.
 
-7.4.7.  Cat
+5.4.7.  Cat
 
    1.  Write a program which mimics the Unix program "cat".
 
@@ -3670,7 +3670,7 @@ Internet-Draft                 Learning Go                   August 2018
    3.  The solution to the above question given in contains a bug.  Can
        you spot and fix it?
 
-7.4.8.  Answer
+5.4.8.  Answer
 
    1.  The following is implemention of "cat" which also supports a -n
        flag to number each line.
@@ -3866,7 +3866,7 @@ Gieben                  Expires February 26, 2019              [Page 69]
 Internet-Draft                 Learning Go                   August 2018
 
 
-7.4.9.  Method calls
+5.4.9.  Method calls
 
    1.  Suppose we have the following program.  Note the package
        "container/vector" was once part of Go, but was removed when the
@@ -3898,7 +3898,7 @@ Internet-Draft                 Learning Go                   August 2018
        So the receiver has to be of type "*IntVector", why does the code
        above (the Push statements) work correctly then?
 
-7.4.10.  Answer
+5.4.10.  Answer
 
    1.  The type of "k1" is "vector.IntVector".  Why?  We use a composite
        literal (the "{}"), so we get a value of that type back.  The
@@ -3927,7 +3927,7 @@ Internet-Draft                 Learning Go                   August 2018
    Go into "(&k1).Push(2)" which makes the type system happy again (and
    you too -- now you know this).
 
-8.  Interfaces
+6.  Interfaces
 
       I have this phobia about having my body penetrated surgically.
       You know what I mean?
@@ -4003,7 +4003,7 @@ Internet-Draft                 Learning Go                   August 2018
    type satisfies an interface.  The result in Go is powerful, flexible,
    efficient, and easy to write.
 
-8.1.  Which is what?
+6.1.  Which is what?
 
    Let's define another type "R" that also implements the interface "I":
 
@@ -4050,7 +4050,7 @@ Internet-Draft                 Learning Go                   August 2018
    type of "something".  When you are sure a variable implements an
    interface you can use: "t := something.(I)" .
 
-8.2.  Empty interface
+6.2.  Empty interface
 
    Since every type satisfies the empty interface: "interface{}" we can
    create a generic function which has an empty interface as its
@@ -4093,9 +4093,9 @@ Internet-Draft                 Learning Go                   August 2018
    Which is completely true, the built-in type "int" does not have a
    "Get()" method.
 
-8.3.  Methods
+6.3.  Methods
 
-   Methods are functions that have a receiver (see Section 5).  You can
+   Methods are functions that have a receiver (see Section 3).  You can
    define methods on any type (except on non-local types, this includes
    built-in types: the type "int" can not have methods).  You can
    however make a new integer type with its own methods.  For example:
@@ -4113,7 +4113,7 @@ Internet-Draft                 Learning Go                   August 2018
    Doing this on non-local (types defined in other packages) types
    yields an error "cannot define new methods on non-local type int".
 
-8.4.  Methods on interface types
+6.4.  Methods on interface types
 
    An interface defines a set of methods.  A method contains the actual
    code.  In other words, an interface is the definition and the methods
@@ -4146,7 +4146,7 @@ Gieben                  Expires February 26, 2019              [Page 74]
 Internet-Draft                 Learning Go                   August 2018
 
 
-8.5.  Interface names
+6.5.  Interface names
 
    By convention, one-method interfaces are named by the method name
    plus the _-er_ suffix: Read_er_, Writ_er_, Formatt_er_ etc.
@@ -4160,7 +4160,7 @@ Internet-Draft                 Learning Go                   August 2018
    type, give it the same name and signature; call your string-converter
    method "String" not "ToString".
 
-8.6.  A sorting example
+6.6.  A sorting example
 
    Recall the Bubblesort exercise, where we sorted an array of integers:
 
@@ -4280,7 +4280,7 @@ Internet-Draft                 Learning Go                   August 2018
    Sort(strings)
    fmt.Printf("%v\n", strings)
 
-8.7.  Listing interfaces in interfaces
+6.7.  Listing interfaces in interfaces
 
    Take a look at the following example of an interface definition, this
    one is from the package "container/heap":
@@ -4297,7 +4297,7 @@ Internet-Draft                 Learning Go                   August 2018
    methods. "sort.Interface" is also such a listing, so it is perfectly
    legal to include it in the interface.
 
-8.8.  Introspection and reflection
+6.8.  Introspection and reflection
 
    In the following example we want to look at the "tag" (here named
    "namestr") defined in the type definition of "Person".  To do this we
@@ -4430,7 +4430,7 @@ Internet-Draft                 Learning Go                   August 2018
    Einstein".  Of course this only works when you call "Set()" with a
    pointer argument.
 
-8.9.  Exercises
+6.9.  Exercises
 
    ### Interfaces and max()
 
@@ -4440,7 +4440,7 @@ Internet-Draft                 Learning Go                   August 2018
    Try to make your program as generic as possible, although that is
    quite difficult in this case.
 
-8.9.1.  Answer
+6.9.1.  Answer
 
    The following program calculates a maximum.  It is as generic as you
    can get with Go.
@@ -4520,9 +4520,9 @@ Internet-Draft                 Learning Go                   August 2018
    integers, so this is legit.  And at _3_ we do the some for floats.
    At _4_ we get the maximum value for "a", "b" and "x" and "y".
 
-8.9.2.  Pointers and reflection
+6.9.2.  Pointers and reflection
 
-   One of the last paragraphs in section Section 8.8 has the following
+   One of the last paragraphs in section Section 6.8 has the following
    words:
 
       The code on the right works OK and sets the member "Name" to
@@ -4538,13 +4538,13 @@ Gieben                  Expires February 26, 2019              [Page 81]
 Internet-Draft                 Learning Go                   August 2018
 
 
-8.9.3.  Answer
+6.9.3.  Answer
 
    When called with a non-pointer argument the variable is a copy (call-
    by-value).  So you are doing the reflection voodoo on a copy.  And
    thus you are _not_ changing the original value, but only this copy.
 
-9.  Concurrency
+7.  Concurrency
 
 
 
@@ -4706,7 +4706,7 @@ Gieben                  Expires February 26, 2019              [Page 84]
 Internet-Draft                 Learning Go                   August 2018
 
 
-9.1.  Make it run in parallel
+7.1.  Make it run in parallel
 
    While our goroutines were running concurrently, they were not running
    in parallel.  When you do not tell Go anything there can only be one
@@ -4726,7 +4726,7 @@ Internet-Draft                 Learning Go                   August 2018
    version 1.5 and above, "GOMAXPROCS" defaults to the number of CPU
    cores[go_1_5_release_notes].
 
-9.2.  More on channels
+7.2.  More on channels
 
    When you create a channel in Go with "ch := make(chan bool)", an
    unbuffered channel for bools is created.  What does this mean for
@@ -4780,11 +4780,11 @@ Internet-Draft                 Learning Go                   August 2018
    channel was closed and the value received is a zero value of the
    channel's type.
 
-9.3.  Exercises
+7.3.  Exercises
 
-9.3.1.  Channels
+7.3.1.  Channels
 
-   1.  Modify the program you created in exercise Section 4.9.1 to use
+   1.  Modify the program you created in exercise Section 2.9.1 to use
        channels, in other words, the function called in the body should
        now be a goroutine and communication should happen via channels.
        You should not worry yourself on how the goroutine terminates.
@@ -4797,7 +4797,7 @@ Internet-Draft                 Learning Go                   August 2018
        sometimes it prints only to 8.  Adding a second quit-channel you
        can remedy both issues.  Do this.
 
-9.3.2.  Answer
+7.3.2.  Answer
 
    1.  A possible program is:
 
@@ -4905,9 +4905,9 @@ Internet-Draft                 Learning Go                   August 2018
    might have pulled out of your hat may be: "_ = <-quit".  This is
    valid in Go, but idomatic Go is the one given on line 20.
 
-9.3.3.  Fibonacci II
+7.3.3.  Fibonacci II
 
-   This is the same exercise as an earlier one Section 5.7.7 in
+   This is the same exercise as an earlier one Section 3.7.7 in
    exercise.  For completeness the complete question:
 
       The Fibonacci sequence starts as follows: "1, 1, 2, 3, 5, 8, 13,
@@ -4930,7 +4930,7 @@ Gieben                  Expires February 26, 2019              [Page 88]
 Internet-Draft                 Learning Go                   August 2018
 
 
-9.3.4.  Answer
+7.3.4.  Answer
 
    The following program calculates the Fibonacci numbers using
    channels.
@@ -4986,7 +4986,7 @@ Gieben                  Expires February 26, 2019              [Page 89]
 Internet-Draft                 Learning Go                   August 2018
 
 
-10.  Communication
+8.  Communication
 
       Good communication is as stimulating as black coffee, and just as
       hard to sleep after.
@@ -5083,7 +5083,7 @@ Internet-Draft                 Learning Go                   August 2018
    _3_ to flush all output.  This entire program could be optimized
    further by using "io.Copy".
 
-10.1.  io.Reader
+8.1.  io.Reader
 
    As mentioned above the "io.Reader" is an important interface in the
    language Go.  A lot (if not all) functions that need to read from
@@ -5102,7 +5102,7 @@ Internet-Draft                 Learning Go                   August 2018
    fulfill the "io.Reader" or "io.Writer" interface, _the whole standard
    Go library can be used_ on that type!
 
-10.2.  Some examples
+8.2.  Some examples
 
    The previous program reads a file in its entirety, but a more common
    scenario is that you want to read a file on a line-by-line basis.
@@ -5135,7 +5135,7 @@ Internet-Draft                 Learning Go                   August 2018
    it, i.e. programming in Go can be compared to programming in an
    interpreted language (Python, Ruby, Perl or PHP).
 
-10.3.  Command line arguments
+8.3.  Command line arguments
 
    Arguments from the command line are available inside your program via
    the string slice "os.Args", provided you have imported the package
@@ -5175,7 +5175,7 @@ flag.Parse() <4>
    After the flags have been parsed you can used them: "if *dnssec { ...
    }"
 
-10.4.  Executing commands
+8.4.  Executing commands
 
    The "os/exec" package has functions to run external commands, and is
    the premier way to execute commands from within a Go program.  It
@@ -5196,7 +5196,7 @@ flag.Parse() <4>
 
    And "buf" is byte slice, that you can further use in your program.
 
-10.5.  Networking
+8.5.  Networking
 
    All network related types and functions can be found in the package
    "net".  One of the most important functions in there is "Dial".  When
@@ -5250,9 +5250,9 @@ Internet-Draft                 Learning Go                   August 2018
        }
    }
 
-10.6.  Exercises
+8.6.  Exercises
 
-10.6.1.  Finger daemon
+8.6.1.  Finger daemon
 
    Write a finger daemon that works with the finger(1) command.
 
@@ -5280,7 +5280,7 @@ Internet-Draft                 Learning Go                   August 2018
 
    o  If the user exists, show the contents of the ".plan" file.
 
-10.6.2.  Answer
+8.6.2.  Answer
 
    This solution is from Fabian Becker.
 
@@ -5341,7 +5341,7 @@ func getUserInfo(usr string) ([]byte, error) {
         return data, nil
 }
 
-10.6.3.  Echo server
+8.6.3.  Echo server
 
    Write a simple echo server.  Make it listen to TCP port number 8053
    on localhost.  It should be able to read a line (up to the newline),
@@ -5350,7 +5350,7 @@ func getUserInfo(usr string) ([]byte, error) {
    Make the server concurrent so that every request is taken care of in
    a separate goroutine.
 
-10.6.4.  Answer
+8.6.4.  Answer
 
    A simple echo server might be:
 
@@ -5434,7 +5434,7 @@ Gieben                  Expires February 26, 2019              [Page 97]
 Internet-Draft                 Learning Go                   August 2018
 
 
-10.6.5.  Word and Letter Count
+8.6.5.  Word and Letter Count
 
    Write a small program that reads text from standard input and
    performs the following actions:
@@ -5448,7 +5448,7 @@ Internet-Draft                 Learning Go                   August 2018
    In other words implement wc(1) (check you local manual page), however
    you only have to read from standard input.
 
-10.6.6.  Answer
+8.6.6.  Answer
 
    The following program is an implementation of wc(1).
 
@@ -5490,7 +5490,7 @@ Gieben                  Expires February 26, 2019              [Page 98]
 Internet-Draft                 Learning Go                   August 2018
 
 
-10.6.7.  Uniq
+8.6.7.  Uniq
 
    Write a Go program that mimics the function of the Unix "uniq"
    command.  This program should work as follows, given a list with the
@@ -5511,7 +5511,7 @@ Internet-Draft                 Learning Go                   August 2018
        if ($first ne $_) { print; $first = $_; }
    }
 
-10.6.8.  Answer
+8.6.8.  Answer
 
    The following is a "uniq" implementation in Go.
 
@@ -5532,7 +5532,7 @@ Internet-Draft                 Learning Go                   August 2018
            }
    }
 
-10.6.9.  Quine
+8.6.9.  Quine
 
    A _Quine_ is a program that prints itself.  Write a Quine in Go.
 
@@ -5546,7 +5546,7 @@ Gieben                  Expires February 26, 2019              [Page 99]
 Internet-Draft                 Learning Go                   August 2018
 
 
-10.6.10.  Answer
+8.6.10.  Answer
 
    This solution is from Russ Cox. It was posted to the Go Nuts mailing
    list.
@@ -5565,7 +5565,7 @@ Internet-Draft                 Learning Go                   August 2018
    }
    var q = `
 
-10.6.11.  Processes
+8.6.11.  Processes
 
    Write a program that takes a list of all running processes and prints
    how many child processes each parent has spawned.  The output should
@@ -5615,7 +5615,7 @@ Internet-Draft                 Learning Go                   August 2018
        @{$child{$_}} == 1 ? ": " : "ren: ", "[@{$child{$_}}]";
    }
 
-10.6.12.  Answer
+8.6.12.  Answer
 
    There is lots of stuff to do here.  We can divide our program up in
    the following sections:
@@ -5701,7 +5701,7 @@ func main() {
         }
 }
 
-10.6.13.  Number cruncher
+8.6.13.  Number cruncher
 
    o  Pick six (6) random numbers from this list: "1, 2, 3, 4, 5, 6, 7,
       8, 9, 10, 25, 50, 75, 100" Numbers may be picked multiple times.
@@ -5731,7 +5731,7 @@ Internet-Draft                 Learning Go                   August 2018
    Calculate _all_ possible solutions and show them (or only show how
    many there are).  In the example above there are 544 ways to do it.
 
-10.6.14.  Answer
+8.6.14.  Answer
 
    The following is one possibility.  It uses recursion and backtracking
    to get an answer.  When starting "permrec" we give 977 as the first
@@ -5916,9 +5916,9 @@ Internet-Draft                 Learning Go                   August 2018
         return 0, false
 }
 
-11.  References
+9.  References
 
-11.1.  Informative References
+9.1.  Informative References
 
    [bubblesort]
               Wikipedia, "Bubble sort", 2010.
@@ -5973,7 +5973,7 @@ Internet-Draft                 Learning Go                   August 2018
               DOI 10.17487/RFC4627, July 2006,
               <https://www.rfc-editor.org/info/rfc4627>.
 
-11.2.  URIs
+9.2.  URIs
 
    [1] https://github.com/miekg/learninggo
 
