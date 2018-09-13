@@ -29,7 +29,7 @@
     }
 
     function figures(){
-        $("pre + figcaption").each(function(index){
+        $("pre + figcaption, p + figcaption").each(function(index){
         $(this).prepend("Figure " + (index+1) + ". ")
       })
     }
