@@ -612,7 +612,6 @@ s5 := s2[:] //<<6>>
 s6 := a[2:4:5] //<<7>>
 ~~~
 
-<!-- Double check this -->
 First we define <<1>> an array with five elements, from index 0 to 4.
 From this we create <<2>> a slice with the elements from index 2 to 3, this slices contains: `3, 4`.
 Then we we create another slice <<3>> from `a`: with the elements from index 1 to 4,
