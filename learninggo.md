@@ -25,6 +25,7 @@ fullname = "R. (Miek) Gieben"
 .# Preface
 {{preface.md}}
 
+{mainmatter}
 
 {.title}
 # Learning Go
@@ -32,8 +33,6 @@ fullname = "R. (Miek) Gieben"
 !---
 ![](fig/bumper-inverse.png)
 !---
-
-{mainmatter}
 
 
 # Introduction

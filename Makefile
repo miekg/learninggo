@@ -20,8 +20,7 @@ learninggo-2.xml:
 
 .PHONY: learninggo-2.txt
 learninggo-2.txt: learninggo-2.xml
-	@# Using -n because it doesn't fully validate (RFC7749 is a limited format).
-	xml2rfc -n learninggo-2.xml
+	xml2rfc learninggo-2.xml
 
 .PHONY: ast
 ast:
