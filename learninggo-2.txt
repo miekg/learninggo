@@ -43,13 +43,13 @@ Preface
    "Learning Go" has been translated into (note that this used the
    original LaTeX source).
 
-   o  Chinese, by Xing Xing,
-      &#36825;&#37324;&#26159;&#20013;&#25991;&#35793;&#26412;:
-      http://www.mikespook.com/learning-go/ [5]
+   o  Chinese, by Xing Xing, 这里是中文译本: http://www.mikespook.com/learning-
+      go/ [5]
 
    I hope this book is useful.
 
    Miek Gieben, London, 2015.
+
 
 
 
@@ -964,17 +964,17 @@ Internet-Draft                 Learning Go                   August 2018
    the word rune is used.  In this case the type of "char" is "rune".
    and their start position, by parsing the UTF-8.  The loop:
 
-for pos, char := range "G&#337;!" {
+for pos, char := range "Gő!" {
     fmt.Printf("character '%c' starts at byte position %d\n", char, pos)
 }
 
    prints
 
    character 'G' starts at byte position 0
-   character '&#337;' starts at byte position 1
+   character 'ő' starts at byte position 1
    character '!' starts at byte position 3
 
-   Note that "&#337;" took 2 bytes, so '!' starts at byte 3.
+   Note that "ő" took 2 bytes, so '!' starts at byte 3.
 
 3.6.6.  Switch
 
@@ -3337,17 +3337,17 @@ Internet-Draft                 Learning Go                   August 2018
    |       | []byte  |         | []rune  | string  | t32    |          |
    +-------+---------+---------+---------+---------+--------+----------+
    | To    |         |         |         |         |        |          |
-   | []byt | .       |         |         | []byte( |        |          |
+   | []byt | ·       |         |         | []byte( |        |          |
    | e     |         |         |         | s)      |        |          |
-   | []int |         | .       |         | []int(s |        |          |
+   | []int |         | ·       |         | []int(s |        |          |
    |       |         |         |         | )       |        |          |
    | []run |         |         |         | []rune( |        |          |
    | e     |         |         |         | s)      |        |          |
-   | strin | string( | string( | string( | .       |        |          |
+   | strin | string( | string( | string( | ·       |        |          |
    | g     | b)      | i)      | r)      |         |        |          |
-   | float |         |         |         |         | .      | float32( |
+   | float |         |         |         |         | ·      | float32( |
    | 32    |         |         |         |         |        | i)       |
-   | int   |         |         |         |         | int(f) | .        |
+   | int   |         |         |         |         | int(f) | ·        |
    +-------+---------+---------+---------+---------+--------+----------+
 
       Table 4: Valid conversions, float64 works the same as float32.

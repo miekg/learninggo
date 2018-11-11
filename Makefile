@@ -20,7 +20,7 @@ learninggo-2.xml:
 
 .PHONY: learninggo-2.txt
 learninggo-2.txt: learninggo-2.xml
-	xml2rfc learninggo-2.xml
+	xml2rfc --utf8 learninggo-2.xml
 
 .PHONY: ast
 ast:
