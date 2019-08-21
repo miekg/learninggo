@@ -7,5 +7,6 @@
 {.answer}
 ### Answer
 
-1.
- <{{src/for-func.go}}
+1. <!-- comment -->
+
+    <{{src/for-func.go}}
