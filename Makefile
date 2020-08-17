@@ -1,4 +1,4 @@
-MMARK=~/g/src/github.com/mmarkdown/mmark/mmark
+MMARK=~/src/github.com/mmarkdown/mmark/mmark
 
 all: learninggo.html
 
