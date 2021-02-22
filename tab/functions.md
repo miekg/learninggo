@@ -1,4 +1,4 @@
----------|----------|-----------|-------
+---------|----------|-----------|---------
 `close`  | `new`    | `panic`   | `complex`
 `delete` | `make`   | `recover` | `real`
 `len`    | `append` | `print`   | `imag`
