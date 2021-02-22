@@ -1,5 +1,5 @@
 {.epigraph}
-> "^"
+> "\^"
 ****
 
 Quote: Answer to whether there is a bit wise negation operator -- Ken Thompson

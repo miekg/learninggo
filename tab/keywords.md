@@ -1,4 +1,3 @@
- \          | \             | \         | \          | \    
 ------------|---------------|-----------|------------|--------
 `break`	    |`default`	    |`func`	    |`interface` |`select`
 `case`	    |`defer`	    |`go`	    |`map`       |`struct`

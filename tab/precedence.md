@@ -1,9 +1,9 @@
 Precedence | Operator(s)
 -----------|------------------
-Highest    |	`*  /  %  <<  >>  &  &^`
-           |	`+  -  | ^`
-           |	`==  !=  <  <=  >  >=`
-           |	`<-`
-           |	`&&`
-Lowest     |	\|\|
+Highest    | `*  /  %  <<  >>  &  &^`
+           | `+  -  | ^`
+           | `==  !=  <  <=  >  >=`
+           | `<-`
+           | `&&`
+Lowest     | \|\|
 Table: Operator precedence.
