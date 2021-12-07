@@ -247,9 +247,9 @@ defer func() {/* ... */}()
 
 Here we use a function without a name and specify the body of the function
 inline, basically we're creating a nameless function on the spot. The final
-braces are needed because `defer` needs a function call, not a function value.
+parentheses are needed because `defer` needs a function call, not a function value.
 If our anonymous function would take an parameter it would be easier to see why
-we need the braces:
+we need the parentheses:
 
 ~~~go
 defer func(x int) {/* ... */}(5)
