@@ -958,11 +958,8 @@ Internet-Draft                 Learning Go                   August 2018
    be 0 through 5, and v will be "a" through "f".
 
    You can also use "range" on strings directly.  Then it will break out
-   the individual Unicode characters ^[In the UTF-8 world characters are
-   sometimes called _runes_ Mostly, when people talk about characters,
-   they mean 8 bit characters.  As UTF-8 characters may be up to 32 bits
-   the word rune is used.  In this case the type of "char" is "rune".
-   and their start position, by parsing the UTF-8.  The loop:
+   the individual Unicode characters. In this case the type of "char" is
+   "rune". and their start position, by parsing the UTF-8.  The loop:
 
 for pos, char := range "Gő!" {
     fmt.Printf("character '%c' starts at byte position %d\n", char, pos)
