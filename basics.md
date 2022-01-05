@@ -393,10 +393,10 @@ a `string`. It will start with 0 and "a", so `k` will be 0 through 5, and v will
 be "a" through "f".
 
 You can also use `range` on strings directly. Then it will break out the
-individual Unicode characters ^[In the UTF-8 world characters are sometimes
+individual Unicode characters ^[In the UTF-8 word *characters* are sometimes
 called *runes* (!runes) Mostly, when people talk about characters, they
 mean 8 bit characters. As UTF-8 characters may be up to 32 bits the word rune is
-used. In this case the type of `char` is `rune`. and their start position, by
+used.] In this case the type of `char` is `rune`. and their start position, by
 parsing the UTF-8. The loop: (!keywords,range)
 
 ~~~go
